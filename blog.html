@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Kunal Gupta</title>
+    <meta name="description" content="Field notes on robotics, entrepreneurship, travel, and taste." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="blog-index-page">
+    <header class="site-header">
+      <a class="brand-mark" href="index.html#top" aria-label="Kunal Gupta home">
+        <span class="brand-cell">KG</span>
+        <span class="brand-text">Kunal Gupta</span>
+      </a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Blog</a></nav>
+    </header>
+
+    <main>
+      <section class="article-hero">
+        <p class="section-kicker">Field notes</p>
+        <h1>Writing on machines, motion, ambition, and taste.</h1>
+        <p>Blog posts can support long essays, short logs, image-heavy travel notes, embedded links, downloadable references, callouts, and quotes.</p>
+      </section>
+
+      <section class="blog-index">
+        <a class="blog-card" href="blog-robotics.html">
+          <span>Robotics</span>
+          <h2>Designing machines that survive contact with reality</h2>
+          <p>Notes on constraints, tests, and why prototypes teach faster than plans.</p>
+        </a>
+        <a class="blog-card" href="blog-founder.html">
+          <span>Founder</span>
+          <h2>What entrepreneurship borrows from engineering tests</h2>
+          <p>A field note about risk, iteration, and signal quality.</p>
+        </a>
+        <a class="blog-card image-card" href="blog-travel.html">
+          <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=80" alt="Travel writing placeholder" />
+          <span>Travel</span>
+          <h2>Why movement sharpens taste</h2>
+        </a>
+      </section>
+
+      <section class="article-layout" id="post-template">
+        <aside class="article-meta">
+          <span>Post template</span>
+          <p>Long-form writing system with editorial modules.</p>
+        </aside>
+        <article class="rich-article">
+          <h2>Blog post typography structure</h2>
+          <p class="lede">This is the larger first paragraph style: personal, direct, and a little more literary than the project pages.</p>
+          <p>Body copy should be comfortable enough for long essays while still feeling precise. Links can appear inline, and downloadable references can sit inside cards.</p>
+          <blockquote>“A good personal site should make the private logic behind the public work easier to see.”</blockquote>
+          <div class="callout">Callouts can hold a strong observation, a travel detail, a lesson learned, or a compact summary.</div>
+          <div class="article-card-grid">
+            <div><strong>Media block</strong><p>Inline images, videos, captions, and galleries.</p></div>
+            <div><strong>Reference card</strong><p>External links, reading lists, and downloads.</p></div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="site.js?v=20260704-rail-map-cards"></script>
+  </body>
+</html>
