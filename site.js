@@ -79,6 +79,7 @@ window.addEventListener("hashchange", setActiveSectionFromHash);
 
 if ((window.location.pathname.split("/").pop() || "index.html") === "index.html" || window.location.pathname.endsWith("/")) {
   const sectionNav = {
+    latest: "latest",
     work: "work",
     timeline: "timeline",
     atlas: "atlas",
@@ -102,7 +103,7 @@ if ((window.location.pathname.split("/").pop() || "index.html") === "index.html"
 
     observedSections.forEach((section) => navObserver.observe(section));
     if (!setActiveSectionFromHash()) {
-      setActiveSection("work");
+      setActiveSection("latest");
     }
   }
 }

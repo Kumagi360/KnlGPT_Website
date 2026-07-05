@@ -19,16 +19,93 @@
   <body class="home-page">
     <div class="scroll-meter" aria-hidden="true"></div>
     <div class="schematic-bg" aria-hidden="true">
-      <span class="schem-token">VCC</span>
-      <span class="schem-token">GPIO</span>
-      <span class="schem-token">PID()</span>
-      <span class="schem-token">τ = Iα</span>
-      <span class="schem-token">CAN</span>
-      <span class="schem-token">state.next()</span>
-      <span class="code-token">if (signal) actuate();</span>
-      <span class="code-token">encoder.read()</span>
-      <span class="schem-token">M3</span>
-      <span class="code-token">bus.write(frame)</span>
+      <svg class="bg-drawing bg-circuit" viewBox="0 0 520 260" role="img" aria-label="Signal amplifier circuit schematic">
+        <path d="M20 130h80l24-34 34 68 34-68 34 68 24-34h56" />
+        <path d="M306 74v112l112-56z" />
+        <path d="M250 130h56M418 130h72" />
+        <path d="M156 86v-46M156 174v48M348 56v-34M348 204v34" />
+        <path d="M118 40h76M118 222h76M322 22h52M322 238h52" />
+        <path d="M64 130v58h38M64 130V72h38" />
+        <text x="24" y="118">VIN</text>
+        <text x="386" y="96">OPA</text>
+        <text x="454" y="118">VOUT</text>
+        <text x="122" y="32">R1 10k</text>
+        <text x="320" y="18">C2 100n</text>
+      </svg>
+      <svg class="bg-drawing bg-board" viewBox="0 0 620 360" role="img" aria-label="Motor controller PCB layout">
+        <path d="M52 54h516v252H52z" />
+        <path d="M104 92h96v72h-96zM420 82h92v92h-92zM252 122h82v116h-82z" />
+        <path d="M200 128h52M334 164h86M466 174v58h-96M104 164v82h148M512 128h54" />
+        <path d="M122 246h130M292 238v54M334 210h36M104 92V58M200 92V58M466 82V48" />
+        <circle cx="104" cy="246" r="8" /><circle cx="252" cy="246" r="8" /><circle cx="334" cy="164" r="8" /><circle cx="420" cy="164" r="8" />
+        <circle cx="466" cy="232" r="8" /><circle cx="370" cy="232" r="8" /><circle cx="566" cy="128" r="8" />
+        <text x="104" y="84">DRV8323</text>
+        <text x="250" y="112">STM32</text>
+        <text x="420" y="74">MOSFET BANK</text>
+        <text x="432" y="260">PHASE U/V/W</text>
+      </svg>
+      <svg class="bg-drawing bg-board bg-board-alt" viewBox="0 0 640 380" role="img" aria-label="Sensor fusion PCB layout">
+        <path d="M44 48h552v284H44z" />
+        <path d="M92 92h112v72H92zM292 76h104v118H292zM456 122h82v86h-82zM118 238h136v48H118z" />
+        <path d="M204 128h88M396 134h60M538 166h42M344 194v74H254M186 238v-74M456 208v78H320" />
+        <path d="M92 128H58M204 92V60M344 76V48M498 122V78M254 262h180M118 286H74" />
+        <circle cx="204" cy="128" r="7" /><circle cx="292" cy="128" r="7" /><circle cx="396" cy="134" r="7" /><circle cx="456" cy="166" r="7" />
+        <circle cx="254" cy="262" r="7" /><circle cx="434" cy="262" r="7" /><circle cx="580" cy="166" r="7" />
+        <text x="94" y="84">IMU ARRAY</text>
+        <text x="292" y="68">FUSION MCU</text>
+        <text x="456" y="114">CAN FD</text>
+        <text x="116" y="230">POWER ISLAND</text>
+      </svg>
+      <svg class="bg-drawing bg-cad" viewBox="0 0 560 360" role="img" aria-label="Engine block CAD wireframe">
+        <path d="M92 128 218 58h246l24 162-132 82H118z" />
+        <path d="M218 58 246 220l-128 82M464 58 488 220l-132 82M246 220h242" />
+        <ellipse cx="230" cy="150" rx="42" ry="56" />
+        <ellipse cx="330" cy="145" rx="42" ry="56" />
+        <ellipse cx="430" cy="140" rx="42" ry="56" />
+        <path d="M174 262h212M150 286h178M116 124h338M130 104h310" />
+        <path d="M138 168h44M456 168h50M154 206h316" />
+        <text x="92" y="116">cast body</text>
+        <text x="238" y="46">cylinder bank</text>
+        <text x="330" y="326">mounting face</text>
+      </svg>
+      <svg class="bg-drawing bg-linkage" viewBox="0 0 520 320" role="img" aria-label="Four-bar linkage CAD wireframe">
+        <path d="M72 248h330M126 248 214 118 338 148 402 248" />
+        <path d="M214 118 268 248M338 148 268 248" />
+        <circle cx="126" cy="248" r="24" /><circle cx="214" cy="118" r="18" /><circle cx="338" cy="148" r="18" /><circle cx="402" cy="248" r="24" /><circle cx="268" cy="248" r="14" />
+        <path d="M80 270h72M368 270h68M186 104l-42-52M350 130l64-44" />
+        <text x="88" y="236">ground</text>
+        <text x="178" y="94">input link</text>
+        <text x="346" y="130">coupler</text>
+        <text x="392" y="236">rocker</text>
+      </svg>
+      <svg class="bg-drawing bg-gearbox" viewBox="0 0 560 340" role="img" aria-label="Gearbox CAD wireframe">
+        <path d="M94 112 190 62h222l58 82v112l-116 50H132L76 230z" />
+        <path d="M190 62 214 226 132 306M412 62 430 232 354 306M214 226h216M94 112h336M76 230h354" />
+        <circle cx="186" cy="174" r="54" /><circle cx="186" cy="174" r="24" />
+        <circle cx="318" cy="172" r="70" /><circle cx="318" cy="172" r="30" />
+        <circle cx="430" cy="190" r="42" /><circle cx="430" cy="190" r="18" />
+        <path d="M132 92h62M386 92h68M114 270h120M288 286h104" />
+        <text x="128" y="86">bearing boss</text>
+        <text x="280" y="92">gear train</text>
+        <text x="332" y="326">machined face</text>
+      </svg>
+      <pre class="bg-code">module motor_driver (
+  input  logic clk,
+  input  logic [11:0] encoder,
+  output logic pwm_a, pwm_b
+);
+  always_ff @(posedge clk) begin
+    error <= target - encoder;
+    duty  <= kp * error + kd * (error - prev);
+end
+endmodule</pre>
+      <pre class="bg-code bg-code-alt">always_comb begin
+  next_state = IDLE;
+  unique case (state)
+    SEEK:  if (tag_seen) next_state = TRACK;
+    TRACK: if (range_ok) next_state = ACTUATE;
+  endcase
+end</pre>
     </div>
 
     <header class="site-header">
@@ -43,6 +120,7 @@
     </header>
 
     <nav class="section-nav" aria-label="Homepage sections">
+      <a href="#latest" data-section-nav="latest">Latest</a>
       <a href="#work" data-section-nav="work">Work</a>
       <a href="#timeline" data-section-nav="timeline">Timeline</a>
       <a href="#atlas" data-section-nav="atlas">Atlas</a>
@@ -52,15 +130,17 @@
     <main id="top">
       <section class="hero-section">
         <div class="hero-copy">
-          <p class="eyebrow">Personal archive / robotics / ventures / motion</p>
+          <p class="eyebrow">Robotics engineer / entrepreneur / world archive</p>
           <h1>
             Kunal
             <span>Gupta</span>
           </h1>
           <div class="hero-subgrid no-actions">
             <p>
-              I build physical systems and companies, then keep a record of the
-              places, projects, people, and ideas that shape how I see the world.
+              Hey! I'm Kunal, a Cornell robotics engineer and AI/XR founder.
+              I've built software, firmware, and hardware across four continents
+              and several embodiments, including autonomous cars, intelligent
+              humanoids, and bio-inspired swarms.
             </p>
           </div>
           <div class="hero-interactions" aria-label="Robotics focus signals">
@@ -81,10 +161,7 @@
             <div class="rig-node node-b"></div>
             <div class="rig-node node-c"></div>
             <div class="portrait-placeholder">
-              <div class="media-grain"></div>
-              <span class="portrait-initials">KG</span>
-              <span class="portrait-label">hero portrait / robot demo / travel still</span>
-              <span class="video-chip">video slot</span>
+              <img src="assets/kunal-headshot.jpg" alt="Portrait of Kunal Gupta" />
             </div>
           </div>
           <div class="telemetry-grid">
@@ -104,109 +181,230 @@
         </aside>
       </section>
 
+      <section class="section latest-section" id="latest" aria-label="Latest updates">
+        <div class="latest-heading">
+          <p class="section-kicker">Latest updates</p>
+        </div>
+        <div class="latest-carousel" data-latest-carousel>
+          <div class="latest-track">
+            <article class="latest-card is-active" data-latest-card>
+              <div class="latest-card-copy">
+                <span>Japan / robotics field note</span>
+                <h3>Japan deployment.</h3>
+                <p>
+                  A field note from working around robots in Japan: the
+                  interesting part is rarely the demo alone, but the choreography
+                  around it. In autonomous vehicle deployment, every interaction
+                  becomes a systems problem: operators, edge cases, city texture,
+                  hardware rhythm, and the quiet discipline of making autonomy
+                  behave in the real world.
+                </p>
+              </div>
+              <div class="latest-media collage-media">
+                <figure class="media-main">
+                  <img src="assets/japan-trip.jpg" alt="Kunal with a robot in Japan" />
+                </figure>
+                <figure>
+                  <img src="assets/japan-trip.jpg" alt="Robot cafe detail from Japan trip" />
+                </figure>
+                <figure>
+                  <img src="assets/japan-trip.jpg" alt="Japan deployment trip moment" />
+                </figure>
+              </div>
+            </article>
+            <article class="latest-card" data-latest-card>
+              <div class="latest-card-copy">
+                <span>Autonomy / operations</span>
+                <h3>Deployment is where autonomy gets honest.</h3>
+                <p>
+                  The work sits between model performance, hardware uptime,
+                  operator trust, and the small operational details that decide
+                  whether a robot feels useful or fragile.
+                </p>
+              </div>
+              <div class="latest-media diagram-media" aria-hidden="true">
+                <div class="diagram-panel">
+                  <span>route graph</span>
+                  <svg viewBox="0 0 420 280">
+                    <path d="M42 220 C96 120 158 180 204 92 S330 74 376 158" />
+                    <path d="M76 210h72M204 92h92M298 166h78" />
+                    <circle cx="42" cy="220" r="9" /><circle cx="204" cy="92" r="9" /><circle cx="376" cy="158" r="9" />
+                  </svg>
+                </div>
+                <div class="diagram-panel">
+                  <span>ops stack</span>
+                  <code>perception -> planner -> safety case -> operator loop</code>
+                </div>
+              </div>
+            </article>
+            <article class="latest-card" data-latest-card>
+              <div class="latest-card-copy">
+                <span>Field archive / next card</span>
+                <h3>A living feed for launches, essays, and travel notes.</h3>
+                <p>
+                  This carousel is built to take more updates: travel notes,
+                  deployment logs, project launches, essays, and short visual
+                  dispatches.
+                </p>
+              </div>
+              <div class="latest-media collage-media placeholder-collage" aria-hidden="true">
+                <div><span>prototype clip</span></div>
+                <div><span>field note</span></div>
+                <div><span>photo essay</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="latest-controls" aria-label="Latest update controls">
+            <button type="button" class="is-active" data-latest-dot="0" aria-label="Show Japan deployment update"></button>
+            <button type="button" data-latest-dot="1" aria-label="Show autonomy operations update"></button>
+            <button type="button" data-latest-dot="2" aria-label="Show future update placeholder"></button>
+          </div>
+        </div>
+      </section>
+
       <section class="section focus-section" id="work">
         <div class="focus-shell">
           <div class="focus-copy">
             <p class="section-kicker">Selected focus</p>
-            <h2>One strong artifact should be enough to pull someone in.</h2>
+            <h2>Selected work.</h2>
             <p id="focusBody">
-              Start with a small number of high-resolution stories. Each one can
-              open into drawings, prototypes, clips, diagrams, and reflections.
+              Robotics projects should open like case files: prototype evidence,
+              mechanism decisions, electrical bring-up, software traces, and the
+              lessons that survived testing.
             </p>
           </div>
           <div class="focus-stage" id="focusStage">
             <div class="stage-orbit orbit-a"></div>
             <div class="stage-orbit orbit-b"></div>
-            <div class="stage-media media-placeholder image-slot">
-              <img
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80"
-                alt="Robotics project placeholder"
-              />
-              <span>image placeholder</span>
-              <strong>robotics build photo</strong>
-            </div>
-            <div class="stage-media video-slot-card">
-              <img
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
-                alt="Electronics and embedded systems placeholder"
-              />
-              <span>video placeholder</span>
-              <strong>demo / founder clip</strong>
-            </div>
             <div class="stage-core">
               <span id="focusCode">KG-01</span>
-              <strong id="focusTitle">Robotics Build</strong>
+              <strong id="focusTitle">MAP Rover</strong>
+            </div>
+            <div class="stage-readouts" aria-hidden="true">
+              <span><em>Range</em><strong id="focusRange">1+ mile</strong></span>
+              <span><em>Stack</em><strong id="focusStack">SLAM / EKF</strong></span>
+              <span><em>Evidence</em><strong id="focusEvidence">field demo</strong></span>
             </div>
           </div>
         </div>
         <div class="project-tile-grid" aria-label="Featured project tiles">
-          <a class="project-tile tile-wide is-active" href="projects.html#autonomous" data-focus="0">
+          <a class="project-tile tile-wide is-active" href="projects.html#map" data-focus="0">
             <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80" alt="Robotics project placeholder" />
             <span>Robotics</span>
-            <h3>Autonomous manipulation platform</h3>
-            <p>Mechanisms, controls, perception, and test footage.</p>
+            <h3>MAP rover</h3>
+            <p>Autonomous rover with GPS, object detection, SLAM, EKF, and mile-scale endurance.</p>
           </a>
-          <a class="project-tile tile-tall" href="projects.html#founder-file" data-focus="1">
+          <a class="project-tile tile-tall" href="projects.html#martha" data-focus="1">
             <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Founder project placeholder" />
-            <span>Venture</span>
-            <h3>Founder operating history</h3>
-            <p>Product decisions, users, team, market, and lessons.</p>
+            <span>Product</span>
+            <h3>MARTHA</h3>
+            <p>Hotspot restriction-tracking iOS app and webpage for Covid-19 spread mitigation.</p>
           </a>
-          <a class="project-tile tile-square" href="projects.html#motion-lab" data-focus="2">
+          <a class="project-tile tile-square" href="projects.html#safe" data-focus="2">
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Embedded systems placeholder" />
-            <span>Embedded</span>
-            <h3>Motion experiments</h3>
-            <p>Firmware, boards, sensing, actuation, and bench tests.</p>
+            <span>Healthcare AI</span>
+            <h3>SAFE</h3>
+            <p>AI model and sensor pod for temperature-stress prediction and prevention.</p>
           </a>
         </div>
       </section>
 
       <section class="section timeline-section" id="timeline">
         <div class="timeline-intro">
-          <p class="section-kicker">Experience sequence</p>
-          <h2>A resume, but as a trail of decisions.</h2>
+          <p class="section-kicker">Experience</p>
+          <h2>Experience trail.</h2>
           <p>
-            This can become the professional spine of the site: education,
-            internships, companies, ventures, research, projects, and inflection
-            points shown in time order without feeling like a PDF.
+            A working sequence across robot autonomy, founder work, venture
+            diligence, autonomous EVs, AI infrastructure, humanoids, swarms,
+            XR tourism, and Cornell robotics education.
           </p>
+          <aside class="education-panel" aria-label="Education">
+            <p class="section-kicker">Education</p>
+            <article>
+              <div class="timeline-logo" aria-hidden="true">CU</div>
+              <div>
+                <h3>Cornell University</h3>
+                <p>B.S. Computer Science, 2020 - 2024. Minors in Robotics and Electrical & Computer Engineering.</p>
+                <span>Cornell Electric Vehicles / CEI Lab / Entrepreneurship at Cornell</span>
+              </div>
+            </article>
+            <article>
+              <div class="timeline-logo" aria-hidden="true">ISH</div>
+              <div>
+                <h3>International School</h3>
+                <p>IB Diploma, 2018 - 2020. Engineering, developer, code, enterprise, debate, MUN, and student leadership.</p>
+                <span>The Hague / engineering head / project lead</span>
+              </div>
+            </article>
+          </aside>
         </div>
-        <div class="timeline-track" aria-label="Resume timeline preview">
-          <article class="timeline-item is-active" data-year="2022">
-            <span>2022</span>
-            <div class="timeline-logo" aria-hidden="true">RF</div>
-            <h3>Robotics foundation</h3>
-            <p>Mechanical, electrical, and software layers start converging into physical systems work.</p>
-          </article>
-          <article class="timeline-item" data-year="2023">
-            <span>2023</span>
-            <div class="timeline-logo" aria-hidden="true">PL</div>
-            <h3>Prototype loop</h3>
-            <p>Hardware bring-up, embedded tests, CAD, demos, and applied engineering velocity.</p>
-          </article>
-          <article class="timeline-item" data-year="2024">
-            <span>2024</span>
-            <div class="timeline-logo" aria-hidden="true">FM</div>
-            <h3>Founder mode</h3>
-            <p>Entrepreneurial work becomes a serious operating lane: product, users, team, market.</p>
-          </article>
-          <article class="timeline-item" data-year="2025">
-            <span>2025</span>
-            <div class="timeline-logo" aria-hidden="true">PA</div>
-            <h3>Public archive</h3>
-            <p>The work becomes easier to inspect through case studies, media, writing, and travel records.</p>
-          </article>
+        <div class="timeline-board">
+          <div class="timeline-track" aria-label="Resume timeline preview" data-auto-scroll-timeline>
+            <article class="timeline-item is-active" data-year="2024">
+              <span>2024 - now</span>
+              <div class="timeline-logo" aria-hidden="true">WV</div>
+              <h3>Robotics Engineer</h3>
+              <p><strong>Wayve</strong> / Mountain View. Building and deploying the SoTA robot autonomy stack for self-driving cars.</p>
+            </article>
+            <article class="timeline-item" data-year="2024">
+              <span>2024</span>
+              <div class="timeline-logo" aria-hidden="true">EF</div>
+              <h3>Founder in Residence</h3>
+              <p><strong>Entrepreneur First</strong> / San Francisco. Iterated on robotics tooling, training, and embodiments in a highly selective incubator cohort.</p>
+            </article>
+            <article class="timeline-item" data-year="2024">
+              <span>2024</span>
+              <div class="timeline-logo" aria-hidden="true">BV</div>
+              <h3>Analyst Extern</h3>
+              <p><strong>Battery Ventures</strong> / Remote. Sourced and led deal diligence for early and growth-stage tech investments.</p>
+            </article>
+            <article class="timeline-item" data-year="2023">
+              <span>2023 - 24</span>
+              <div class="timeline-logo" aria-hidden="true">CEV</div>
+              <h3>Full-Team Lead</h3>
+              <p><strong>Cornell Electric Vehicles</strong>. Directed a 60-person team building autonomous, hyper-efficient electric cars.</p>
+            </article>
+            <article class="timeline-item" data-year="2022">
+              <span>2022 - 23</span>
+              <div class="timeline-logo" aria-hidden="true">CEV</div>
+              <h3>Electrical Lead</h3>
+              <p><strong>Cornell Electric Vehicles</strong>. Headed design, bring-up, and integration of vehicular electrical and embedded systems.</p>
+            </article>
+            <article class="timeline-item" data-year="2023">
+              <span>2023</span>
+              <div class="timeline-logo" aria-hidden="true">AMZ</div>
+              <h3>SWE Intern</h3>
+              <p><strong>Amazon AGI</strong> / Boston. Developed an ML infrastructure module to accelerate dataset generation for Alexa SLU models.</p>
+            </article>
+            <article class="timeline-item" data-year="2022">
+              <span>2022</span>
+              <div class="timeline-logo" aria-hidden="true">CEI</div>
+              <h3>Researcher</h3>
+              <p><strong>Collective Embodied Intelligence Lab</strong>. Designed perception and control algorithms for bio-inspired swarm robot stigmergic coordination research.</p>
+            </article>
+            <article class="timeline-item" data-year="2022">
+              <span>2022</span>
+              <div class="timeline-logo" aria-hidden="true">DL</div>
+              <h3>Robotics Intern</h3>
+              <p><strong>Dynamic Locomotion</strong> / Groton. Developed embedded and electrical systems for joint actuation of a high-efficiency humanoid.</p>
+            </article>
+            <article class="timeline-item" data-year="2021">
+              <span>2020 - 23</span>
+              <div class="timeline-logo" aria-hidden="true">XR</div>
+              <h3>Co-Founder & CTO</h3>
+              <p><strong>Visions</strong> / The Hague and Kotor. Led technology architecture for immersive reality tourism platforms backed by the NTO of Montenegro.</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="section atlas-section" id="atlas">
         <div class="atlas-copy">
           <p class="section-kicker">Atlas</p>
-          <h2>Travel as a living world map.</h2>
+          <h2>Living atlas.</h2>
           <p>
-            Countries can hold photos, edits, and short reflections. Hovering or
-            clicking a country should reveal just enough context to invite a
-            deeper travel page later.
+            Countries hold photos, edits, travel dates, and notes. Hover or click
+            highlighted places to reveal a compact travel card.
           </p>
         </div>
         <div class="atlas-map" aria-label="Interactive world map">
@@ -226,7 +424,11 @@
       <section class="section notes-section" id="notes">
         <div>
           <p class="section-kicker">Field notes</p>
-          <h2>Writing should feel personal before it feels polished.</h2>
+          <h2>Field notes.</h2>
+          <p class="notes-subheading">
+            Short essays from the overlap between robotics, company-building,
+            travel, and taste.
+          </p>
         </div>
         <div class="note-list">
           <a href="blog-robotics.html" class="note-row">

@@ -1,24 +1,33 @@
 const focusItems = [
   {
     code: "KG-01",
-    title: "Robotics Build",
+    title: "MAP Rover",
     body:
-      "Start with a small number of high-resolution stories. Each one can open into drawings, prototypes, clips, diagrams, and reflections.",
+      "Mobile Autonomous Pathfinder combines a web and GPS-enabled rover, onboard low-resolution object detection, SLAM, EKF, and mile-scale endurance.",
     accent: "var(--oxide)",
+    range: "1+ mile",
+    stack: "SLAM / EKF",
+    evidence: "field rover",
   },
   {
     code: "KG-02",
-    title: "Founder File",
+    title: "MARTHA",
     body:
-      "Venture pages should feel like operating history: why the problem mattered, what was built, what changed, and what you learned.",
+      "Monitoring and Restriction-Tracking Hotspot Application was a distancing and de-densification iOS app and webpage for mitigating Covid-19 spreader events.",
     accent: "var(--cyan)",
+    range: "campus",
+    stack: "iOS / web",
+    evidence: "finalist",
   },
   {
     code: "KG-03",
-    title: "Motion Lab",
+    title: "SAFE",
     body:
-      "Smaller experiments can still feel magnetic when they are framed as test logs, constraints, failures, and physical proof.",
+      "Smart Assistance for Elders combined an app, AI model, and sensor pod to predict and prevent temperature-stress conditions in elderly households.",
     accent: "var(--violet)",
+    range: "pilot",
+    stack: "ML / sensor",
+    evidence: "papers",
   },
 ];
 
@@ -50,14 +59,15 @@ const focusStage = document.querySelector("#focusStage");
 const focusBody = document.querySelector("#focusBody");
 const focusCode = document.querySelector("#focusCode");
 const focusTitle = document.querySelector("#focusTitle");
+const focusRange = document.querySelector("#focusRange");
+const focusStack = document.querySelector("#focusStack");
+const focusEvidence = document.querySelector("#focusEvidence");
 const popoverMeta = document.querySelector("#popoverMeta");
 const popoverTitle = document.querySelector("#popoverTitle");
 const popoverDetail = document.querySelector("#popoverDetail");
 const popoverImageA = document.querySelector("#popoverImageA");
 const popoverImageB = document.querySelector("#popoverImageB");
 const mapPopover = document.querySelector("#mapPopover");
-const portraitLabel = document.querySelector(".portrait-label");
-const videoChip = document.querySelector(".video-chip");
 const visitedCountryIds = new Set(countries.map((country) => country.id));
 
 function updateScrollMeter() {
@@ -71,7 +81,113 @@ function setFocus(index) {
   focusCode.textContent = item.code;
   focusTitle.textContent = item.title;
   focusBody.textContent = item.body;
+  if (focusRange) focusRange.textContent = item.range;
+  if (focusStack) focusStack.textContent = item.stack;
+  if (focusEvidence) focusEvidence.textContent = item.evidence;
   focusStage.style.setProperty("--stage-accent", item.accent);
+}
+
+function initLatestCarousel() {
+  const carousel = document.querySelector("[data-latest-carousel]");
+  if (!carousel) return;
+
+  const track = carousel.querySelector(".latest-track");
+  const cards = [...carousel.querySelectorAll("[data-latest-card]")];
+  const dots = [...carousel.querySelectorAll("[data-latest-dot]")];
+  if (!track || cards.length < 2) return;
+
+  let activeIndex = 0;
+  let autoTimer;
+
+  const setLatest = (index, shouldScroll = true) => {
+    activeIndex = (index + cards.length) % cards.length;
+    cards.forEach((card, cardIndex) => {
+      card.classList.toggle("is-active", cardIndex === activeIndex);
+    });
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === activeIndex);
+    });
+    if (shouldScroll) {
+      track.scrollTo({ left: track.clientWidth * activeIndex, behavior: "smooth" });
+    }
+  };
+
+  const restartAuto = () => {
+    window.clearInterval(autoTimer);
+    autoTimer = window.setInterval(() => {
+      if (!document.hidden) setLatest(activeIndex + 1);
+    }, 6500);
+  };
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      setLatest(Number(dot.dataset.latestDot));
+      restartAuto();
+    });
+  });
+
+  track.addEventListener(
+    "scroll",
+    () => {
+      const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+      if (index !== activeIndex) setLatest(index, false);
+    },
+    { passive: true }
+  );
+
+  setLatest(0, false);
+  restartAuto();
+}
+
+function initTimelineAutoScroll() {
+  const track = document.querySelector("[data-auto-scroll-timeline]");
+  if (!track) return;
+
+  let paused = false;
+  let resumeTimer;
+  let frameId;
+  let lastFrame = 0;
+
+  const pause = () => {
+    paused = true;
+    window.clearTimeout(resumeTimer);
+  };
+
+  const resumeSoon = () => {
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      paused = false;
+    }, 1400);
+  };
+
+  const step = (timestamp) => {
+    if (!lastFrame) lastFrame = timestamp;
+    const delta = timestamp - lastFrame;
+    lastFrame = timestamp;
+
+    if (!paused && !document.hidden && track.scrollHeight > track.clientHeight + 4) {
+      track.scrollTop += delta * 0.018;
+      if (track.scrollTop + track.clientHeight >= track.scrollHeight - 2) {
+        track.scrollTop = 0;
+      }
+    }
+
+    frameId = window.requestAnimationFrame(step);
+  };
+
+  track.addEventListener("mouseenter", pause);
+  track.addEventListener("mouseleave", resumeSoon);
+  track.addEventListener("focusin", pause);
+  track.addEventListener("focusout", resumeSoon);
+  track.addEventListener("wheel", () => {
+    pause();
+    resumeSoon();
+  }, { passive: true });
+  track.addEventListener("touchstart", pause, { passive: true });
+  track.addEventListener("touchend", resumeSoon, { passive: true });
+
+  frameId = window.requestAnimationFrame(step);
+  window.addEventListener("beforeunload", () => window.cancelAnimationFrame(frameId));
 }
 
 function setCountry(countryId) {
@@ -192,6 +308,8 @@ async function renderWorldMap() {
 
 window.addEventListener("scroll", updateScrollMeter, { passive: true });
 updateScrollMeter();
+initLatestCarousel();
+initTimelineAutoScroll();
 
 document.querySelectorAll(".project-tile").forEach((tile) => {
   const activateTile = () => {
@@ -205,13 +323,13 @@ document.querySelectorAll(".project-tile").forEach((tile) => {
   tile.addEventListener("focus", activateTile);
 });
 
+setFocus(0);
+
 document.querySelectorAll(".hero-interactions span").forEach((signal) => {
   const activateSignal = () => {
     document.querySelectorAll(".hero-interactions span").forEach((item) => {
       item.classList.toggle("is-active", item === signal);
     });
-    if (portraitLabel) portraitLabel.textContent = signal.dataset.consoleLabel;
-    if (videoChip) videoChip.textContent = signal.dataset.consoleChip;
   };
   signal.addEventListener("mouseenter", activateSignal);
   signal.addEventListener("focus", activateSignal);

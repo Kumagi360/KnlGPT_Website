@@ -11,7 +11,19 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="projects-page">
-    <div class="schematic-bg" aria-hidden="true"><span>VCC</span><span>GPIO</span><span>PID()</span><span>τ = Iα</span><span>CAN</span><span>state.next()</span></div>
+    <div class="schematic-bg" aria-hidden="true">
+      <svg class="bg-drawing bg-circuit" viewBox="0 0 520 260">
+        <path d="M20 130h80l24-34 34 68 34-68 34 68 24-34h56" />
+        <path d="M306 74v112l112-56z" />
+        <path d="M250 130h56M418 130h72" />
+        <path d="M156 86v-46M156 174v48M348 56v-34M348 204v34" />
+        <text x="24" y="118">VIN</text><text x="386" y="96">OPA</text><text x="454" y="118">VOUT</text>
+      </svg>
+      <pre class="bg-code">always_ff @(posedge clk) begin
+  error <= target - encoder;
+  duty  <= kp * error + kd * delta;
+end</pre>
+    </div>
     <header class="site-header">
       <a class="brand-mark" href="index.html#top" aria-label="Kunal Gupta home"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
       <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Blog</a></nav>
@@ -20,33 +32,33 @@
     <main>
       <section class="article-hero project-hero">
         <p class="section-kicker">Project archive</p>
-        <h1>Case-file cards for machines, ventures, and experiments.</h1>
-        <p>Each card can hold mixed-ratio media, links, downloads, quotes, callouts, and compact technical notes.</p>
+        <h1>Project archive.</h1>
+        <p>Robotics, embedded systems, and founder work collected as inspection-ready case files with media, links, notes, and technical context.</p>
       </section>
 
       <section class="project-card-collection" aria-label="Project collection">
-        <article class="project-case-card" id="autonomous">
+        <article class="project-case-card" id="map">
           <div class="project-collage">
             <img class="wide" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80" alt="Robotics project placeholder" />
             <img src="https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?auto=format&fit=crop&w=700&q=80" alt="Robot arm placeholder" />
             <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80" alt="Electronics placeholder" />
           </div>
           <div class="project-case-body">
-            <span>KG-01 / Robotics</span>
-            <h2>Autonomous Manipulation Platform</h2>
-            <p class="lede">Mechanism, sensing, control, autonomy, and demo evidence in one expandable artifact.</p>
-            <div class="callout">Core question: can the system repeatedly perform the task outside a clean demo environment?</div>
-            <blockquote>“The prototype is the argument.”</blockquote>
+            <span>KG-01 / Autonomous robotics</span>
+            <h2>MAP Rover</h2>
+            <p class="lede">Mobile Autonomous Pathfinder: a web and GPS-enabled autonomous rover with onboard low-resolution object detection.</p>
+            <div class="callout">Leveraged SLAM and EKF; designed to traverse more than one mile per charge.</div>
+            <blockquote>“Autonomy becomes real when the robot can leave the bench.”</blockquote>
             <div class="mini-card-grid">
-              <a href="#">GitHub / code</a>
-              <a href="#">CAD export</a>
-              <a href="#">Demo reel</a>
-              <a href="#">Build notes</a>
+              <a href="#">SLAM / EKF</a>
+              <a href="#">GPS web stack</a>
+              <a href="#">Object detection</a>
+              <a href="#">Rover endurance</a>
             </div>
           </div>
         </article>
 
-        <article class="project-case-card" id="motion-lab">
+        <article class="project-case-card" id="martha">
           <div class="project-carousel" aria-label="Embedded motion lab image carousel">
             <div class="carousel-track">
               <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Embedded systems placeholder" />
@@ -56,32 +68,75 @@
             <div class="carousel-dots" aria-hidden="true"><span></span><span></span><span></span></div>
           </div>
           <div class="project-case-body">
-            <span>KG-02 / Embedded</span>
-            <h2>Embedded Motion Lab</h2>
-            <p class="lede">A bench-level project format for firmware, boards, sensors, motor control, and debugging traces.</p>
-            <div class="callout">This card can collect scope captures, wiring photos, short clips, and firmware logs.</div>
+            <span>KG-02 / Public health product</span>
+            <h2>MARTHA</h2>
+            <p class="lede">Monitoring and Restriction-Tracking Hotspot Application: distancing and de-densification iOS app and webpage.</p>
+            <div class="callout">Cornell HackOurCampus finalist; pitched to senior SWEs and investors while pursuing Cornell campus deployment.</div>
             <div class="mini-card-grid">
-              <a href="#">Firmware notes</a>
-              <a href="#">Wiring diagram</a>
-              <a href="#">Test data</a>
+              <a href="#">iOS app</a>
+              <a href="#">Webpage</a>
+              <a href="#">Hotspot tracking</a>
+              <a href="#">Campus pitch</a>
             </div>
           </div>
         </article>
 
-        <article class="project-case-card" id="founder-file">
+        <article class="project-case-card" id="safe">
           <div class="project-collage venture-collage">
             <img class="wide" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80" alt="Founder project placeholder" />
             <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80" alt="Team work placeholder" />
           </div>
           <div class="project-case-body">
-            <span>KG-03 / Venture</span>
-            <h2>Founder Operating File</h2>
-            <p class="lede">A venture case file for product thesis, users, team, market, traction, and decision quality.</p>
-            <blockquote>“Show what changed your mind, not just what worked.”</blockquote>
+            <span>KG-03 / Healthcare AI</span>
+            <h2>SAFE</h2>
+            <p class="lede">Smart Assistance for Elders: app, AI model, and sensor pod for predicting and preventing temperature-stress conditions.</p>
+            <blockquote>“Health sensing has to survive messy homes, not just clean datasets.”</blockquote>
             <div class="mini-card-grid">
-              <a href="#">Pitch deck</a>
-              <a href="#">Product notes</a>
-              <a href="#">Customer signal</a>
+              <a href="#">Sensor pod</a>
+              <a href="#">AI model</a>
+              <a href="#">India pilot</a>
+              <a href="#">ANN papers</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-case-card" id="sage">
+          <div class="project-collage">
+            <img class="wide" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Graph analytics placeholder" />
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Data visualization placeholder" />
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=80" alt="Network graph placeholder" />
+          </div>
+          <div class="project-case-body">
+            <span>KG-04 / Graph intelligence</span>
+            <h2>SAGE</h2>
+            <p class="lede">Smart Analytical Graph of Events: interactive visualization of top-read Wikipedia article nodes and weighted content edges.</p>
+            <div class="callout">Used IBM Watson API for sentiment analysis over graph-connected event content.</div>
+            <div class="mini-card-grid">
+              <a href="#">Wikipedia graph</a>
+              <a href="#">Weighted edges</a>
+              <a href="#">IBM Watson</a>
+              <a href="#">Sentiment analysis</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-case-card" id="soar">
+          <div class="project-carousel" aria-label="SOAR project carousel">
+            <div class="carousel-track">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80" alt="Database interface placeholder" />
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80" alt="Operations planning placeholder" />
+              <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80" alt="Team management placeholder" />
+            </div>
+            <div class="carousel-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          </div>
+          <div class="project-case-body">
+            <span>KG-05 / Operations software</span>
+            <h2>SOAR</h2>
+            <p class="lede">Smart Operating and Rostering: secure database and frontend interface for staff break duty allocation and daily management.</p>
+            <div class="callout">Adopted by head office and 200+ staff at International School of The Hague; received special commendation from school leadership.</div>
+            <div class="mini-card-grid">
+              <a href="#">Secure database</a>
+              <a href="#">Roster allocation</a>
+              <a href="#">Staff workflow</a>
+              <a href="#">200+ users</a>
             </div>
           </div>
         </article>
