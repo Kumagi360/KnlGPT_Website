@@ -56,6 +56,8 @@ const popoverDetail = document.querySelector("#popoverDetail");
 const popoverImageA = document.querySelector("#popoverImageA");
 const popoverImageB = document.querySelector("#popoverImageB");
 const mapPopover = document.querySelector("#mapPopover");
+const portraitLabel = document.querySelector(".portrait-label");
+const videoChip = document.querySelector(".video-chip");
 const visitedCountryIds = new Set(countries.map((country) => country.id));
 
 function updateScrollMeter() {
@@ -201,6 +203,18 @@ document.querySelectorAll(".project-tile").forEach((tile) => {
   };
   tile.addEventListener("mouseenter", activateTile);
   tile.addEventListener("focus", activateTile);
+});
+
+document.querySelectorAll(".hero-interactions span").forEach((signal) => {
+  const activateSignal = () => {
+    document.querySelectorAll(".hero-interactions span").forEach((item) => {
+      item.classList.toggle("is-active", item === signal);
+    });
+    if (portraitLabel) portraitLabel.textContent = signal.dataset.consoleLabel;
+    if (videoChip) videoChip.textContent = signal.dataset.consoleChip;
+  };
+  signal.addEventListener("mouseenter", activateSignal);
+  signal.addEventListener("focus", activateSignal);
 });
 
 document.querySelectorAll(".timeline-item").forEach((item) => {

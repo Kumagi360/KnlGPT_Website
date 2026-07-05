@@ -19,12 +19,16 @@
   <body class="home-page">
     <div class="scroll-meter" aria-hidden="true"></div>
     <div class="schematic-bg" aria-hidden="true">
-      <span>VCC</span>
-      <span>GPIO</span>
-      <span>PID()</span>
-      <span>τ = Iα</span>
-      <span>CAN</span>
-      <span>state.next()</span>
+      <span class="schem-token">VCC</span>
+      <span class="schem-token">GPIO</span>
+      <span class="schem-token">PID()</span>
+      <span class="schem-token">τ = Iα</span>
+      <span class="schem-token">CAN</span>
+      <span class="schem-token">state.next()</span>
+      <span class="code-token">if (signal) actuate();</span>
+      <span class="code-token">encoder.read()</span>
+      <span class="schem-token">M3</span>
+      <span class="code-token">bus.write(frame)</span>
     </div>
 
     <header class="site-header">
@@ -58,6 +62,11 @@
               I build physical systems and companies, then keep a record of the
               places, projects, people, and ideas that shape how I see the world.
             </p>
+          </div>
+          <div class="hero-interactions" aria-label="Robotics focus signals">
+            <span tabindex="0" data-console-label="mechanism sketch / linkage study / CAD tolerance loop" data-console-chip="cad layer"><strong>Mechanisms</strong><em>CAD / tolerances / motion</em></span>
+            <span tabindex="0" data-console-label="board bring-up / sensor bus / firmware trace" data-console-chip="signal layer"><strong>Embedded</strong><em>boards / firmware / sensors</em></span>
+            <span tabindex="0" data-console-label="closed-loop test / perception stack / autonomy run" data-console-chip="control layer"><strong>Autonomy</strong><em>control / perception / tests</em></span>
           </div>
         </div>
 
@@ -165,21 +174,25 @@
         <div class="timeline-track" aria-label="Resume timeline preview">
           <article class="timeline-item is-active" data-year="2022">
             <span>2022</span>
+            <div class="timeline-logo" aria-hidden="true">RF</div>
             <h3>Robotics foundation</h3>
             <p>Mechanical, electrical, and software layers start converging into physical systems work.</p>
           </article>
           <article class="timeline-item" data-year="2023">
             <span>2023</span>
+            <div class="timeline-logo" aria-hidden="true">PL</div>
             <h3>Prototype loop</h3>
             <p>Hardware bring-up, embedded tests, CAD, demos, and applied engineering velocity.</p>
           </article>
           <article class="timeline-item" data-year="2024">
             <span>2024</span>
+            <div class="timeline-logo" aria-hidden="true">FM</div>
             <h3>Founder mode</h3>
             <p>Entrepreneurial work becomes a serious operating lane: product, users, team, market.</p>
           </article>
           <article class="timeline-item" data-year="2025">
             <span>2025</span>
+            <div class="timeline-logo" aria-hidden="true">PA</div>
             <h3>Public archive</h3>
             <p>The work becomes easier to inspect through case studies, media, writing, and travel records.</p>
           </article>
@@ -247,6 +260,6 @@
     <script src="assets/topojson-client.min.js"></script>
     <script src="assets/countries-110m.js"></script>
     <script src="site.js?v=20260704-rail-map-cards"></script>
-    <script src="main.js?v=20260704-atlas-inline"></script>
+    <script src="main.js?v=20260704-home-refine"></script>
   </body>
 </html>
