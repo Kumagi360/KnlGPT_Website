@@ -53,6 +53,20 @@ function initProjectCardFocus() {
 
   collection.classList.add("has-focus");
 
+  const canHover = window.matchMedia("(hover: hover)").matches;
+
+  cards.forEach((card) => {
+    card.addEventListener("mouseenter", () => card.classList.add("is-expanded"));
+    card.addEventListener("mouseleave", () => {
+      if (canHover) card.classList.remove("is-expanded");
+    });
+    card.addEventListener("focusin", () => card.classList.add("is-expanded"));
+    card.addEventListener("focusout", () => card.classList.remove("is-expanded"));
+    card.addEventListener("click", () => {
+      card.classList.toggle("is-expanded");
+    });
+  });
+
   const setCurrentCard = (card) => {
     cards.forEach((item) => item.classList.toggle("is-current", item === card));
   };

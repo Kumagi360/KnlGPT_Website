@@ -709,15 +709,14 @@ main::before {
 }
 
 .latest-heading {
-  border-top: 1px solid var(--line-strong);
-  padding-top: 16px;
+  padding-top: 0;
 }
 
-.latest-heading h2 {
-  max-width: 680px;
-  margin: 8px 0 0;
-  font-size: 5.8rem;
-  line-height: 0.9;
+.latest-heading .section-kicker,
+.focus-copy .section-kicker,
+.notes-section .section-kicker {
+  font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+  font-weight: 500;
 }
 
 .latest-carousel {
@@ -852,7 +851,7 @@ main::before {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 16px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--line-strong);
   color: var(--ink);
@@ -1022,10 +1021,10 @@ main::before {
 
 .focus-shell {
   display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(300px, 0.42fr);
-  gap: clamp(24px, 5vw, 76px);
+  grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.34fr);
+  gap: clamp(18px, 3.2vw, 48px);
   align-items: start;
-  min-height: 430px;
+  min-height: 0;
 }
 
 .focus-copy p {
@@ -1036,7 +1035,7 @@ main::before {
 .focus-stage {
   --stage-accent: var(--oxide);
   position: relative;
-  min-height: 220px;
+  min-height: 208px;
   border: 1px solid var(--line-strong);
   overflow: hidden;
   background:
@@ -1091,14 +1090,14 @@ main::before {
 
 .stage-readouts {
   position: absolute;
-  left: 20px;
-  right: 20px;
-  top: 50%;
+  left: 8px;
+  right: 8px;
+  top: 58%;
   bottom: auto;
   z-index: 4;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 7px;
   pointer-events: none;
   transform: translateY(-50%);
 }
@@ -1108,7 +1107,7 @@ main::before {
   display: grid;
   align-content: center;
   gap: 8px;
-  padding: 14px 10px;
+  padding: 14px 8px;
   border: 1px solid rgba(17, 17, 17, 0.18);
   background: rgba(246, 243, 238, 0.76);
   backdrop-filter: blur(8px);
@@ -1124,7 +1123,7 @@ main::before {
 
 .stage-readouts strong {
   overflow: visible;
-  font-size: clamp(2rem, 3.25vw, 2.9rem);
+  font-size: clamp(1.85rem, 2.8vw, 2.45rem);
   line-height: 0.85;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1134,7 +1133,7 @@ main::before {
   display: grid;
   grid-template-columns: 1.25fr 0.82fr 0.93fr;
   gap: 18px;
-  margin-top: 28px;
+  margin-top: 18px;
 }
 
 .project-tile {
@@ -1703,6 +1702,7 @@ main::before {
   display: grid;
   grid-template-columns: minmax(0, 0.48fr) minmax(340px, 0.52fr);
   gap: clamp(22px, 4vw, 56px);
+  align-items: center;
   padding: clamp(18px, 3vw, 34px);
   border: 1px solid var(--line-strong);
   background:
@@ -1730,7 +1730,8 @@ main::before {
 }
 
 .project-case-card:hover::after,
-.project-case-card:focus-within::after {
+.project-case-card:focus-within::after,
+.project-case-card.is-expanded::after {
   content: "Technical notes open";
   background: rgba(17, 17, 17, 0.86);
   color: var(--paper);
@@ -1750,10 +1751,12 @@ main::before {
 }
 
 .project-collage {
+  align-self: center;
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
   grid-auto-rows: clamp(130px, 17vw, 220px);
   gap: 10px;
+  align-content: center;
 }
 
 .project-collage img {
@@ -1780,6 +1783,7 @@ main::before {
 
 .project-carousel {
   position: relative;
+  align-self: center;
   min-height: clamp(280px, 36vw, 440px);
   overflow: hidden;
   border: 1px solid rgba(17, 17, 17, 0.14);
@@ -1816,7 +1820,7 @@ main::before {
 }
 
 .project-case-body {
-  align-self: end;
+  align-self: center;
 }
 
 .project-case-body span {
@@ -1868,7 +1872,8 @@ main::before {
 }
 
 .project-case-card:hover .project-technical,
-.project-case-card:focus-within .project-technical {
+.project-case-card:focus-within .project-technical,
+.project-case-card.is-expanded .project-technical {
   max-height: 440px;
   margin-top: 26px;
   padding-top: 20px;
@@ -1894,7 +1899,7 @@ main::before {
 
 .back-link {
   display: inline-flex;
-  margin: 34px clamp(18px, 4vw, 54px) 0;
+  margin: 52px clamp(34px, 6vw, 86px) 0;
   padding: 9px 12px;
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.38);
@@ -1913,7 +1918,7 @@ main::before {
 .post-hero {
   display: grid;
   gap: 22px;
-  padding: clamp(72px, 10vw, 130px) clamp(18px, 4vw, 54px) 42px;
+  padding: clamp(34px, 5vw, 66px) clamp(18px, 4vw, 54px) 38px;
 }
 
 .post-hero span {
