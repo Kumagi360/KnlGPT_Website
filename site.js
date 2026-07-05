@@ -71,9 +71,30 @@ function initProjectCardFocus() {
   setCurrentCard(cards[0]);
 }
 
+function initBlogFilters() {
+  const filters = [...document.querySelectorAll("[data-blog-filter]")];
+  const cards = [...document.querySelectorAll("[data-blog-tags]")];
+  if (!filters.length || !cards.length) return;
+
+  const setFilter = (filter) => {
+    filters.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.blogFilter === filter);
+    });
+    cards.forEach((card) => {
+      const tags = (card.dataset.blogTags || "").split(/\s+/);
+      card.classList.toggle("is-filtered-out", filter !== "all" && !tags.includes(filter));
+    });
+  };
+
+  filters.forEach((button) => {
+    button.addEventListener("click", () => setFilter(button.dataset.blogFilter));
+  });
+}
+
 setActiveNav();
 initProjectPanels();
 initProjectCardFocus();
+initBlogFilters();
 window.addEventListener("hashchange", setActiveNav);
 window.addEventListener("hashchange", setActiveSectionFromHash);
 
@@ -90,21 +111,47 @@ if ((window.location.pathname.split("/").pop() || "index.html") === "index.html"
     .filter(Boolean);
 
   if (observedSections.length) {
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        setActiveSection(sectionNav[visible.target.id]);
-      },
-      { rootMargin: "-30% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
-    );
+    let sectionTicking = false;
 
-    observedSections.forEach((section) => navObserver.observe(section));
+    const updateSectionFromScroll = () => {
+      sectionTicking = false;
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 8;
+      if (scrollBottom >= pageBottom) {
+        setActiveSection("notes");
+        return;
+      }
+
+      const targetLine = window.innerHeight * 0.42;
+      const current = observedSections
+        .map((section) => {
+          const rect = section.getBoundingClientRect();
+          const sectionCenter = rect.top + rect.height * 0.38;
+          return {
+            id: section.id,
+            distance: Math.abs(sectionCenter - targetLine),
+            visible: rect.bottom > 96 && rect.top < window.innerHeight - 96,
+          };
+        })
+        .filter((section) => section.visible)
+        .sort((a, b) => a.distance - b.distance)[0];
+
+      if (current) setActiveSection(sectionNav[current.id]);
+    };
+
+    const requestSectionUpdate = () => {
+      if (sectionTicking) return;
+      sectionTicking = true;
+      window.requestAnimationFrame(updateSectionFromScroll);
+    };
+
     if (!setActiveSectionFromHash()) {
       setActiveSection("latest");
     }
+    updateSectionFromScroll();
+    window.addEventListener("scroll", requestSectionUpdate, { passive: true });
+    window.addEventListener("resize", requestSectionUpdate);
   }
 }
 

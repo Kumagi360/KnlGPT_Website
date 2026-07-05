@@ -56,12 +56,8 @@ const countries = [
 
 const scrollMeter = document.querySelector(".scroll-meter");
 const focusStage = document.querySelector("#focusStage");
-const focusBody = document.querySelector("#focusBody");
 const focusCode = document.querySelector("#focusCode");
 const focusTitle = document.querySelector("#focusTitle");
-const focusRange = document.querySelector("#focusRange");
-const focusStack = document.querySelector("#focusStack");
-const focusEvidence = document.querySelector("#focusEvidence");
 const popoverMeta = document.querySelector("#popoverMeta");
 const popoverTitle = document.querySelector("#popoverTitle");
 const popoverDetail = document.querySelector("#popoverDetail");
@@ -78,12 +74,8 @@ function updateScrollMeter() {
 
 function setFocus(index) {
   const item = focusItems[index];
-  focusCode.textContent = item.code;
-  focusTitle.textContent = item.title;
-  focusBody.textContent = item.body;
-  if (focusRange) focusRange.textContent = item.range;
-  if (focusStack) focusStack.textContent = item.stack;
-  if (focusEvidence) focusEvidence.textContent = item.evidence;
+  if (focusCode) focusCode.textContent = item.code;
+  if (focusTitle) focusTitle.textContent = item.title;
   focusStage.style.setProperty("--stage-accent", item.accent);
 }
 
@@ -98,6 +90,7 @@ function initLatestCarousel() {
 
   let activeIndex = 0;
   let autoTimer;
+  let isPaused = false;
 
   const setLatest = (index, shouldScroll = true) => {
     activeIndex = (index + cards.length) % cards.length;
@@ -115,8 +108,17 @@ function initLatestCarousel() {
   const restartAuto = () => {
     window.clearInterval(autoTimer);
     autoTimer = window.setInterval(() => {
-      if (!document.hidden) setLatest(activeIndex + 1);
-    }, 6500);
+      if (!document.hidden && !isPaused) setLatest(activeIndex + 1);
+    }, 15000);
+  };
+
+  const pauseAuto = () => {
+    isPaused = true;
+  };
+
+  const resumeAuto = () => {
+    isPaused = false;
+    restartAuto();
   };
 
   dots.forEach((dot) => {
@@ -125,6 +127,13 @@ function initLatestCarousel() {
       restartAuto();
     });
   });
+
+  carousel.addEventListener("mouseenter", pauseAuto);
+  carousel.addEventListener("mouseleave", resumeAuto);
+  carousel.addEventListener("focusin", pauseAuto);
+  carousel.addEventListener("focusout", resumeAuto);
+  carousel.addEventListener("touchstart", pauseAuto, { passive: true });
+  carousel.addEventListener("touchend", resumeAuto, { passive: true });
 
   track.addEventListener(
     "scroll",
@@ -137,57 +146,6 @@ function initLatestCarousel() {
 
   setLatest(0, false);
   restartAuto();
-}
-
-function initTimelineAutoScroll() {
-  const track = document.querySelector("[data-auto-scroll-timeline]");
-  if (!track) return;
-
-  let paused = false;
-  let resumeTimer;
-  let frameId;
-  let lastFrame = 0;
-
-  const pause = () => {
-    paused = true;
-    window.clearTimeout(resumeTimer);
-  };
-
-  const resumeSoon = () => {
-    window.clearTimeout(resumeTimer);
-    resumeTimer = window.setTimeout(() => {
-      paused = false;
-    }, 1400);
-  };
-
-  const step = (timestamp) => {
-    if (!lastFrame) lastFrame = timestamp;
-    const delta = timestamp - lastFrame;
-    lastFrame = timestamp;
-
-    if (!paused && !document.hidden && track.scrollHeight > track.clientHeight + 4) {
-      track.scrollTop += delta * 0.018;
-      if (track.scrollTop + track.clientHeight >= track.scrollHeight - 2) {
-        track.scrollTop = 0;
-      }
-    }
-
-    frameId = window.requestAnimationFrame(step);
-  };
-
-  track.addEventListener("mouseenter", pause);
-  track.addEventListener("mouseleave", resumeSoon);
-  track.addEventListener("focusin", pause);
-  track.addEventListener("focusout", resumeSoon);
-  track.addEventListener("wheel", () => {
-    pause();
-    resumeSoon();
-  }, { passive: true });
-  track.addEventListener("touchstart", pause, { passive: true });
-  track.addEventListener("touchend", resumeSoon, { passive: true });
-
-  frameId = window.requestAnimationFrame(step);
-  window.addEventListener("beforeunload", () => window.cancelAnimationFrame(frameId));
 }
 
 function setCountry(countryId) {
@@ -309,7 +267,6 @@ async function renderWorldMap() {
 window.addEventListener("scroll", updateScrollMeter, { passive: true });
 updateScrollMeter();
 initLatestCarousel();
-initTimelineAutoScroll();
 
 document.querySelectorAll(".project-tile").forEach((tile) => {
   const activateTile = () => {

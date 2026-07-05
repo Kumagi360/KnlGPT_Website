@@ -29,40 +29,29 @@
         <p>Blog posts can support long essays, short logs, image-heavy travel notes, embedded links, downloadable references, callouts, and quotes.</p>
       </section>
 
+      <section class="blog-filter-bar" aria-label="Filter blog posts by tag">
+        <button type="button" class="is-active" data-blog-filter="all">All</button>
+        <button type="button" data-blog-filter="robotics">Robotics</button>
+        <button type="button" data-blog-filter="founder">Founder</button>
+        <button type="button" data-blog-filter="travel">Travel</button>
+      </section>
+
       <section class="blog-index">
-        <a class="blog-card" href="blog-robotics.html">
+        <a class="blog-card" href="blog-robotics.html" data-blog-tags="robotics">
           <span>Robotics</span>
           <h2>Reality-tested machines</h2>
           <p>Notes on constraints, tests, and why prototypes teach faster than plans.</p>
         </a>
-        <a class="blog-card" href="blog-founder.html">
+        <a class="blog-card" href="blog-founder.html" data-blog-tags="founder">
           <span>Founder</span>
           <h2>Engineering entrepreneurship</h2>
           <p>A field note about risk, iteration, and signal quality.</p>
         </a>
-        <a class="blog-card image-card" href="blog-travel.html">
+        <a class="blog-card image-card" href="blog-travel.html" data-blog-tags="travel">
           <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=80" alt="Travel writing placeholder" />
           <span>Travel</span>
           <h2>Taste in motion</h2>
         </a>
-      </section>
-
-      <section class="article-layout" id="post-template">
-        <aside class="article-meta">
-          <span>Post template</span>
-          <p>Long-form writing system with editorial modules.</p>
-        </aside>
-        <article class="rich-article">
-          <h2>Typography system</h2>
-          <p class="lede">This is the larger first paragraph style: personal, direct, and a little more literary than the project pages.</p>
-          <p>Body copy should be comfortable enough for long essays while still feeling precise. Links can appear inline, and downloadable references can sit inside cards.</p>
-          <blockquote>“A good personal site should make the private logic behind the public work easier to see.”</blockquote>
-          <div class="callout">Callouts can hold a strong observation, a travel detail, a lesson learned, or a compact summary.</div>
-          <div class="article-card-grid">
-            <div><strong>Media block</strong><p>Inline images, videos, captions, and galleries.</p></div>
-            <div><strong>Reference card</strong><p>External links, reading lists, and downloads.</p></div>
-          </div>
-        </article>
       </section>
     </main>
     <script src="site.js?v=20260704-rail-map-cards"></script>
