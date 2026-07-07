@@ -373,12 +373,12 @@ end</pre>
             XR tourism, and Cornell robotics education.
           </p>
           <aside class="education-panel" aria-label="Education">
-            <p class="section-kicker">Education</p>
             <article>
               <div class="timeline-logo" aria-hidden="true">CU</div>
               <div>
                 <h3>Cornell University</h3>
-                <p>B.S. Computer Science, 2020 - 2024. Minors in Robotics and Electrical & Computer Engineering.</p>
+                <p class="education-meta">2020 - 2024 / B.S. Computer Science</p>
+                <p>Minors in Robotics and Electrical & Computer Engineering.</p>
                 <span>Cornell Electric Vehicles / CEI Lab / Entrepreneurship at Cornell</span>
               </div>
             </article>
@@ -386,7 +386,8 @@ end</pre>
               <div class="timeline-logo" aria-hidden="true">ISH</div>
               <div>
                 <h3>International School</h3>
-                <p>IB Diploma, 2018 - 2020. Engineering, developer, code, enterprise, debate, MUN, and student leadership.</p>
+                <p class="education-meta">2018 - 2020 / IB Diploma</p>
+                <p>Engineering, developer, code, enterprise, debate, MUN, and student leadership.</p>
                 <span>The Hague / engineering head / project lead</span>
               </div>
             </article>
@@ -463,6 +464,10 @@ end</pre>
         </div>
         <div class="atlas-map" aria-label="Interactive world map">
           <div class="map-canvas" id="worldMap" aria-label="Real world map with hoverable country outlines"></div>
+          <div class="map-legend" aria-label="Map legend">
+            <span><i class="legend-visited"></i>Visited</span>
+            <span><i class="legend-lived"></i>Lived in</span>
+          </div>
           <div class="map-popover" id="mapPopover" aria-live="polite">
             <span id="popoverMeta">United States / 2021-present</span>
             <strong id="popoverTitle">United States</strong>
@@ -519,7 +524,7 @@ end</pre>
     <script src="assets/d3.min.js"></script>
     <script src="assets/topojson-client.min.js"></script>
     <script src="assets/countries-110m.js"></script>
-    <script src="site.js?v=20260705-polish"></script>
-    <script src="main.js?v=20260705-polish"></script>
+    <script src="site.js?v=20260707-atlas"></script>
+    <script src="main.js?v=20260707-atlas"></script>
   </body>
 </html>
