@@ -5,6 +5,7 @@ function setActiveNav() {
   if (path === "index.html" || path === "") active = "home";
   if (path.startsWith("projects")) active = "projects";
   if (path === "blog.html") active = "blog";
+  if (path === "til.html" || path.startsWith("til-")) active = "til";
 
   document.querySelectorAll("[data-nav]").forEach((link) => {
     link.classList.toggle("is-current", link.dataset.nav === active);
