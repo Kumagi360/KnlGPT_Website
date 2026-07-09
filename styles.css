@@ -2835,11 +2835,45 @@ blockquote {
   margin-bottom: 8px;
 }
 
+.til-subcard a {
+  color: var(--ink);
+  text-decoration-color: rgba(126, 169, 159, 0.9);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+.til-source-tag {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "IBM Plex Mono", monospace;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.til-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 14px;
+  object-fit: cover;
+  border: 1px solid var(--line-strong);
+}
+
+.til-email-card,
+.til-idea-card {
+  padding: 18px;
+}
+
 .til-subcard p {
-  margin: 0;
+  margin: 0 0 12px;
   color: #3f4643;
   font-size: 1rem;
   overflow-wrap: anywhere;
+}
+
+.til-subcard p:last-child {
+  margin-bottom: 0;
 }
 
 .til-subcard.muted-card {
