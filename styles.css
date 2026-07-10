@@ -2777,6 +2777,30 @@ blockquote {
   gap: 18px;
 }
 
+.til-aggregation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 390px), 1fr));
+  align-items: start;
+  gap: 18px;
+  margin-bottom: clamp(34px, 6vw, 72px);
+}
+
+.til-page-divider {
+  width: min(100%, 780px);
+  height: 1px;
+  margin: 0 auto clamp(34px, 6vw, 72px);
+  background: var(--line-strong);
+}
+
+.til-ideation-section {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.til-ideation-section > .til-column {
+  margin: 0 auto;
+}
+
 .til-column {
   position: relative;
   min-width: 0;
