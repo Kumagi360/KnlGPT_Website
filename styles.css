@@ -2859,6 +2859,12 @@ blockquote {
   padding-bottom: 24px;
 }
 
+.til-gear-hero h1 {
+  font-size: clamp(2.35rem, 11vw, 5rem);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
 .til-gear-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 390px), 1fr));
@@ -2946,6 +2952,7 @@ blockquote {
 .til-subcard strong {
   display: block;
   margin-bottom: 8px;
+  overflow-wrap: anywhere;
 }
 
 .til-subcard a {
@@ -2961,6 +2968,7 @@ blockquote {
     text-decoration-color 160ms ease,
     text-shadow 160ms ease,
     top 160ms ease;
+  overflow-wrap: anywhere;
 }
 
 .til-subcard a:hover,
@@ -3872,5 +3880,44 @@ blockquote {
     flex: 1 1 0;
     min-width: 0;
     text-align: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .til-gear-hero h1 {
+    font-size: 2rem;
+    line-height: 1;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-wrap: wrap;
+  }
+
+  .til-subcard strong,
+  .til-subcard a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 360px) {
+  .til-gear-hero h1 {
+    font-size: 2.08rem;
+    line-height: 0.96;
+    text-wrap: wrap;
+  }
+
+  .til-column {
+    padding: 16px;
+  }
+
+  .til-email-card,
+  .til-idea-card {
+    padding: 14px;
+  }
+
+  .til-subcard strong,
+  .til-subcard a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
