@@ -79,7 +79,7 @@ a:focus-visible,
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
-  opacity: 0.23;
+  opacity: 0.31;
   background:
     linear-gradient(90deg, transparent 0 48px, rgba(17, 17, 17, 0.04) 49px, transparent 50px) 0 0 / 98px 98px,
     linear-gradient(0deg, transparent 0 48px, rgba(17, 17, 17, 0.035) 49px, transparent 50px) 0 0 / 98px 98px,
@@ -120,7 +120,10 @@ a:focus-visible,
   stroke: rgba(17, 17, 17, 0.28);
   stroke-width: 1.45;
   vector-effect: non-scaling-stroke;
-  animation: schematicFloat 28s ease-in-out infinite alternate;
+  --entity-low: 0.22;
+  --entity-mid: 0.46;
+  --entity-high: 0.34;
+  animation: schematicFloat 31s ease-in-out infinite alternate;
 }
 
 .bg-drawing text {
@@ -132,44 +135,112 @@ a:focus-visible,
 }
 
 .bg-circuit {
+  --entity-low: 0.24;
+  --entity-mid: 0.52;
+  --entity-high: 0.38;
   width: min(48vw, 620px);
   left: 4vw;
   top: 9vh;
+  animation-duration: 29s;
 }
 
 .bg-board {
+  --entity-low: 0.18;
+  --entity-mid: 0.38;
+  --entity-high: 0.26;
   width: min(54vw, 760px);
   right: -1vw;
   top: 5vh;
+  animation-duration: 37s;
   animation-delay: -6s;
 }
 
 .bg-board-alt {
+  --entity-low: 0.14;
+  --entity-mid: 0.32;
+  --entity-high: 0.2;
   width: min(44vw, 640px);
   left: 30vw;
   top: 30vh;
+  animation-duration: 43s;
   animation-delay: -21s;
 }
 
 .bg-cad {
+  --entity-low: 0.24;
+  --entity-mid: 0.5;
+  --entity-high: 0.36;
   width: min(42vw, 600px);
   right: 8vw;
   bottom: 3vh;
+  animation-duration: 34s;
   animation-delay: -11s;
 }
 
 .bg-linkage {
+  --entity-low: 0.18;
+  --entity-mid: 0.42;
+  --entity-high: 0.28;
   width: min(43vw, 580px);
   left: 2vw;
   bottom: 14vh;
+  animation-duration: 39s;
   animation-delay: -17s;
 }
 
 .bg-gearbox {
+  --entity-low: 0.2;
+  --entity-mid: 0.44;
+  --entity-high: 0.3;
   width: min(40vw, 560px);
   right: 24vw;
   bottom: 24vh;
+  animation-duration: 47s;
   animation-delay: -25s;
+}
+
+.bg-arm {
+  --entity-low: 0.2;
+  --entity-mid: 0.48;
+  --entity-high: 0.3;
+  width: min(42vw, 590px);
+  left: 56vw;
+  top: 46vh;
+  animation-duration: 41s;
+  animation-delay: -31s;
+}
+
+.bg-routing {
+  --entity-low: 0.16;
+  --entity-mid: 0.36;
+  --entity-high: 0.24;
+  width: min(48vw, 700px);
+  left: -5vw;
+  top: 36vh;
+  animation-duration: 52s;
+  animation-delay: -19s;
+}
+
+.bg-trajectory {
+  --entity-low: 0.24;
+  --entity-mid: 0.54;
+  --entity-high: 0.34;
+  width: min(40vw, 560px);
+  right: 5vw;
+  top: 68vh;
+  animation-duration: 36s;
+  animation-delay: -27s;
+}
+
+.bg-state {
+  --entity-low: 0.18;
+  --entity-mid: 0.4;
+  --entity-high: 0.26;
+  width: min(36vw, 500px);
+  left: 20vw;
+  top: 72vh;
+  animation-duration: 45s;
+  animation-delay: -9s;
 }
 
 .bg-code {
@@ -194,6 +265,24 @@ a:focus-visible,
   top: 58vh;
   width: min(27vw, 380px);
   animation-delay: -13s;
+}
+
+.bg-code-third {
+  left: 70vw;
+  top: 21vh;
+  width: min(25vw, 360px);
+  color: rgba(17, 17, 17, 0.42);
+  animation-duration: 41s;
+  animation-delay: -24s;
+}
+
+.bg-code-fourth {
+  left: 7vw;
+  top: 76vh;
+  width: min(28vw, 390px);
+  color: rgba(17, 17, 17, 0.38);
+  animation-duration: 47s;
+  animation-delay: -32s;
 }
 
 .schematic-bg span {
@@ -2973,11 +3062,16 @@ blockquote {
 }
 
 @keyframes schematicFloat {
-  from {
+  0% {
     transform: translate3d(0, 0, 0);
+    opacity: var(--entity-low);
   }
-  to {
+  42% {
+    opacity: var(--entity-mid);
+  }
+  100% {
     transform: translate3d(18px, -10px, 0);
+    opacity: var(--entity-high);
   }
 }
 
