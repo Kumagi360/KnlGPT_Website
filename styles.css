@@ -2860,10 +2860,31 @@ blockquote {
 }
 
 .til-subcard a {
+  position: relative;
+  top: 0;
   color: var(--ink);
-  text-decoration-color: rgba(126, 169, 159, 0.9);
+  text-decoration-color: rgba(190, 104, 38, 0.78);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
+  text-shadow: 0 6px 18px rgba(190, 104, 38, 0.2);
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease,
+    text-shadow 160ms ease,
+    top 160ms ease;
+}
+
+.til-subcard a:hover,
+.til-subcard a:focus-visible {
+  top: -1px;
+  color: #9a501f;
+  text-decoration-color: rgba(190, 104, 38, 1);
+  text-shadow: 0 8px 20px rgba(190, 104, 38, 0.32);
+}
+
+.til-subcard a:focus-visible {
+  outline: 1px solid rgba(190, 104, 38, 0.55);
+  outline-offset: 3px;
 }
 
 .til-source-tag {
