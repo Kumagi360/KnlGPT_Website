@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 9, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 9, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Blog</a><a href="til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="til.html">← Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 9, 2026 / 6:30 AM-6:30 PM PT</span>
+          <h1>Cheap labor creates work before it replaces jobs</h1>
+          <p>The strongest signal in the window was that autonomous systems create new operational backlogs before they cleanly substitute for existing work: physical maintenance, robot safety, manipulation data, agent review, and model-cost routing.</p>
+        </header>
+
+        <section class="post-body til-gear-grid" aria-label="Paired gear output">
+          <section class="til-column">
+            <span class="til-column-kicker">Aggregation</span>
+            <h2>Source window</h2>
+            <div class="til-subcard">
+              <strong>Source set</strong>
+              <p>The available shared source-intelligence artifact covered It Can Think on cheap robotic labor, The Pragmatic Engineer on Cursor usage data, Cursor's primary developer habits report, WSJ reporting on humanoid safety, and The Guardian on dexterous robotic hands in China.</p>
+            </div>
+            <div class="til-subcard">
+              <strong>Strongest facts</strong>
+              <p>Cursor reported p50 users generating about 700 AI-assisted lines per week while p90 users were closer to 9,000, and the source intelligence notes that roughly 40% of Cursor users allowed agent commits without manual checking in March 2026.</p>
+              <p>Cursor's primary report was also recorded as showing accepted AI lines still present after 60 minutes rising from roughly 76% to 81% in early 2026, with nearly 9x variation in mean cost per agent request across model families.</p>
+            </div>
+            <div class="til-subcard">
+              <strong>Notable links</strong>
+              <p><a href="https://itcanthink.substack.com/p/what-would-you-do-if-labor-was-free">What Would You Do if Labor Was Free?</a></p>
+              <p><a href="https://newsletter.pragmaticengineer.com/p/the-pulse-interesting-ai-coding-stats">The Pulse: Interesting AI coding stats from Cursor</a></p>
+              <p><a href="https://cursor.com/insights">Cursor Developer Habits Report: Agentic Coding Trends</a></p>
+              <p><a href="https://www.wsj.com/tech/the-quest-to-make-humanoid-robots-safe-enough-for-humans-4887c123">The Quest to Make Humanoid Robots Safe Enough for Humans</a></p>
+              <p><a href="https://www.theguardian.com/technology/ng-interactive/2026/jul/06/china-dextrous-robotic-hands-humanoid">China wants to solve the hardest problem in robotics - making hands</a></p>
+            </div>
+            <div class="til-subcard">
+              <strong>What changed</strong>
+              <p>The useful framing shifted from "automation replaces a task" to "automation reveals an unpriced queue of work." Deferred maintenance, cleaning, repair, inventory, care support, code review, safety review, and cost routing all become explicit once machines can attempt them at scale.</p>
+            </div>
+            <div class="til-subcard muted-card">
+              <strong>Coverage note</strong>
+              <p>No separate newsletter-aggregation artifact was present for this gear. This column is adapted from the shared 2026-07-09 Second Gear source-intelligence record rather than from a standalone aggregation digest.</p>
+            </div>
+          </section>
+
+          <section class="til-column">
+            <span class="til-column-kicker">Ideation</span>
+            <h2>Operational control planes</h2>
+            <p class="til-lede">The available contextual-ideation artifact supported two ideas that clear the bar: one for physical-world work backlogs and one for agentic software work. Both are less about generating more output and more about making autonomous output governable.</p>
+            <div class="til-subcard">
+              <strong>Physical Work Backlog OS</strong>
+              <p>A vertical system for turning neglected physical work into priced, auditable jobs for robots or robot-assisted crews: inspection routes, site constraints, safety rules, completion evidence, exception handling, and buyer approval.</p>
+              <p>The first wedge should be narrow: one environment, one recurring job family, and a buyer with visible deferred work. Facilities maintenance, warehouse cleaning, utility inspection, and healthcare support all have demand, but the product has to start where safety and proof-of-work can be bounded.</p>
+            </div>
+            <div class="til-subcard">
+              <strong>Reality check</strong>
+              <p>Commercially, the buyer is paying for reduced operational risk, not for a robot story. Technically, the hard parts are site-specific perception, exception recovery, liability, and trustworthy evidence that a job was done. Without those, the company becomes a services wrapper around immature hardware.</p>
+            </div>
+            <div class="til-subcard">
+              <strong>Agent Commit Control Plane</strong>
+              <p>A governance layer for teams that already let coding agents make large changes: policy-based review requirements, cost-aware model routing, context-budget monitoring, risky-diff detection, and audit trails for unreviewed agent commits.</p>
+              <p>The Cursor signals make this feel current because agentic coding is moving from suggestion to operational control. The buyer is an engineering leader trying to preserve velocity without losing review discipline or letting model costs become invisible infrastructure spend.</p>
+            </div>
+            <div class="til-subcard">
+              <strong>Reality check</strong>
+              <p>The product cannot be a dashboard alone. It needs to sit directly in the commit, pull request, and agent execution path, where it can block, route, or require human review. Defensibility would come from workflow data, integrations, and trust with engineering teams, not from generic code-quality claims.</p>
+            </div>
+            <div class="til-subcard muted-card">
+              <strong>Artifact note</strong>
+              <p>The ideation side present for this run was the contextual source-intelligence artifact, not a separate final memo. The ideas above are adapted from that record's source summaries, claims, and why-it-matters fields.</p>
+            </div>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="site.js?v=20260707-atlas"></script>
+  </body>
+</html>
