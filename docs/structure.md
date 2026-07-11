@@ -23,11 +23,12 @@ This is a static site with no build step. Keep root entry pages at the project r
 - `assets/images/`: committed owned/local image assets
 - `assets/images/placeholders/`: replaceable non-TIL image slots, named by page and placement
 
-## Content Manifests
+## Content Automation
 
-- `content/blog/posts.json`: blog metadata and paths
-- `content/til/posts.json`: TIL metadata and paths
+Automation should generate or update the actual HTML files directly:
 
-The manifests are intentionally simple JSON so future automation can generate indexes later without changing URLs.
+- `blog.html` and `til.html` for index cards
+- `blog/<post-heading-slug>.html` for blog detail pages
+- `til/YYYY-MM-DD-<gear>-gear.html` for TIL detail pages
 
 TIL images are intentionally remote-only. Do not mirror newsletter/article card images into committed assets unless ownership changes.

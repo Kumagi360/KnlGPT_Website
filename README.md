@@ -10,7 +10,6 @@ Static personal website for Kunal Gupta, built for GitHub Pages.
 - `til.html` - TIL index
 - `blog/` - individual blog post pages
 - `til/` - dated TIL pages
-- `content/` - JSON metadata for future content automation
 - `assets/css/` - site styling
 - `assets/js/` - shared navigation, homepage interactions, and Atlas map
 - `assets/vendor/` - vendored browser libraries
