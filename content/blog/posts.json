@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Reality-tested machines",
+    "category": "robotics",
+    "status": "draft",
+    "path": "blog/reality-tested-machines.html",
+    "tags": ["robotics"]
+  },
+  {
+    "title": "Engineering entrepreneurship",
+    "category": "founder",
+    "status": "draft",
+    "path": "blog/engineering-entrepreneurship.html",
+    "tags": ["founder"]
+  },
+  {
+    "title": "Taste in motion",
+    "category": "travel",
+    "status": "draft",
+    "path": "blog/taste-in-motion.html",
+    "tags": ["travel"]
+  }
+]

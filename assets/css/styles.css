@@ -79,13 +79,14 @@ a:focus-visible,
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
-  opacity: 0.31;
+  opacity: 0.78;
   background:
-    linear-gradient(90deg, transparent 0 48px, rgba(17, 17, 17, 0.04) 49px, transparent 50px) 0 0 / 98px 98px,
-    linear-gradient(0deg, transparent 0 48px, rgba(17, 17, 17, 0.035) 49px, transparent 50px) 0 0 / 98px 98px,
-    radial-gradient(circle, rgba(17, 17, 17, 0.05) 0 1.5px, transparent 1.6px) 0 0 / 98px 98px,
+    linear-gradient(90deg, transparent 0 58px, rgba(17, 17, 17, 0.032) 59px, transparent 60px) 0 0 / 116px 116px,
+    linear-gradient(0deg, transparent 0 58px, rgba(17, 17, 17, 0.028) 59px, transparent 60px) 0 0 / 116px 116px,
+    radial-gradient(circle, rgba(17, 17, 17, 0.046) 0 1.4px, transparent 1.5px) 0 0 / 116px 116px,
     linear-gradient(135deg, rgba(246, 243, 238, 0.98), rgba(231, 236, 232, 0.62));
   mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.72) 54%, transparent 92%);
+  animation: ambientGrid 24s linear infinite;
 }
 
 .schematic-bg::before,
@@ -94,7 +95,7 @@ a:focus-visible,
   position: absolute;
   border: 1px solid rgba(17, 17, 17, 0.1);
   opacity: 0.32;
-  animation: schematicDrift 64s ease-in-out infinite alternate;
+  animation: schematicDrift 34s ease-in-out infinite alternate;
 }
 
 .schematic-bg::before {
@@ -117,180 +118,508 @@ a:focus-visible,
   position: absolute;
   overflow: visible;
   fill: none;
-  stroke: rgba(17, 17, 17, 0.28);
-  stroke-width: 1.45;
+  stroke: rgba(17, 17, 17, 0.46);
+  stroke-width: 1.35;
   vector-effect: non-scaling-stroke;
-  --entity-low: 0.22;
-  --entity-mid: 0.46;
-  --entity-high: 0.34;
-  animation: schematicFloat 31s ease-in-out infinite alternate;
+  --entity-low: 0.28;
+  --entity-mid: 0.62;
+  --entity-high: 0.42;
+  animation: schematicFloat 15s ease-in-out infinite alternate;
+}
+
+.bg-drawing path,
+.bg-drawing circle,
+.bg-drawing rect,
+.bg-drawing polyline,
+.bg-drawing line {
+  stroke-dasharray: var(--dash, 820);
+  stroke-dashoffset: 0;
+  animation: tracePulse 8s ease-in-out infinite alternate;
 }
 
 .bg-drawing text {
-  fill: rgba(17, 17, 17, 0.42);
+  fill: rgba(17, 17, 17, 0.5);
   stroke: none;
   font-family: "IBM Plex Mono", monospace;
   font-size: 14px;
   letter-spacing: 0;
-}
-
-.bg-circuit {
-  --entity-low: 0.24;
-  --entity-mid: 0.52;
-  --entity-high: 0.38;
-  width: min(48vw, 620px);
-  left: 4vw;
-  top: 9vh;
-  animation-duration: 29s;
-}
-
-.bg-board {
-  --entity-low: 0.18;
-  --entity-mid: 0.38;
-  --entity-high: 0.26;
-  width: min(54vw, 760px);
-  right: -1vw;
-  top: 5vh;
-  animation-duration: 37s;
-  animation-delay: -6s;
-}
-
-.bg-board-alt {
-  --entity-low: 0.14;
-  --entity-mid: 0.32;
-  --entity-high: 0.2;
-  width: min(44vw, 640px);
-  left: 30vw;
-  top: 30vh;
-  animation-duration: 43s;
-  animation-delay: -21s;
-}
-
-.bg-cad {
-  --entity-low: 0.24;
-  --entity-mid: 0.5;
-  --entity-high: 0.36;
-  width: min(42vw, 600px);
-  right: 8vw;
-  bottom: 3vh;
-  animation-duration: 34s;
-  animation-delay: -11s;
-}
-
-.bg-linkage {
-  --entity-low: 0.18;
-  --entity-mid: 0.42;
-  --entity-high: 0.28;
-  width: min(43vw, 580px);
-  left: 2vw;
-  bottom: 14vh;
-  animation-duration: 39s;
-  animation-delay: -17s;
-}
-
-.bg-gearbox {
-  --entity-low: 0.2;
-  --entity-mid: 0.44;
-  --entity-high: 0.3;
-  width: min(40vw, 560px);
-  right: 24vw;
-  bottom: 24vh;
-  animation-duration: 47s;
-  animation-delay: -25s;
-}
-
-.bg-arm {
-  --entity-low: 0.2;
-  --entity-mid: 0.48;
-  --entity-high: 0.3;
-  width: min(42vw, 590px);
-  left: 56vw;
-  top: 46vh;
-  animation-duration: 41s;
-  animation-delay: -31s;
-}
-
-.bg-routing {
-  --entity-low: 0.16;
-  --entity-mid: 0.36;
-  --entity-high: 0.24;
-  width: min(48vw, 700px);
-  left: -5vw;
-  top: 36vh;
-  animation-duration: 52s;
-  animation-delay: -19s;
-}
-
-.bg-trajectory {
-  --entity-low: 0.24;
-  --entity-mid: 0.54;
-  --entity-high: 0.34;
-  width: min(40vw, 560px);
-  right: 5vw;
-  top: 68vh;
-  animation-duration: 36s;
-  animation-delay: -27s;
-}
-
-.bg-state {
-  --entity-low: 0.18;
-  --entity-mid: 0.4;
-  --entity-high: 0.26;
-  width: min(36vw, 500px);
-  left: 20vw;
-  top: 72vh;
-  animation-duration: 45s;
-  animation-delay: -9s;
+  animation: none;
 }
 
 .bg-code {
   position: absolute;
-  left: 48vw;
-  top: 38vh;
+  left: 46vw;
+  top: 43vh;
   width: min(28vw, 390px);
   margin: 0;
   padding: 16px 18px;
   border: 1px solid rgba(17, 17, 17, 0.14);
-  background: rgba(246, 243, 238, 0.46);
-  color: rgba(17, 17, 17, 0.48);
+  background: rgba(246, 243, 238, 0.3);
+  color: rgba(17, 17, 17, 0.58);
   font-family: "IBM Plex Mono", monospace;
   font-size: 11px;
   line-height: 1.6;
   white-space: pre-wrap;
-  animation: codeBreathe 34s ease-in-out infinite alternate;
+  animation: codeBreathe 16s ease-in-out infinite alternate;
 }
 
-.bg-code-alt {
-  left: 14vw;
-  top: 58vh;
-  width: min(27vw, 380px);
-  animation-delay: -13s;
-}
-
-.bg-code-third {
-  left: 70vw;
-  top: 21vh;
-  width: min(25vw, 360px);
-  color: rgba(17, 17, 17, 0.42);
-  animation-duration: 41s;
-  animation-delay: -24s;
-}
-
-.bg-code-fourth {
-  left: 7vw;
-  top: 76vh;
-  width: min(28vw, 390px);
-  color: rgba(17, 17, 17, 0.38);
-  animation-duration: 47s;
-  animation-delay: -32s;
-}
-
-.schematic-bg span {
+.bg-label {
   position: absolute;
   font-family: "IBM Plex Mono", monospace;
   font-size: 11px;
-  color: rgba(17, 17, 17, 0.5);
-  animation: schematicFloat 22s ease-in-out infinite alternate;
+  color: rgba(17, 17, 17, 0.54);
+  white-space: nowrap;
+  animation: schematicFloat 13s ease-in-out infinite alternate;
+}
+
+.bg-label-a {
+  left: 7vw;
+  top: 17vh;
+}
+
+.bg-label-b {
+  right: 8vw;
+  top: 54vh;
+  animation-delay: -9s;
+}
+
+.bg-label-c {
+  left: 13vw;
+  bottom: 16vh;
+  animation-delay: -16s;
+}
+
+.bg-label-d {
+  right: 15vw;
+  bottom: 23vh;
+  animation-delay: -6s;
+}
+
+.bg-entity-a {
+  width: min(46vw, 660px);
+  left: clamp(-80px, -3vw, -24px);
+  bottom: 10vh;
+  animation-duration: 15s;
+}
+
+.bg-entity-b {
+  width: min(43vw, 640px);
+  right: 4vw;
+  top: 12vh;
+  animation-duration: 18s;
+  animation-delay: -11s;
+}
+
+.bg-entity-c {
+  width: min(35vw, 560px);
+  left: 32vw;
+  top: 50vh;
+  animation-duration: 17s;
+  animation-delay: -7s;
+}
+
+.bg-entity-d {
+  width: min(38vw, 610px);
+  right: 30vw;
+  top: 8vh;
+  animation-duration: 20s;
+  animation-delay: -14s;
+}
+
+.bg-entity-e {
+  width: min(31vw, 500px);
+  left: 6vw;
+  top: 35vh;
+  animation-duration: 12s;
+  animation-delay: -4s;
+}
+
+.bg-entity-f {
+  width: min(30vw, 490px);
+  right: 8vw;
+  bottom: 32vh;
+  animation-duration: 14s;
+  animation-delay: -10s;
+}
+
+.bg-code-b {
+  left: 8vw;
+  top: 61vh;
+  width: min(27vw, 380px);
+  animation-delay: -8s;
+}
+
+.bg-code-c {
+  left: 38vw;
+  top: auto;
+  bottom: 8vh;
+  width: min(24vw, 340px);
+  animation-delay: -13s;
+}
+
+.bg-block {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: min(34vw, 480px);
+  color: rgba(17, 17, 17, 0.52);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0;
+  animation: codeBreathe 11s ease-in-out infinite alternate;
+}
+
+.bg-block span {
+  position: relative;
+  min-width: 0;
+  padding: 9px 8px;
+  border: 1px solid rgba(17, 17, 17, 0.15);
+  background: rgba(246, 243, 238, 0.28);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bg-block span + span::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  width: 9px;
+  border-top: 1px solid rgba(17, 17, 17, 0.18);
+}
+
+.bg-block-a {
+  left: 34vw;
+  top: 15vh;
+}
+
+.schematic-bg-home .bg-entity-a {
+  left: 3vw;
+  bottom: 8vh;
+}
+
+.schematic-bg-home .bg-entity-b {
+  right: -2vw;
+  top: 13vh;
+}
+
+.schematic-bg-home .bg-entity-c {
+  left: 55vw;
+  top: 53vh;
+}
+
+.schematic-bg-home .bg-entity-d {
+  left: 24vw;
+  top: 7vh;
+}
+
+.schematic-bg-home .bg-entity-e {
+  left: -4vw;
+  top: 38vh;
+}
+
+.schematic-bg-home .bg-entity-f {
+  right: 10vw;
+  bottom: 26vh;
+}
+
+.schematic-bg-home .bg-code-b {
+  left: 7vw;
+  top: 66vh;
+}
+
+.schematic-bg-projects .bg-entity-a {
+  width: min(48vw, 700px);
+  left: 2vw;
+  top: 14vh;
+  bottom: auto;
+}
+
+.schematic-bg-projects .bg-entity-b {
+  width: min(40vw, 590px);
+  right: 8vw;
+  bottom: 10vh;
+  top: auto;
+}
+
+.schematic-bg-projects .bg-code {
+  left: 43vw;
+  top: 47vh;
+}
+
+.schematic-bg-projects .bg-entity-c {
+  width: min(40vw, 600px);
+  left: -8vw;
+  bottom: 4vh;
+  top: auto;
+}
+
+.schematic-bg-projects .bg-entity-d {
+  width: min(34vw, 520px);
+  right: 30vw;
+  top: 9vh;
+}
+
+.schematic-bg-projects .bg-entity-e {
+  width: min(32vw, 500px);
+  right: -5vw;
+  top: 38vh;
+  left: auto;
+}
+
+.schematic-bg-projects .bg-entity-f {
+  width: min(30vw, 480px);
+  left: 34vw;
+  bottom: 7vh;
+  right: auto;
+}
+
+.schematic-bg-blog .bg-entity-a {
+  width: min(36vw, 560px);
+  left: 5vw;
+  top: 12vh;
+  bottom: auto;
+}
+
+.schematic-bg-blog .bg-entity-b {
+  width: min(42vw, 620px);
+  right: 5vw;
+  bottom: 9vh;
+  top: auto;
+}
+
+.schematic-bg-blog .bg-entity-c {
+  width: min(43vw, 650px);
+  left: 30vw;
+  top: 8vh;
+}
+
+.schematic-bg-blog .bg-entity-d {
+  width: min(33vw, 500px);
+  left: 4vw;
+  bottom: 8vh;
+  top: auto;
+}
+
+.schematic-bg-blog .bg-code {
+  left: 53vw;
+  top: 33vh;
+  width: min(30vw, 420px);
+}
+
+.schematic-bg-blog .bg-entity-e {
+  width: min(30vw, 470px);
+  right: 3vw;
+  top: 42vh;
+  left: auto;
+}
+
+.schematic-bg-blog .bg-entity-f {
+  width: min(31vw, 490px);
+  left: 35vw;
+  bottom: 10vh;
+  right: auto;
+}
+
+.schematic-bg-til .bg-entity-a {
+  width: min(48vw, 720px);
+  left: 3vw;
+  top: 10vh;
+  bottom: auto;
+}
+
+.schematic-bg-til .bg-entity-b {
+  width: min(39vw, 590px);
+  right: 4vw;
+  top: 18vh;
+}
+
+.schematic-bg-til .bg-entity-c {
+  width: min(35vw, 520px);
+  right: 9vw;
+  bottom: 8vh;
+  top: auto;
+}
+
+.schematic-bg-til .bg-entity-d {
+  width: min(34vw, 510px);
+  left: 9vw;
+  bottom: 7vh;
+  top: auto;
+}
+
+.schematic-bg-til .bg-code {
+  left: 50vw;
+  top: 43vh;
+}
+
+.schematic-bg-til .bg-entity-e {
+  width: min(31vw, 480px);
+  left: -5vw;
+  top: 43vh;
+}
+
+.schematic-bg-til .bg-entity-f {
+  width: min(30vw, 470px);
+  right: 32vw;
+  bottom: 6vh;
+}
+
+.schematic-bg-post .bg-entity-a {
+  width: min(48vw, 720px);
+  left: 2vw;
+  top: 12vh;
+  bottom: auto;
+}
+
+.schematic-bg-post .bg-entity-b {
+  width: min(34vw, 520px);
+  right: 7vw;
+  bottom: 12vh;
+  top: auto;
+}
+
+.schematic-bg-post .bg-entity-c {
+  width: min(38vw, 570px);
+  right: -4vw;
+  top: 10vh;
+}
+
+.schematic-bg-post .bg-entity-d {
+  width: min(34vw, 520px);
+  left: 9vw;
+  bottom: 5vh;
+  top: auto;
+}
+
+.schematic-bg-post .bg-code {
+  left: 52vw;
+  top: 31vh;
+  width: min(31vw, 430px);
+}
+
+.schematic-bg-post .bg-entity-e {
+  width: min(30vw, 470px);
+  left: 36vw;
+  top: 5vh;
+}
+
+.schematic-bg-post .bg-entity-f {
+  width: min(29vw, 450px);
+  right: 5vw;
+  bottom: 38vh;
+}
+
+.schematic-bg-home .bg-entity-a,
+.schematic-bg-projects .bg-entity-a,
+.schematic-bg-blog .bg-entity-a,
+.schematic-bg-til .bg-entity-a,
+.schematic-bg-post .bg-entity-a {
+  left: 3vw;
+  top: 12vh;
+  bottom: auto;
+  width: min(30vw, 460px);
+}
+
+.schematic-bg-home .bg-entity-b,
+.schematic-bg-projects .bg-entity-b,
+.schematic-bg-blog .bg-entity-b,
+.schematic-bg-til .bg-entity-b,
+.schematic-bg-post .bg-entity-b {
+  right: 3vw;
+  top: 14vh;
+  bottom: auto;
+  width: min(31vw, 480px);
+}
+
+.schematic-bg-home .bg-entity-c,
+.schematic-bg-projects .bg-entity-c,
+.schematic-bg-blog .bg-entity-c,
+.schematic-bg-til .bg-entity-c,
+.schematic-bg-post .bg-entity-c {
+  left: auto;
+  right: 4vw;
+  top: auto;
+  bottom: 8vh;
+  width: min(30vw, 470px);
+}
+
+.schematic-bg-home .bg-entity-d,
+.schematic-bg-projects .bg-entity-d,
+.schematic-bg-blog .bg-entity-d,
+.schematic-bg-til .bg-entity-d,
+.schematic-bg-post .bg-entity-d {
+  left: 5vw;
+  right: auto;
+  top: auto;
+  bottom: 9vh;
+  width: min(29vw, 450px);
+}
+
+.schematic-bg-home .bg-entity-e,
+.schematic-bg-projects .bg-entity-e,
+.schematic-bg-blog .bg-entity-e,
+.schematic-bg-til .bg-entity-e,
+.schematic-bg-post .bg-entity-e {
+  left: -7vw;
+  right: auto;
+  top: 42vh;
+  bottom: auto;
+  width: min(24vw, 360px);
+}
+
+.schematic-bg-home .bg-entity-f,
+.schematic-bg-projects .bg-entity-f,
+.schematic-bg-blog .bg-entity-f,
+.schematic-bg-til .bg-entity-f,
+.schematic-bg-post .bg-entity-f {
+  left: auto;
+  right: -7vw;
+  top: 43vh;
+  bottom: auto;
+  width: min(24vw, 360px);
+}
+
+.schematic-bg-home .bg-code,
+.schematic-bg-projects .bg-code,
+.schematic-bg-blog .bg-code,
+.schematic-bg-til .bg-code,
+.schematic-bg-post .bg-code {
+  left: 39vw;
+  top: 36vh;
+  width: min(22vw, 320px);
+}
+
+.schematic-bg-home .bg-code-b,
+.schematic-bg-projects .bg-code-b,
+.schematic-bg-blog .bg-code-b,
+.schematic-bg-til .bg-code-b,
+.schematic-bg-post .bg-code-b {
+  left: 10vw;
+  top: 61vh;
+  width: min(23vw, 330px);
+}
+
+.schematic-bg-home .bg-code-c,
+.schematic-bg-projects .bg-code-c,
+.schematic-bg-blog .bg-code-c,
+.schematic-bg-til .bg-code-c,
+.schematic-bg-post .bg-code-c {
+  left: auto;
+  right: 28vw;
+  top: auto;
+  bottom: 6vh;
+  width: min(22vw, 320px);
+}
+
+.schematic-bg-home .bg-block-a,
+.schematic-bg-projects .bg-block-a,
+.schematic-bg-blog .bg-block-a,
+.schematic-bg-til .bg-block-a,
+.schematic-bg-post .bg-block-a {
+  left: 33vw;
+  top: 12vh;
 }
 
 .home-page main {
@@ -1193,17 +1522,18 @@ main::before {
   z-index: 4;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
+  gap: 8px;
   pointer-events: none;
   transform: translateY(-50%);
 }
 
 .stage-readouts span {
-  min-height: 78px;
+  min-width: 0;
+  min-height: 82px;
   display: grid;
   align-content: center;
   gap: 8px;
-  padding: clamp(10px, 3.4vw, 14px) clamp(6px, 2.8vw, 10px);
+  padding: 12px clamp(6px, 1.2vw, 10px);
   border: 1px solid rgba(17, 17, 17, 0.14);
   background: rgba(246, 243, 238, 0.68);
   backdrop-filter: blur(8px);
@@ -1212,17 +1542,24 @@ main::before {
 .stage-readouts em {
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: clamp(7px, 0.72vw, 9px);
   font-style: normal;
+  line-height: 1.15;
   text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .stage-readouts strong {
-  overflow: visible;
-  font-size: clamp(1.85rem, 2.8vw, 2.45rem);
-  line-height: 0.85;
+  min-width: 0;
+  overflow: hidden;
+  font-size: clamp(1.35rem, 2.1vw, 2.1rem);
+  line-height: 0.9;
   text-transform: uppercase;
   white-space: nowrap;
+  text-overflow: clip;
 }
 
 .project-tile-grid {
@@ -1403,6 +1740,12 @@ main::before {
   font-size: 11px;
   color: var(--ink);
   transition: transform 180ms ease, background 180ms ease;
+}
+
+.timeline-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .timeline-item .timeline-logo {
@@ -2667,7 +3010,9 @@ main::before {
   margin: 18px 0;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 0.96;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   text-wrap: balance;
 }
 
@@ -2692,6 +3037,19 @@ main::before {
 
 .blog-index {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+
+.til-index-page .blog-index {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.til-index-page .blog-card h2 {
+  font-size: clamp(1.8rem, 2.4vw, 2.55rem);
+  line-height: 1;
+}
+
+.til-index-page .blog-card p {
+  font-size: 1rem;
 }
 
 .blog-filter-bar {
@@ -2861,7 +3219,9 @@ blockquote {
 
 .til-gear-hero h1 {
   font-size: clamp(2.35rem, 11vw, 5rem);
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   text-wrap: balance;
 }
 
@@ -2932,7 +3292,9 @@ blockquote {
   margin: 14px 0 18px;
   font-size: clamp(2rem, 3.6vw, 3.2rem);
   line-height: 0.96;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   text-wrap: balance;
 }
 
@@ -2952,7 +3314,9 @@ blockquote {
 .til-subcard strong {
   display: block;
   margin-bottom: 8px;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .til-subcard a {
@@ -2968,7 +3332,9 @@ blockquote {
     text-decoration-color 160ms ease,
     text-shadow 160ms ease,
     top 160ms ease;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .til-subcard a:hover,
@@ -3011,7 +3377,9 @@ blockquote {
   margin: 0 0 12px;
   color: #3f4643;
   font-size: 1rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .til-subcard p:last-child {
@@ -3074,8 +3442,11 @@ blockquote {
     transform: translate3d(0, 0, 0);
     opacity: var(--entity-low);
   }
-  42% {
+  36% {
     opacity: var(--entity-mid);
+  }
+  68% {
+    opacity: var(--entity-low);
   }
   100% {
     transform: translate3d(18px, -10px, 0);
@@ -3086,11 +3457,29 @@ blockquote {
 @keyframes codeBreathe {
   from {
     transform: translate3d(0, 0, 0);
-    opacity: 0.64;
+    opacity: 0.72;
   }
   to {
     transform: translate3d(-18px, 12px, 0);
-    opacity: 0.42;
+    opacity: 0.48;
+  }
+}
+
+@keyframes tracePulse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -34;
+  }
+}
+
+@keyframes ambientGrid {
+  from {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 116px 58px, -58px 116px, 116px 116px, 0 0;
   }
 }
 
@@ -3296,6 +3685,11 @@ blockquote {
     max-width: min(var(--max), 760px);
   }
 
+  .til-index-page .blog-index {
+    max-width: var(--max);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .blog-card.image-card img {
     height: clamp(220px, 42vw, 320px);
     max-height: 320px;
@@ -3384,47 +3778,74 @@ blockquote {
     height: 5px;
   }
 
-  .bg-circuit {
-    width: 74vw;
-    left: 8vw;
-    top: 18vh;
+  .schematic-bg {
+    opacity: 0.66;
   }
 
-  .bg-cad {
-    width: 78vw;
-    right: -12vw;
-    bottom: 10vh;
+  .bg-entity-a {
+    width: 66vw;
+    left: -20vw;
+    top: 9vh;
+    bottom: auto;
   }
 
-  .bg-board {
-    width: 86vw;
-    right: -24vw;
-    top: 4vh;
+  .bg-entity-b {
+    width: 64vw;
+    right: -22vw;
+    top: auto;
+    bottom: 8vh;
   }
 
-  .bg-board-alt {
-    width: 78vw;
-    left: 16vw;
-    top: 36vh;
+  .bg-entity-c {
+    display: none;
   }
 
-  .bg-linkage {
-    width: 82vw;
-    left: -14vw;
-    bottom: 18vh;
+  .bg-entity-d {
+    display: none;
   }
 
-  .bg-gearbox {
-    width: 82vw;
-    right: -18vw;
-    bottom: 30vh;
+  .bg-entity-e {
+    display: none;
+  }
+
+  .bg-entity-f {
+    display: none;
   }
 
   .bg-code {
-    left: 18vw;
-    top: 56vh;
-    width: 66vw;
+    left: 9vw;
+    top: 48vh;
+    width: 60vw;
     font-size: 9px;
+  }
+
+  .bg-code-b,
+  .bg-code-c,
+  .bg-block,
+  .bg-label-b,
+  .bg-label-c,
+  .bg-label-d {
+    display: none;
+  }
+
+  .bg-label-a {
+    left: 8vw;
+    top: 13vh;
+  }
+
+  .bg-label-b {
+    right: 7vw;
+    top: 42vh;
+  }
+
+  .bg-label-c {
+    left: 8vw;
+    bottom: 9vh;
+  }
+
+  .bg-label-d {
+    right: 8vw;
+    bottom: 18vh;
   }
 
   .brand-text {
@@ -3556,12 +3977,12 @@ blockquote {
   }
 
   .stage-readouts span {
-    min-height: 78px;
-    padding: 12px 7px;
+    min-height: 76px;
+    padding: 10px 8px;
   }
 
   .stage-readouts strong {
-    font-size: clamp(1.65rem, 7vw, 2.1rem);
+    font-size: clamp(1.18rem, 5vw, 1.7rem);
   }
 
   .atlas-readout strong {
@@ -3696,14 +4117,36 @@ blockquote {
     display: none;
   }
 
-  .bg-circuit {
-    width: 96vw;
-    left: 4vw;
+  .bg-label {
+    display: none;
   }
 
-  .bg-cad {
-    width: 104vw;
-    right: -28vw;
+  .bg-entity-a {
+    width: 112vw;
+    left: -36vw;
+  }
+
+  .bg-entity-b {
+    width: 106vw;
+    right: -42vw;
+    bottom: 7vh;
+  }
+
+  .bg-entity-c {
+    width: 82vw;
+    left: 24vw;
+    top: 32vh;
+  }
+
+  .bg-entity-d {
+    width: 76vw;
+    right: 20vw;
+    top: 8vh;
+  }
+
+  .bg-entity-e,
+  .bg-entity-f {
+    width: 62vw;
   }
 
   .section-heading h2,
@@ -3737,6 +4180,7 @@ blockquote {
     left: 10px;
     right: 10px;
     gap: 6px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .stage-readouts span {
@@ -3910,6 +4354,10 @@ blockquote {
     margin-inline: clamp(14px, 5vw, 22px);
   }
 
+  .til-index-page .blog-index {
+    grid-template-columns: 1fr;
+  }
+
   .til-post-page .back-link {
     margin-left: clamp(14px, 5vw, 22px);
     margin-right: clamp(14px, 5vw, 22px);
@@ -3920,15 +4368,17 @@ blockquote {
     max-width: 100%;
     font-size: clamp(1.72rem, 8.6vw, 2.18rem);
     line-height: 1;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
     text-wrap: wrap;
   }
 
   .til-subcard strong,
   .til-subcard a {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 }
 
@@ -3950,7 +4400,8 @@ blockquote {
 
   .til-subcard strong,
   .til-subcard a {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 }

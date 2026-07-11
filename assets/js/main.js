@@ -303,7 +303,7 @@ async function renderWorldMap() {
     .attr("aria-label", "Hoverable real country outlines");
 
   try {
-    const world = window.WORLD_COUNTRIES_TOPOLOGY || (await d3.json("assets/countries-110m.json"));
+    const world = window.WORLD_COUNTRIES_TOPOLOGY || (await d3.json("assets/data/countries-110m.json"));
     const features = topojson.feature(world, world.objects.countries).features;
     const projection = d3.geoNaturalEarth1().fitExtent([[8, 10], [width - 8, height - 16]], {
       type: "Sphere",

@@ -7,11 +7,22 @@ Static personal website for Kunal Gupta, built for GitHub Pages.
 - `index.html` - homepage
 - `projects.html` - project card archive
 - `blog.html` - blog index
-- `blog-*.html` - individual blog post templates
-- `styles.css` - site styling
-- `site.js` - shared navigation/page interactions
-- `main.js` - homepage interactions and Atlas map
-- `assets/` - map data and local visual/runtime assets
+- `til.html` - TIL index
+- `blog/` - individual blog post pages
+- `til/` - dated TIL pages
+- `content/` - JSON metadata for future content automation
+- `assets/css/` - site styling
+- `assets/js/` - shared navigation, homepage interactions, and Atlas map
+- `assets/vendor/` - vendored browser libraries
+- `assets/data/` - map data
+- `assets/images/` - committed local image assets
+
+## Image Replacement
+
+- `assets/images/placeholders/` contains the replaceable non-TIL site images.
+- Filenames describe where the image is used, for example `home-project-map-rover.jpg` or `projects-crm-analytics-wide.jpg`.
+- Replace an image by overwriting the file and keeping the same filename.
+- TIL card and TIL page images intentionally remain remote and are not mirrored into the repo.
 
 ## Local Preview
 
