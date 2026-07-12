@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 11, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 11, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">← Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 11, 2026</span>
+          <h1>Shared Robot Bodies Shift Value</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">3 critical / 2 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Robotics</span>
+                <img class="til-card-image" src="https://media.thenextweb.com/2026/07/Booster-s-robots-RoboCup-2026.avif" alt="Robots swept RoboCup 2026, and they want the human World Cup" />
+                <strong><a href="https://thenextweb.com/news/booster-robotics-robocup-2026-humanoid-football-sweep">Robots swept RoboCup 2026, and they’re coming for the human World Cup by 2050</a></strong>
+                <p><b>Pre-read:</b> Humanoid robotics is moving from bespoke lab machines toward common hardware platforms, which changes what competitions and buyers can actually measure. RoboCup’s founding target is still a long-range research moonshot: autonomous humanoids beating the human world champions by 2050, a goal the federation still frames as its north star in its <a href="https://www.robocup.org/news/192">Incheon milestone note</a>. The useful signal is less the soccer spectacle than the separation between commodity bodies and differentiated embodied intelligence.</p>
+                <p><b>Summary:</b> TNW reports that teams using Beijing-based Booster Robotics machines swept all three RoboCup 2026 humanoid football divisions, with 38 of 59 humanoid-league teams running Booster hardware. The winners span the Large, Middle, and Small divisions, including Tsinghua Hephaestus on Booster T1, B-Human on K1, and Invic on K1 Air. The article argues that the contest has shifted from building a robot body to writing better perception, decision, and multi-agent coordination software. It also adds the business implication: Booster is trying to turn tournament dominance into a developer platform through simulation, deployment tools, and its own robot football league. For anyone thinking about robotics, the article is a compact case study in how a hardware standard can make the software layer, benchmark design, and deployment evidence more valuable.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Systems</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!7Ide!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea8d5fa1-18fc-4c6f-9fea-f6bf68792757_2484x3034.png" alt="EP221: How Docker Works Under the Hood" />
+                <strong><a href="https://blog.bytebytego.com/p/ep221-how-docker-works-under-the">EP221: How Docker Works Under the Hood</a></strong>
+                <p><b>Pre-read:</b> Containers remain one of the cleanest examples of a simple developer interface hiding a layered systems contract. The important mental model is that Docker doesn’t virtualize an operating system; it coordinates Linux primitives through a runtime stack, which is why bugs often appear at image, network, filesystem, or resource-boundary edges. ByteByteGo’s own <a href="https://bytebytego.com/guides/how-does-docker-work/">Docker guide</a> gives the basic lifecycle; this issue adds the runtime path from command to process.</p>
+                <p><b>Summary:</b> The newsletter walks from a Docker CLI command to a running container: the CLI sends an API request to dockerd, dockerd checks or pulls the image, prepares config, and hands lifecycle work to containerd. containerd assembles the OCI bundle and root filesystem, then calls runc, which creates the Linux namespaces and mounts and starts the process before exiting. The running container is just a Linux process with isolated PID, network, and mount namespaces; cgroups handle CPU and memory limits, while layered image filesystems add a writable layer over read-only image layers. The issue also includes short refreshers on merge versus rebase, vector database choices, pagination strategies, and deep-research agent workflows, but the Docker section is the durable piece worth opening.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Hardware</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!5BRG!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa11f7c99-c8f0-44bf-804c-66ca44c3c5b4_4096x3072.jpeg" alt="The $800K Bounty to Go Mach 1" />
+                <strong><a href="https://hardwarefyi.substack.com/p/the-800k-bounty-to-go-mach-1">The $800K Bounty to Go Mach 1</a></strong>
+                <p><b>Pre-read:</b> Fast RC aircraft sit in a useful middle ground between hobby projects and aerospace engineering because they expose aerodynamics, structure, propulsion, controls, testing, and failure risk in one small system. The article’s best frame is convergent design: under tight physical constraints, independent builders often arrive at similar shapes. One caveat matters before opening it: public reporting corroborates Blake Scholl’s prize as <a href="https://dronexl.co/2026/07/02/boom-ceo-100k-prize-mach-1-amateur-rc-airplane/">$100,000</a>, and Scholl’s public post described <a href="https://x.com/bscholl/status/2072687775636426934">$50,000 cash plus $50,000 in Boom stock</a>, so treat the newsletter’s $800K headline as unverified.</p>
+                <p><b>Summary:</b> Hardware FYI uses Tomas Salvo’s 5 kg carbon-fiber, turbine-powered RC aircraft as a compact lesson in local design spaces. The aircraft targets roughly 500 mph with a 250 N miniature turbine, and the article compares its blended-delta form with Niels Herbrich’s Inferno, which set a 465.5 mph jet-powered RC record in 2017. The point is not plagiarism drama; it is that high-speed, small-scale aircraft optimized around the same thrust, stability, drag, and manufacturability constraints will often look alike while differing in details such as airfoil, inlet geometry, surface finish, and control tuning. The issue then broadens into hardware links on ultrasound silent speech, 1X’s new NEO hand, Tesla factory-line changes, and AI hardware funding, but the RC aircraft section is the strongest read because it makes physical constraint visible.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <strong><a href="https://live.euronext.com/en/financial-news/mistral-launches-first-robotics-model-physical-ai-push">Mistral enters physical AI</a></strong>
+                <p><b>Pre-read:</b> Robotics foundation models are becoming a crowded layer between robot hardware and site-specific deployment. The hard question is whether model vendors can own enough of the navigation, perception, and adaptation stack to matter once factories and warehouses demand reliability evidence, not demos.</p>
+                <p><b>Summary:</b> Reuters, syndicated by Euronext, reports that Mistral launched Robostral Navigate, its first robotics model, aimed at robot navigation in factories, warehouses, and industrial automation. The model uses a single camera as input and follows Mistral’s acquisition of Emmi AI, a startup focused on robotics and physical-world AI. The article places the launch inside a wider investor rush toward physical AI, where software vendors are trying to extend language-model momentum into embodied systems. The practical implication is that navigation models are becoming productized, but deployment value will still depend on integration with robot bodies, safety constraints, customer workflows, and measured site performance.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://media.wired.com/photos/6a4ea0a34c236782d7135868/191:100/w_1280,c_limit/GLASS.png" alt="The 1X Neo Robot Has Freaky Fast Fingers" />
+                <strong><a href="https://www.wired.com/story/the-1x-neo-robot-has-freaky-fast-fingers">NEO gets dexterous hands</a></strong>
+                <p><b>Pre-read:</b> Robot hands are one of the clearest bottlenecks between impressive locomotion demos and useful home or workplace labor. More degrees of freedom only matter when actuation, sensing, durability, and control survive messy real objects.</p>
+                <p><b>Summary:</b> Wired reports that 1X’s NEO robot now has five-finger hands with 25 degrees of freedom, tendon-like actuation, tactile sensing, fast finger movement, and waterproofing strong enough for hand-washing. The company frames the hands as a route toward broader household manipulation, but the article also notes that NEO still relies on a remote-human “Expert Mode” for some tasks, creating both capability and privacy questions. The useful takeaway is that consumer humanoid strategy is shifting toward manipulation fidelity, not only whole-body mobility. The risk is that dexterous hardware can make demos look closer to autonomy than the deployed system really is.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Task Envelopes for Robots</strong>
+                <p>Sell the proof layer that tells a factory, hospital, construction site, insurer, or city exactly where a robot is allowed to work. The product is not a benchmark leaderboard and not another robot brain. It is a task-envelope record: instrumented trials, edge-case replays, site constraints, near-miss logs, and a continuously updated operating certificate that says this robot, with this model version and hardware stack, can do these jobs under these conditions.</p>
+
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://www.robocup.org/news/192">RoboCup reported the first full 11-vs-11 humanoid robot soccer match</a> via Robots &amp; Startups<br />A public multi-agent task is a better signal than a single demo because it exposes coordination, recovery, perception, and hardware limits.</li>
+                  <li><a href="https://thenextweb.com/news/booster-robotics-robocup-2026-humanoid-football-sweep">Booster Robotics platforms swept RoboCup 2026 humanoid divisions</a> via Robots &amp; Startups<br />When many teams use the same body, value shifts toward software, field evidence, and task-specific reliability.</li>
+                  <li><a href="https://www.1x.tech/discover/category/product">1X announced 25-DOF tendon-driven NEO hands</a> via Hardware FYI<br />More capable hands expand the reachable task set, but they also create more ways to fail around people, fragile objects, food, tools, and doors.</li>
+                  <li><a href="https://live.euronext.com/en/financial-news/mistral-launches-first-robotics-model-physical-ai-push">Mistral launched its first robotics model</a> via Robots &amp; Startups<br />The robot model layer is becoming crowded; buyers will need evidence that a model version works in their physical setting.</li>
+                  <li><a href="https://www.ul.com/news/ul-solutions-grants-its-first-global-certification-public-facing-robot-simbes-tally-autonomous">UL certified Simbe's Tally as a public-facing autonomous robot</a> via Web verification<br />Certification is already real, which is the prior check: the wedge must be continuous deployment evidence, not a generic certification body.</li>
+                </ul>
+
+                <p><b>Why Now:</b> Robot bodies are becoming more standardized, hands are getting useful, and model companies are racing into physical AI. That makes the bottleneck less about a buyer believing robots are coming and more about approving one narrow deployment without taking unknown safety, downtime, privacy, labor, and insurance risk.</p>
+                <p><b>First Wedge:</b> Start with public-facing inventory robots, hospital delivery robots, or construction-layout robots that already have budget and live around non-expert humans. Run a 30-day instrumented pre-deployment trial, produce a task-envelope certificate for the buyer's safety and procurement teams, and keep monitoring the deployed fleet for drift, near misses, and model updates.</p>
+                <p><b>Commercial Model:</b> The buyer is the site owner or robot OEM trying to get a deployment approved. Charge $25K-$75K for the initial envelope study plus a per-robot monthly monitoring fee. Insurers and certification bodies become channels once the evidence format is trusted.</p>
+                <p><b>Defensibility:</b> The compounding asset is a cross-OEM database of physical near misses, task boundaries, environmental failure modes, and remediation patterns. Incumbent certification labs can certify products, but they do not naturally own live operational telemetry across many robot brands and customer sites. Robot OEMs have the data but lack buyer trust when marking their own homework.</p>
+                <p><b>Technical Risk:</b> The hard part is building a test harness that captures enough synchronized video, robot state, environment metadata, intervention logs, and model-version changes to explain failures without becoming expensive custom consulting. The system also needs privacy controls because public-facing robots will record people and workplaces.</p>
+                <p><b>Market Expansion:</b> After one vertical, expand by morphology and risk pattern: shelf-scanning robots to cleaning robots, hospital delivery to eldercare logistics, construction layout to inspection, then humanoid manipulation once hands and whole-body control leave the lab. The same primitive can become a credit file for physical AI deployments.</p>
+                <p><b>Self-Critique:</b> This can become a services business if the first product is just expert review. It may also be too early if robot fleets remain tiny or if certification bodies move faster than expected. The wedge survives only if the company turns every deployment into reusable evidence templates and insurer-grade loss data.</p>
+                <p><b>Next Experiment:</b> Interview 10 safety/procurement owners who rejected or delayed robot deployments, 5 robotics OEM deployment leads, and 3 specialty insurers. Offer a manual task-envelope report for one live pilot using borrowed cameras, robot logs, and operator incident notes; success is a buyer using the report to approve expansion or lower an insurance/process blocker.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>

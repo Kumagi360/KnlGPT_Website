@@ -4357,6 +4357,12 @@ blockquote {
   .til-post-page .primary-nav {
     width: 100%;
     max-width: 100%;
+    gap: 4px;
+  }
+
+  .til-post-page .primary-nav a {
+    padding-inline: 6px;
+    font-size: 13px;
   }
 
   .til-post-page .post-hero > *,
@@ -4373,7 +4379,22 @@ blockquote {
   }
 
   .til-post-page .post-body {
-    margin-inline: clamp(14px, 5vw, 22px);
+    --til-mobile-gutter: clamp(14px, 5vw, 22px);
+    width: calc(100vw - var(--til-mobile-gutter) - var(--til-mobile-gutter));
+    max-width: none;
+    margin-inline: var(--til-mobile-gutter);
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .til-post-page .til-gear-grid,
+  .til-post-page .til-aggregation-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .til-index-page .blog-index {
