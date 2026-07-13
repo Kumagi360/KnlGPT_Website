@@ -4433,6 +4433,21 @@ blockquote {
     text-wrap: wrap;
   }
 
+  .til-post-page .primary-nav {
+    width: calc(100vw - 28px);
+    min-width: 0;
+    max-width: calc(100vw - 28px);
+    gap: 2px;
+    padding: 4px;
+  }
+
+  .til-post-page .primary-nav a {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 3px;
+    font-size: 11px;
+  }
+
   .til-column {
     padding: 16px;
   }
