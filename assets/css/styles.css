@@ -4407,10 +4407,11 @@ blockquote {
   }
 
   .til-gear-hero h1 {
-    width: 100%;
-    max-width: 100%;
-    font-size: clamp(1.58rem, 7.6vw, 2rem);
+    width: min(100%, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
+    font-size: clamp(1.46rem, 7vw, 2rem);
     line-height: 1;
+    white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: none;
@@ -4428,8 +4429,10 @@ blockquote {
 
 @media (max-width: 360px) {
   .til-gear-hero h1 {
-    font-size: 1.76rem;
+    font-size: 1.45rem;
     line-height: 0.96;
+    max-width: calc(100vw - 40px);
+    white-space: normal;
     text-wrap: wrap;
   }
 
