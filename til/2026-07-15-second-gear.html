@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 15, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 15, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 15, 2026</span>
+          <h1>Context Is System Design</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Public Health</span>
+                <strong><a href="https://www.reuters.com/world/americas/inside-rfk-jrs-push-dismantle-decades-us-vaccine-policy-2026-07-14/">Inside RFK Jr.'s push to dismantle decades of US vaccine policy</a></strong>
+                <p><b>Pre-read:</b> Vaccine policy is one of the few places where federal advisory machinery directly shapes school requirements, insurance coverage, and pandemic readiness. The CDC director nomination fight and recent reporting on agency upheaval show how much of that machinery now depends on whether scientific institutions can resist political pressure. Reuters is worth opening here because it names the actors inside the policy shift.</p>
+                <p><b>Summary:</b> Reuters reports that Health Secretary Robert F. Kennedy Jr. has moved faster and aimed further than was publicly understood in remaking US vaccine policy. The story draws on interviews with 16 current and former Trump administration officials and identifies adviser Stefanie Spear and vaccine-litigation figure Aaron Siri as important outside-to-inside channels.</p>
+                <p>The reported push includes changes to long-standing policy architecture and an effort to pursue claims about vaccines and autism. That matters because advisory committees, guidance language, and agency staffing decisions can change medical practice before Congress votes on anything. The article gives a concrete view of how institutional capture can happen through appointments, procedural control, and agenda-setting rather than a single headline order.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI Engineering</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/youtube/w_728,c_limit/Usufn8IQJgw" alt="Context engineering with Dex Horthy" />
+                <strong><a href="https://newsletter.pragmaticengineer.com/p/context-engineering-with-dex-horthy">Context engineering with Dex Horthy</a></strong>
+                <p><b>Pre-read:</b> Agentic coding is moving from prompt tricks toward systems design: what enters context, what gets compacted, and where humans review architecture. HumanLayer's <a href="https://www.humanlayer.dev/12-factor-agents">12-Factor Agents</a> frame treats LLM apps as reliable software systems rather than chat wrappers. That makes this interview useful as a map of where leverage and risk actually sit.</p>
+                <p><b>Summary:</b> Gergely Orosz interviews HumanLayer CEO Dex Horthy about context engineering, harness engineering, loop design, and the limits of unattended code generation. Horthy argues that models degrade when context gets too large or low-quality, and that teams need deliberate compaction, cleaner trajectories, and smaller high-signal work packets.</p>
+                <p>The strongest section is his postmortem on letting models write unread production code: the team eventually found a primary-key routing failure buried across the codebase, then spent weeks rebuilding human understanding. His operating model is pragmatic: use the strongest model until scale makes cost optimization matter, keep people in the loop for design and architecture, and let agents do implementation only after the system boundaries are clear.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!A8qd!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb25a75a-487b-4154-b0dd-0c2cb437238d_3244x1776.png" alt="AI Customer Support at Scale: The Travel Industry's $Billion Bet" />
+                <strong><a href="https://blog.bytebytego.com/p/ai-customer-support-at-scale-the">Travel AI hits the adjudication wall</a></strong>
+                <p><b>Pre-read:</b> Customer-support automation is easy to overread because vendors report different denominators: deflection, self-service, autonomous resolution, and agent-assist all measure different things. Travel is a sharper test because the hard cases involve money, safety, language, and disputes among guests, hosts, and platforms.</p>
+                <p><b>Summary:</b> ByteByteGo breaks travel-support AI into a boundary problem: routine lookups and structured changes automate well, while cancellation disputes, refunds, damage claims, and safety cases require adjudication. Airbnb's approach pushes models closer to autonomous refund decisions; Booking.com focuses on routing and briefed human handoffs; Expedia emphasizes scale, summaries, and multilingual continuity across more than thirty languages.</p>
+                <p>The engineering lesson is that the handoff matters as much as the bot. A weak escalation forces the traveler to restart the story and can make the combined system worse than plain human support. The durable takeaway is to inspect where the confidence threshold sits, what context crosses the boundary, and which errors are expensive enough to keep humans in the loop.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>
