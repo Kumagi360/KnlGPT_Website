@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 16, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 16, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 16, 2026</span>
+          <h1>Prediction Markets Need Licensed Truth</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Market structure</span>
+                <img class="til-card-image" src="https://images.prismic.io/contrary-research/vxujQA65vSVuDSIu_-----4-.png?auto=format,compress" alt="Are Prediction Markets Doomed to Fail?" />
+                <strong><a href="https://research.contrary.com/report/are-prediction-markets-doomed-to-fail">Are Prediction Markets Doomed to Fail?</a></strong>
+                <p><b>Pre-read:</b> Prediction markets are turning forecasts into consumer finance, which means their hardest problems are market structure and legitimacy rather than UX. The same product can look like information infrastructure to traders, gambling to regulators, and an oracle problem to data owners. That tension matters more as event contracts move from elections into aviation, sports, biotech, macro, and operational risk.</p>
+                <p><b>Summary:</b> Contrary Research argues that Kalshi and Polymarket are now the category's dominant platforms, but their growth exposes unresolved questions around regulation, user outcomes, fee models, liquidity, and settlement authority. The report walks from the Iowa Electronic Markets and Intrade through Augur, PredictIt, Kalshi, and Polymarket, then explains how exchanges make money through trading fees, interest on balances, data feeds, and market-maker economics.</p>
+                <p>The most interesting thread is that prediction markets are becoming a fight over who gets to define reality. A <a href="https://www.businessinsider.com/kalshi-turning-flight-cancellations-into-trades-2026-7">flight-cancellation contract</a> raised the question of whether FlightAware data could be used for settlement when RTX said it would not authorize that use. A new <a href="https://www.theguardian.com/technology/2026/jul/16/kalshi-betting-drug-trial-results">Kalshi biotech pilot</a> with AppliedXL moves the same model into clinical-trial and FDA-decision markets, where insider access, manipulation risk, and data provenance get sharper. The report is worth opening because it treats prediction markets as regulated information exchanges, not just betting apps with better branding.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Essays</span>
+                <img class="til-card-image" src="https://jamesclear.com/wp-content/uploads/2021/04/3-2-1-Featured-Image.png" alt="3-2-1 by James Clear" />
+                <strong><a href="https://jamesclear.com/3-2-1/july-16-2026">3-2-1: On protecting your mind, the recipe for frustration, and how to spark better conversation</a></strong>
+                <p>James Clear's strongest note this week is a compact operating rule: frustration grows when a task requires a whole person but receives half-attention. The issue also argues for taking feedback without defensiveness, handling small problems before they compound, and replacing status-script conversation with a question about what someone loves to do. It is a quick mindset reset, not a reported piece.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI software migration</span>
+                <img class="til-card-image" src="https://bun.com/og/blog/bun-in-rust.png" alt="Rewriting Bun in Rust" />
+                <strong><a href="https://bun.com/blog/bun-in-rust">Rewriting Bun in Rust</a></strong>
+                <p><b>Pre-read:</b> Large rewrites fail when the organization loses behavioral equivalence faster than it gains nicer architecture. The new frontier is less raw code generation than evidence: test suites, review loops, rollback discipline, and ownership rules that make generated changes mergeable. Bun is a useful case because its runtime sits under real production tooling, so migration errors would surface quickly.</p>
+                <p><b>Summary:</b> Jarred Sumner says Bun moved roughly 535,000 lines of Zig toward Rust because memory-management bugs kept showing up despite fuzzing, ASAN, ReleaseSafe builds, and end-to-end leak tests. The team used Claude Fable 5 as a porting engine, but the workflow looked more like industrial migration than prompting: a detailed <a href="https://github.com/oven-sh/bun/blob/main/PORTING.md">PORTING.md</a>, lifetime analysis, trial runs, four worktrees, 64 agents, two adversarial reviewers per change, and the same TypeScript test suite as the acceptance layer.</p>
+                <p>The rewrite took 11 days and about <a href="https://bun.com/blog/bun-in-rust">$165,000 at API prices</a>, with 6,500 commits and around 16,000 compiler errors burned down through crate-level loops. The durable lesson is that AI made the impossible rewrite plausible only because Bun already had strong tests, a deeply involved maintainer, and review processes designed to catch plausible-but-wrong code. That is the shape enterprise migrations will need if AI codegen becomes a budget line instead of a demo.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!RWJE!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbb93d50f-61ea-4d58-99b6-b96cae02390e_1325x1534.png" alt="A Guide to Multi-Tenancy: Benefits and Challenges" />
+                <strong><a href="https://blog.bytebytego.com/p/a-guide-to-multi-tenancy-benefits">Multi-tenancy is a blast-radius problem</a></strong>
+                <p><b>Pre-read:</b> SaaS margins depend on sharing infrastructure, but shared systems turn one customer's workload, bad deployment, or authorization bug into a platform-wide risk. Architecture choices around tenant isolation are really pricing, support, and incident-response choices.</p>
+                <p><b>Summary:</b> ByteByteGo frames multi-tenancy around the basic tradeoff between separate customer copies and shared infrastructure. Shared tables, shared databases, shared compute, and shared background jobs lower cost and simplify rollout, but they couple customers together. A heavy tenant can create noisy-neighbor latency, a faulty deployment can widen blast radius, and a missing tenant context can leak data across accounts.</p>
+                <p>The useful checklist is where tenant context has to travel: database schema, query filters, caches, queues, logs, metrics, billing, rate limits, and admin tooling. Mature systems rebuild isolation with quotas, limits, per-tenant observability, and careful data-placement choices. The article is introductory, but it is a good reminder that multi-tenancy is not a database pattern; it is an operating model for shared risk.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Settlement Rights for Event Markets</strong>
+                <p>Sell the legal and technical layer that lets real-world data owners license their facts into prediction markets without losing control. Flight delays, drug trials, commodity inspections, logistics milestones, and FDA decisions are becoming tradable events. The missing primitive is not another market; it is a settlement-rights system that proves who owns the outcome feed, who can trade, what manipulation would look like, and what the regulator can audit.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://research.contrary.com/report/are-prediction-markets-doomed-to-fail">Are Prediction Markets Doomed to Fail?</a> via Contrary Research<br />The category is scaling past politics into a larger event-contract market where data, fees, liquidity, and regulation define the business.</li>
+                  <li><a href="https://www.businessinsider.com/kalshi-turning-flight-cancellations-into-trades-2026-7">Kalshi Is Trying to Turn Flight Cancellations Into Trades</a> via Business Insider<br />Kalshi named FlightAware as a settlement source; FlightAware's parent said its data was not authorized for that use.</li>
+                  <li><a href="https://www.theguardian.com/technology/2026/jul/16/kalshi-betting-drug-trial-results">Kalshi to offer betting on drug trial results and FDA regulatory decisions</a> via The Guardian<br />Clinical-trial event contracts show the next frontier: high-value outcomes with insiders, patients, sponsors, regulators, and data vendors in the loop.</li>
+                  <li><a href="https://www.axios.com/2026/07/16/white-house-teleprompter-kalshi-investigation">White House teleprompter operator investigated over alleged Kalshi trades</a> via Axios<br />Mention-market insider-trading allegations show that employment verification alone will not be enough as contracts move closer to private operational facts.</li>
+                </ul>
+                <p><b>Why Now:</b> Prediction markets are pushing into events whose truth is produced by private operational systems, not public election results. At the same time, regulators and data owners are seeing that a settlement feed can create manipulation incentives and liability for the organization that produces the feed.</p>
+                <p><b>First Wedge:</b> Start with aviation disruption contracts: sell airports, airlines, travel insurers, and exchanges a licensed cancellation-resolution feed with data-owner consent, embargo rules, manipulation monitoring, and an audit packet for CFTC review.</p>
+                <p><b>Commercial Model:</b> Data owners and exchanges pay annual licensing plus per-contract settlement fees. Insurers and enterprise hedgers pay for verified feeds because they cannot underwrite or hedge against an event contract that may be pulled, disputed, or based on unauthorized data.</p>
+                <p><b>Defensibility:</b> The compounding asset is not generic oracle code; it is rights-cleared integrations with operational data owners, domain-specific manipulation playbooks, regulator-ready audit history, and trusted participation rules. Chainlink-style oracles prove that outcome feeds matter, but they do not solve data-owner consent, insider access graphs, or contract-market approval.</p>
+                <p><b>Technical Risk:</b> The hard part is turning messy operational data into a deterministic, appealable settlement record while detecting when a trader may have influenced or privately known the outcome. False positives will anger legitimate hedgers; false negatives will get the feed removed from markets.</p>
+                <p><b>Market Expansion:</b> After aviation, expand into clinical trials, port delays, power outages, food recalls, commodity inspection results, sports injury availability, and AI benchmark releases. The common morphology is a valuable event whose truth comes from a semi-private data system.</p>
+                <p><b>Self-Critique:</b> This could be too dependent on Kalshi and Polymarket's regulatory path, and some data owners may prefer to ban market use rather than monetize it. The wedge must avoid looking like compliance consulting by shipping a narrow settlement product with real contracts attached.</p>
+                <p><b>Next Experiment:</b> In two weeks, interview five data owners named or likely to be named in event-contract filings, two market operators, and two CFTC/event-contract lawyers. Build one mocked settlement packet for a flight-cancellation contract and test whether it would have prevented the FlightAware conflict.</p>
+              </article>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 2</span>
+                <strong>Rewrite Acceptance Lab</strong>
+                <p>Sell independent acceptance evidence for agentic code rewrites. As models make year-long migrations compressible, the buyer's problem moves from writing the new code to proving that the new system behaves the same, can be maintained, and can be insured. The product is a third-party lab that produces differential tests, behavioral traces, risk scores, and an underwriting packet for one high-risk migration at a time.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://bun.com/blog/bun-in-rust">Rewriting Bun in Rust</a> via Bun<br />The Bun rewrite worked because it was structured around porting rules, trial runs, adversarial review, and behavioral tests, not because an agent blindly translated code.</li>
+                  <li><a href="https://newsletter.pragmaticengineer.com/p/the-pulse-what-can-we-learn-from">The Pulse: What can we learn from Bun's rapid Rust rewrite with AI?</a> via The Pragmatic Engineer<br />The newsletter frames the cost and time compression as a real shift for large engineering migrations.</li>
+                  <li><a href="https://www.anthropic.com/news/fable-mythos-access">Statement on the US government directive to suspend access to Fable 5 and Mythos 5</a> via Anthropic<br />Frontier-model access can be interrupted by policy decisions, which matters when a company builds a critical migration around one model.</li>
+                  <li><a href="https://www.techradar.com/pro/ai-can-read-your-legacy-systems-modernization-is-still-the-hard-part">AI can read your legacy systems. Modernization is still the hard part</a> via TechRadar<br />Legacy modernization still turns on business context, dependencies, audit, and operational sequencing, not just faster code generation.</li>
+                </ul>
+                <p><b>Why Now:</b> AI rewrite capacity is arriving before enterprise acceptance capacity. Code can now be transformed faster than architecture boards, compliance teams, incident owners, and insurers can decide whether the result is safe to ship.</p>
+                <p><b>First Wedge:</b> Target one regulated migration class: insurance rating and claims logic moving from legacy systems into modern policy platforms. Produce line-level parity evidence, generated regression suites, data lineage, model-use logs, and an exception register that a CIO, auditor, and carrier can all read.</p>
+                <p><b>Commercial Model:</b> Charge a fixed assessment fee plus a success fee when the migration passes acceptance gates. The budget comes from modernization programs that already spend millions on SI work, delayed releases, audit remediation, and cyber or E&amp;O coverage requirements.</p>
+                <p><b>Defensibility:</b> The lab gets stronger with every accepted migration because it accumulates edge-case corpora, parity-test generators, migration failure modes, and insurer trust. Modernization vendors are conflicted because they grade their own work; insurers and auditors need an independent record.</p>
+                <p><b>Technical Risk:</b> The hard part is extracting behavioral intent from legacy code and production traces without overfitting to the old system's bugs. The lab must distinguish intended parity from inherited defects and explain that distinction well enough for auditors.</p>
+                <p><b>Market Expansion:</b> Move from insurance rating engines to banking risk models, healthcare claims adjudication, airline operations systems, tax engines, industrial controls, and any domain where old code encodes business rules no one fully remembers.</p>
+                <p><b>Self-Critique:</b> This market has many modernization vendors, test-automation tools, and consultancies. The company only works if it becomes the neutral acceptance and underwriting layer, not another team promising to rewrite code faster.</p>
+                <p><b>Next Experiment:</b> Take one open-source legacy subsystem with a mature test suite, run an agentic language or framework migration, and produce a sample acceptance dossier. Then ask three modernization leaders and two tech E&amp;O underwriters what evidence would change their willingness to approve the rewrite.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>

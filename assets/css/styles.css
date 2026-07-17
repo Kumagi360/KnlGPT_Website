@@ -4345,7 +4345,7 @@ blockquote {
 
   .til-post-page main,
   .til-post-page .post-page {
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
   }
 
@@ -4376,13 +4376,16 @@ blockquote {
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .til-post-page .post-body {
     --til-mobile-gutter: clamp(14px, 5vw, 22px);
-    width: calc(100vw - var(--til-mobile-gutter) - var(--til-mobile-gutter));
+    width: 100%;
     max-width: none;
-    margin-inline: var(--til-mobile-gutter);
+    margin-inline: 0;
+    padding-inline: var(--til-mobile-gutter);
   }
 
   .til-post-page .til-aggregation-grid,
@@ -4420,10 +4423,15 @@ blockquote {
 
   .til-subcard strong,
   .til-subcard a,
-  .til-subcard p {
+  .til-subcard p,
+  .til-subcard li {
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: none;
+  }
+
+  .til-card-image {
+    max-width: 100%;
   }
 }
 
@@ -4462,7 +4470,8 @@ blockquote {
 
   .til-subcard strong,
   .til-subcard a,
-  .til-subcard p {
+  .til-subcard p,
+  .til-subcard li {
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: none;
