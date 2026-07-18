@@ -4350,19 +4350,27 @@ blockquote {
   }
 
   .til-post-page .site-header {
-    width: 100vw;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     padding-inline: 14px;
+    overflow: visible;
   }
 
   .til-post-page .primary-nav {
-    width: 100%;
-    max-width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
     gap: 4px;
   }
 
   .til-post-page .primary-nav a {
+    min-width: 0;
     padding-inline: 6px;
     font-size: 13px;
+    text-align: center;
   }
 
   .til-post-page .post-hero > *,
