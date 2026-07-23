@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 22, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 22, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 22, 2026</span>
+          <h1>Agents Need Logs</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 2 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <strong><a href="https://www.reuters.com/business/world-at-work/meta-employees-lawsuit-shows-that-if-ai-fires-you-proving-it-is-hard-part-2026-07-22/">AI layoffs enter evidentiary law</a></strong>
+                <p><b>Pre-read:</b> Workplace AI disputes are moving from abstract fairness debates into evidence fights over logs, scoring systems, and decision authority. The legal problem is asymmetric: employers control the systems, while workers often see only the employment outcome.</p>
+                <p><b>Summary:</b> Reuters' One Essential Read centers on former Meta workers who say discriminatory AI tools were used in layoff selection. Reuters frames the case as the first lawsuit aimed directly at AI's role in layoffs, and says the hard part for workers is proving how the systems were actually used. Legal experts told Reuters that employees often lack visibility into workplace AI and may have signed arbitration agreements that limit court claims.</p>
+                <p>The newsletter ties the suit to Meta's earlier employee-monitoring controversy, including a paused program that captured mouse movements and keystrokes for AI training data. It also points to a broader operating risk for companies: AI-enabled workforce decisions create discoverability, audit, and discrimination exposure even when management says humans made the final call. AP's separate coverage of the Meta complaint reported that 26 employees alleged protected leave was penalized by AI-linked activity and performance scoring, while Meta denied that AI made the decisions.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <strong><a href="https://seekingalpha.com/news/4616731-equity-etfs-dominate-again-as-140b-in-positive-flows-funnel-into-funds-in-june">ETF flows keep rewarding equity beta</a></strong>
+                <p><b>Pre-read:</b> ETF flow data is a useful read on investor behavior because it shows where allocators are sending marginal dollars, not just where prices have already moved. In a year when rate expectations and AI concentration keep pulling attention toward growth, broad equity demand still matters for market structure.</p>
+                <p><b>Summary:</b> Seeking Alpha reported that the U.S. ETF sector took in $206.1 billion of net inflows in June, with equity ETFs accounting for about $140 billion. The story's signal is that passive and ETF allocation demand remains broad even after a long rally, and that equity exposure is still dominating fund flows.</p>
+                <p>For a reader tracking macro conditions, the implication is simple: risk appetite is not showing up only in single-name AI trades. It is also arriving through large, low-friction allocation vehicles. That can support index-level momentum while making market breadth and fund-flow reversals more important to watch.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Agent reliability</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!zNXl!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc232d4d2-34ca-4f1f-946a-16585ec93b8c_3082x1510.png" alt="" />
+                <strong><a href="https://blog.bytebytego.com/p/best-practices-for-building-ai-agents">Best Practices for Building AI Agents That Work in Production</a></strong>
+                <p><b>Pre-read:</b> Production agents are settling into a less theatrical shape: ordinary software owns prompts, context, state, and control flow, while the model handles selected judgment calls. HumanLayer's <a href="https://github.com/humanlayer/12-factor-agents">12-Factor Agents</a> has become a useful vocabulary for this pattern, and Anthropic's <a href="https://www.anthropic.com/engineering/building-effective-agents">agent guidance</a> similarly favors simple composable workflows over maximal autonomy. This piece is useful because it turns that emerging consensus into engineering tradeoffs you can actually design around.</p>
+                <p><b>Summary:</b> ByteByteGo argues that a production agent is mostly deterministic software wrapped around carefully placed model calls. The core risk is multiplicative error: a 95% reliable step becomes fragile when chained through many autonomous decisions. The article maps that risk to four controls: own the context window, own the loop and stopping conditions, externalize state, and keep agents narrow and supervised.</p>
+                <p>Its strongest section is the tradeoff discussion. It treats multi-agent systems as useful only when orchestration is explicit and the task benefits from parallel search; Anthropic's <a href="https://www.anthropic.com/engineering/multi-agent-research-system">research-system writeup</a> makes the same cost point, noting much higher token spend for breadth-heavy work. The durable lesson is that better models won't remove the need for replayable state, bounded loops, and human handoff paths. Those are software and liability primitives, not prompt tricks.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Agent Decision Escrow</strong>
+                <p>Sell regulated support and claims teams a tamper-evident record of what each customer-facing agent knew, decided, was allowed to do, and why. The product sits beside the agent runtime, captures policy snapshots, tool permissions, state transitions, human handoffs, and final customer statements, then produces a replayable dispute packet when a customer, auditor, or regulator challenges the interaction.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://blog.bytebytego.com/p/best-practices-for-building-ai-agents">Best Practices for Building AI Agents That Work in Production</a> via ByteByteGo<br />The newsletter's core point is that reliable agents need owned context, deterministic control flow, external state, and narrow supervised scope, not just a smarter model.</li>
+                  <li><a href="https://github.com/humanlayer/12-factor-agents">12-Factor Agents</a> via HumanLayer<br />The production vocabulary is converging on owned prompts, owned context windows, structured tool calls, unified business/execution state, and stateless reducers.</li>
+                  <li><a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective AI Agents</a> via Anthropic<br />Anthropic identifies customer support as a natural agent use case because it combines conversation, tool-backed action, measurable outcomes, and human oversight.</li>
+                  <li><a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems">Guidelines on transparency obligations for providers and deployers of AI systems</a> via European Commission<br />The Commission published Article 50 transparency guidance on July 20, 2026; the obligations apply from August 2, 2026.</li>
+                  <li><a href="https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/">BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot</a> via American Bar Association<br />The Air Canada chatbot case shows why a company needs evidence about what its automated agent represented to a customer.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Customer-facing agents are moving from answer boxes into account changes, refunds, claims, eligibility checks, and renewals. At the same time, regulators are turning transparency and logging into explicit duties, and public incidents have made hallucinated policy statements a board-level risk. Generic traces tell engineers what broke; buyers now need dispute-grade evidence that legal, compliance, and operations teams can use.</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with travel, fintech, insurance, or healthcare support teams that already deploy AI agents for policy-heavy conversations. Ship a sidecar that records policy-version hashes, retrieved documents, tool-call inputs and outputs, human approval points, customer-visible statements, and final resolution, then generates a one-click packet for escalations and compliance reviews.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Heads of support, compliance, and legal operations pay per resolved agent case or per monthly interaction volume. Budget comes from support automation risk, compliance tooling, and outside-counsel avoidance: one prevented regulatory escalation or class-action discovery mess can justify a six-figure annual contract.</p>
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is not raw logs; it is a normalized evidence graph across agent frameworks, policy stores, ticketing systems, and regulated workflows. Over time the company learns which missing context, permission boundary, or handoff pattern predicts costly disputes. Incumbent observability tools can add traces, but they are not organized around legal sufficiency, policy provenance, retention, redaction, and replayable customer-state reconstruction.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is reconstructing the exact decision context without leaking sensitive data or slowing the agent. The system has to capture enough prompt, retrieval, policy, tool, and state material to be probative later, while redacting secrets, preserving chain-of-custody, and surviving heterogeneous agent stacks.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After support, expand into autonomous sales commitments, claims adjudication, loan servicing, HR case handling, government benefits, and robot dispatch decisions. The shared morphology is an autonomous system making or communicating a consequential decision under policy constraints.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This could be too early if most companies keep agents in low-risk FAQ mode or if buyers decide existing observability plus ticket transcripts are good enough. It also risks becoming compliance consulting unless the product produces standardized packets and automated policy-drift alerts without custom services each time.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, interview ten support/compliance leaders at companies with live AI agents and ask for the last three escalations where nobody could prove what the bot knew or said. Build a prototype that ingests Zendesk, a policy docs repo, and an agent trace from one pilot, then produces a dispute packet their legal team would actually rely on.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>
