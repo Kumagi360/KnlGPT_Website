@@ -4455,28 +4455,38 @@ blockquote {
     text-wrap: auto;
   }
 
+  .til-post-page .post-hero {
+    padding-inline: 14px;
+  }
+
+  .til-post-page .post-body {
+    --til-mobile-gutter: 8px;
+  }
+
   .til-post-page .primary-nav {
+    display: flex;
+    flex-wrap: nowrap;
     width: calc(100vw - 28px);
     min-width: 0;
     max-width: calc(100vw - 28px);
-    gap: 2px;
-    padding: 4px;
+    gap: 1px;
+    padding: 3px;
   }
 
   .til-post-page .primary-nav a {
     flex: 1 1 0;
     min-width: 0;
-    padding-inline: 3px;
-    font-size: 11px;
+    padding-inline: 1px;
+    font-size: 9px;
   }
 
   .til-column {
-    padding: 16px;
+    padding: 12px 10px;
   }
 
   .til-email-card,
   .til-idea-card {
-    padding: 14px;
+    padding: 10px;
   }
 
   .til-subcard strong,

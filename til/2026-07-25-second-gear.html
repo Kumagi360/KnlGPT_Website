@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 25, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 25, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 25, 2026</span>
+          <h1>Device Acceptance</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://media.wired.com/photos/6a5fc180262e397baf375f6c/191:100/w_1280,c_limit/GettyImages-2227996588.jpg" alt="True IMAX is a scarce machine layer" />
+                <strong><a href="https://www.wired.com/story/the-odyssey-was-made-for-imax-70mm-good-luck-watching-it-that-way/">True IMAX is a scarce machine layer</a></strong>
+                <p><b>Pre-read:</b> Premium media formats often look like branding until a physical bottleneck reveals the real stack underneath. Film projection depends on cameras, prints, trained operators, spare parts, venues, and screen geometry, not only studio demand.</p>
+                <p><b>Summary:</b> Wired reports that Christopher Nolan's The Odyssey is available broadly, but only 41 theaters worldwide, including 25 in the U.S., can show it in full 15/70-mm IMAX film. The format runs a large 65-mm negative horizontally, creating a 1.43:1 image that is larger and sharper than most digital IMAX presentations. The scarcity comes from old projectors, limited parts, and the operational burden of moving and running huge film prints. Hardware FYI's linked Adam Savage tour fits the same point from the machine side: the cultural prestige of real IMAX now rests on a fragile industrial base. The useful model is broader than cinema. Whenever a product promise depends on rare physical infrastructure, distribution becomes a supply-chain problem disguised as consumer demand.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Hardware Security</span>
+                <img class="til-card-image" src="https://grandideastudio.com/media/_assets/logo-grand-idea-studio-social.jpg" alt="Reverse Engineering a Ledger Nano X Hardware Implant" />
+                <strong><a href="https://grandideastudio.com/portfolio/security/ledger-hardware-implant/">Reverse Engineering a Ledger Nano X Hardware Implant</a></strong>
+                <p><b>Pre-read:</b> Hardware wallets concentrate trust in a tiny ceremony: the device generates a recovery phrase, shows it on its own screen, and asks the user to preserve it offline. Ledger says the Nano X displays that phrase during setup on the device's secure screen, while its broader recovery documentation treats the phrase as the backup that restores control of assets. That makes the display path part of the trusted computing base, even when the secure element itself is doing its job.</p>
+                <p><b>Summary:</b> Joe Grand's case study shows a genuine Ledger Nano X that had been physically modified after manufacture with a hidden implant. Hardware FYI's issue summarizes the key mechanism: the attacker replaced internal space with a smaller battery, added a board, antenna, cellular path, and wiring, then tapped the SPI bus driving the display. The implant did not need to defeat the wallet's secure element; it watched the recovery words as pixels and exfiltrated the reconstructed seed. The durable lesson is that cryptographic authenticity checks don't fully answer whether the specific object in your hand has been altered. For embodied AI, drones, vehicles, factory robots, and other expensive physical systems, acceptance testing has to include the received artifact, not only the intended design.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Acceptance Layer for Embodied AI</strong>
+                <p>Sell factories, public-safety agencies, and insurers a way to prove that each autonomous device they are about to trust is the device they think it is, running the behavior envelope they approved, with a clean physical chain of custody. The primitive is not fleet management. It is acceptance evidence for machines that can move, sense, decide, and later be blamed.</p>
+
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://hardwarefyi.substack.com/p/the-crypto-wallet-that-wasnt-alone">The Crypto Wallet That Wasn't Alone</a> via Hardware FYI<br />A legitimate Ledger Nano X was allegedly modified after manufacture with an implant that watched the display bus and exfiltrated setup secrets; the lesson is that cryptographic authenticity does not prove the received object is physically safe.</li>
+                  <li><a href="https://www.businesswire.com/news/home/20260715089377/en/Walden-Robotics-Launches-with-%24300-Million-to-Put-General-Purpose-Robots-to-Work-Today">Walden Robotics Launches with $300 Million to Put General-Purpose Robots to Work Today</a> via Hardware FYI<br />Walden's launch frames production robots as continuously learning systems deployed into manufacturing and logistics, which raises the cost of trusting undocumented physical changes or behavior drift.</li>
+                  <li><a href="https://brincdrones.com/news/brinc-raises-125m-to-put-a-911-response-drone-on-every-police-and-fire-station-roof/">BRINC Raises $125M to Put a 911 Response Drone on Every Police and Fire Station Roof</a> via Hardware FYI<br />Public-safety drones are moving toward always-ready deployments at police and fire sites, where agencies will need chain-of-custody, tamper checks, and post-incident evidence before the first lawsuit.</li>
+                  <li><a href="https://www.defensenews.com/industry/techwatch/2026/07/20/thunderstruck-anduril-unveils-autonomous-attack-rotorcraft/">Thunderstruck: Anduril unveils autonomous attack rotorcraft</a> via Contrary Research<br />Autonomous rotorcraft are entering procurement language, making evidence about hardware state and behavioral bounds a buying requirement, not a lab nicety.</li>
+                </ul>
+
+                <p><b>Why Now</b></p>
+                <p>Embodied AI is crossing from demos into public agencies, factories, logistics nodes, and defense-adjacent procurement. At the same time, the hardware-wallet implant shows a nasty failure mode: the trusted product can be genuine while the received physical object has a second system inside it. Buyers will not accept black-box autonomy without inspection, baselining, and incident evidence.</p>
+
+                <p><b>First Wedge</b></p>
+                <p>A 48-hour acceptance test for police drone docks and industrial robot cells: teardown-safe imaging, RF and power-signature baselines, firmware and model hash capture, sensor calibration proof, battery/module provenance, and an incident-recorder policy that the agency or plant can attach to procurement and insurance files.</p>
+
+                <p><b>Commercial Model</b></p>
+                <p>Sell to public-safety agencies, city risk offices, manufacturers, and their insurers as a per-device acceptance certificate plus annual monitoring. Pricing can start at $1,500-$5,000 per device for acceptance and $100-$500 per device per month for ongoing evidence retention, re-baselining, and incident export.</p>
+
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is a library of known-good physical signatures, component provenance, failure modes, and behavior envelopes across device classes. OEM fleet dashboards can show status, but they are conflicted when the buyer needs independent proof for insurance, procurement, litigation, and regulator review.</p>
+
+                <p><b>Technical Risk</b></p>
+                <p>Non-destructive physical inspection has to be good enough to catch meaningful extra boards, radios, battery swaps, sensor substitutions, and anomalous power/RF behavior without turning every device into a lab project. The hard part is making the test cheap and repeatable across messy hardware revisions.</p>
+
+                <p><b>Market Expansion</b></p>
+                <p>Start with 911 drone docks and factory robot cells, then expand to autonomous forklifts, inspection robots, grid drones, defense subcontractor hardware, hospital delivery robots, and any embodied system where the buyer needs to prove what was deployed after an incident.</p>
+
+                <p><b>Self-Critique</b></p>
+                <p>This can die if OEMs make independent inspection contractually impossible, if agencies treat it as a one-time consulting audit, or if buyers only care after a catastrophic incident. The wedge has to attach to insurance, procurement, and post-incident liability workflows so the budget is mandatory rather than nice-to-have.</p>
+
+                <p><b>Next Experiment</b></p>
+                <p>Interview 10 city risk managers, public-safety drone program owners, and industrial insurers. Offer a fixed-price acceptance packet for one deployed drone dock or robot cell, then measure whether the buyer wants the certificate for procurement, insurance renewal, or internal safety signoff.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>
