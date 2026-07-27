@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 26, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 26, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260726-til" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 26, 2026</span>
+          <h1>Model Routing Needs Governance</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Artificial Intelligence</span>
+                <img class="til-card-image" src="https://www.thedailyupside.com/wp-content/uploads/2026/07/7-19-26_modelmaxxing-768x432.png" alt="'Modelmaxxing' Replaces 'Tokenmaxxing' for Firms Grappling With AI Costs" />
+                <strong><a href="https://www.thedailyupside.com/technology/artificial-intelligence/modelmaxxing-replaces-tokenmaxxing-for-firms-figuring-out-ai-use-cases/">'Modelmaxxing' Replaces 'Tokenmaxxing' for Firms Grappling With AI Costs</a></strong>
+                <p><b>Pre-read:</b> Enterprise AI is moving from adoption theater to workload economics. The useful infrastructure layer is no longer just a model API; it is routing, caching, provider selection, compliance posture, and unit-cost control. <a href="https://openrouter.ai/docs/guides/routing/routers/auto-router">OpenRouter describes auto-routing</a> as a way to send simpler prompts to cheaper models while reserving stronger systems for harder work, and <a href="https://www.businessinsider.com/coinbase-ceo-ai-cost-savings-strategy-token-costs-2026-6">Coinbase's Brian Armstrong has argued</a> that model choice and cache hits can keep spend roughly flat as usage rises.</p>
+                <p><b>Summary:</b> The Daily Upside frames the shift as "modelmaxxing": routing each AI task to the cheapest model that is good enough, instead of maximizing token consumption on frontier systems. The article says Chinese models including DeepSeek, Doubao, GLM, Hunyuan, Kimi, and Qwen are pressuring US labs because they are fast, improving, and often far cheaper. It cites IDC survey data saying 47% of 260 US decision-makers at large companies reported using made-in-China models for at least one use case, with 20% reporting extensive use.</p>
+                <p>The core operational pattern is hybrid: use a strong model to plan or decompose work, then send routine execution to cheaper open-weight or specialized models. The tradeoff is governance. The article emphasizes that model origin, hosting provider, data handling, deployment geography, and procurement rules can matter more than a leaderboard score. Its durable point is that the next AI value pool may shift away from raw foundation-model performance and toward the software, infrastructure, and deployment architecture that make model choice invisible to users.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Model Chain-of-Custody Firewall</strong>
+                <p>Sell regulated companies a runtime control plane that proves which model, host, fine-tune, adapter, tool, and cached trace touched each AI decision before that output reaches a customer, employee, or government contract workflow. The wedge is not cheaper routing. It is making model choice auditable enough that teams can use low-cost open-weight models without accidentally inheriting export, procurement, IP, residency, or vendor-origin risk.</p>
+
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://www.thedailyupside.com/technology/artificial-intelligence/modelmaxxing-replaces-tokenmaxxing-for-firms-figuring-out-ai-use-cases/">'Modelmaxxing' Replaces 'Tokenmaxxing' for Firms Grappling With AI Costs</a> via The Daily Upside<br />The newsletter's core signal is that enterprise AI is shifting from raw token adoption to dynamic model selection, with cheaper Chinese models creating both cost pressure and governance anxiety.</li>
+                  <li><a href="https://hai.stanford.edu/assets/files/hai-digichina-issue-brief-beyond-deepseek-chinas-diverse-open-weight-ai-ecosystem-policy-implications.pdf">Beyond DeepSeek: China's Diverse Open-Weight AI Ecosystem and Its Policy Implications</a> via Stanford HAI DigiChina<br />Chinese open-weight models are not a one-off DeepSeek story; they are a durable, broad model supply chain that developers will keep pulling into products.</li>
+                  <li><a href="https://www.sentinelone.com/cybersecurity-101/data-and-ai/ai-bill-of-materials-aibom/">AI Bill of Materials (AIBOM): Complete Guide</a> via SentinelOne<br />AIBOM language is emerging, but most implementations are static inventories. The missing layer is runtime enforcement tied to each AI call and downstream workflow.</li>
+                  <li><a href="https://www.kharon.com/brief/us-china-1260-list-alibaba-baidu-byd-defense-department">U.S. Designates Chinese Tech Giants as Military Companies, Adding Alibaba, Baidu, and BYD</a> via Kharon<br />Procurement exposure is becoming concrete for contractors as Chinese tech suppliers are added to restriction lists.</li>
+                </ul>
+
+                <p><b>Why Now</b></p>
+                <p>Model routers are becoming normal because the price gap is too large to ignore, but the governance layer is still mostly static policy, logging, and trust-center paperwork. Frontier systems are now cheap enough to be selected per task, which means compliance has to move from annual vendor review to per-inference chain-of-custody.</p>
+
+                <p><b>First Wedge</b></p>
+                <p>A proxy that plugs into LiteLLM, OpenRouter, Bedrock, Azure, and self-hosted vLLM deployments for defense suppliers, fintechs, and healthcare vendors. It blocks or quarantines calls when a model's origin, hosting region, license, fine-tune lineage, or provider terms violate a customer-defined contract or regulatory policy.</p>
+
+                <p><b>Commercial Model</b></p>
+                <p>Security, procurement, or AI platform teams pay per protected AI application plus usage-based audit storage. The budget exists because the alternative is forcing teams onto expensive approved models, losing the cost savings that made routing attractive, or accepting contract risk they cannot explain to auditors.</p>
+
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is a normalized evidence graph of models, derivative weights, hosting providers, licenses, benchmark regressions, policy changes, and customer-specific contract constraints. Incumbent gateways can log traffic, but they do not automatically know that a cheap model was distilled from, hosted by, proxied through, or contractually tied to a newly restricted supplier.</p>
+
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is trustworthy provenance inference when model cards are incomplete and derivative models hide their ancestry. The product needs a mix of signed attestations, vendor feeds, weight fingerprinting, benchmark-behavior fingerprints, policy ingestion, and conservative unknown-state handling without crushing developer velocity.</p>
+
+                <p><b>Market Expansion</b></p>
+                <p>Start with LLM calls in regulated software, then expand to multimodal models, robotics policies, autonomous-agent toolchains, and AI-enabled supplier due diligence. The same primitive applies anywhere autonomous systems choose external intelligence at runtime.</p>
+
+                <p><b>Self-Critique</b></p>
+                <p>This could collapse into a feature inside Palo Alto, Wiz, Cloudflare, OpenRouter, or a procurement-risk platform if the product is only a dashboard. It only deserves to exist if it enforces decisions inline and becomes the trusted evidence layer auditors and platform teams rely on when model supply chains change weekly.</p>
+
+                <p><b>Next Experiment</b></p>
+                <p>Interview 12 AI platform or security leads at defense-adjacent SaaS, fintech, and healthcare companies already using more than one model provider. Build a thin proxy that emits an AIBOM per request, flags Chinese-origin or unknown-origin model paths, and tests whether teams will pay to keep low-cost routing while satisfying one real procurement or compliance review.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>

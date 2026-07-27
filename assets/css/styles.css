@@ -4333,10 +4333,18 @@ blockquote {
 }
 
 @media (max-width: 720px) {
+  .til-post-page *,
+  .til-index-page * {
+    box-sizing: border-box;
+  }
+
   .til-post-page main,
   .til-post-page .post-page,
   .til-post-page .post-hero,
   .til-post-page .post-body,
+  .til-index-page main,
+  .til-index-page .article-hero,
+  .til-index-page .blog-filter-bar,
   .til-index-page .blog-index {
     min-width: 0;
     width: 100%;
@@ -4349,24 +4357,29 @@ blockquote {
     overflow: hidden;
   }
 
-  .til-post-page .site-header {
+  .til-post-page .site-header,
+  .til-index-page .site-header {
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
     width: 100%;
     max-width: 100%;
     padding-inline: 14px;
-    overflow: visible;
+    overflow: hidden;
   }
 
-  .til-post-page .primary-nav {
+  .til-post-page .primary-nav,
+  .til-index-page .primary-nav {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    width: calc(100vw - 28px);
-    max-width: calc(100vw - 28px);
+    width: 100%;
+    max-width: 100%;
     gap: 4px;
   }
 
-  .til-post-page .primary-nav a {
+  .til-post-page .primary-nav a,
+  .til-index-page .primary-nav a {
     min-width: 0;
     padding-inline: 6px;
     font-size: 13px;
@@ -4381,11 +4394,24 @@ blockquote {
     max-width: 100%;
   }
 
+  .til-index-page .blog-card {
+    box-sizing: border-box;
+    width: min(100%, calc(100vw - 40px));
+    max-width: calc(100vw - 40px);
+    overflow: hidden;
+  }
+
+  .til-index-page .blog-card h2,
+  .til-index-page .blog-card p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
+    width: min(100%, calc(100vw - 44px));
+    max-width: calc(100vw - 44px);
     overflow-wrap: anywhere;
   }
 
@@ -4400,8 +4426,8 @@ blockquote {
 
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section {
-    width: 100%;
-    max-width: 100%;
+    width: min(100%, calc(100vw - (var(--til-mobile-gutter) * 2)));
+    max-width: calc(100vw - (var(--til-mobile-gutter) * 2));
     overflow: hidden;
   }
 
@@ -4422,7 +4448,7 @@ blockquote {
   .til-gear-hero h1 {
     width: min(100%, calc(100vw - 40px));
     max-width: calc(100vw - 40px);
-    font-size: clamp(1.46rem, 7vw, 2rem);
+    font-size: clamp(1.34rem, 6.5vw, 2rem);
     line-height: 1;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -4448,7 +4474,7 @@ blockquote {
 
 @media (max-width: 360px) {
   .til-gear-hero h1 {
-    font-size: 1.32rem;
+    font-size: 1.16rem;
     line-height: 1;
     max-width: calc(100vw - 44px);
     white-space: normal;
@@ -4463,17 +4489,19 @@ blockquote {
     --til-mobile-gutter: 8px;
   }
 
-  .til-post-page .primary-nav {
+  .til-post-page .primary-nav,
+  .til-index-page .primary-nav {
     display: flex;
     flex-wrap: nowrap;
-    width: calc(100vw - 28px);
+    width: 100%;
     min-width: 0;
-    max-width: calc(100vw - 28px);
+    max-width: 100%;
     gap: 1px;
     padding: 3px;
   }
 
-  .til-post-page .primary-nav a {
+  .til-post-page .primary-nav a,
+  .til-index-page .primary-nav a {
     flex: 1 1 0;
     min-width: 0;
     padding-inline: 1px;
