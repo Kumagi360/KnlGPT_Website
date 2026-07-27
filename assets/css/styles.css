@@ -4410,9 +4410,17 @@ blockquote {
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+
+  .til-post-page .til-column {
     width: min(100%, calc(100vw - 44px));
     max-width: calc(100vw - 44px);
-    overflow-wrap: anywhere;
+  }
+
+  .til-post-page .til-subcard {
+    width: 100%;
+    max-width: 100%;
   }
 
   .til-post-page .post-body {
