@@ -4534,3 +4534,63 @@ blockquote {
     hyphens: none;
   }
 }
+
+@media (max-width: 720px) {
+  .til-post-page .post-body {
+    padding-inline: 0;
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    width: calc(100vw - 44px);
+    max-width: calc(100vw - 44px);
+    margin-inline: auto;
+  }
+
+  .til-post-page .til-column {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .til-post-page .til-gear-hero h1,
+  .til-index-page .blog-card h2,
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .til-post-page .til-gear-hero h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(1.28rem, 6.1vw, 2rem);
+    line-height: 1.02;
+  }
+}
+
+@media (max-width: 360px) {
+  .til-post-page .til-gear-hero h1 {
+    font-size: 1.08rem;
+    line-height: 1.03;
+  }
+}
+
+@media (max-width: 420px) {
+  .til-post-page .til-gear-hero h1,
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    width: calc(100vw - 80px);
+    max-width: calc(100vw - 80px);
+  }
+
+  .til-post-page .til-column {
+    padding-inline: 10px;
+  }
+
+  .til-post-page .til-subcard {
+    padding-inline: 8px;
+  }
+}
