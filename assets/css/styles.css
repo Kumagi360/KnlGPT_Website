@@ -4582,15 +4582,23 @@ blockquote {
   .til-post-page .til-gear-hero h1,
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section {
-    width: calc(100vw - 80px);
-    max-width: calc(100vw - 80px);
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
   }
 
   .til-post-page .til-column {
+    width: 100%;
+    max-width: 100%;
     padding-inline: 10px;
   }
 
   .til-post-page .til-subcard {
     padding-inline: 8px;
+  }
+
+  .til-post-page .primary-nav,
+  .til-index-page .primary-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
