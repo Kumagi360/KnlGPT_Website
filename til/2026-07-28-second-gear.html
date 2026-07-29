@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, July 28, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the July 28, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / July 28, 2026</span>
+          <h1>Agent Infrastructure Needs Control Planes</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 2 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://technode.com/wp-content/uploads/2026/07/20230129061325525.jpg" alt="" />
+                <strong><a href="https://technode.com/2026/07/27/cxmt-becomes-chinas-most-valuable-a-share-company-after-8-6-billion-ipo/">China's DRAM champion gets market fuel</a></strong>
+                <p><b>Pre-read:</b> Memory chips are the less glamorous bottleneck beneath AI infrastructure: accelerators need huge pools of DRAM and HBM-like capacity around them, while phones and PCs compete for the same supply chain. That makes China's domestic memory push a macro, industrial-policy, and consumer-pricing story at once.</p>
+                <p><b>Summary:</b> The Daily Upside flags ChangXin Memory Technologies as China's newly ascendant DRAM player after a blockbuster Shanghai STAR Market debut. TechNode reports CXMT raised RMB57.92 billion, about $8.6 billion, in the largest mainland semiconductor offering on record, and its shares rose more than 500% intraday. The newsletter says Gartner expects combined DRAM and SSD prices to jump 130% by year-end, with downstream pressure on PCs and smartphones.</p>
+                <p>The strategic tension is access. The Daily Upside says Samsung, SK Hynix, and Micron still control about 90% of global DRAM, while CXMT is expanding from a smaller base and remains constrained by U.S. export controls. The Pentagon has also treated CXMT as a national-security concern, so Western device makers face a familiar tradeoff: cheaper memory supply from China versus policy and supply-chain risk.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://www.thedailyupside.com/wp-content/uploads/2026/07/zumaglobaltwelve654544-e1785192768791.jpg" alt="" />
+                <strong><a href="https://investors.rocketlabcorp.com/news-releases/news-release-details/rocket-lab-awarded-record-266m-missile-defense-contract-us-space">Rocket Lab deepens its defense launch role</a></strong>
+                <p><b>Pre-read:</b> Space launch is becoming part of missile-defense and resilient-infrastructure competition, not just satellite deployment. The U.S. military wants more responsive launch capacity, and smaller launch providers gain leverage when national-security demand requires redundancy outside SpaceX.</p>
+                <p><b>Summary:</b> The Daily Upside highlights Rocket Lab's record U.S. Space Force win, and Rocket Lab's own release says the $266 million Rocket Systems Launch Program contract covers 12 suborbital launches with options for up to six more. The first launch is expected no earlier than the end of 2026, and most missions are slated for a new Rocket Lab site at Alaska's Pacific Spaceport Complex.</p>
+                <p>The contract matters because it gives Rocket Lab deeper placement in urgent missile-defense work, not because it instantly changes the SpaceX comparison. The company says the award is its largest launch contract, while the newsletter notes Rocket Lab already had a public-sector-heavy backlog and recently expanded its strategic footprint. Defense demand can make smaller space companies more durable even when commercial satellite cycles cool.</p>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://www.pcmag.com/news/amazon-plans-to-launch-5000-new-satellites-to-beam-data-to-iphones">Amazon plans direct-to-device satellites</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://spyglass.org/youtube-plus-peacock/">YouTube and Peacock test a streaming bundle</a></strong>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">2 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Agent Infrastructure</span>
+                <img class="til-card-image" src="https://cdn.sanity.io/images/4zrzovbb/website/c4c716fb31cdbd336b628549cdac0f14e10d0099-2000x1050.heif" alt="" />
+                <strong><a href="https://www.anthropic.com/engineering/managed-agents">Scaling Managed Agents: Decoupling the brain from the hands</a></strong>
+                <p><b>Pre-read:</b> Production agents are becoming long-running systems with state, credentials, compute, and recovery semantics. The useful analogy is closer to an operating system than a chat wrapper: durable state, isolated execution, and replaceable interfaces determine whether agents survive real work. This piece is worth opening because it explains the control-plane architecture behind that shift.</p>
+                <p><b>Summary:</b> Anthropic says Managed Agents decouple the model harness from the sandbox and from the session log, so each component can fail, recover, or change independently. The core interface is deliberately simple: the brain calls hands through an execute(name, input) -> string pattern, while session events live outside the harness as durable context.</p>
+                <p>The practical wins are reliability, security, and latency. Containers can be recreated after failure instead of preserving a fragile all-in-one runtime; credentials stay in vaults or proxies rather than inside the sandbox; and Anthropic reports that decoupling the brain from the hands cut p50 time-to-first-token by roughly 60% and p95 by more than 90%. The broader lesson is that agent capability is now gated by systems design as much as model quality.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / LLM Search</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!CzXk!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbd284093-159c-4301-b54b-465a6973c1a8_2048x1016.png" alt="" />
+                <strong><a href="https://blog.bytebytego.com/p/why-doordash-instacart-and-uber-eats">Why DoorDash, Instacart, and Uber Eats Integrated LLMs Into Search Three Different Ways</a></strong>
+                <p><b>Pre-read:</b> Commerce search is a clean testbed for production LLM integration because intent, constraints, catalog structure, latency, and economics collide in one search box. DoorDash's own engineering post shows LLMs can be constrained by a product knowledge graph; Instacart describes a separate LLM query-understanding layer; Uber uses a fine-tuned Qwen model inside a two-tower retrieval system. The comparison is useful because it turns model choice into an infrastructure-placement problem.</p>
+                <p><b>Summary:</b> ByteByteGo argues that the three delivery companies made different architectural bets because their existing systems offered different leverage points. DoorDash keeps retrieval mostly classical, using LLMs to enrich and map queries into a knowledge graph; DoorDash reports nearly a 30% lift in popular-dish carousel triggering and better whole-page relevance after those retrieval changes.</p>
+                <p>Instacart uses LLMs upstream for query rewrites, category classification, and semantic role labeling, then applies guardrails and smaller fine-tuned models for real-time tail queries. Its tech blog says rewrite coverage rose from 50% to over 95% with 90%+ precision, and its LoRA-tuned Llama-3-8B model hit the 300 ms serving target on H100s. Uber pushes LLMs deepest into retrieval: its Qwen-backed two-tower system pre-embeds documents, serves query embeddings online, and uses MRL plus quantization to cut latency and storage while preserving recall.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://bun.com/og/blog/bun-in-rust.png" alt="" />
+                <strong><a href="https://bun.com/blog/bun-in-rust">AI rewrites now bottleneck on verification</a></strong>
+                <p><b>Pre-read:</b> Large rewrites used to be rejected because the calendar risk exceeded the architectural gain. AI changes that math only when the project already has portable tests, a domain expert, and independent review loops. Without those constraints, faster code generation just moves failure downstream.</p>
+                <p><b>Summary:</b> Bun's Jarred Sumner says he rewrote roughly 535,000 lines of Zig into Rust in 11 days using about 50 Claude Code dynamic workflows. The work produced 6,778 commits, ran up to 64 Claude instances at once, and cost about $165,000 at API pricing before merge. The point is verification, not heroics: every line went through separate adversarial Claude reviewers, the cross-platform test suite had zero skipped or deleted tests, and Sumner manually checked that tests were actually running.</p>
+                <p>The migration passed more than 57,000 tests on each major platform and included over a million assertions on Debian. Bun has since completed 11 rounds of Claude Code Security review and added 24/7 coverage-guided fuzzing across parsers. Sumner still reports 19 known regressions from semantic porting mistakes, which is the useful warning: AI can make a rewrite economically rational, but confidence comes from independent behavioral evidence.</p>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://www.tanayj.com/p/the-robot-data-pyramid">The Data Pyramid in Robotics</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://arxiv.org/html/2606.04233v1">What Are We Actually Benchmarking in Robot Manipulation?</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://hardwarefyi.substack.com/p/why-headphones-need-a-fake-head">Why Headphones Need a Fake Head</a></strong>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Conformance Foundry for Agentic Rewrites</strong>
+                <p>The company sells a behavior-conformance harness for teams using agents to rewrite dangerous old systems. Agents can now move 500K lines faster than a team can read the diff, so the scarce primitive is no longer code generation. It is a durable, adversarial proof that the new system preserves the old system's behavior, security boundaries, and operational contracts.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://bun.com/blog/bun-in-rust">Rewriting Bun in Rust</a> via The Pragmatic Engineer<br />Bun's 11-day Zig-to-Rust rewrite only became credible because of preserved architecture, massive tests, cross-platform CI, security review, and fuzzing.</li>
+                  <li><a href="https://www.anthropic.com/engineering/managed-agents">Scaling Managed Agents: Decoupling the brain from the hands</a> via The Pragmatic Engineer<br />Anthropic frames production agents as infrastructure with separate state, sandbox, tool, and session interfaces.</li>
+                  <li><a href="https://platform.claude.com/docs/en/managed-agents/vaults">Authenticate with vaults</a> via Current verification<br />Agent credentials are becoming a first-class runtime primitive, which raises the bar for migration tooling that touches real systems.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>The Bun rewrite shows that agentic migration cost can drop from years to days, but the proof burden moved in the opposite direction. Generic AI code review is already consensus; the sharper wedge is conformance infrastructure for migrations where the buyer already has an urgent reason to leave unsafe, slow, or unsupported code.</p>
+                <p><b>First Wedge</b></p>
+                <p>A paid pilot for one migration class: C/C++ or Zig services being moved to Rust, with the product building golden traces, differential fuzzers, API contract checks, dependency-risk checks, and a merge-readiness report that a staff engineer can defend.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Sell to platform, security, and infra teams as a migration-risk product: fixed-fee pilot for one service, then annual usage priced by repo size, test minutes, and number of conformance gates. Budget exists because the alternative is a frozen rewrite, recurring memory bugs, or a security-risk exception that never closes.</p>
+                <p><b>Defensibility</b></p>
+                <p>Every migration adds language-pair mappings, failure corpora, equivalence tests, and runtime traces that improve the next migration. Incumbent code agents can generate patches, but they do not own the customer's historical behavior ledger or the independent verifier that procurement and security can trust.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is extracting meaningful behavioral specs from messy production systems without pretending that tests equal truth. The product has to combine traces, property tests, fuzzing, static contracts, and human-reviewed invariants without drowning teams in false positives.</p>
+                <p><b>Market Expansion</b></p>
+                <p>Start with memory-safety rewrites, then expand to Python-to-Rust hot paths, Java monolith decomposition, cloud SDK migrations, database swaps, and regulated infrastructure upgrades where equivalence matters more than feature velocity.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This could collapse into services if every migration needs bespoke expert work. It also fails if teams will not share traces or if the first buyer lacks a strong existing test suite. The company has to package repeatable conformance assets, not sell heroic rewrite consulting.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, pick one open-source project with a past migration or major refactor, generate a conformance pack from its tests and traces, run two agent-generated ports or refactors through it, and show maintainers which regressions normal CI missed.</p>
+              </article>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 2</span>
+                <strong>Robot Mannequins for Deployment Proof</strong>
+                <p>The company sells instrumented physical test surrogates that let robot buyers measure whether a robot can safely handle a real job before it enters the site. The new primitive is not more robot data in the abstract; it is repeatable physical evidence tied to a buyer's task, body geometry, contact forces, edge cases, and safety requirements.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://hardwarefyi.substack.com/p/why-headphones-need-a-fake-head">Why Headphones Need a Fake Head</a> via Hardware FYI<br />Product testing already uses fake heads and articulated fingers because consistent physical surrogates make subjective or dangerous interactions measurable.</li>
+                  <li><a href="https://www.tanayj.com/p/the-robot-data-pyramid">The Data Pyramid in Robotics</a> via TLDR<br />The newsletter signal was that robotics lacks an internet-scale physical data source and nobody knows how much data is enough.</li>
+                  <li><a href="https://arxiv.org/html/2606.04233v1">What Are We Actually Benchmarking in Robot Manipulation?</a> via Current verification<br />Recent benchmark research warns that fixed benchmark scores can be weak evidence of general manipulation capability.</li>
+                  <li><a href="https://www.nist.gov/laboratories/tools-instruments/robotics-test-facility">Robotics Test Facility</a> via Current verification<br />NIST's facility shows the older standards pattern: physical artifacts, metrics, data collection, and task abstractions can become shared testing language.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Physical AI funding is now concentrated in huge platform bets, which makes 'robot foundation model' too consensus. The underbuilt layer is buyer-trusted deployment proof: factories, solar farms, mines, warehouses, and hospitals need to know which robots can touch which objects, in which conditions, with what failure envelope.</p>
+                <p><b>First Wedge</b></p>
+                <p>Portable test kits for one high-urgency task family, such as solar-panel handling or warehouse tote manipulation: instrumented objects, calibrated fixtures, force/contact sensors, randomized layouts, video capture, and an eval report that compares vendors against the buyer's real task envelope.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Robot buyers, insurers, and integrators pay per site evaluation plus annual benchmark subscriptions. Robot vendors may pay to certify against a buyer-visible task pack, but the trust anchor has to stay with the buyer or insurer, not the vendor's marketing team.</p>
+                <p><b>Defensibility</b></p>
+                <p>The moat is a growing library of task surrogates, failure data, site-specific edge cases, and cross-vendor performance distributions. A robot company can build its own demo bench, but it cannot easily become the neutral comparison layer trusted by customers, insurers, and standards bodies.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The surrogate has to predict real deployment failures without becoming a toy benchmark that robots overfit. Designing randomized but meaningful physical tasks, measuring contact safely, and keeping the benchmark statistically valid are the hard parts.</p>
+                <p><b>Market Expansion</b></p>
+                <p>Solar installation leads to construction-material handling, factory kitting, loading docks, hospital logistics, food production, and heavy-industry inspection. The expansion path is by shared manipulation morphology and safety evidence, not by robot category.</p>
+                <p><b>Self-Critique</b></p>
+                <p>The market may be too early if buyers still choose vendors from demos and relationships rather than quantified deployment risk. It also risks becoming a standards committee business unless the first kits directly shorten paid pilots or insurance approvals.</p>
+                <p><b>Next Experiment</b></p>
+                <p>Build one $5K instrumented object-and-fixture kit for a narrow manipulation task, run three robots or teleoperated baselines through randomized trials, and ask two integrators whether the resulting failure report would change a deployment decision.</p>
+              </article>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 3</span>
+                <strong>Constraint Compiler for Regulated Commerce Search</strong>
+                <p>The company sells an auditable layer that turns messy buyer intent into hard catalog constraints for marketplaces where wrong results create liability. Food delivery proved the pattern in a low-liability setting: LLMs are useful when they compile human language into domain structure, not when they freewheel over the catalog.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://careersatdoordash.com/blog/how-doordash-leverages-llms-for-better-search-retrieval/">How DoorDash leverages LLMs for better search retrieval</a> via ByteByteGo<br />DoorDash constrained LLM query parsing with a product knowledge graph and reported a nearly 30% lift in popular-dish carousel trigger rate.</li>
+                  <li><a href="https://tech.instacart.com/building-the-intent-engine-how-instacart-is-revamping-query-understanding-with-llms-3ac8051ae7ac">Building The Intent Engine</a> via ByteByteGo<br />Instacart combines company-specific context with guardrails so general model knowledge does not override actual user behavior or catalog meaning.</li>
+                  <li><a href="https://www.uber.com/us/en/blog/evolution-and-scale-of-ubers-delivery-search-platform/">Evolution and Scale of Uber's Delivery Search Platform</a> via ByteByteGo<br />Uber's LLM search architecture became a core retrieval substrate only after fitting existing scale, vertical, and latency constraints.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Every B2B catalog is about to get a natural-language search box, but regulated and technical categories cannot tolerate plausible-but-wrong substitutions. The buyer wants 'low-smoke cable for a school retrofit' or 'latex-free surgical prep kit,' and the system must separate soft preference from hard compliance constraint.</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with one technical distributor category, such as electrical components for public-sector construction. Ingest SKUs, spec sheets, building-code constraints, substitution rules, and buyer purchase history, then expose an API that returns constrained query parses and explainable rejection reasons for unsafe substitutions.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Distributors and vertical marketplaces pay a platform fee plus query volume because better constraint handling increases conversion, reduces sales-engineering load, and lowers returns or compliance disputes. The budget owner is the search/product lead, but the urgency comes from sales ops and compliance.</p>
+                <p><b>Defensibility</b></p>
+                <p>The system compounds through proprietary mappings between messy buyer language, catalog attributes, local rules, substitution outcomes, and human override decisions. A horizontal search vendor can add LLM embeddings, but the hard part is the domain-specific constraint graph and audit trail.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The main risk is ontology drift: spec sheets are incomplete, local rules change, and buyers use shorthand that only makes sense inside their procurement culture. The compiler must know when to ask for a required attribute rather than guessing.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After electrical distribution, expand to industrial safety supplies, medical consumables, aerospace fasteners, lab reagents, and insurance-approved building materials. Each has high-SKU catalogs, constraint-heavy purchasing, and expensive wrong answers.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This may be a feature for large commerce platforms, not a standalone company, if the wedge is too generic. The first vertical must have enough liability and catalog pain that customers buy a constraint API before rebuilding their entire search stack.</p>
+                <p><b>Next Experiment</b></p>
+                <p>Take 20 real procurement queries from one distributor, label hard constraints versus preferences with a domain expert, run them through an LLM plus catalog parser, and measure unsafe substitutions, abstentions, and sales-rep time saved.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js?v=20260707-atlas"></script>
+  </body>
+</html>
