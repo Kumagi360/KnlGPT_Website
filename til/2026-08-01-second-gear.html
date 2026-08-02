@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, August 1, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the August 1, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / August 1, 2026</span>
+          <h1>Process Evidence</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://www.freightwaves.com/wp-content/uploads/2026/07/29/Terminal_Series_A_photo_1_cropped.jpg" alt="Terminal raises $20M to untangle fleet telematics data" />
+                <strong><a href="https://www.freightwaves.com/news/terminal-fleet-telematics-data-funding">Fleet data gets an API layer</a></strong>
+                <p><b>Pre-read:</b> Transportation data is fragmented because trucks, insurers, brokers, and fleet managers all sit on different systems of record. The business opportunity is less glamorous than autonomy, but it controls pricing, underwriting, compliance, and utilization in a huge physical economy.</p>
+                <p><b>Summary:</b> FreightWaves reports that Terminal raised a $20 million Series A led by Battery Ventures to normalize telematics data from more than 325 providers for insurers and fleets. Intact Private Capital and Penske joined as strategic investors, while Y Combinator and Wayfinder returned.</p>
+                <p>The company is selling a single API across a messy provider landscape, turning vehicle data into something insurers and operators can use without bespoke integrations. Terminal's own <a href="https://www.prnewswire.com/news-releases/terminal-raises-20-million-to-scale-market-leading-telematics-integration-technology-for-fortune-500-companies-across-insurance-fleet-management-and-logistics-302837250.html">funding announcement</a> positions the product as infrastructure for insurance, fleet management, and logistics. The broader point is that physical-world AI and automation still need mundane normalization layers before higher-level decisions can become reliable.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 2 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Manufacturing</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!vDQm!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d0d181d-423b-4a57-adbe-9de752316826_4095x2732.jpeg" alt="Why is Manufacturing Difficult?" />
+                <strong><a href="https://hardwarefyi.substack.com/p/why-is-manufacturing-difficult">Why is Manufacturing Difficult?</a></strong>
+                <p><b>Pre-read:</b> Cheap design iteration is colliding with a factory world where tooling, supplier choices, and qualification plans still harden early. The durable bottleneck in hardware is shifting toward process evidence: can a design be made repeatedly, inspected reliably, and changed without restarting the whole ramp? That is the frame robotics teams need before they treat manufacturing as a late-stage handoff.</p>
+                <p><b>Summary:</b> Hardware FYI uses Dr. Anna Thornton's manufacturing lifecycle framing to argue that production is difficult because decisions made before ramp cast long shadows across cost, quality, schedules, suppliers, and yield. The useful split is pre-manufacturing, ramp, and ongoing production, with parallel loops for sourcing, qualification, and process control running beside the familiar product-development loop.</p>
+                <p>The post is strongest when read as a warning for embodied-AI companies: prototypes can improve fast, but factories reward early process discipline. That point connects cleanly to the current rise of <a href="https://cadbench.ai/">AI-generated CAD</a>, where more design candidates will make manufacturability review, supplier readiness, and production planning more valuable rather than less.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <strong><a href="https://cadbench.ai/">CAD agents face editability tests</a></strong>
+                <p><b>Pre-read:</b> CAD automation matters only when the output survives engineering workflows. Meshes can look plausible, but manufacturing workflows need editable parametric history, stable faces, tolerances, and downstream toolpath compatibility.</p>
+                <p><b>Summary:</b> Parametric CAD Bench evaluates AI models and agents on CAD design and 3D modeling tasks, with a focus on editable engineering models rather than static shapes. The companion <a href="https://www.gnucleus.ai/cad-bench/news/parametric-cad-bench">gNucleus bench report</a> says it uses an agentic loop and an editability gate for FreeCAD model authoring.</p>
+                <p>The broader research context is moving in the same direction. A separate <a href="https://arxiv.org/abs/2605.10873">CADBench paper</a> introduces 18,000 samples across six benchmark families and finds current systems degrade with geometric complexity and modality shifts. The signal for hardware teams is clear: AI can increase design throughput before it can guarantee production-grade CAD.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://images.ctfassets.net/trvmqu12jq2l/6CZbpNwCYzzzGrCtlBlWoP/b1565bb5658dccbf4fe138147184d181/aircraft_nose.jpeg" alt="DoorDash Is Cleared for Takeoff: Launches DoorDash Air" />
+                <strong><a href="https://about.doordash.com/en-us/news/doordash-air">DoorDash becomes a drone operator</a></strong>
+                <p><b>Pre-read:</b> Commercial drone delivery is an operations and certification problem as much as an autonomy problem. The <a href="https://www.faa.gov/uas/advanced_operations/package_delivery_drone">FAA Part 135 path</a> forces operators to prove a real air-carrier system, including safety processes and waivers for package delivery beyond visual line of sight.</p>
+                <p><b>Summary:</b> DoorDash says DoorDash Labs earned FAA Part 135 air-carrier certification and is launching DoorDash Air, its in-house drone delivery program. The company frames drones as one mode in a larger autonomous delivery platform that can route orders among human couriers, ground robots, and aircraft.</p>
+                <p>The strategic shift is that DoorDash is moving from buying drone capacity through partners to owning more of the aircraft, routing, handoff, and marketplace integration stack. Coverage from <a href="https://www.theverge.com/science/970731/doordash-air-drone-delivery-faa">The Verge</a> and <a href="https://www.businessinsider.com/doordash-launches-drone-delivery-service-faa-certification-wing-flytrex-2026-7">Business Insider</a> also notes the fall 2026 commercial-launch target and continued partnerships with Wing and Flytrex. For robotics companies, the lesson is that deployment advantage can come from certification and workflow integration, not just vehicle performance.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Process Passports for AI-Made Parts</strong>
+                <p>Sell hardware teams and supplier-quality leads a lightweight process passport for high-mix custom parts: a machine-readable record of how a part was actually made, measured, changed, and approved. The primitive is not another CAD generator or sourcing marketplace. It is portable manufacturing evidence for the moment when AI can produce many plausible designs but buyers still need proof that a shop can repeatedly make the part without hidden process drift.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://hardwarefyi.substack.com/p/why-is-manufacturing-difficult">Why is Manufacturing Difficult?</a> via Hardware FYI<br />The useful point is that manufacturing decisions cast long shadows across sourcing, ramp, qualification, and ongoing production.</li>
+                  <li><a href="https://www.gnucleus.ai/cad-bench">Parametric CAD Bench</a> via Hardware FYI / gNucleus AI<br />Editable AI-generated CAD is improving, which moves the bottleneck from making geometry to proving manufacturability.</li>
+                  <li><a href="https://about.doordash.com/en-us/news/doordash-air">DoorDash Air</a> via Hardware FYI / DoorDash<br />Embodied autonomy is moving into certified operations, where evidence and auditability matter as much as demos.</li>
+                  <li><a href="https://www.freightwaves.com/news/terminal-fleet-telematics-data-funding">Terminal raises $20M to untangle fleet telematics data</a> via Hardware FYI / FreightWaves<br />Messy physical-world data can become valuable when normalized for insurers and operators.</li>
+                  <li><a href="https://www.fictiv.com/articles/ppap-production-part-approval-process-explained">PPAP production approval reference</a> via Prior check<br />Generic PPAP and QMS software already exists, so the wedge has to be narrower than digitizing a known checklist.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>AI CAD agents are making more candidate parts, robotics startups are raising into real production, and buyers are being forced to qualify more small suppliers faster. The scarce object becomes trusted process memory: dimensions, fixtures, inspection photos, machine settings, deviations, material certs, and signoffs that survive supplier changes.</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with robotics and defense-adjacent hardware teams buying machined or stamped parts from small domestic shops. The product ingests drawings, RFQs, inspection reports, CMM outputs, fixture photos, and shop notes, then produces a PPAP-lite packet and live risk score for each part number before the team releases a second production batch.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Supplier-quality or hardware operations pays per active part number and supplier seat, with a higher tier for regulated evidence retention. Budget exists because one bad supplier transfer or late ramp failure can burn weeks of engineering time and delay customer delivery.</p>
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is a cross-shop map from part features and process choices to actual nonconformance, rework, lead-time slip, and supplier-change outcomes. Incumbent PLM, QMS, and sourcing tools store documents; this company wins by turning messy build evidence into acceptance criteria that both buyer and shop can reuse.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is extracting reliable process facts from ugly inputs without pretending the model understands manufacturing physics it has not observed. It needs human-in-the-loop checkpoints, deterministic parsers for metrology files, and tight audit logs so a quality engineer trusts the packet.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After CNC and stamping, expand into PCBA, additive manufacturing, composite layups, medical device subassemblies, and autonomous vehicle maintenance parts. The common morphology is any high-mix part where repeatability depends on process choices that are poorly captured in the drawing.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This can die as a services-heavy quality consultancy or get trapped between PLM/QMS incumbents and sourcing marketplaces. The wedge only works if the first product removes real supplier-quality labor in 30 to 90 days, not if it asks shops to maintain another portal for vague future analytics.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, collect ten recently reordered custom parts from three robotics teams. Reconstruct the process passport from existing artifacts, score which parts were most likely to slip or fail inspection, and test whether supplier-quality leads would pay to generate the packet before the next purchase order.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>

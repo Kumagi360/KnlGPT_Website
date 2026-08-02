@@ -4602,3 +4602,36 @@ blockquote {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+@media (max-width: 720px) {
+  .til-post-page .post-body,
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-column,
+  .til-post-page .til-subcard,
+  .til-post-page .til-card-image {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .til-post-page .post-body {
+    width: 100%;
+    padding-inline: clamp(10px, 4vw, 22px);
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .til-post-page .til-column,
+  .til-post-page .til-subcard {
+    width: 100%;
+  }
+
+  .til-post-page .til-card-image {
+    height: auto;
+  }
+}
