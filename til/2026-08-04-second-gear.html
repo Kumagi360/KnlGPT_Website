@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, August 4, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the August 4, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260804-til" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / August 4, 2026</span>
+          <h1>KV Cache Becomes Infrastructure</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <strong><a href="https://insideevs.com/news/803284/ford-china-evs-5-years/">Ford sees Chinese EVs breaching the moat</a></strong>
+                <p><b>Pre-read:</b> The U.S. auto market is protected by tariffs and connected-vehicle security rules, but China already pressures Western automakers through Europe, Mexico, Canada, and battery supply chains. Reuters Auto File framed the issue as a strategic inevitability for Detroit rather than a distant trade-policy abstraction.</p>
+                <p><b>Summary:</b> Ford CEO Jim Farley reportedly told employees that Chinese automakers could enter the U.S. market within five to ten years, likely toward the latter half of that range, according to Reuters reporting summarized by <a href="https://insideevs.com/news/803284/ford-china-evs-5-years/">InsideEVs</a> and <a href="https://www.repairerdrivennews.com/2026/08/03/ford-expects-chinese-vehicles-will-enter-u-s-market-in-5-to-10-years/">Repairer Driven News</a>. The warning sits beside several defenses: high tariffs on Chinese EVs, restrictions on Chinese connected-vehicle software and hardware, and congressional efforts to harden those rules.</p>
+                <p>The same Reuters newsletter showed why the wall is leaky. BYD's July global sales rose 21.8% year over year to 419,211 vehicles, with overseas shipments of passenger vehicles and pickups up 124.3%, according to Reuters figures republished by <a href="https://www.investing.com/news/stock-market-news/byds-sales-rise-third-month-buoyed-by-exports-4829603">Investing.com</a>. Toyota raised its annual operating-profit forecast by 13% and announced a 1 trillion yen buyback, but Reuters also reported a fifth straight quarterly operating-profit decline tied to China weakness and conflict-related costs. The auto story is less about EV demand in one country than Chinese scale forcing incumbents to redesign cost structures before formal U.S. entry.</p>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://kfgo.com/2026/08/04/toyota-profit-drops-for-fifth-straight-quarter-on-china-slump-iran-war-impact/">Toyota lifts annual forecast and announces stock buyback, but shares fall</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://www.investing.com/news/stock-market-news/byds-sales-rise-third-month-buoyed-by-exports-4829603">BYD's sales rise for third month, buoyed by exports</a></strong>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">2 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI infrastructure</span>
+                <img class="til-card-image" src="https://substack-post-media.s3.amazonaws.com/public/images/55198691-ef0b-4887-8ef7-18f523ca8145_2472x1566.png" alt="ByteByteGo KV-cache explainer diagram" />
+                <strong><a href="https://blog.bytebytego.com/p/why-an-llms-memory-gets-expensive">Why An LLM's Memory Gets Expensive and How to Fix It</a></strong>
+                <p><b>Pre-read:</b> Long-context agents turn memory into an infrastructure bill because inference has to preserve working state while many requests share the same accelerator. Serving systems such as <a href="https://arxiv.org/abs/2309.06180">vLLM's PagedAttention</a> improved memory packing, and API-level <a href="https://platform.openai.com/docs/guides/prompt-caching">prompt caching</a> made repeated prefixes cheaper, but both expose how central the cache has become. This piece is worth opening because it connects the math, the hardware bottleneck, and the serving tricks in one frame.</p>
+                <p><b>Summary:</b> ByteByteGo explains that a transformer's KV cache stores key and value vectors for every prior token, layer, KV head, head dimension, numeric precision, and active request. A 70B model with a 128,000-token context can need roughly 40 GB of KV cache for one request, before batching multiplies the footprint. The key bottleneck is decoding: every generated token reads the retained cache from GPU memory, so long-context generation becomes memory-bandwidth-bound even when the model fits on the card.</p>
+                <p>The article walks through the main levers. Grouped-query attention and multi-head latent attention reduce what each token stores. Quantization cuts bytes per value, with 8-bit usually much safer than 4-bit for demanding retrieval. Eviction saves memory by dropping tokens, but it can erase the fact a future token needs. Paged attention attacks fragmentation, while prefix and prompt caching reuse shared blocks. The practical lesson is that agent systems with repeated long prompts should optimize for reuse, while long-document retrieval should be cautious about cache eviction.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI buildout</span>
+                <img class="til-card-image" src="https://poweredbywho.com/opengraph-image.jpg?00e1e69f3b557e2b" alt="PoweredByWho - Who's Building Data Centers in Your Backyard?" />
+                <strong><a href="https://poweredbywho.com/map">PoweredByWho Project Map</a></strong>
+                <p><b>Pre-read:</b> AI infrastructure is shifting from model-lab capex headlines into grid interconnection, water, permitting, and local politics. The strongest signal now is often the gap between announced capacity and projects that can actually be energized. A public map is useful because it lets you inspect the buildout as a permission system, not a press-release race.</p>
+                <p><b>Summary:</b> PoweredByWho tracks public-record reporting on U.S. data centers and related political activity, with project status, permits, local opposition, and power scale exposed through a national map. When checked, the map listed <a href="https://poweredbywho.com/map">2,113 data centers across 46 states</a> and 56.9 GW of announced capacity, while noting that its database is not comprehensive. The same page surfaces large pending projects, contested sites, high-water-use layers, and Q1 permit counts.</p>
+                <p>The useful part is not a single number. It is the taxonomy: built, construction, permit, announced, proposed, and contested are different realities. That distinction matters for GPU supply, power procurement, utility planning, and local backlash. Hardware FYI paired the map with Ed Zitron's <a href="https://www.wheresyoured.at/where-are-all-the-data-centers/">capacity-skeptical essay</a>, which is lower-certainty analysis but a useful warning against treating headline gigawatts as deployable compute.</p>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://www.ndss-symposium.org/wp-content/uploads/2025-1772-paper.pdf">I Know What You Asked: Prompt Leakage via KV-Cache Sharing in Multi-Tenant LLM Serving</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://www.datacenterwatch.org/report">$64 billion of data center projects have been blocked or delayed amid local opposition</a></strong>
+              </article>
+
+              <article class="til-subcard muted-card">
+                <span class="til-source-tag">Also Worth Opening</span>
+                <strong><a href="https://hardwarefyi.substack.com/p/pickleballs-composite-problem">Pickleball's Composite Problem</a></strong>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Cache Boundary Auditor</strong>
+                <p>Sell security and platform teams a test harness that proves where an AI provider or self-hosted inference stack reuses prompt and KV-cache state. The new primitive is cache state as regulated data-in-use: not logs, not stored files, but transient tensors that can still leak enough about a customer, tenant, region, or workflow to matter.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://blog.bytebytego.com/p/why-an-llms-memory-gets-expensive">Why An LLM's Memory Gets Expensive and How to Fix It</a> via ByteByteGo<br />Long-context serving pushes teams toward prompt caching, paged attention, and KV reuse because decoding repeatedly reads the cache.</li>
+                  <li><a href="https://www.ndss-symposium.org/wp-content/uploads/2025-1772-paper.pdf">Prompt Leakage via KV-Cache Sharing in Multi-Tenant LLM Serving</a> via NDSS 2025<br />PROMPTPEEK shows that multi-tenant KV sharing can create side channels that reconstruct prompts.</li>
+                  <li><a href="https://arxiv.org/html/2508.08438v2">Selective KV-Cache Sharing to Mitigate Timing Side-Channels in LLM Inference</a> via arXiv<br />Follow-on mitigation work treats cache sharing between untrusted users as a real privacy problem, not only a theoretical footnote.</li>
+                  <li><a href="https://docs.helicone.ai/features/advanced-usage/caching">LLM Caching</a> via Helicone docs<br />The visible commercial category is mostly cost and response caching, leaving provider-level cache isolation audit as a sharper wedge.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Long-context agents make cache economics unavoidable, and provider prompt caching turns a backend optimization into a procurement and compliance question. Security teams already ask where data is stored and logged; they do not yet have a standard way to test whether cached inference state crosses tenant, region, model, or policy boundaries.</p>
+                <p><b>First Wedge</b></p>
+                <p>A paid audit runner for regulated AI platform teams: deploy synthetic canary prompts through OpenAI, Anthropic, self-hosted vLLM/SGLang, and internal gateways, then report cache-hit observability, isolation failures, residency ambiguity, and recommended cache policies.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Security, AI platform, or governance teams pay $25k-$100k per annual environment for continuous cache-boundary tests and vendor evidence packs. The budget exists because a failed customer-data review can block model rollout even when the underlying model is approved.</p>
+                <p><b>Defensibility</b></p>
+                <p>The company compounds a corpus of provider behaviors, timing baselines, attack probes, contract language, and mitigations across real enterprise stacks. Incumbent observability tools can show spend and traces, but proving a negative about hidden provider cache reuse requires adversarial measurement, policy mapping, and buyer-trusted reports.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is separating true cache side-channel signals from noisy provider latency and scheduling variance without internal telemetry. The product has to produce statistically defensible evidence, not scary charts from small samples.</p>
+                <p><b>Market Expansion</b></p>
+                <p>Start with prompt/KV-cache boundaries, then expand into data-in-use controls for agent sandboxes, vector indexes, browser sessions, tool-call caches, and confidential-computing attestations.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This could be too early if major providers quickly publish strong cache-isolation guarantees and enterprise customers accept them without independent testing. It also fails if timing-based black-box tests are too noisy to survive a security review.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In 2-4 weeks, build a black-box probe against vLLM/SGLang and two hosted APIs using repeated canary prefixes. Take the findings to five AI security leads and ask whether the evidence would help unblock an internal model-risk review.</p>
+              </article>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 2</span>
+                <strong>Delivered Megawatt Ledger</strong>
+                <p>Sell AI labs, utilities, energy suppliers, and infrastructure investors a probability-adjusted ledger of usable data-center capacity, not announced capacity. The primitive is delivered megawatts: a staged claim that moves from press release to permits, interconnection, power equipment, local consent, construction, energization, and finally revenue-generating compute.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://poweredbywho.com/map">PoweredByWho Project Map</a> via Hardware FYI / PoweredByWho<br />Public-record trackers already show the scale and geography of announced AI data-center projects, including permits, status, and contested sites.</li>
+                  <li><a href="https://www.wheresyoured.at/where-are-all-the-data-centers/">Where Are All The Data Centers?</a> via Hardware FYI / Ed Zitron<br />The useful question is not how many gigawatts were announced, but how much capacity is actually energized and usable.</li>
+                  <li><a href="https://www.datacenterwatch.org/report">$64 billion of data center projects have been blocked or delayed amid local opposition</a> via Data Center Watch<br />Local opposition and permitting risk are now material enough to delay large projects across political lines.</li>
+                  <li><a href="https://electrek.co/2026/08/03/base-power-raises-1b-to-roll-out-its-giant-new-home-battery/">Base Power raises $1B to roll out its giant new home battery</a> via TLDR follow-up verification<br />Grid flexibility is attracting billion-dollar financing because peak demand and data-center load are reshaping electricity planning.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>AI capacity planning is moving from chips to power, permits, water, transformers, and local politics. Buyers who sign compute, power, or equipment contracts need to know whether a site is likely to deliver usable megawatts on a specific date, not whether a developer announced an impressive number.</p>
+                <p><b>First Wedge</b></p>
+                <p>A data product for suppliers and energy buyers that scores 200MW+ U.S. projects by delivery probability and month-by-month slippage risk using permits, interconnection queues, utility filings, local meeting minutes, equipment lead times, satellite/construction signals, and opposition activity.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Sell annual seats and API access to power traders, utilities, equipment vendors, hyperscaler procurement teams, insurers, and infra funds. Pricing can start at $30k-$150k per year because one wrong capacity assumption can misprice equipment, power, land, or compute commitments by millions.</p>
+                <p><b>Defensibility</b></p>
+                <p>The moat is not a map; maps are already becoming common. The moat is a verified event graph that learns which early signals actually predict energization, plus relationships with local permit watchers, utility dockets, EPCs, transformer suppliers, and community groups.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is entity resolution and causal scoring across messy public records: proposed sites change names, developers hide behind LLCs, MW numbers mutate, and energization is often not directly disclosed.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After AI data centers, the same ledger can cover battery fleets, hydrogen facilities, nuclear microreactors, transmission upgrades, factories, and other projects where announced capacity routinely diverges from operational capacity.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This is crowded adjacent to construction intelligence, permit databases, and data-center trackers. It only clears the bar if the wedge is delivery-risk underwriting with timestamped confidence, not another searchable database of projects.</p>
+                <p><b>Next Experiment</b></p>
+                <p>Pick Texas and Illinois, score 30 announced data-center projects from public records, and backtest against known delays or utility filings. Then sell three pilot reports to a transformer supplier, a power trader, and a compute buyer.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>

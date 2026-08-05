@@ -4693,14 +4693,20 @@ blockquote {
 
   .til-post-page .primary-nav,
   .til-index-page .primary-nav {
-    width: calc(100vw - 28px) !important;
-    max-width: calc(100vw - 28px) !important;
+    display: grid !important;
+    width: calc(100vw - 40px) !important;
+    max-width: calc(100vw - 40px) !important;
     min-width: 0 !important;
+    gap: 2px !important;
+    padding: 4px !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 
   .til-post-page .primary-nav a,
   .til-index-page .primary-nav a {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
     min-width: 0 !important;
     padding-left: 2px !important;
     padding-right: 2px !important;
@@ -4723,10 +4729,21 @@ blockquote {
 
   .til-post-page .post-hero,
   .til-post-page .post-body {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    width: calc(100vw - 28px) !important;
+    max-width: calc(100vw - 28px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section,
+  .til-index-page .blog-index {
+    width: calc(100vw - 40px) !important;
+    max-width: calc(100vw - 40px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .til-post-page .til-column {
