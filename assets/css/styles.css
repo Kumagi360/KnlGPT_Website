@@ -4756,3 +4756,30 @@ blockquote {
     padding-right: 8px !important;
   }
 }
+
+@media (max-width: 420px) {
+  .til-post-page .site-header,
+  .til-index-page .site-header {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .til-post-page .primary-nav,
+  .til-index-page .primary-nav {
+    width: calc(100vw - 48px) !important;
+    max-width: calc(100vw - 48px) !important;
+  }
+
+  .til-post-page .post-hero,
+  .til-post-page .post-body,
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    width: calc(100vw - 56px) !important;
+    max-width: calc(100vw - 56px) !important;
+  }
+
+  .til-post-page .til-gear-hero h1 {
+    font-size: clamp(1.24rem, 7vw, 1.74rem) !important;
+    line-height: 1.03 !important;
+  }
+}
