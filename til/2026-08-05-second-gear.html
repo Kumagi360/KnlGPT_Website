@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Gear, August 5, 2026 | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the August 5, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260805-til" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="blog-post-page til-post-page">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / August 5, 2026</span>
+          <h1>Small Models <br />Need Provenance</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+              <p class="til-lede">0 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://media.sailthru.com/fss/e7jepi/4628c3a0-393f-47ef-8cf3-b45bba8fa60d/2026-08-05T060425Z_2117751239_RC24SMABFP6H_RTRMADP_3_USA-ELECTION.JPG" alt="Abdul El-Sayed at an election night rally in Detroit, Michigan" />
+                <strong><a href="https://www.reuters.com/world/us/progressive-el-sayed-wins-michigan-primary-jolt-democrats-us-media-project-2026-08-05/">Michigan tests Democrats' left turn</a></strong>
+                <p><b>Pre-read:</b> Michigan is a Senate-control state, so a primary there is also a test of how much ideological risk Democrats can carry into a competitive general election. Reuters' own polling context shows the party's self-described liberal share has risen sharply, with <a href="https://www.aol.com/articles/shifting-left-democrats-see-universal-100340000.html">liberal Democrats now a clear majority</a> of the party.</p>
+                <p><b>Summary:</b> Reuters reports that Abdul El-Sayed narrowly won Michigan's Democratic U.S. Senate primary over Representative Haley Stevens, a more moderate candidate backed by Democratic leaders and pro-Israel groups. The newsletter frames the result as another sign that Democratic voters want the party to move left, with Israel policy becoming a repeated fault line between progressives and the institutional wing. Reuters notes that the race was statewide and Midwestern, which makes the result more consequential than a safe-seat protest vote.</p>
+                <p>The general election constraint is immediate: El-Sayed now has to unify a bruised coalition and face Republican Mike Rogers in a battleground race. AP separately reports that El-Sayed built a 12,000-volunteer organization and held more than 500 events, while Stevens had heavy outside-spending support and establishment backing. The primary shows progressive energy; November will test whether that energy is additive in the places Senate majorities are decided.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 1 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI Systems</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!Jfpl!,w_1100,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd280c4e-90ed-4064-8225-741c922327b6_2952x2006.png" alt="Diagram from ByteByteGo knowledge distillation explainer" />
+                <strong><a href="https://blog.bytebytego.com/p/how-big-models-teach-small-models">How Big Models Teach Small Models to Be Smart</a></strong>
+                <p><b>Pre-read:</b> Distillation is moving from model-compression trick to production architecture: large models can serve as teachers while small models handle cheap, low-latency, narrow jobs. Hinton, Vinyals, and Dean framed the core idea in 2015 as transferring a cumbersome model's knowledge into a more deployable one via <a href="https://arxiv.org/abs/1503.02531">soft output distributions</a>. The useful question now is where the teacher-student boundary gives you capability without inheriting too much hidden behavior.</p>
+                <p><b>Summary:</b> ByteByteGo explains distillation as training a separate student model to imitate a larger teacher, rather than pruning or quantizing the teacher itself. The piece walks through soft labels, synthetic data generation, fine-tuning, evaluation, and automated loops where the teacher creates data, scores the student, and iterates. It is clearest on the operating constraints: narrow tasks benefit most, teacher quality sets much of the ceiling, too-wide capacity gaps can hurt, and architecture can matter more than raw parameter count.</p>
+                <p>The stronger adjacent signal is that this is becoming a workflow, not only a technique. Google said <a href="https://arxiv.org/abs/2503.19786">Gemma 3</a> used distillation to improve lightweight open models, while a 2026 <a href="https://arxiv.org/abs/2602.10869">agentic distillation paper</a> reports a closed loop for SMS-threat detection where teacher choice strongly affected outcomes. The risk side is equally concrete: a Nature paper on <a href="https://www.nature.com/articles/s41586-026-10319-8">subliminal learning</a> reports that behavioral traits can transfer through semantically unrelated generated data. Distillation is becoming a small-model factory, and provenance has to follow the factory floor.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://www.southparkcommons.com/cms/news/images/recMC635kq4sfRdSH-1.fcceec87.webp" alt="Announcing SPC" />
+                <strong><a href="https://www.southparkcommons.com/news/announcing-spc-575m-fund-iv/">SPC raises for founder formation</a></strong>
+                <p><b>Pre-read:</b> Early-stage venture has been drifting toward company formation before the canonical seed round, especially around AI founders whose experiment costs keep falling. SPC's niche is the pre-idea stage, where talent selection and direction-setting matter before a startup has crisp metrics.</p>
+                <p><b>Summary:</b> South Park Commons announced a <a href="https://www.southparkcommons.com/news/announcing-spc-575m-fund-iv/">$575 million Fund IV</a> and says the new vehicle brings the firm to $2 billion in assets under management. The announcement says SPC now has a 1,200-member technologist community and wants to keep supporting founders beyond launch, not only during the -1 to 0 exploration phase. The post is partly recruiting material, but the signal is useful: capital is being packaged around founder judgment, talent density, and idea selection as explicit products. For AI builders, that means the scarce input may shift from coding capacity toward knowing which mountain is worth climbing.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Distillation Residue Lab</strong>
+                <p>Sell regulated AI teams a test gate for small models trained from larger teachers. Before a bank, insurer, hospital vendor, or device maker ships a distilled model, the product builds a teacher bill of materials, runs task-specific residue assays, compares alternate teacher lineages, and issues a deployment certificate that says what the student appears to have inherited and where it is unsafe to use.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://blog.bytebytego.com/p/how-big-models-teach-small-models">How Big Models Teach Small Models to Be Smart</a> via ByteByteGo<br />Distillation is becoming normal production infrastructure for narrow, low-latency, low-cost models, but teacher choice and capacity gaps materially shape outcomes.</li>
+                  <li><a href="https://arxiv.org/html/2602.10869">Agentic Knowledge Distillation</a> via ByteByteGo reference<br />A teacher model can now run much of the data generation, fine-tuning, and evaluation loop itself; that makes derivative small models cheap enough to create frequently.</li>
+                  <li><a href="https://www.nature.com/articles/s41586-026-10319-8">Language models transmit behavioural traits through hidden signals in data</a> via ByteByteGo reference<br />The paper reports that students can inherit teacher traits from semantically unrelated generated data, so filtering the visible dataset is not enough.</li>
+                  <li><a href="https://www.southparkcommons.com/news/announcing-spc-575m-fund-iv/">Announcing SPC's $575M Fund IV</a> via South Park Commons<br />SPC's fund announcement points at the wider gap between what is possible and what founders are attempting as the cost of trying ideas falls.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Frontier models are becoming cheap teachers, and small models are becoming the default way to put AI inside phones, call centers, factories, clinics, and private clouds. At the same time, provenance is no longer just paperwork: if generated training data can carry hidden teacher behavior, a derivative model needs a lineage and residue check before it touches regulated workflows.</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with regulated customer-support and fraud-review teams distilling frontier models into small classifiers or routing agents. The first product is a CI step plus expert report: compare two or three teacher choices, run adversarial and bias residue suites, flag inherited refusal or risk-taking patterns, and produce evidence for model risk management.</p>
+                <p><b>Commercial Model</b></p>
+                <p>The buyer is the head of AI platform, model risk, or security at a regulated enterprise. Charge per certified model lineage and annual platform access, with higher pricing for production monitoring and regulator-ready evidence packs. Budget exists because these teams already pay for model validation, red-teaming, audit support, and vendor-risk reviews.</p>
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is a private corpus of teacher-student fingerprints: which teacher families leak which behavioral residues into which student architectures on which tasks. Generic lineage tools can say where a model came from; this company gets better at predicting what a student will inherit and which teacher produces the safer narrow model for a given workflow.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is not storing provenance. It is building assays that catch non-semantic inherited behavior without claiming impossible guarantees. Version one should be honest: bounded task suites, teacher A/B comparisons, canary prompts, representation-level similarity checks where available, and post-deployment drift monitors tied to the original certificate.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After support and fraud classifiers, expand to on-device medical triage, insurance claims, industrial safety copilots, malware and phishing filters, and autonomous workflow routers. The morphology is the same: a larger teacher produces or labels data, a smaller student runs cheaply in a constrained environment, and the buyer needs proof that the derivative model did not inherit unacceptable behavior.</p>
+                <p><b>Self-Critique</b></p>
+                <p>Generic AI governance and provenance are crowded, and incumbents can add lineage metadata. The wedge only works if residue testing becomes a painful production blocker, not a nice-to-have audit artifact. It could also be too early if enterprises keep using hosted frontier models instead of producing many small derivatives.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In four weeks, pick one narrow task such as complaint triage or SMS fraud detection. Distill the same small model from three different teachers, run a public bias, refusal, and risk-appetite assay plus task accuracy, and show a model-risk leader a one-page certificate that changes which teacher they would approve.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>

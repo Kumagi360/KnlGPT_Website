@@ -4755,6 +4755,20 @@ blockquote {
     padding-left: 8px !important;
     padding-right: 8px !important;
   }
+
+  .til-post-page .til-subcard > *,
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li,
+  .til-post-page .til-card-image {
+    display: block;
+    width: 100%;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
 }
 
 @media (max-width: 420px) {
