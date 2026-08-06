@@ -4797,3 +4797,66 @@ blockquote {
     line-height: 1.03 !important;
   }
 }
+
+@media (max-width: 420px) {
+  .til-post-page .primary-nav,
+  .til-index-page .primary-nav {
+    width: calc(100vw - 28px) !important;
+    max-width: calc(100vw - 28px) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1px !important;
+  }
+
+  .til-post-page .primary-nav a,
+  .til-index-page .primary-nav a {
+    font-size: 9px !important;
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+  }
+
+  .til-post-page main,
+  .til-post-page .post-page {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: clip !important;
+  }
+
+  .til-post-page .post-hero,
+  .til-post-page .post-body {
+    box-sizing: border-box !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section {
+    box-sizing: border-box !important;
+    width: calc(100vw - 88px) !important;
+    max-width: calc(100vw - 88px) !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .til-post-page .til-column,
+  .til-post-page .til-subcard {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .til-post-page .til-column {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .til-post-page .til-card-image {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
