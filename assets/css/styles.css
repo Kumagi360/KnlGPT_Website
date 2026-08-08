@@ -4769,6 +4769,16 @@ blockquote {
     overflow-wrap: anywhere !important;
     word-break: break-word !important;
   }
+
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    line-break: anywhere;
+  }
 }
 
 @media (max-width: 420px) {
@@ -4858,5 +4868,41 @@ blockquote {
   .til-post-page .til-card-image {
     width: 100% !important;
     max-width: 100% !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .til-post-page .post-body,
+  .til-post-page .post-body * {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .til-post-page .post-body {
+    overflow-x: hidden !important;
+  }
+
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-column,
+  .til-post-page .til-subcard {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+  }
+
+  .til-post-page .til-card-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li {
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
   }
 }
