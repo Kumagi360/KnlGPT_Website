@@ -3362,6 +3362,7 @@ blockquote {
 .til-card-image {
   display: block;
   width: 100%;
+  box-sizing: border-box;
   aspect-ratio: 16 / 9;
   margin: 0 0 14px;
   object-fit: cover;
@@ -4984,5 +4985,57 @@ blockquote {
   .til-post-page .til-card-image {
     width: 100% !important;
     max-width: 100% !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .til-post-page main,
+  .til-post-page .post-page,
+  .til-post-page .post-hero,
+  .til-post-page .post-body,
+  .til-post-page .til-aggregation-grid,
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-column,
+  .til-post-page .til-subcard {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .til-post-page .til-gear-hero h1 {
+    max-width: 100% !important;
+    font-size: clamp(2rem, 9vw, 3.75rem) !important;
+    line-height: 0.96 !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li {
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .til-post-page .til-card-image {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .til-post-page .post-hero,
+  .til-post-page .post-body {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    margin-inline: auto !important;
+  }
+
+  .til-post-page .til-gear-hero h1 {
+    font-size: clamp(1.85rem, 8.8vw, 2.3rem) !important;
   }
 }
