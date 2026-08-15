@@ -5038,4 +5038,11 @@ blockquote {
   .til-post-page .til-gear-hero h1 {
     font-size: clamp(1.85rem, 8.8vw, 2.3rem) !important;
   }
+
+  .til-post-page .til-subcard strong,
+  .til-post-page .til-subcard a,
+  .til-post-page .til-subcard p,
+  .til-post-page .til-subcard li {
+    line-break: auto !important;
+  }
 }
