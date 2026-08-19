@@ -5137,27 +5137,38 @@ blockquote {
 
 @media (max-width: 720px) {
   .til-gear-20260818-first,
+  .til-gear-20260818-second,
   .til-gear-20260818-first main,
+  .til-gear-20260818-second main,
   .til-gear-20260818-first .post-page,
+  .til-gear-20260818-second .post-page,
   .til-gear-20260818-first .post-hero,
+  .til-gear-20260818-second .post-hero,
   .til-gear-20260818-first .post-body,
+  .til-gear-20260818-second .post-body,
   .til-gear-20260818-first .til-aggregation-grid,
+  .til-gear-20260818-second .til-aggregation-grid,
   .til-gear-20260818-first .til-ideation-section,
+  .til-gear-20260818-second .til-ideation-section,
   .til-gear-20260818-first .til-column,
-  .til-gear-20260818-first .til-subcard {
+  .til-gear-20260818-second .til-column,
+  .til-gear-20260818-first .til-subcard,
+  .til-gear-20260818-second .til-subcard {
     box-sizing: border-box !important;
     max-width: 100% !important;
     min-width: 0 !important;
     overflow-x: hidden !important;
   }
 
-  .til-gear-20260818-first .site-header {
+  .til-gear-20260818-first .site-header,
+  .til-gear-20260818-second .site-header {
     width: 100% !important;
     max-width: 100vw !important;
     padding-inline: 14px !important;
   }
 
-  .til-gear-20260818-first .primary-nav {
+  .til-gear-20260818-first .primary-nav,
+  .til-gear-20260818-second .primary-nav {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     justify-self: stretch !important;
@@ -5166,7 +5177,8 @@ blockquote {
     gap: 2px !important;
   }
 
-  .til-gear-20260818-first .primary-nav a {
+  .til-gear-20260818-first .primary-nav a,
+  .til-gear-20260818-second .primary-nav a {
     display: grid !important;
     place-items: center !important;
     min-width: 0 !important;
@@ -5175,25 +5187,32 @@ blockquote {
   }
 
   .til-gear-20260818-first main,
-  .til-gear-20260818-first .post-page {
+  .til-gear-20260818-second main,
+  .til-gear-20260818-first .post-page,
+  .til-gear-20260818-second .post-page {
     width: 100% !important;
   }
 
   .til-gear-20260818-first .post-hero,
-  .til-gear-20260818-first .post-body {
+  .til-gear-20260818-second .post-hero,
+  .til-gear-20260818-first .post-body,
+  .til-gear-20260818-second .post-body {
     width: 100% !important;
     margin-inline: 0 !important;
     padding-inline: 14px !important;
   }
 
   .til-gear-20260818-first .til-aggregation-grid,
-  .til-gear-20260818-first .til-ideation-section {
+  .til-gear-20260818-second .til-aggregation-grid,
+  .til-gear-20260818-first .til-ideation-section,
+  .til-gear-20260818-second .til-ideation-section {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
     width: 100% !important;
   }
 
-  .til-gear-20260818-first .til-gear-hero h1 {
+  .til-gear-20260818-first .til-gear-hero h1,
+  .til-gear-20260818-second .til-gear-hero h1 {
     width: 100% !important;
     max-width: 100% !important;
     font-size: clamp(1.58rem, 8.5vw, 2.75rem) !important;
@@ -5204,9 +5223,13 @@ blockquote {
   }
 
   .til-gear-20260818-first .til-subcard strong,
+  .til-gear-20260818-second .til-subcard strong,
   .til-gear-20260818-first .til-subcard a,
+  .til-gear-20260818-second .til-subcard a,
   .til-gear-20260818-first .til-subcard p,
-  .til-gear-20260818-first .til-subcard li {
+  .til-gear-20260818-second .til-subcard p,
+  .til-gear-20260818-first .til-subcard li,
+  .til-gear-20260818-second .til-subcard li {
     max-width: 100% !important;
     overflow-wrap: anywhere !important;
     word-break: break-word !important;
@@ -5214,19 +5237,22 @@ blockquote {
 }
 
 @media (max-width: 420px) {
-  .til-gear-20260818-first .primary-nav {
+  .til-gear-20260818-first .primary-nav,
+  .til-gear-20260818-second .primary-nav {
     width: 100% !important;
     max-width: 100% !important;
     gap: 1px !important;
     padding: 4px !important;
   }
 
-  .til-gear-20260818-first .primary-nav a {
+  .til-gear-20260818-first .primary-nav a,
+  .til-gear-20260818-second .primary-nav a {
     font-size: 10px !important;
     padding-inline: 1px !important;
   }
 
-  .til-gear-20260818-first .til-gear-hero h1 {
+  .til-gear-20260818-first .til-gear-hero h1,
+  .til-gear-20260818-second .til-gear-hero h1 {
     font-size: clamp(1.42rem, 7.2vw, 1.72rem) !important;
     line-height: 1.04 !important;
   }
