@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GraphRAG Needs Corpus Maps | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the August 19, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260819-til2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      .til-gear-20260819-second .post-hero,
+      .til-gear-20260819-second .post-body {
+        box-sizing: border-box;
+        width: min(100%, calc(100vw - 80px));
+        max-width: min(100%, calc(100vw - 80px));
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .til-gear-20260819-second .til-aggregation-grid,
+      .til-gear-20260819-second .til-ideation-section,
+      .til-gear-20260819-second .til-column,
+      .til-gear-20260819-second .til-subcard {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      @media (max-width: 420px) {
+        .til-gear-20260819-second .post-hero,
+        .til-gear-20260819-second .post-body {
+          width: 100%;
+          max-width: 100%;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+
+        .til-gear-20260819-second .til-gear-hero h1 {
+          font-size: 1.28rem !important;
+          line-height: 1.05 !important;
+          overflow-wrap: anywhere !important;
+          word-break: break-word !important;
+          text-wrap: auto !important;
+        }
+
+        .til-gear-20260819-second .til-subcard strong {
+          font-size: 0.86rem !important;
+          line-height: 1.2 !important;
+          overflow-wrap: anywhere !important;
+          word-break: break-word !important;
+          text-wrap: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="blog-post-page til-post-page til-gear-20260819-second">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / August 19, 2026</span>
+          <h1>GraphRAG Needs Corpus Maps</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+              <p class="til-lede">1 critical / 0 happenings</p>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Retrieval Architecture</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!bMmM!,w_1100,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd7759dfb-dff4-4703-9aec-8a6428bab54a_3902x1818.png" alt="Diagram comparing GraphRAG local search and global search paths" />
+                <strong><a href="https://blog.bytebytego.com/p/graphrag-how-ai-answers-questions">GraphRAG: How AI Answers Questions Hidden Across Many Documents</a></strong>
+                <p><b>Pre-read:</b> Enterprise agents only get useful when they can answer questions about a company's operational memory, not merely retrieve the page that resembles a prompt. Microsoft's <a href="https://microsoft.github.io/graphrag/query/global_search/">GraphRAG global-search docs</a> frame this as a split between local entity questions and global corpus questions, with global search leaning on precomputed community reports rather than plain vector neighbors. That distinction matters for robotics and infrastructure teams because incident reports, design docs, and launch reviews often encode patterns across many documents.</p>
+                <p><b>Summary:</b> ByteByteGo gives a clear systems-level walk through of why standard RAG breaks on questions whose answer exists as a distribution across a corpus. The article separates local queries, where the answer resembles the question and lives in a small text region, from global queries, where the system must survey a whole collection. It then explains GraphRAG's indexing pipeline: chunk documents, extract entities and relationships, merge duplicate descriptions, optionally extract claims, cluster the graph into communities, and generate community reports before query time. Local search starts from matched entities and expands through text units, neighbors, relationships, claims, and community reports, which matches Microsoft's <a href="https://microsoft.github.io/graphrag/query/local_search/">local-search description</a>. Global search uses community reports in a map-reduce flow, which Microsoft describes in its <a href="https://microsoft.github.io/graphrag/query/global_search/">GraphRAG docs</a>. The practical warning is cost: full GraphRAG spends heavily at indexing time, while Microsoft's <a href="https://www.microsoft.com/en-us/research/blog/lazygraphrag-setting-a-new-standard-for-quality-and-cost/">LazyGraphRAG research note</a> claims vector-RAG-level indexing cost, 0.1 percent of full GraphRAG indexing cost, and much cheaper global queries. The useful takeaway is architectural rather than vendor-specific: retrieval quality depends on matching the query type to the memory structure, and routing mistakes become a new failure mode for agent systems.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Memory Regression Tests for Agents</strong>
+                <p>Sell a test harness that tells enterprises when an agent is about to act on stale, contradictory, or under-supported internal context. The primitive is not a better company search box. It is a CI system for operational memory: before a support, finance, legal, or engineering agent changes a ticket, sends a customer answer, approves a workflow, or opens a PR, the harness asks corpus-wide questions against the company's documents, incidents, policies, owners, and past decisions and blocks actions when the answer depends on broken memory.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://blog.bytebytego.com/p/graphrag-how-ai-answers-questions">GraphRAG: How AI Answers Questions Hidden Across Many Documents</a> via ByteByteGo<br />The useful distinction is local retrieval versus global questions whose answer only appears after surveying the corpus.</li>
+                  <li><a href="https://microsoft.github.io/graphrag/">Welcome - GraphRAG</a> via Microsoft<br />Microsoft describes a graph, community hierarchy, and community summaries as precomputed structure for RAG tasks.</li>
+                  <li><a href="https://dl.acm.org/doi/10.1145/3626772.3661370">Retrieval-Augmented Generation with Knowledge Graphs for Customer Service Question Answering</a> via ACM / LinkedIn<br />LinkedIn reported production support gains from preserving ticket structure and relationships instead of treating tickets as flat text.</li>
+                  <li><a href="https://www.microsoft.com/en-us/research/blog/lazygraphrag-setting-a-new-standard-for-quality-and-cost/">LazyGraphRAG: Setting a new standard for quality and cost</a> via Microsoft Research<br />Lower indexing cost makes continuous graph-style checks more plausible than one-off expensive corpus builds.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Companies are moving from chatbots to agents that change systems. At the same time, internal knowledge is becoming more fragmented: Slack, Linear, docs, postmortems, CRM notes, policies, runbooks, and code comments all disagree. Bigger context windows do not solve the global question: is this instruction still true across the whole organization?</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with engineering incident and support escalations. Connect to Linear/Jira, Slack, GitHub, docs, and postmortems; generate a daily memory test suite around ownership, customer commitments, known failure modes, and policy exceptions; then gate agent-written support replies or runbook actions when the graph finds conflicts or weak evidence.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Heads of support, engineering productivity, or AI platform pay because one bad agent action can create churn, compliance exposure, or an outage. Price by connected knowledge surface plus checked agent actions, with an enterprise plan for regulated audit logs and approval workflows.</p>
+                <p><b>Defensibility</b></p>
+                <p>The asset is the customer's evolving map of claims, owners, exceptions, reversals, and action outcomes, not a generic GraphRAG stack. Every blocked action and human override teaches which contradictions matter. Incumbents can add retrieval, but they do not naturally own the cross-system regression history tied to agent decisions.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is separating real contradictions from normal organizational mess. The system needs temporal claim extraction, source authority ranking, and action-specific thresholds, or it will either block everything useful or miss the dangerous stale-context cases.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After support and incident work, the same shape applies to sales promises versus contract language, clinical operations SOPs, financial controls, security exceptions, vendor risk, and any workflow where agents act from a living body of internal rules.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This could collapse into another AI observability dashboard or enterprise search product if it does not own an action gate. Buyers may also resist a blocker in fast workflows, so the first deployment has to run in shadow mode and prove it catches expensive misses without flooding teams.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, ingest one company's last 100 incidents, current runbooks, and support macros. Create 30 memory regression tests, run them against proposed agent replies or runbook steps, and measure how many blocks a senior engineer agrees would have prevented a stale or wrong action.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>
