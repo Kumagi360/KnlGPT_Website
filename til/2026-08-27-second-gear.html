@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Migrations Need Evidence Escrow | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the August 27, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260821-til2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      body.til-gear-20260827-second .til-gear-hero h1 {
+        max-width: 100% !important;
+        font-size: clamp(2.35rem, 7vw, 5rem) !important;
+        line-height: 0.96 !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+      }
+
+      .til-gear-20260827-second .til-card-image {
+        aspect-ratio: auto;
+        height: auto;
+        object-fit: contain;
+      }
+
+      html,
+      body.til-gear-20260827-second {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body.til-gear-20260827-second .post-body,
+      body.til-gear-20260827-second .til-aggregation-grid,
+      body.til-gear-20260827-second .til-ideation-section,
+      body.til-gear-20260827-second .til-column,
+      body.til-gear-20260827-second .til-subcard,
+      body.til-gear-20260827-second .til-card-image {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      body.til-gear-20260827-second .til-subcard strong,
+      body.til-gear-20260827-second .til-subcard a,
+      body.til-gear-20260827-second .til-subcard p,
+      body.til-gear-20260827-second .til-subcard li {
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+      }
+
+      body.til-gear-20260827-second .til-subcard strong a {
+        display: block !important;
+      }
+
+      @media (max-width: 420px) {
+        body.til-gear-20260827-second .post-body,
+        body.til-gear-20260827-second .post-hero {
+          width: calc(100vw - 44px) !important;
+          max-width: calc(100vw - 44px) !important;
+          padding-inline: 0 !important;
+        }
+
+        .til-gear-20260827-second .post-hero,
+        .til-gear-20260827-second .post-body,
+        .til-gear-20260827-second .til-aggregation-grid,
+        .til-gear-20260827-second .til-ideation-section,
+        .til-gear-20260827-second .til-column,
+        .til-gear-20260827-second .til-subcard {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        .til-gear-20260827-second .til-column,
+        .til-gear-20260827-second .til-subcard {
+          padding-inline: 10px !important;
+        }
+
+        body.til-gear-20260827-second .til-gear-hero h1 {
+          width: 100% !important;
+          max-width: 100% !important;
+          font-size: 1.35rem !important;
+          line-height: 1.04 !important;
+          white-space: normal !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="blog-post-page til-post-page til-gear-20260827-second">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / August 27, 2026</span>
+          <h1>AI Migrations Need<br />Evidence Escrow</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / AI-assisted migrations</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!qxa1!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F798d1525-1097-40a9-b68e-8ae5dbb6598f_970x666.png" alt="The Pulse: We need to talk about migrations with AI" />
+                <strong><a href="https://newsletter.pragmaticengineer.com/p/the-pulse-we-need-to-talk-about-migrations">The Pulse: We need to talk<br />about migrations with AI</a></strong>
+                <p><b>Pre-read:</b> Large code migrations usually fail as portfolio management problems before they fail as syntax problems: they touch many owners, sit below feature work, and require proof that behavior survived the rewrite. The new primitive is a verified batch system for code, where agents generate candidate diffs while tests, linters, sampling, and engineer review decide what can merge. This article is worth opening because it shows the operating model behind that shift.</p>
+                <p><b>Summary:</b> Gergely Orosz uses Asana's Enzyme removal to argue that AI is turning years-long cleanup work into bounded engineering programs. <a href="https://openai.com/index/asana/">OpenAI's Asana case study</a> says Codex helped remove Enzyme in about two calendar weeks for roughly $12,000, against Asana's roughly $6 million staffing estimate. The important correction is that the five-year figure was not four engineers locked on one project for five years; it was the realistic completion horizon for low-priority opportunistic migration work.</p>
+                <p>The pattern matches earlier engineering writeups. <a href="https://medium.com/airbnb-engineering/accelerating-large-scale-test-migration-with-llms-9565c208023b">Airbnb migrated nearly 3.5K React component test files</a> from Enzyme to React Testing Library in six weeks by using validation steps, retries, rich context, and breadth-first tuning. <a href="https://www.uber.com/us/en/blog/junit-migration/">Uber's JUnit migration</a> shows the same shape at larger scale: automated transformation plus repeated validation, with engineers designing the loop and handling hard cases. The durable point is that AI does not make migration judgment disappear. It changes migration from scattered manual toil into an auditable factory for long-deferred codebase change.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Happenings</span>
+                <img class="til-card-image" src="https://substackcdn.com/image/fetch/$s_!Xc1V!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd594fcac-5228-4811-a8ce-38744f2c2030_2650x3068.png" alt="Background Work: From Cron Jobs to Distributed Systems" />
+                <strong><a href="https://blog.bytebytego.com/p/background-work-from-cron-jobs-to">Background jobs become agent infrastructure</a></strong>
+                <p><b>Pre-read:</b> Long-running AI work has the same systems pressure as ordinary background work: it must leave the request path, survive retries, expose state, and avoid duplicating side effects. Queues and schedulers become product infrastructure once agents run tasks that last minutes or hours.</p>
+                <p><b>Summary:</b> ByteByteGo walks through why teams move slow, bursty, or failure-prone operations out of synchronous user requests. A profile-photo upload is the concrete example: store the object first, then resize it, scan it, push variants to a CDN, and update metadata asynchronously. The piece groups background work by trigger: user actions, clocks, external systems, and volume thresholds. Its useful frame is evolutionary. Teams can start with one scheduled script, but complexity pushes them toward job queues, retries, idempotency, and distributed orchestration. For agentic software, that same progression is likely to show up in product surfaces rather than only backend plumbing.</p>
+              </article>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Essays</span>
+                <strong><a href="https://jamesclear.com/3-2-1/august-27-2026">3-2-1: On thinking long-term, how to attract like-minded people, and one sign of mental toughness</a></strong>
+                <p>James Clear's issue is a compact mindset note rather than a reporting item. The strongest thread is long-horizon compounding: do a small amount of work today that your ten-years-from-now self would thank you for, then choose projects whose intrinsic pull can survive the tedious parts. It is worth opening only if you want a quick reset on attention, taste, and persistence.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Change Escrow for Agentic Migrations</strong>
+                <p>Sell VP Engineering and platform teams a verification layer for large AI-run migrations: every agent change goes into an evidence escrow with the intended behavior, generated tests, replay logs, semantic diffs, rollback plan, and a signoff packet a human can actually trust. The company is not another coding agent. It is the transaction system for letting agents make thousands of background changes without turning production code into an unreviewable pile of almost-right edits.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://newsletter.pragmaticengineer.com/p/the-pulse-we-need-to-talk-about-migrations">The Pulse: We need to talk about migrations with AI</a><br />The issue connects Asana, Airbnb, Uber, and Bun as proof that long-deferred migrations are becoming executable when agents are wrapped in loops, tests, and engineer review.</li>
+                  <li><a href="https://openai.com/index/asana/">Asana cleared 5 years of engineering work in 2 weeks with Codex</a><br />OpenAI says Asana removed Enzyme in two weeks for about $12K in model and infrastructure cost, compared with a much larger internal staffing estimate.</li>
+                  <li><a href="https://medium.com/airbnb-engineering/accelerating-large-scale-test-migration-with-llms-9565c208023b">Accelerating large-scale test migration with LLMs</a><br />Airbnb described the real shape of the work: automated retries, validation, edge-case handling, and manual review for the hard tail.</li>
+                  <li><a href="https://www.uber.com/us/en/blog/junit-migration/">How Uber Executed A JUnit Migration at Massive Scale</a><br />Uber reported migrating more than 75,000 test classes and over 1.25 million lines of code, showing that the hard problem is orchestration and verification at scale.</li>
+                  <li><a href="https://blog.bytebytego.com/p/background-work-from-cron-jobs-to">Background Work: From Cron Jobs to Distributed Systems</a><br />The background-work framing matters because agentic migrations are long-running jobs with queues, retries, checkpoints, and failure handling, not chat sessions.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Frontier coding agents are good enough to make old migrations economically rational, but the bottleneck has moved to trust. Enterprises can tolerate a human changing 40 files with normal review. They cannot tolerate an agent changing 40,000 files unless someone can prove what changed, what did not change, and how to unwind the run.</p>
+                <p><b>First Wedge</b></p>
+                <p>Start with one migration class that has obvious demand and objective validation: test-framework, API-version, or dependency migrations in large TypeScript and Java monorepos. The first product ingests the repo, migration goal, test commands, coverage history, and CI logs, then produces a migration runbook plus an evidence packet for each merged batch.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Sell to platform engineering, developer productivity, and infrastructure teams as a per-migration project fee plus seat-based usage for ongoing evidence storage. A credible first price is $25K-$100K for a migration workstream, because the avoided cost is measured in engineer-months and the budget already lives in developer productivity or technical-debt programs.</p>
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is not prompts; it is a private corpus of migration invariants, failure modes, semantic diff patterns, flaky-test signatures, and reviewer decisions across real enterprise codebases. Incumbent coding agents can generate patches, but they do not naturally become the neutral audit trail, rollback registry, and risk record that legal, security, and engineering leadership can all accept.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is proving semantic preservation when tests are incomplete. The system needs static analysis, dynamic traces, coverage-gap detection, mutation testing, and targeted human review routing without pretending it can mathematically prove every application behavior.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After code migrations, the same primitive expands to Salesforce workflow rewrites, data-pipeline migrations, IAM-policy refactors, ERP configuration changes, and regulated documentation updates. The common shape is high-volume background change where agents can do the work but buyers need evidence before they trust the result.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This can fail if buyers decide ordinary CI plus senior review is enough, or if coding-agent vendors bundle lightweight migration dashboards before the category is named. The wedge has to be serious risk reduction for painful migrations, not a pretty report on top of GitHub pull requests.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, take three public migration PR sets or partner with one engineering team sitting on a legacy migration. Build a thin CLI that produces semantic diff summaries, coverage-gap maps, generated regression tests, and reviewer packets. The validation question is simple: would the team merge a larger batch with this evidence than they would without it?</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>
