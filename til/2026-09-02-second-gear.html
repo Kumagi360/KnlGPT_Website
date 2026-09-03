@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAG Needs Better Translators | TIL | Kunal Gupta</title>
+    <meta name="description" content="A paired aggregation and ideation page for the September 2, 2026 second gear newsletter window." />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260821-til2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      body.til-gear-20260902-second .til-gear-hero h1 {
+        max-width: 100% !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+      }
+
+      html,
+      body.til-gear-20260902-second {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body.til-gear-20260902-second .post-body,
+      body.til-gear-20260902-second .til-aggregation-grid,
+      body.til-gear-20260902-second .til-ideation-section,
+      body.til-gear-20260902-second .til-column,
+      body.til-gear-20260902-second .til-subcard,
+      body.til-gear-20260902-second .til-card-image {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      body.til-gear-20260902-second .til-subcard strong,
+      body.til-gear-20260902-second .til-subcard a,
+      body.til-gear-20260902-second .til-subcard p,
+      body.til-gear-20260902-second .til-subcard li {
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+      }
+
+      body.til-gear-20260902-second .til-subcard strong a {
+        display: block !important;
+      }
+
+      @media (max-width: 520px) {
+        body.til-gear-20260902-second .site-header {
+          box-sizing: border-box !important;
+          width: 100vw !important;
+          max-width: 100vw !important;
+          padding-inline: 14px !important;
+          overflow: hidden !important;
+        }
+
+        body.til-gear-20260902-second .primary-nav {
+          display: grid !important;
+          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          width: 280px !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        body.til-gear-20260902-second .primary-nav a {
+          display: grid !important;
+          place-items: center !important;
+          min-width: 0 !important;
+          padding-inline: 2px !important;
+          font-size: 9px !important;
+        }
+
+        body.til-gear-20260902-second .post-body,
+        body.til-gear-20260902-second .post-hero {
+          width: 292px !important;
+          max-width: 100% !important;
+          padding-inline: 0 !important;
+          margin-left: 14px !important;
+          margin-right: 0 !important;
+          overflow: visible !important;
+        }
+
+        body.til-gear-20260902-second .til-aggregation-grid,
+        body.til-gear-20260902-second .til-ideation-section {
+          display: grid !important;
+          grid-template-columns: minmax(0, 1fr) !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          overflow: visible !important;
+        }
+
+        body.til-gear-20260902-second .til-column {
+          display: block !important;
+          padding-inline: 10px !important;
+        }
+
+        body.til-gear-20260902-second .til-subcard {
+          display: block !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          padding-inline: 8px !important;
+          overflow: visible !important;
+        }
+
+        body.til-gear-20260902-second .til-gear-hero h1 {
+          width: 260px !important;
+          max-width: 100% !important;
+          font-size: 1.55rem !important;
+          line-height: 1.04 !important;
+          white-space: normal !important;
+          overflow-wrap: anywhere !important;
+          word-break: break-all !important;
+        }
+
+        body.til-gear-20260902-second .til-subcard > *,
+        body.til-gear-20260902-second .til-subcard strong,
+        body.til-gear-20260902-second .til-subcard a,
+        body.til-gear-20260902-second .til-subcard p,
+        body.til-gear-20260902-second .til-subcard li,
+        body.til-gear-20260902-second .til-card-image {
+          display: block !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          white-space: normal !important;
+          overflow-wrap: anywhere !important;
+          word-break: break-all !important;
+          line-break: anywhere !important;
+        }
+
+        body.til-gear-20260902-second .til-subcard strong,
+        body.til-gear-20260902-second .til-subcard strong a,
+        body.til-gear-20260902-second .til-subcard p,
+        body.til-gear-20260902-second .til-subcard li {
+          width: 236px !important;
+          max-width: 100% !important;
+        }
+
+        body.til-gear-20260902-second .til-subcard p,
+        body.til-gear-20260902-second .til-subcard li {
+          font-size: 0.94rem !important;
+          line-height: 1.36 !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="blog-post-page til-post-page til-gear-20260902-second">
+    <header class="site-header">
+      <a class="brand-mark" href="../index.html#top"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="../index.html#top" data-nav="home">Home</a><a href="../projects.html" data-nav="projects">Projects</a><a href="../blog.html" data-nav="blog">Blog</a><a href="../til.html" data-nav="til">TIL</a></nav>
+    </header>
+    <main>
+      <a class="back-link" href="../til.html">&larr; Back to TIL</a>
+      <article class="post-page">
+        <header class="post-hero til-gear-hero">
+          <span>Second Gear / September 2, 2026</span>
+          <h1>RAG Needs Better Translators</h1>
+        </header>
+
+        <section class="post-body" aria-label="Paired gear output">
+          <section class="til-aggregation-grid" aria-label="Aggregation">
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>World</h2>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Canada-U.S. Rift</span>
+                <strong><a href="https://www.reuters.com/business/street-names-supply-chains-canadians-pull-away-us-rift-grows-2026-09-02/">Street names to supply chains: Canadians pull away as U.S. rift grows</a></strong>
+                <p><b>Pre-read:</b> Canada-U.S. integration normally runs through quiet dependencies: retail shelves, travel flows, municipal symbolism, procurement, and cross-border supply chains. The current tariff cycle, tracked in detail by <a href="https://www.blakes.com/insights/us-canada-tariffs-timeline-of-key-dates-and-documents/">Blake's tariff timeline</a>, turns national sentiment into an operating variable for companies that used to treat the border as low-friction infrastructure.</p>
+                <p><b>Summary:</b> Reuters reports that Trump's new tariffs on Canadian goods and an order renaming Lake Ontario as "Lake America" are intensifying Canadian anger and patriotism. The story ties symbolic politics to practical behavior: boycotts of U.S. products, reduced southbound travel, pressure on retailers, and Ottawa's move to rename Trump Avenue. The useful read is the breadth of the rupture; it shows a bilateral dispute moving from policy desks into ordinary purchasing, travel, and local identity.</p>
+              </article>
+            </section>
+
+            <section class="til-column">
+              <span class="til-column-kicker">Aggregation</span>
+              <h2>Tech</h2>
+
+              <article class="til-subcard til-email-card">
+                <span class="til-source-tag">Critical / Retrieval Systems</span>
+                <img class="til-card-image" src="https://substack-post-media.s3.amazonaws.com/public/images/e1c71ec9-cfff-4d2d-852c-da408388c2ae_3934x1808.png" alt="Diagram from ByteByteGo explaining Matryoshka embedding storage options" />
+                <strong><a href="https://blog.bytebytego.com/p/how-to-shrink-a-language-model-without">Why Your RAG System Is Only as Good as Its Translator Model</a></strong>
+                <p><b>Pre-read:</b> Enterprise RAG quality is increasingly governed by retrieval operations: corpus parsing, chunking, metadata policy, evaluation sets, and regression gates. Tooling such as <a href="https://www.langchain.com/langsmith/evaluation">LangSmith evaluations</a> has already normalized the idea that retrieval changes need testable release discipline, not prompt-only debugging.</p>
+                <p><b>Summary:</b> ByteByteGo's explainer is valuable because it isolates the embedding model as the first relevance decision in a RAG system. It walks through failure modes that matter in production: semantically related passages that don't answer the question, negation, entity confusion, stale policy versions, numeric differences, and multi-part queries. The strongest operational point is migration cost: changing embedding models means re-embedding the corpus, rebuilding indexes, preserving metadata and permissions, retesting rankings, and keeping rollback paths.</p>
+              </article>
+            </section>
+          </section>
+
+          <div class="til-page-divider" aria-hidden="true"></div>
+
+          <section class="til-ideation-section" aria-label="Ideation">
+            <section class="til-column">
+              <span class="til-column-kicker">Ideation</span>
+              <h2>Ideation</h2>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 1</span>
+                <strong>Answerability Release Ledger</strong>
+                <p>Sell regulated support teams a release gate that proves an AI agent can still answer from the right policy after every corpus, embedding, chunking, and prompt change. The product is not another trace dashboard; it turns policy diffs into executable answerability tests for the exact places where agents fail: negations, dates, dollar limits, eligibility carve-outs, and nearly identical old policies.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://blog.bytebytego.com/p/how-to-shrink-a-language-model-without">Why Your RAG System Is Only as Good as Its Translator Model</a> via ByteByteGo<br />The newsletter's core point is that bad retrieval cannot be fixed by a better generator, especially when numbers, dates, versions, and negation are the deciding facts.</li>
+                  <li><a href="https://www.langchain.com/langsmith/evaluation">LangSmith Evaluation</a> via Prior check<br />Broad AI/RAG eval and observability is already crowded; the wedge has to be narrower than tracing, online evals, and generic annotation.</li>
+                  <li><a href="https://arize.com/">Arize AI</a> via Prior check<br />Large eval platforms already sell production monitoring and agent improvement, which pushes the opportunity toward domain-specific release evidence.</li>
+                  <li><a href="https://arxiv.org/abs/2603.27355">LLM Readiness Harness</a> via Prior check<br />Academic and open tooling is moving toward CI gates for RAG, so the commercial wedge should own policy-change semantics, not generic readiness scoring.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Customer-service agents are moving from demos into refund, insurance, benefits, banking, and policy workflows where a single stale retrieved clause creates a compliance incident. At the same time, embedding migrations and index rebuilds are becoming normal operations, which means every release can silently change what the agent considers authoritative.</p>
+                <p><b>First Wedge</b></p>
+                <p>A GitHub-style policy release gate for one support domain, starting with refund and cancellation policies for subscription fintech or healthcare benefits. It ingests policy docs and historical tickets, detects changed clauses, generates adversarial customer questions around the changed facts, runs them against the live RAG stack, and produces an audit packet before deployment.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Support, compliance, or risk teams pay per agent domain and monthly evaluated ticket volume. Budget exists because the alternative is manual QA by policy specialists plus incident cleanup when an agent gives customers the wrong eligibility, refund, or coverage answer.</p>
+                <p><b>Defensibility</b></p>
+                <p>The compounding asset is a library of domain-specific policy-diff patterns, human-reviewed failure cases, and mappings between legal language and user questions. Incumbent observability tools can add generic evaluators, but they do not automatically know which changed clause should create which hostile customer question or what evidence a compliance lead will accept.</p>
+                <p><b>Technical Risk</b></p>
+                <p>The hard part is turning messy policy edits into high-recall tests without flooding teams with false alarms. The system must reliably identify semantically tiny but operationally decisive changes, bind them to authoritative document versions, and run against each customer's retrieval stack without seeing private production data unnecessarily.</p>
+                <p><b>Market Expansion</b></p>
+                <p>Start with support policy agents, then expand into claims adjudication, HR benefits, tax guidance, lending disclosures, marketplace seller rules, and any workflow where the agent's answer depends on a current, authoritative policy version.</p>
+                <p><b>Self-Critique</b></p>
+                <p>This can collapse into a services-heavy eval consultancy if the policy-diff engine is weak or buyers do not trust generated tests. It is also vulnerable if broad observability platforms quickly partner with compliance vendors and make domain packs easy to distribute.</p>
+                <p><b>Next Experiment</b></p>
+                <p>In two weeks, collect 50 real policy-change examples from public terms, refund pages, and benefits docs; generate 500 adversarial questions; run them against three common RAG stacks; and ask five support/compliance leads whether the resulting release packet would replace part of their pre-launch review.</p>
+              </article>
+
+              <article class="til-subcard til-idea-card">
+                <span class="til-source-tag">Idea 2</span>
+                <strong>Political Origin Layer for Retail Agents</strong>
+                <p>Sell retailers and distributors a provenance layer that lets merchandising, procurement, and support agents answer a suddenly urgent question: is this product politically, legally, and commercially safe to promote in this market today? The primitive is not traceability for audits; it is live product-origin truth that can drive shelf tags, substitutions, e-commerce filters, and procurement decisions when tariffs, boycotts, and naming disputes change buyer behavior overnight.</p>
+                <p><b>Source Signals</b></p>
+                <ul>
+                  <li><a href="https://www.reuters.com">Renaming Trump Avenue in Ottawa, Ontario</a> via Reuters One Essential Read<br />The newsletter framed Canada-US tensions as a consumer-sentiment and patriotism story, not only a diplomacy story.</li>
+                  <li><a href="https://www.blakes.com/insights/us-canada-tariffs-timeline-of-key-dates-and-documents/">U.S.-Canada Tariffs: Timeline of Key Dates and Documents</a> via Blakes<br />The tariff timeline shows origin, CUSMA compliance, forced-labor rules, and changing duty structures becoming operational facts.</li>
+                  <li><a href="https://www.supplychainbrain.com/articles/43283-report-ai-geopolitical-disruption-will-guide-procurement-in-2026">Report: AI, Geopolitical Disruption Will Guide Procurement in 2026</a> via SupplyChainBrain<br />Procurement teams are being pushed toward AI-driven scenario planning and supplier coordination under geopolitical disruption.</li>
+                  <li><a href="https://apnews.com/article/14abb66fe0ecfa05bffd42fb083dc70d">Apple changes Lake Ontario name to 'Lake America' for US users of its Maps</a> via AP<br />Map-name compliance shows that even consumer-facing product metadata now changes by jurisdiction and political pressure.</li>
+                </ul>
+                <p><b>Why Now</b></p>
+                <p>Trade conflict is becoming a front-end retail problem. Consumers want to avoid or prefer certain origins, governments change tariff and labeling rules, and AI procurement agents need structured political context before they can recommend substitutes or price changes.</p>
+                <p><b>First Wedge</b></p>
+                <p>A Canadian grocery and pharmacy SKU-origin cockpit: ingest supplier documents, customs/origin declarations, UPC catalogs, and store inventory; score each SKU for Canadian, US, mixed, uncertain, or politically sensitive status; and push tags and substitution recommendations into Shopify, Instacart, shelf-label systems, and buyer worklists.</p>
+                <p><b>Commercial Model</b></p>
+                <p>Regional retailers and distributors pay by SKU count and store count, with a premium for automated supplier evidence collection. The budget comes from merchandising, compliance, and category management because wrong labels create customer complaints, lost trust, and missed demand shifts toward acceptable substitutes.</p>
+                <p><b>Defensibility</b></p>
+                <p>The moat is not the database alone; it is the evidence graph tying SKUs to supplier attestations, customs docs, ingredient origin, packaging claims, customer complaint patterns, and local rule changes. Each deployment improves supplier mappings and substitution logic in categories with similar supply chains.</p>
+                <p><b>Technical Risk</b></p>
+                <p>Supplier data is incomplete, stale, and often deliberately vague. The product must express uncertainty honestly, reconcile conflicting origin evidence, and avoid publishing claims that create legal exposure for the retailer.</p>
+                <p><b>Market Expansion</b></p>
+                <p>After Canada-US retail, expand to EU-China exposure, forced-labor and critical-mineral rules, halal/kosher/local-origin claims, defense procurement, public-sector buying, and any market where political acceptability becomes a machine-readable product attribute.</p>
+                <p><b>Self-Critique</b></p>
+                <p>Supply-chain traceability is crowded, and a broad platform would lose to incumbents. The wedge only works if political-origin decisions become frequent enough that category managers will pay for daily workflow automation rather than periodic consulting.</p>
+                <p><b>Next Experiment</b></p>
+                <p>Pick 200 Canadian grocery SKUs across five boycott-sensitive categories, collect public and supplier-origin evidence, build a substitution map, and test it with two independent grocers by asking whether they would use it to update shelf tags or buyer recommendations this month.</p>
+              </article>
+            </section>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script src="../assets/js/site.js"></script>
+  </body>
+</html>
