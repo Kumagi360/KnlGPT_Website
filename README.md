@@ -1,4 +1,4 @@
-# KnlGPT Website
+# [WIP] KnlGPT Website
 
 Static personal website for Kunal Gupta, built for GitHub Pages.
 
