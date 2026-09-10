@@ -17,7 +17,7 @@ This is a static site with no build step. Keep root entry pages at the project r
 ## Assets
 
 - `assets/css/`: stylesheets
-- `assets/js/header.js`: shared site header, loaded synchronously where the header appears
+- `assets/js/header.js`: shared header and persistent same-origin page navigation
 - `assets/js/`: remaining local application scripts
 - `assets/vendor/`: vendored third-party browser scripts
 - `assets/data/`: local data payloads
