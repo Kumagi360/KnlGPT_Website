@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog | Kunal Gupta</title>
-    <meta name="description" content="Field notes on robotics, entrepreneurship, travel, and taste." />
+    <title>Thoughts | Kunal Gupta</title>
+    <meta name="description" content="Notes on robotics, building products, and travel by Kunal Gupta." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260909-blog-template" />
   </head>
   <body class="blog-index-page">
     <header class="site-header">
@@ -19,41 +19,46 @@
         <span class="brand-cell">KG</span>
         <span class="brand-text">Kunal Gupta</span>
       </a>
-      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Blog</a><a href="til.html" data-nav="til">TIL</a></nav>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Thoughts</a><a href="til.html" data-nav="til">TIL</a></nav>
     </header>
 
     <main>
       <section class="article-hero">
-        <p class="section-kicker">Field notes</p>
-        <h1>Field notes.</h1>
-        <p>Blog posts can support long essays, short logs, image-heavy travel notes, embedded links, downloadable references, callouts, and quotes.</p>
+        <h1>Thoughts, sometimes</h1>
+        <p>Notes on robotics, building things, and travel. Some stay short. Others take the long way around.</p>
       </section>
 
       <section class="blog-filter-bar" aria-label="Filter blog posts by tag">
-        <button type="button" class="is-active" data-blog-filter="all">All</button>
-        <button type="button" data-blog-filter="robotics">Robotics</button>
-        <button type="button" data-blog-filter="founder">Founder</button>
-        <button type="button" data-blog-filter="travel">Travel</button>
+        <button type="button" class="is-active" data-blog-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-blog-filter="robotics" aria-pressed="false">Robotics</button>
+        <button type="button" data-blog-filter="founder" aria-pressed="false">Founder</button>
+        <button type="button" data-blog-filter="travel" aria-pressed="false">Travel</button>
       </section>
 
       <section class="blog-index">
-        <a class="blog-card" href="blog/reality-tested-machines.html" data-blog-tags="robotics">
-          <span>Robotics</span>
-          <h2>Reality-tested machines</h2>
-          <p>Notes on constraints, tests, and why prototypes teach faster than plans.</p>
+        <a class="blog-card lead-card" href="blog/reality-tested-machines.html" data-blog-tags="robotics">
+          <div class="blog-card-heading">
+            <span>Robotics</span>
+            <h2>Reality-tested machines</h2>
+          </div>
+          <img src="assets/images/placeholders/blog-post-reality-tested-machines-cover.jpg" alt="Robot prototype in a workshop" />
         </a>
-        <a class="blog-card" href="blog/engineering-entrepreneurship.html" data-blog-tags="founder">
-          <span>Founder</span>
-          <h2>Engineering entrepreneurship</h2>
-          <p>A field note about risk, iteration, and signal quality.</p>
+        <a class="blog-card lead-card" href="blog/engineering-entrepreneurship.html" data-blog-tags="founder">
+          <div class="blog-card-heading">
+            <span>Founder</span>
+            <h2>Engineering entrepreneurship</h2>
+          </div>
+          <img src="assets/images/placeholders/blog-post-engineering-entrepreneurship-cover.jpg" alt="Engineering notebook, prototype parts, and sketchbook" />
         </a>
-        <a class="blog-card image-card" href="blog/taste-in-motion.html" data-blog-tags="travel">
-          <img src="assets/images/placeholders/blog-index-taste-in-motion-card.jpg" alt="Travel writing placeholder" />
-          <span>Travel</span>
-          <h2>Taste in motion</h2>
+        <a class="blog-card lead-card" href="blog/taste-in-motion.html" data-blog-tags="travel">
+          <div class="blog-card-heading">
+            <span>Travel</span>
+            <h2>Taste in motion</h2>
+          </div>
+          <img src="assets/images/placeholders/blog-post-taste-in-motion-cover.jpg" alt="Travel scene" />
         </a>
       </section>
     </main>
-    <script src="assets/js/site.js?v=20260707-atlas"></script>
+    <script src="assets/js/site.js?v=20260909-background-fix"></script>
   </body>
 </html>
