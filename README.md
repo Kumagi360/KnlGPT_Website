@@ -19,7 +19,7 @@ Static personal website for Kunal Gupta, built for GitHub Pages.
 ## Image Replacement
 
 - `assets/images/placeholders/` contains the replaceable non-TIL site images.
-- Filenames describe where the image is used, for example `home-project-map-rover.jpg` or `projects-crm-analytics-wide.jpg`.
+- Filenames describe where the image is used, for example `home-hero-portrait.jpg` or `projects-crm-analytics-wide.jpg`.
 - Replace an image by overwriting the file and keeping the same filename.
 - TIL card and TIL page images intentionally remain remote and are not mirrored into the repo.
 

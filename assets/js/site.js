@@ -62,26 +62,6 @@ function setActiveSectionFromHash() {
   return true;
 }
 
-function activateProjectPanel(id) {
-  if (!id) return;
-  document.querySelectorAll("[data-project-panel]").forEach((tile) => {
-    tile.classList.toggle("is-active", tile.dataset.projectPanel === id);
-  });
-  document.querySelectorAll("[data-project-detail]").forEach((panel) => {
-    panel.classList.toggle("is-active", panel.dataset.projectDetail === id);
-  });
-}
-
-function initProjectPanels() {
-  document.querySelectorAll("[data-project-panel]").forEach((tile) => {
-    tile.addEventListener("mouseenter", () => {
-      document.querySelectorAll("[data-project-panel]").forEach((otherTile) => {
-        otherTile.classList.toggle("is-active", otherTile === tile);
-      });
-    });
-  });
-}
-
 function initProjectCardFocus() {
   const cards = [...document.querySelectorAll(".project-case-card")];
   const collection = document.querySelector(".project-card-collection");
@@ -252,7 +232,6 @@ function initHomeSectionTracking() {
 
 function initializeSitePage() {
   initAmbientBackground();
-  initProjectPanels();
   initProjectCardFocus();
   initProjectMediaCarousels();
   initBlogFilters();
