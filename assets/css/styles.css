@@ -19,6 +19,13 @@
   --rail-gutter: clamp(112px, 9vw, 156px);
 }
 
+/* Keep desktop content comfortably inside the viewport; tablet and phone layouts use their full responsive width. */
+@media (min-width: 1081px) {
+  :root {
+    --max: min(1440px, 80vw);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -309,7 +316,8 @@ main::before {
 .section-nav a::before {
   content: "";
   position: absolute;
-  left: -15px;
+  /* Keep the 7px dot centered on the rail. */
+  left: -14px;
   top: 50%;
   width: 7px;
   height: 7px;
@@ -3760,7 +3768,8 @@ blockquote {
   }
 
   .section-nav a::before {
-    left: -10px;
+    /* Keep the smaller 5px dot centered on the same rail. */
+    left: -7px;
     width: 5px;
     height: 5px;
   }
