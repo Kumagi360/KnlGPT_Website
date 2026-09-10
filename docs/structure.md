@@ -17,7 +17,8 @@ This is a static site with no build step. Keep root entry pages at the project r
 ## Assets
 
 - `assets/css/`: stylesheets
-- `assets/js/`: local application scripts
+- `assets/js/header.js`: shared site header, loaded synchronously where the header appears
+- `assets/js/`: remaining local application scripts
 - `assets/vendor/`: vendored third-party browser scripts
 - `assets/data/`: local data payloads
 - `assets/images/`: committed owned/local image assets
@@ -30,5 +31,7 @@ Automation should generate or update the actual HTML files directly:
 - `blog.html` and `til.html` for index cards
 - `blog/<post-heading-slug>.html` for blog detail pages
 - `til/YYYY-MM-DD-<gear>-gear.html` for TIL detail pages
+
+New pages should load the shared header instead of copying its markup. Root pages use `assets/js/header.js`; pages inside `blog/` or `til/` use `../assets/js/header.js`.
 
 TIL images are intentionally remote-only. Do not mirror newsletter/article card images into committed assets unless ownership changes.

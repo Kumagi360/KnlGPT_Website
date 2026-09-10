@@ -1,17 +1,3 @@
-function setActiveNav() {
-  const path = window.location.pathname.split("/").pop() || "index.html";
-  let active = "";
-
-  if (path === "index.html" || path === "") active = "home";
-  if (path.startsWith("projects") || document.body.classList.contains("projects-page")) active = "projects";
-  if (path === "blog.html" || document.body.classList.contains("blog-post-page")) active = "blog";
-  if (path === "til.html" || document.body.classList.contains("til-index-page") || document.body.classList.contains("til-post-page")) active = "til";
-
-  document.querySelectorAll("[data-nav]").forEach((link) => {
-    link.classList.toggle("is-current", link.dataset.nav === active);
-  });
-}
-
 function initAmbientBackground() {
   let background = document.querySelector(".schematic-bg");
 
@@ -200,12 +186,10 @@ function initBlogFilters() {
 }
 
 initAmbientBackground();
-setActiveNav();
 initProjectPanels();
 initProjectCardFocus();
 initProjectMediaCarousels();
 initBlogFilters();
-window.addEventListener("hashchange", setActiveNav);
 window.addEventListener("hashchange", setActiveSectionFromHash);
 
 if ((window.location.pathname.split("/").pop() || "index.html") === "index.html" || window.location.pathname.endsWith("/")) {
