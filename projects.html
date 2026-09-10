@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projects | Kunal Gupta</title>
-    <meta name="description" content="Robotics, hardware, software, and venture project cards for Kunal Gupta." />
+    <meta name="description" content="Selected robotics, hardware, software, and product work by Kunal Gupta." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260905-hybrid-cards" />
   </head>
   <body class="projects-page">
     <div class="schematic-bg" aria-hidden="true">
@@ -26,144 +26,263 @@ end</pre>
     </div>
     <header class="site-header">
       <a class="brand-mark" href="index.html#top" aria-label="Kunal Gupta home"><span class="brand-cell">KG</span><span class="brand-text">Kunal Gupta</span></a>
-      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Blog</a><a href="til.html" data-nav="til">TIL</a></nav>
+      <nav class="primary-nav global-nav" aria-label="Primary navigation"><a href="index.html#top" data-nav="home">Home</a><a href="projects.html" data-nav="projects">Projects</a><a href="blog.html" data-nav="blog">Thoughts</a><a href="til.html" data-nav="til">TIL</a></nav>
     </header>
 
     <main>
       <section class="article-hero project-hero">
-        <p class="section-kicker">Project archive</p>
         <h1>Project archive.</h1>
-        <p>Robotics, embedded systems, and founder work collected as inspection-ready case files with media, links, notes, and technical context.</p>
+        <p>A few projects I had a lot of fun building. The notes show how they came together, including the parts that took a second try.</p>
       </section>
 
       <section class="project-card-collection" aria-label="Project collection">
-        <article class="project-case-card" id="map">
-          <div class="project-collage">
-            <img class="wide" src="assets/images/placeholders/projects-map-rover-wide.jpg" alt="Robotics project placeholder" />
-            <img src="assets/images/placeholders/projects-map-rover-arm.jpg" alt="Robot arm placeholder" />
-            <img src="assets/images/placeholders/projects-map-rover-electronics.jpg" alt="Electronics placeholder" />
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="map">
+          <div class="project-case-summary">
+          <div class="project-case-media" data-project-carousel aria-label="MAP Rover project media">
+            <div class="project-media-viewport">
+              <div class="project-media-track">
+                <figure class="project-media-slide is-active">
+                  <img src="assets/images/placeholders/projects-map-rover-wide.jpg" alt="MAP Rover in the field" />
+                </figure>
+                <figure class="project-media-slide">
+                  <img src="assets/images/placeholders/projects-map-rover-arm.jpg" alt="MAP Rover robotic arm assembly" />
+                </figure>
+                <figure class="project-media-slide">
+                  <img src="assets/images/placeholders/projects-map-rover-electronics.jpg" alt="MAP Rover electronics" />
+                </figure>
+              </div>
+            </div>
+            <div class="project-media-controls">
+              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <div>
+                <button type="button" data-carousel-previous aria-label="Show previous MAP Rover image">←</button>
+                <button type="button" data-carousel-next aria-label="Show next MAP Rover image">→</button>
+              </div>
+            </div>
           </div>
           <div class="project-case-body">
-            <span>KG-01 / Autonomous robotics</span>
             <h2>MAP Rover</h2>
-            <p class="lede">Mobile Autonomous Pathfinder: a web and GPS-enabled autonomous rover with onboard low-resolution object detection.</p>
-            <div class="callout">Leveraged SLAM and EKF; designed to traverse more than one mile per charge.</div>
-            <blockquote>“Autonomy becomes real when the robot can leave the bench.”</blockquote>
-            <div class="mini-card-grid">
-              <a href="#">SLAM / EKF</a>
-              <a href="#">GPS web stack</a>
-              <a href="#">Object detection</a>
-              <a href="#">Rover endurance</a>
+            <p class="lede">Mobile Autonomous Pathfinder: a web- and GPS-enabled rover with onboard low-resolution object detection.</p>
+            <div class="project-case-statement project-case-statement--quiet">
+              <span>Project premise</span>
+              <p>It is not much of a rover if it cannot leave the bench.</p>
             </div>
-            <div class="project-technical">
-              <h3>Technical writing space</h3>
-              <p>This expanded area is reserved for deeper architecture notes: localization strategy, sensor assumptions, state estimation details, mechanical packaging, power budget, field failures, and prototype revisions.</p>
-              <p>It can support long paragraphs, links, downloadable files, diagrams, code references, and test logs without changing the compact card state.</p>
-            </div>
+            <ul class="project-case-evidence" aria-label="MAP Rover project evidence">
+              <li><span>Navigation</span><strong>SLAM + EKF</strong></li>
+              <li><span>Perception</span><strong>Onboard detection</strong></li>
+              <li><span>Target</span><strong>1+ mile / charge</strong></li>
+            </ul>
+            <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="map-system-brief" aria-expanded="false">Read more <span>+</span></button>
+          </div>
+          </div>
+          <div class="project-system-reveal project-technical" id="map-system-brief">
+              <div>
+                <p>MAP Rover was built for the point where the floor markings run out. It needed to know roughly where it was outside, not just show off individual features in a demo.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>Keep moving when every sensor has only part of the story.</p></aside>
+                <p>SLAM and an EKF helped estimate where the rover was and which data to trust next. A web interface kept that information handy without hauling the whole thing back to the bench.</p>
+                <pre class="project-brief-code"><code>GPS + local sensors
+  → estimate pose
+  → detect + plan
+  → drive + report</code></pre>
+              </div>
+              <div class="project-architecture" aria-label="MAP Rover architecture">
+                <span>GPS + sensors</span><b>→</b><span>SLAM / EKF</span><b>→</b><span>Drive + web</span>
+              </div>
+              <div class="project-brief-links" aria-label="MAP Rover project resources">
+                <a href="#">Build notes <span>↗</span></a>
+                <a href="#" download>Project brief <span>↓</span></a>
+              </div>
           </div>
         </article>
 
-        <article class="project-case-card" id="martha">
-          <div class="project-carousel" aria-label="Embedded motion lab image carousel">
-            <div class="carousel-track">
-              <img src="assets/images/placeholders/projects-martha-embedded-systems.jpg" alt="Embedded systems placeholder" />
-              <img src="assets/images/placeholders/projects-martha-engineering-bench.jpg" alt="Engineering bench placeholder" />
-              <img src="assets/images/placeholders/projects-martha-hardware-testing.jpg" alt="Hardware testing placeholder" />
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="martha">
+          <div class="project-case-summary">
+          <div class="project-case-media" data-project-carousel aria-label="MARTHA project media">
+            <div class="project-media-viewport">
+              <div class="project-media-track">
+                <figure class="project-media-slide is-active">
+                  <img src="assets/images/placeholders/projects-martha-embedded-systems.jpg" alt="MARTHA embedded systems prototype" />
+                </figure>
+                <figure class="project-media-slide">
+                  <img src="assets/images/placeholders/projects-martha-engineering-bench.jpg" alt="MARTHA engineering bench" />
+                </figure>
+                <figure class="project-media-slide">
+                  <img src="assets/images/placeholders/projects-martha-hardware-testing.jpg" alt="MARTHA hardware testing" />
+                </figure>
+              </div>
             </div>
-            <div class="carousel-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="project-media-controls">
+              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <div>
+                <button type="button" data-carousel-previous aria-label="Show previous MARTHA image">←</button>
+                <button type="button" data-carousel-next aria-label="Show next MARTHA image">→</button>
+              </div>
+            </div>
           </div>
           <div class="project-case-body">
-            <span>KG-02 / Public health product</span>
             <h2>MARTHA</h2>
             <p class="lede">Monitoring and Restriction-Tracking Hotspot Application: distancing and de-densification iOS app and webpage.</p>
-            <div class="callout">Cornell HackOurCampus finalist; pitched to senior SWEs and investors while pursuing Cornell campus deployment.</div>
-            <div class="mini-card-grid">
-              <a href="#">iOS app</a>
-              <a href="#">Webpage</a>
-              <a href="#">Hotspot tracking</a>
-              <a href="#">Campus pitch</a>
+            <div class="project-case-statement project-case-statement--quiet">
+              <span>Project premise</span>
+              <p>Help people spot crowding before it becomes a problem.</p>
             </div>
-            <div class="project-technical">
-              <h3>Technical writing space</h3>
-              <p>Use this reveal area for product architecture, data model decisions, privacy constraints, deployment assumptions, user-flow tradeoffs, and the pitch narrative behind the campus rollout.</p>
-              <p>The section is intentionally generous so each project can grow into a real case study.</p>
+            <ul class="project-case-evidence" aria-label="MARTHA project evidence">
+              <li><span>Built</span><strong>iOS app + webpage</strong></li>
+              <li><span>Milestone</span><strong>HackOurCampus finalist</strong></li>
+              <li><span>Direction</span><strong>Cornell campus deployment</strong></li>
+            </ul>
+            <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="martha-system-brief" aria-expanded="false">Read more <span>+</span></button>
+          </div>
+          </div>
+          <div class="project-system-reveal project-technical" id="martha-system-brief">
+            <div>
+              <p>MARTHA gave people a clearer view of crowding before they had to react. It paired hotspot awareness with lower-density options around campus, without making a walk to class feel dramatic.</p>
+              <aside class="project-brief-callout"><span>The question</span><p>How do you make risk clear without turning the whole experience into an alarm?</p></aside>
+              <p>The idea was simple: show where pressure was building, explain why it mattered, and make a lower-density option easier to choose.</p>
+              <pre class="project-brief-code"><code>campus activity
+  → identify hotspot
+  → explain context
+  → suggest lower-density route</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="MARTHA architecture">
+              <span>Campus signal</span><b>→</b><span>Hotspot view</span><b>→</b><span>Next choice</span>
+            </div>
+            <div class="project-brief-links" aria-label="MARTHA project resources">
+              <a href="#">Product notes <span>↗</span></a>
+              <a href="#" download>Concept brief <span>↓</span></a>
             </div>
           </div>
         </article>
 
-        <article class="project-case-card" id="safe">
-          <div class="project-collage venture-collage">
-            <img class="wide" src="assets/images/placeholders/projects-preppr-founder-wide.jpg" alt="Founder project placeholder" />
-            <img src="assets/images/placeholders/projects-preppr-team-work.jpg" alt="Team work placeholder" />
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="safe">
+          <div class="project-case-summary">
+          <div class="project-case-media" data-project-carousel aria-label="SAFE project media">
+            <div class="project-media-viewport">
+              <div class="project-media-track">
+                <figure class="project-media-slide is-active">
+                  <img src="assets/images/placeholders/projects-preppr-founder-wide.jpg" alt="SAFE project prototype" />
+                </figure>
+                <figure class="project-media-slide">
+                  <img src="assets/images/placeholders/projects-preppr-team-work.jpg" alt="SAFE project team at work" />
+                </figure>
+                <figure class="project-media-slide project-media-slide--portrait">
+                  <img src="assets/images/placeholders/projects-safe-sensor-pod-portrait.png" alt="Slender environmental sensor-pod placeholder in a home" />
+                </figure>
+              </div>
+            </div>
+            <div class="project-media-controls">
+              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <div>
+                <button type="button" data-carousel-previous aria-label="Show previous SAFE image">←</button>
+                <button type="button" data-carousel-next aria-label="Show next SAFE image">→</button>
+              </div>
+            </div>
           </div>
           <div class="project-case-body">
-            <span>KG-03 / Healthcare AI</span>
             <h2>SAFE</h2>
             <p class="lede">Smart Assistance for Elders: app, AI model, and sensor pod for predicting and preventing temperature-stress conditions.</p>
-            <blockquote>“Health sensing has to survive messy homes, not just clean datasets.”</blockquote>
-            <div class="mini-card-grid">
-              <a href="#">Sensor pod</a>
-              <a href="#">AI model</a>
-              <a href="#">India pilot</a>
-              <a href="#">ANN papers</a>
+            <div class="project-case-statement project-case-statement--quiet">
+              <span>Project premise</span>
+              <p>Health sensing has to work in real homes, not just tidy datasets.</p>
             </div>
-            <div class="project-technical">
-              <h3>Technical writing space</h3>
-              <p>Add model notes, sensor constraints, pilot conditions, signal quality, failure cases, and research artifacts here. The collapsed card stays visual; the hover state becomes the technical reading surface.</p>
-            </div>
+            <ul class="project-case-evidence" aria-label="SAFE project evidence">
+              <li><span>Built</span><strong>Sensor pod + AI model</strong></li>
+              <li><span>Pilot</span><strong>India field test</strong></li>
+              <li><span>Research</span><strong>ANN papers</strong></li>
+            </ul>
+            <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="safe-system-brief" aria-expanded="false">Read more <span>+</span></button>
+          </div>
+          </div>
+          <div class="project-system-reveal project-technical" id="safe-system-brief">
+              <div>
+                <p>SAFE started with a simple idea: the lab is where data behaves. Homes are where the system needed to work. An app, a model, and an environmental sensor pod flagged temperature stress early.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>Homes are messy and unpredictable. The product needed to show uncertainty instead of hiding it behind one score.</p></aside>
+                <p>The goal was not just a classifier. It was a useful heads-up: gather context, estimate risk, and make the next step clear.</p>
+                <pre class="project-brief-code"><code>signal + context
+  → estimate risk
+  → surface confidence
+  → prompt next action</code></pre>
+                <p>The India pilot and related ANN research tested whether the system could stay useful when data quality, living conditions, and daily routines did not resemble a clean dataset.</p>
+              </div>
+              <div class="project-architecture" aria-label="SAFE architecture">
+                <span>Sensor pod</span><b>→</b><span>AI model</span><b>→</b><span>Care signal</span>
+              </div>
+              <div class="project-brief-links" aria-label="SAFE project resources">
+                <a href="#">Research notes <span>↗</span></a>
+                <a href="#" download>Project brief <span>↓</span></a>
+              </div>
           </div>
         </article>
-        <article class="project-case-card" id="sage">
-          <div class="project-collage">
-            <img class="wide" src="assets/images/placeholders/projects-crm-analytics-wide.jpg" alt="Graph analytics placeholder" />
-            <img src="assets/images/placeholders/projects-crm-data-visualization.jpg" alt="Data visualization placeholder" />
-            <img src="assets/images/placeholders/projects-crm-network-graph.jpg" alt="Network graph placeholder" />
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="sage">
+          <div class="project-case-summary">
+          <div class="project-case-media" data-project-carousel aria-label="SAGE project media">
+            <div class="project-media-viewport">
+              <div class="project-media-track">
+                <figure class="project-media-slide is-active"><img src="assets/images/placeholders/projects-crm-analytics-wide.jpg" alt="SAGE graph analytics interface" /></figure>
+                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-crm-data-visualization.jpg" alt="SAGE data visualization" /></figure>
+                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-crm-network-graph.jpg" alt="SAGE network graph" /></figure>
+              </div>
+            </div>
+            <div class="project-media-controls"><span data-carousel-count aria-live="polite">01 / 03</span><div><button type="button" data-carousel-previous aria-label="Show previous SAGE image">←</button><button type="button" data-carousel-next aria-label="Show next SAGE image">→</button></div></div>
           </div>
           <div class="project-case-body">
-            <span>KG-04 / Graph intelligence</span>
             <h2>SAGE</h2>
             <p class="lede">Smart Analytical Graph of Events: interactive visualization of top-read Wikipedia article nodes and weighted content edges.</p>
-            <div class="callout">Used IBM Watson API for sentiment analysis over graph-connected event content.</div>
-            <div class="mini-card-grid">
-              <a href="#">Wikipedia graph</a>
-              <a href="#">Weighted edges</a>
-              <a href="#">IBM Watson</a>
-              <a href="#">Sentiment analysis</a>
-            </div>
-            <div class="project-technical">
-              <h3>Technical writing space</h3>
-              <p>Use this area for graph schema, edge weighting methodology, API usage, visualization decisions, and examples of event clusters discovered through the interface.</p>
-            </div>
+            <div class="project-case-statement project-case-statement--quiet"><span>Project premise</span><p>Events make more sense when you can see how they connect.</p></div>
+            <ul class="project-case-evidence" aria-label="SAGE project evidence"><li><span>Graph</span><strong>Wikipedia nodes</strong></li><li><span>Model</span><strong>Weighted edges</strong></li><li><span>Analysis</span><strong>Watson sentiment</strong></li></ul>
+            <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="sage-system-brief" aria-expanded="false">Read more <span>+</span></button>
+          </div>
+          </div>
+          <div class="project-system-reveal project-technical" id="sage-system-brief">
+              <div>
+                <p>SAGE used a graph to keep related events together. Top-read Wikipedia articles became nodes, and weighted edges showed how their content connected.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>Show the connections without turning the graph into a bowl of spaghetti.</p></aside>
+                <p>IBM Watson sentiment analysis added another layer, so the network could be read through both its structure and the language around an event.</p>
+                <pre class="project-brief-code"><code>article + event
+  → weighted edge
+  → sentiment signal
+  → graph view</code></pre>
+              </div>
+              <div class="project-architecture" aria-label="SAGE architecture"><span>Article nodes</span><b>→</b><span>Edge weights</span><b>→</b><span>Graph view</span></div>
+              <div class="project-brief-links" aria-label="SAGE project resources"><a href="#">Graph notes <span>↗</span></a><a href="#" download>Method brief <span>↓</span></a></div>
           </div>
         </article>
-        <article class="project-case-card" id="soar">
-          <div class="project-carousel" aria-label="SOAR project carousel">
-            <div class="carousel-track">
-              <img src="assets/images/placeholders/projects-benchpress-database.jpg" alt="Database interface placeholder" />
-              <img src="assets/images/placeholders/projects-benchpress-operations-planning.jpg" alt="Operations planning placeholder" />
-              <img src="assets/images/placeholders/projects-benchpress-team-management.jpg" alt="Team management placeholder" />
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="soar">
+          <div class="project-case-summary">
+          <div class="project-case-media" data-project-carousel aria-label="SOAR project media">
+            <div class="project-media-viewport">
+              <div class="project-media-track">
+                <figure class="project-media-slide is-active"><img src="assets/images/placeholders/projects-benchpress-database.jpg" alt="SOAR database interface" /></figure>
+                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-benchpress-operations-planning.jpg" alt="SOAR operations planning" /></figure>
+                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-benchpress-team-management.jpg" alt="SOAR team management" /></figure>
+              </div>
             </div>
-            <div class="carousel-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="project-media-controls"><span data-carousel-count aria-live="polite">01 / 03</span><div><button type="button" data-carousel-previous aria-label="Show previous SOAR image">←</button><button type="button" data-carousel-next aria-label="Show next SOAR image">→</button></div></div>
           </div>
           <div class="project-case-body">
-            <span>KG-05 / Operations software</span>
             <h2>SOAR</h2>
             <p class="lede">Smart Operating and Rostering: secure database and frontend interface for staff break duty allocation and daily management.</p>
-            <div class="callout">Adopted by head office and 200+ staff at International School of The Hague; received special commendation from school leadership.</div>
-            <div class="mini-card-grid">
-              <a href="#">Secure database</a>
-              <a href="#">Roster allocation</a>
-              <a href="#">Staff workflow</a>
-              <a href="#">200+ users</a>
-            </div>
-            <div class="project-technical">
-              <h3>Technical writing space</h3>
-              <p>This can hold notes on permissions, database design, scheduling logic, operational adoption, and how the interface changed when used by head office and staff at real scale.</p>
-            </div>
+            <div class="project-case-statement project-case-statement--quiet"><span>Project premise</span><p>Routine decisions work better when they do not live only in people's heads.</p></div>
+            <ul class="project-case-evidence" aria-label="SOAR project evidence"><li><span>Built</span><strong>Secure database</strong></li><li><span>Workflow</span><strong>Roster allocation</strong></li><li><span>Adoption</span><strong>200+ staff</strong></li></ul>
+            <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="soar-system-brief" aria-expanded="false">Read more <span>+</span></button>
+          </div>
+          </div>
+          <div class="project-system-reveal project-technical" id="soar-system-brief">
+              <div>
+                <p>SOAR put staff break-duty allocation and daily management in one place. The shared view replaced a chain of manual handoffs, which made the day a little less chaotic for everyone.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>A roster only helps when people understand it and know what to do when plans change.</p></aside>
+                <p>Head office and more than 200 staff at the International School of The Hague adopted the system. That meant day-to-day usability mattered as much as the data model.</p>
+                <pre class="project-brief-code"><code>staff + duty constraints
+  → allocate break cover
+  → publish roster
+  → resolve exceptions</code></pre>
+              </div>
+              <div class="project-architecture" aria-label="SOAR architecture"><span>Staff records</span><b>→</b><span>Duty logic</span><b>→</b><span>Daily roster</span></div>
+              <div class="project-brief-links" aria-label="SOAR project resources"><a href="#">Workflow notes <span>↗</span></a><a href="#" download>Project brief <span>↓</span></a></div>
           </div>
         </article>
       </section>
     </main>
-    <script src="assets/js/site.js?v=20260707-atlas"></script>
+    <script src="assets/js/site.js?v=20260905-hybrid-cards"></script>
   </body>
 </html>
