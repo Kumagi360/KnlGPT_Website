@@ -11,19 +11,6 @@
     <link rel="stylesheet" href="assets/css/styles.css?v=20260905-hybrid-cards" />
   </head>
   <body class="projects-page">
-    <div class="schematic-bg" aria-hidden="true">
-      <svg class="bg-drawing bg-circuit" viewBox="0 0 520 260">
-        <path d="M20 130h80l24-34 34 68 34-68 34 68 24-34h56" />
-        <path d="M306 74v112l112-56z" />
-        <path d="M250 130h56M418 130h72" />
-        <path d="M156 86v-46M156 174v48M348 56v-34M348 204v34" />
-        <text x="24" y="118">VIN</text><text x="386" y="96">OPA</text><text x="454" y="118">VOUT</text>
-      </svg>
-      <pre class="bg-code">always_ff @(posedge clk) begin
-  error <= target - encoder;
-  duty  <= kp * error + kd * delta;
-end</pre>
-    </div>
     <script src="assets/js/header.js"></script>
 
     <main>
