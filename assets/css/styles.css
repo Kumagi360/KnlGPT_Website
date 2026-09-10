@@ -3744,6 +3744,35 @@ blockquote {
   }
 }
 
+/* The hero remains a paired introduction through the intermediate laptop/tablet range. */
+@media (min-width: 721px) and (max-width: 1080px) {
+  .hero-copy {
+    display: contents;
+  }
+
+  .hero-section {
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+  }
+
+  .hero-text {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero-console {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .hero-interactions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 720px) {
   .site-header {
     padding: 14px;
