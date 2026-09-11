@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="title">
+  <title id="title">Kunal Gupta</title>
+  <rect x="1" y="1" width="78" height="78" fill="none" stroke="#151515" stroke-width="2"/>
+  <g font-family="Inter Tight, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="2" text-anchor="middle">
+    <text x="40" y="34"><tspan fill="#c95f2a">K</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">N</tspan><tspan fill="#151515">A</tspan><tspan fill="#c95f2a">L</tspan></text>
+    <text x="40" y="56.5"><tspan fill="#c95f2a">G</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">P</tspan><tspan fill="#c95f2a">T</tspan><tspan fill="#151515">A</tspan></text>
+  </g>
+</svg>

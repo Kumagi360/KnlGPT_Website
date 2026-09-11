@@ -4,6 +4,11 @@
 
   const siteRoot = new URL("../../", script.src);
   const href = (path) => new URL(path, siteRoot).href;
+  const favicon = document.querySelector('link[rel="icon"]') || document.createElement("link");
+  favicon.rel = "icon";
+  favicon.type = "image/svg+xml";
+  favicon.href = href("assets/images/kg-mark.svg");
+  if (!favicon.isConnected) document.head.append(favicon);
   const template = document.createElement("template");
   const pageCache = new Map();
   const loadedScripts = new Set([...document.scripts].map((item) => item.src).filter(Boolean));
@@ -17,8 +22,13 @@
   template.innerHTML = `
     <header class="site-header">
       <a class="brand-mark" href="${href("index.html#top")}" aria-label="Kunal Gupta home">
-        <span class="brand-cell">KG</span>
-        <span class="brand-text">Kunal Gupta</span>
+        <svg class="brand-cell" viewBox="0 0 80 80" aria-hidden="true">
+          <rect x="1" y="1" width="78" height="78" fill="none" stroke="#151515" stroke-width="2"/>
+          <g class="brand-wordmark" text-anchor="middle">
+            <text x="40" y="34"><tspan fill="#c95f2a">K</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">N</tspan><tspan fill="#151515">A</tspan><tspan fill="#c95f2a">L</tspan></text>
+            <text x="40" y="56.5"><tspan fill="#c95f2a">G</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">P</tspan><tspan fill="#c95f2a">T</tspan><tspan fill="#151515">A</tspan></text>
+          </g>
+        </svg>
       </a>
       <nav class="primary-nav global-nav" aria-label="Primary navigation">
         <a href="${href("index.html#top")}" data-nav="home">Home</a>

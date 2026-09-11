@@ -16,7 +16,6 @@
   --graphite: #282828;
   --radius: 8px;
   --max: 1440px;
-  --rail-gutter: clamp(112px, 9vw, 156px);
 }
 
 /* Keep desktop content comfortably inside the viewport; tablet and phone layouts use their full responsive width. */
@@ -132,17 +131,12 @@ a:focus-visible,
   stroke-linecap: square;
 }
 
-.ambient-pcb-network {
-  animation: ambientElectric 16s ease-in-out infinite;
-}
-
 .ambient-pcb-network path {
   stroke-dasharray: 8 18;
   animation: ambientCurrent 12s linear infinite;
 }
 
-.ambient-pcb-network circle,
-.ambient-pad-cluster rect {
+.ambient-pcb-network circle {
   fill: var(--paper);
 }
 
@@ -183,31 +177,12 @@ a:focus-visible,
 }
 
 .home-page main {
-  padding-left: var(--rail-gutter);
+  --max: min(1440px, 80vw);
   counter-reset: home-section;
-}
-
-.home-page .site-footer {
-  margin-left: var(--rail-gutter);
 }
 
 main {
   position: relative;
-}
-
-main::before {
-  content: "";
-  position: fixed;
-  right: 3vw;
-  top: 18vh;
-  width: 190px;
-  height: 320px;
-  pointer-events: none;
-  opacity: 0.1;
-  background:
-    linear-gradient(90deg, transparent 18px, rgba(17, 17, 17, 0.28) 19px 20px, transparent 21px) 0 0 / 76px 76px,
-    linear-gradient(0deg, transparent 18px, rgba(17, 17, 17, 0.22) 19px 20px, transparent 21px) 0 0 / 76px 76px;
-  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 70%, transparent);
 }
 
 .site-header {
@@ -232,7 +207,7 @@ main::before {
 }
 
 .brand-mark {
-  gap: 11px;
+  margin-left: 8px;
   font-weight: 700;
   transition: opacity 160ms ease;
 }
@@ -242,17 +217,16 @@ main::before {
 }
 
 .brand-cell {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 2px solid var(--ink);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 13px;
+  display: block;
+  width: 80px;
+  height: 80px;
 }
 
-.brand-text {
-  letter-spacing: 0;
+.brand-wordmark {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .primary-nav {
@@ -260,7 +234,7 @@ main::before {
   padding: 7px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.5);
+  background: transparent;
 }
 
 .primary-nav a {
@@ -305,7 +279,7 @@ main::before {
 .section-nav a {
   position: relative;
   width: max-content;
-  padding: 0 0 0 13px;
+  padding-left: 13px;
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
   font-size: 10px;
@@ -316,7 +290,6 @@ main::before {
 .section-nav a::before {
   content: "";
   position: absolute;
-  /* Keep the 7px dot centered on the rail. */
   left: -14px;
   top: 50%;
   width: 7px;
@@ -337,7 +310,6 @@ main::before {
   background: var(--oxide);
   box-shadow: 0 0 0 5px rgba(201, 95, 42, 0.12);
 }
-
 
 .hero-section {
   min-height: auto;
@@ -3079,6 +3051,98 @@ main::before {
   transform: translateY(-1px);
 }
 
+.til-date-filter {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(112px, 1fr) minmax(280px, 50%) minmax(112px, 1fr);
+  align-items: center;
+  gap: clamp(12px, 2vw, 28px);
+  padding: 0 clamp(18px, 4vw, 54px) 28px;
+}
+
+.til-date-readout {
+  display: grid;
+  gap: 3px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.til-date-readout--start { text-align: right; }
+.til-date-readout--end { text-align: left; }
+
+.til-date-readout output {
+  color: var(--ink);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.til-date-slider {
+  position: relative;
+  height: 34px;
+}
+
+.til-date-slider__rail,
+.til-date-slider__selection {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.til-date-slider__rail { inset-inline: 0; background: var(--line-strong); }
+.til-date-slider__selection { background: var(--oxide); }
+
+.til-date-slider input {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 34px;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.til-date-slider input::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  margin-top: -6.5px;
+  appearance: none;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  cursor: ew-resize;
+  pointer-events: auto;
+}
+
+.til-date-slider input::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+}
+
+.til-date-slider input::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  cursor: ew-resize;
+  pointer-events: auto;
+}
+
+.til-date-slider input::-moz-range-track {
+  height: 2px;
+  background: transparent;
+}
+
+.til-date-slider input:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--signal); outline-offset: 3px; }
+.til-date-slider input:focus-visible::-moz-range-thumb { outline: 2px solid var(--signal); outline-offset: 3px; }
+
 .blog-card {
   --card-inset: 22px;
   position: relative;
@@ -3479,16 +3543,6 @@ blockquote {
   }
 }
 
-@keyframes ambientElectric {
-  0%,
-  100% {
-    opacity: 0.38;
-  }
-  48% {
-    opacity: 0.88;
-  }
-}
-
 @keyframes ambientGrid {
   from {
     background-position: 0 0, 0 0, 0 0, 0 0;
@@ -3540,10 +3594,6 @@ blockquote {
 }
 
 @media (max-width: 1080px) {
-  :root {
-    --rail-gutter: 96px;
-  }
-
   .site-header {
     grid-template-columns: 1fr auto;
   }
@@ -3775,7 +3825,14 @@ blockquote {
   }
 }
 
+@media (max-width: 1280px) {
+  .section-nav {
+    display: none;
+  }
+}
+
 @media (max-width: 720px) {
+
   .site-header {
     padding: 14px;
     gap: 12px;
@@ -3791,32 +3848,13 @@ blockquote {
     font-size: 13px;
   }
 
-  .section-nav {
-    left: 4px;
-    top: 52%;
-    gap: 10px;
-    padding: 8px 0 8px 8px;
-    transform: translateY(-50%);
-  }
-
-  .section-nav a {
-    padding-left: 8px;
-    font-size: 9px;
-  }
-
-  .section-nav a::before {
-    /* Keep the smaller 5px dot centered on the same rail. */
-    left: -7px;
-    width: 5px;
-    height: 5px;
-  }
-
   .schematic-bg {
     opacity: 0.66;
   }
 
-  .brand-text {
-    display: none;
+  .brand-cell {
+    width: 62px;
+    height: 62px;
   }
 
   .hero-section {
@@ -4027,10 +4065,6 @@ blockquote {
 }
 
 @media (max-width: 480px) {
-  :root {
-    --rail-gutter: 88px;
-  }
-
   .hero-copy h1 {
     font-size: 3rem;
   }
@@ -4171,6 +4205,16 @@ blockquote {
 }
 
 @media (max-width: 720px) {
+  .til-date-filter {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    padding-bottom: 22px;
+  }
+
+  .til-date-slider { grid-column: 1 / -1; grid-row: 1; }
+  .til-date-readout--start { grid-column: 1; grid-row: 2; text-align: left; }
+  .til-date-readout--end { grid-column: 2; grid-row: 2; text-align: right; }
+
   .til-post-page *,
   .til-index-page * {
     box-sizing: border-box;

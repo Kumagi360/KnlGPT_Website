@@ -22,12 +22,21 @@
         <p>Source-backed daily cards from the gear windows: what the newsletters said, what the ideation layer inferred, and what was worth keeping.</p>
       </section>
 
-      <section class="blog-filter-bar" aria-label="Filter TIL posts by tag">
-        <button type="button" class="is-active" data-blog-filter="all">All</button>
-        <button type="button" data-blog-filter="ideation">Ideation</button>
-        <button type="button" data-blog-filter="aggregation">Aggregation</button>
-        <button type="button" data-blog-filter="first-gear">First Gear</button>
-        <button type="button" data-blog-filter="second-gear">Second Gear</button>
+      <section class="til-date-filter" aria-label="Filter TIL posts by date">
+        <div class="til-date-readout til-date-readout--start">
+          <span>From</span>
+          <output data-til-date-start></output>
+        </div>
+        <div class="til-date-slider" data-til-date-slider>
+          <div class="til-date-slider__rail"></div>
+          <div class="til-date-slider__selection" data-til-date-selection></div>
+          <input type="range" data-til-date-min aria-label="Earliest date" />
+          <input type="range" data-til-date-max aria-label="Latest date" />
+        </div>
+        <div class="til-date-readout til-date-readout--end">
+          <span>To</span>
+          <output data-til-date-end></output>
+        </div>
       </section>
 
       <section class="blog-index">
