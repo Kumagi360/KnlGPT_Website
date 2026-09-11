@@ -3301,12 +3301,14 @@ blockquote {
   background: var(--line-strong);
 }
 
-.til-ideation-section {
+.til-ideation-section,
+.til-essays-section {
   max-width: 860px;
   margin: 0 auto;
 }
 
-.til-ideation-section > .til-column {
+.til-ideation-section > .til-column,
+.til-essays-section > .til-column {
   margin: 0 auto;
 }
 
@@ -4269,7 +4271,8 @@ blockquote {
   }
 
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     width: min(100%, calc(100vw - (var(--til-mobile-gutter) * 2)));
     max-width: calc(100vw - (var(--til-mobile-gutter) * 2));
     overflow: hidden;
@@ -4377,7 +4380,8 @@ blockquote {
   }
 
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     width: calc(100vw - 44px);
     max-width: calc(100vw - 44px);
     margin-inline: auto;
@@ -4417,7 +4421,8 @@ blockquote {
 @media (max-width: 420px) {
   .til-post-page .til-gear-hero h1,
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     width: calc(100vw - 32px);
     max-width: calc(100vw - 32px);
   }
@@ -4443,6 +4448,7 @@ blockquote {
   .til-post-page .post-body,
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard,
   .til-post-page .til-card-image {
@@ -4457,7 +4463,8 @@ blockquote {
   }
 
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     width: 100%;
     grid-template-columns: minmax(0, 1fr);
   }
@@ -4554,6 +4561,7 @@ blockquote {
   .til-post-page .post-body,
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard,
   .til-index-page .blog-index,
@@ -4575,6 +4583,7 @@ blockquote {
 
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-index-page .blog-index {
     width: calc(100vw - 40px) !important;
     max-width: calc(100vw - 40px) !important;
@@ -4633,7 +4642,8 @@ blockquote {
   .til-post-page .post-hero,
   .til-post-page .post-body,
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     width: calc(100vw - 56px) !important;
     max-width: calc(100vw - 56px) !important;
   }
@@ -4677,7 +4687,8 @@ blockquote {
   }
 
   .til-post-page .til-aggregation-grid,
-  .til-post-page .til-ideation-section {
+  .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section {
     box-sizing: border-box !important;
     width: calc(100vw - 88px) !important;
     max-width: calc(100vw - 88px) !important;
@@ -4721,6 +4732,7 @@ blockquote {
 
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     display: grid !important;
@@ -4770,6 +4782,7 @@ blockquote {
   .til-post-page .post-body,
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     box-sizing: border-box !important;
@@ -4811,6 +4824,7 @@ blockquote {
 
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     width: 100% !important;
@@ -4830,6 +4844,7 @@ blockquote {
   .til-post-page .post-body,
   .til-post-page .til-aggregation-grid,
   .til-post-page .til-ideation-section,
+  .til-post-page .til-essays-section,
   .til-post-page .til-column,
   .til-post-page .til-subcard {
     box-sizing: border-box !important;
