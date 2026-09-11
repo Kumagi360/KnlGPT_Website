@@ -99,6 +99,21 @@ const countries = [
     ],
   },
   {
+    id: "242",
+    status: "visited",
+    title: "Fiji",
+  },
+  {
+    id: "540",
+    status: "visited",
+    title: "New Caledonia",
+  },
+  {
+    id: "548",
+    status: "visited",
+    title: "Vanuatu",
+  },
+  {
     id: "036",
     status: "lived",
     meta: "Australia / lived here",
@@ -190,6 +205,11 @@ const countries = [
     id: "008",
     status: "visited",
     title: "Albania",
+  },
+  {
+    id: "191",
+    status: "visited",
+    title: "Croatia",
   },
   {
     id: "499",
