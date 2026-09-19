@@ -14,18 +14,17 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260918-ux-touchup-5" />
   </head>
   <body class="home-page">
-    <div class="scroll-meter" aria-hidden="true"></div>
-    <script src="assets/js/header.js"></script>
+    <script src="assets/js/header.js?v=20260919-logo-alignment"></script>
 
     <nav class="section-nav" aria-label="Homepage sections">
       <a href="#latest" data-section-nav="latest">Latest</a>
-      <a href="#work" data-section-nav="work">Work</a>
+      <a href="#work" data-section-nav="projects">Projects</a>
       <a href="#timeline" data-section-nav="timeline">Timeline</a>
-      <a href="#atlas" data-section-nav="atlas">Atlas</a>
-      <a href="#notes" data-section-nav="notes">Notes</a>
+      <a href="#atlas" data-section-nav="travel">Travel</a>
+      <a href="#notes" data-section-nav="thoughts">Thoughts</a>
     </nav>
 
     <main id="top">
@@ -47,17 +46,14 @@
 
           <div class="hero-interactions" aria-label="Fields of work">
             <article>
-              <span>01</span>
               <strong>Robotics systems</strong>
               <em>Autonomy / mechatronics / embodied AI</em>
             </article>
             <article>
-              <span>02</span>
               <strong>Founder work</strong>
               <em>Useful things, hopefully with fewer surprises</em>
             </article>
             <article>
-              <span>03</span>
               <strong>Field archive</strong>
               <em>Work, travel, and a few good stories</em>
             </article>
@@ -75,16 +71,16 @@
           </div>
           <div class="portrait-ledger" aria-label="Personal archive statistics">
             <div>
-              <strong>12</strong>
+              <strong id="stat-countries">33</strong>
               <span>Countries</span>
             </div>
             <div>
-              <strong>05</strong>
-              <span>Case files</span>
+              <strong id="stat-projects">05</strong>
+              <span>Projects</span>
             </div>
             <div>
-              <strong>04</strong>
-              <span>Continents</span>
+              <strong id="stat-thoughts">03</strong>
+              <span>Thoughts</span>
             </div>
           </div>
         </aside>
@@ -431,15 +427,15 @@
         </div>
         <div class="timeline-board">
           <div class="timeline-track" aria-label="Resume timeline preview">
-            <article class="timeline-item is-active" data-year="2024">
+            <article class="timeline-item" data-year="2024">
               <span>2024 - now</span>
               <div class="timeline-logo" aria-hidden="true">
                 <img src="assets/images/wayve_logo_2.jpeg" alt="" />
               </div>
               <h3>Robotics Engineer</h3>
               <p>
-                <strong>Wayve</strong> / Mountain View. Working on autonomy for
-                self-driving cars.
+                <span class="timeline-item-company"><strong>Wayve</strong> / Mountain View.</span>
+                <span class="timeline-item-description">Working on autonomy for self-driving cars.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2024">
@@ -449,9 +445,8 @@
               </div>
               <h3>Founder in Residence</h3>
               <p>
-                <strong>Entrepreneur First</strong> / San Francisco. Explored
-                robotics tools, training, and embodiments in an incubator
-                cohort.
+                <span class="timeline-item-company"><strong>Entrepreneur First</strong> / San Francisco.</span>
+                <span class="timeline-item-description">Explored robotics tools, training, and embodiments in an incubator cohort.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2024">
@@ -461,8 +456,8 @@
               </div>
               <h3>Analyst Extern</h3>
               <p>
-                <strong>Battery Ventures</strong> / Remote. Supported sourcing and
-                diligence for early- and growth-stage technology investments.
+                <span class="timeline-item-company"><strong>Battery Ventures</strong> / Remote.</span>
+                <span class="timeline-item-description">Supported sourcing and diligence for early- and growth-stage technology investments.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2023">
@@ -472,8 +467,8 @@
               </div>
               <h3>Full-Team Lead</h3>
               <p>
-                <strong>Cornell Electric Vehicles</strong>. Led a 60-person team
-                building autonomous electric vehicles.
+                <span class="timeline-item-company"><strong>Cornell Electric Vehicles</strong> / Ithaca.</span>
+                <span class="timeline-item-description">Led a 60-person team building autonomous electric vehicles.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2023">
@@ -483,8 +478,8 @@
               </div>
               <h3>SWE Intern</h3>
               <p>
-                <strong>Amazon AGI</strong> / Boston. Built an ML infrastructure
-                module for generating Alexa SLU training data.
+                <span class="timeline-item-company"><strong>Amazon AGI</strong> / Boston.</span>
+                <span class="timeline-item-description">Built an ML infrastructure module for generating Alexa SLU training data.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2022">
@@ -494,9 +489,8 @@
               </div>
               <h3>Researcher</h3>
               <p>
-                <strong>Collective Embodied Intelligence Lab</strong>. Worked on
-                perception and control for bio-inspired swarm-robot coordination
-                research.
+                <span class="timeline-item-company"><strong>Collective Embodied Intelligence Lab</strong> / Ithaca.</span>
+                <span class="timeline-item-description">Worked on perception and control for bio-inspired swarm-robot coordination research.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2022">
@@ -506,8 +500,8 @@
               </div>
               <h3>Robotics Intern</h3>
               <p>
-                <strong>Dynamic Locomotion</strong> / Groton. Built embedded and
-                electrical systems for humanoid joint actuation.
+                <span class="timeline-item-company"><strong>Dynamic Locomotion</strong> / Groton.</span>
+                <span class="timeline-item-description">Built embedded and electrical systems for humanoid joint actuation.</span>
               </p>
             </article>
             <article class="timeline-item" data-year="2021">
@@ -517,9 +511,8 @@
               </div>
               <h3>Co-Founder & CTO</h3>
               <p>
-                <strong>Visions</strong> / The Hague and Kotor. Led the technical
-                work for immersive tourism platforms with Montenegro's national
-                tourism organization.
+                <span class="timeline-item-company"><strong>Visions</strong> / The Hague and Kotor.</span>
+                <span class="timeline-item-description">Led the technical work for immersive tourism platforms with Montenegro's national tourism organization.</span>
               </p>
             </article>
           </div>
@@ -560,17 +553,17 @@
         <div class="note-list">
           <a href="blog/reality-tested-machines.html" class="note-row">
             <span>Robotics</span>
-            <strong>What a robot teaches you once it escapes the bench</strong>
+            <strong>Reality-tested machines</strong>
             <em>Draft</em>
           </a>
           <a href="blog/engineering-entrepreneurship.html" class="note-row">
             <span>Founder</span>
-            <strong>What building a company has in common with a good test</strong>
+            <strong>Engineering entrepreneurship</strong>
             <em>Draft</em>
           </a>
           <a href="blog/taste-in-motion.html" class="note-row">
             <span>Travel</span>
-            <strong>Things travel makes easier to notice</strong>
+            <strong>Taste in motion</strong>
             <em>Draft</em>
           </a>
         </div>
@@ -588,7 +581,7 @@
     <script src="assets/vendor/d3.min.js"></script>
     <script src="assets/vendor/topojson-client.min.js"></script>
     <script src="assets/data/countries-110m.js"></script>
-    <script src="assets/js/site.js?v=20260707-atlas"></script>
-    <script src="assets/js/main.js?v=20260707-atlas"></script>
+    <script src="assets/js/site.js?v=20260918-ux-touchup-3"></script>
+    <script src="assets/js/main.js?v=20260919-hero-stats"></script>
   </body>
 </html>
