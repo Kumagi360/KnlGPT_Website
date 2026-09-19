@@ -21,7 +21,7 @@ This is a static site with no build step. Keep root entry pages at the project r
 
 ## Content Automation
 
-TIL and Thought content lives in the public content Gist. `manifest.json` contains archive-card metadata and a `contentFile` for every entry. Full TIL bodies live in monthly `til--YYYY-MM.json` files; full Thought bodies live in `thoughts.json`.
+TIL and Thought content lives in the public content Gist. `manifest.json` contains archive-card metadata and a `contentFile` for every entry. Full TIL bodies live in monthly `til--YYYY-MM.json` files; full Thought bodies live in `thoughts.json`. Add a card's full record and its manifest entry in the same Gist revision. On a month boundary, add the new monthly file there too. `pageCss` is optional content metadata for a card's page-specific styles.
 
 The root `til.html` and `blog.html` pages use `assets/js/cards.js` to render archive and detail views. New cards update the Gist only, never this website repository.
 
