@@ -9,11 +9,6 @@ This is a static site with no build step. Keep root entry pages at the project r
 - `blog.html`: blog index
 - `til.html`: TIL index
 
-## Content Pages
-
-- `blog/<post-heading-slug>.html`: long-form blog detail pages, named from the visible blog card heading
-- `til/YYYY-MM-DD-<gear>-gear.html`: dated TIL detail pages
-
 ## Assets
 
 - `assets/css/`: stylesheets
@@ -26,12 +21,8 @@ This is a static site with no build step. Keep root entry pages at the project r
 
 ## Content Automation
 
-Automation should generate or update the actual HTML files directly:
+TIL and Thought content lives in the public content Gist. `manifest.json` contains archive-card metadata and a `contentFile` for every entry. Full TIL bodies live in monthly `til--YYYY-MM.json` files; full Thought bodies live in `thoughts.json`.
 
-- `blog.html` and `til.html` for index cards
-- `blog/<post-heading-slug>.html` for blog detail pages
-- `til/YYYY-MM-DD-<gear>-gear.html` for TIL detail pages
-
-New pages should load the shared header instead of copying its markup. Root pages use `assets/js/header.js`; pages inside `blog/` or `til/` use `../assets/js/header.js`.
+The root `til.html` and `blog.html` pages use `assets/js/cards.js` to render archive and detail views. New cards update the Gist only, never this website repository.
 
 TIL images are intentionally remote-only. Do not mirror newsletter/article card images into committed assets unless ownership changes.
