@@ -8,6 +8,8 @@ function initAmbientBackground() {
     document.body.prepend(background);
   }
 
+  if (background.querySelector(".ambient-geometry")) return;
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const tracePulseA = reducedMotion ? "" : '<animateMotion dur="18s" repeatCount="indefinite" path="M110 680H430V790H690" />';
   const tracePulseB = reducedMotion ? "" : '<animateMotion dur="24s" repeatCount="indefinite" path="M80 760H300V590H530V680H760" />';
