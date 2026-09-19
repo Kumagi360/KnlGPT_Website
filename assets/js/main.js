@@ -245,6 +245,30 @@ const interactiveCountryIds = new Set(countries.map((country) => country.id));
 const livedCountryIds = new Set(countries.filter((country) => country.status === "lived").map((country) => country.id));
 const visitedCountryIds = new Set(countries.filter((country) => country.status !== "lived").map((country) => country.id));
 
+function updateArchiveStats() {
+  const countriesStat = document.querySelector("#stat-countries");
+  if (countriesStat) countriesStat.textContent = String(countries.length).padStart(2, "0");
+
+  const statSources = [
+    ["#stat-projects", "projects.html", ".project-case-card"],
+    ["#stat-thoughts", "blog.html", ".blog-index .blog-card"],
+  ];
+
+  statSources.forEach(async ([target, source, selector]) => {
+    const stat = document.querySelector(target);
+    if (!stat) return;
+
+    try {
+      const response = await fetch(source);
+      if (!response.ok) return;
+      const page = new DOMParser().parseFromString(await response.text(), "text/html");
+      stat.textContent = String(page.querySelectorAll(selector).length).padStart(2, "0");
+    } catch {
+      // The static count remains visible if a page cannot be loaded.
+    }
+  });
+}
+
 function updateScrollMeter() {
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
   const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
@@ -254,8 +278,9 @@ function updateScrollMeter() {
 function initSectionNav() {
   const links = [...document.querySelectorAll("[data-section-nav]")];
   const sections = links
-    .map((link) => document.getElementById(link.dataset.sectionNav))
+    .map((link) => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
+  const footer = document.querySelector(".site-footer");
   if (!links.length || !sections.length) return;
 
   let isScheduled = false;
@@ -266,11 +291,12 @@ function initSectionNav() {
       const { top, bottom } = section.getBoundingClientRect();
       return top <= viewportCenter && bottom > viewportCenter;
     });
-    const isAtPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-    const currentSection = centeredSection || (isAtPageBottom ? sections.at(-1) : null);
+    const isAtPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 32;
+    const isFooterVisible = footer && footer.getBoundingClientRect().top <= window.innerHeight;
+    const currentSection = isFooterVisible || isAtPageBottom ? sections.at(-1) : centeredSection;
 
     links.forEach((link) => {
-      link.classList.toggle("is-current", link.dataset.sectionNav === currentSection?.id);
+      link.classList.toggle("is-current", link.getAttribute("href") === `#${currentSection?.id}`);
     });
   };
 
@@ -283,7 +309,7 @@ function initSectionNav() {
 
   links.forEach((link) => {
     link.addEventListener("click", (event) => {
-      const section = document.getElementById(link.dataset.sectionNav);
+      const section = document.querySelector(link.getAttribute("href"));
       if (!section) return;
 
       event.preventDefault();
@@ -475,6 +501,8 @@ async function renderWorldMap() {
       .attr("aria-label", (feature) => (interactiveCountryIds.has(String(feature.id)) ? `${countries.find((country) => country.id === String(feature.id))?.title} country name` : "Country border"))
       .attr("d", path);
 
+    countryPaths.filter((feature) => interactiveCountryIds.has(String(feature.id))).raise();
+
     countryPaths.each(function (feature) {
       const id = String(feature.id);
       if (!interactiveCountryIds.has(id)) return;
@@ -543,14 +571,21 @@ async function renderWorldMap() {
 
 window.addEventListener("scroll", updateScrollMeter, { passive: true });
 updateScrollMeter();
+updateArchiveStats();
 initSectionNav();
 initLatestCarousel();
 
-document.querySelectorAll(".timeline-item").forEach((item) => {
+const timelineItems = [...document.querySelectorAll(".timeline-item")];
+
+timelineItems.forEach((item) => {
   item.addEventListener("mouseenter", () => {
-    document.querySelectorAll(".timeline-item").forEach((otherItem) => {
+    timelineItems.forEach((otherItem) => {
       otherItem.classList.toggle("is-active", otherItem === item);
     });
+  });
+
+  item.addEventListener("mouseleave", () => {
+    item.classList.remove("is-active");
   });
 });
 
