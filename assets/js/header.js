@@ -232,6 +232,8 @@
         if (nextDocument) {
           await loadPageScripts(nextDocument, url);
           window.initializeSitePage?.();
+          if (document.body.classList.contains("til-index-page")) window.initializeCards?.("til");
+          if (document.body.classList.contains("blog-index-page") && !document.body.classList.contains("til-index-page")) window.initializeCards?.("thought");
         }
 
         scrollToDestination(url);
