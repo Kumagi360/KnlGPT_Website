@@ -53,57 +53,55 @@ function initAmbientBackground() {
   `;
 }
 
+function setActiveSection(active) {
+  document.querySelectorAll("[data-section-nav]").forEach((link) => {
+    link.classList.toggle("is-current", link.dataset.sectionNav === active);
+  });
+}
+
+function setActiveSectionFromHash() {
+  const hash = window.location.hash.replace("#", "");
+  const active = { work: "projects", atlas: "travel", notes: "thoughts" }[hash] || hash;
+  if (!active) return false;
+  const link = document.querySelector(`[data-section-nav="${active}"]`);
+  if (!link) return false;
+  setActiveSection(active);
+  return true;
+}
+
 function initProjectCardFocus() {
   const cards = [...document.querySelectorAll(".project-case-card")];
-  const collection = document.querySelector(".project-card-collection");
-  if (!cards.length || !collection) return;
+  if (!cards.length) return;
 
-  collection.classList.add("has-focus");
-
-  const canHover = window.matchMedia("(hover: hover)").matches;
+  const setExpanded = (card, expanded) => {
+    card.classList.toggle("is-expanded", expanded);
+    const briefToggle = card.querySelector("[data-project-brief-toggle]");
+    if (briefToggle) {
+      briefToggle.setAttribute("aria-expanded", String(expanded));
+      briefToggle.setAttribute("aria-label", expanded ? "Close system brief" : "Open system brief");
+      briefToggle.firstChild.nodeValue = expanded ? "Close system brief " : "Open system brief ";
+    }
+  };
 
   cards.forEach((card) => {
-    const briefToggle = card.querySelector("[data-project-brief-toggle]");
-    const setExpanded = (expanded) => {
-      card.classList.toggle("is-expanded", expanded);
-      if (briefToggle) briefToggle.setAttribute("aria-expanded", String(expanded));
-    };
-
-    card.addEventListener("mouseenter", () => setExpanded(true));
-    card.addEventListener("mouseleave", () => {
-      if (canHover) setExpanded(false);
-    });
-    card.addEventListener("focusin", (event) => {
-      if (!event.target.closest("button, a")) setExpanded(true);
-    });
-    card.addEventListener("focusout", () => setExpanded(false));
     card.addEventListener("click", (event) => {
-      if (event.target.closest("[data-project-brief-toggle]")) {
+      const briefToggle = event.target.closest("[data-project-brief-toggle]");
+      if (briefToggle) {
         event.preventDefault();
-        setExpanded(!card.classList.contains("is-expanded"));
-        return;
+        const expanded = !card.classList.contains("is-expanded");
+        setExpanded(card, expanded);
+        if (!expanded) briefToggle.blur();
       }
-      if (event.target.closest("button, a")) return;
-      setExpanded(!card.classList.contains("is-expanded"));
     });
   });
 
-  const setCurrentCard = (card) => {
-    cards.forEach((item) => item.classList.toggle("is-current", item === card));
+  const openHashTarget = () => {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target && cards.includes(target)) setExpanded(target, true);
   };
 
-  const cardObserver = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setCurrentCard(visible.target);
-    },
-    { rootMargin: "-22% 0px -38% 0px", threshold: [0.18, 0.34, 0.52, 0.7] }
-  );
-
-  cards.forEach((card) => cardObserver.observe(card));
-  setCurrentCard(cards[0]);
+  window.addEventListener("hashchange", openHashTarget);
+  window.requestAnimationFrame(openHashTarget);
 }
 
 function initProjectMediaCarousels() {
@@ -231,12 +229,80 @@ function initTilDateFilter() {
   update();
 }
 
+function initHomeSectionTracking() {
+  if ((window.location.pathname.split("/").pop() || "index.html") !== "index.html" && !window.location.pathname.endsWith("/")) return;
+
+  const sectionNav = {
+    latest: "latest",
+    work: "projects",
+    timeline: "timeline",
+    atlas: "travel",
+    notes: "thoughts",
+  };
+  const observedSections = Object.keys(sectionNav)
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const footer = document.querySelector(".site-footer");
+
+  if (observedSections.length) {
+    let sectionTicking = false;
+
+    const updateSectionFromScroll = () => {
+      sectionTicking = false;
+
+      const scrollBottom = window.scrollY + window.innerHeight;
+      const pageBottom = document.documentElement.scrollHeight - 32;
+      const isFooterVisible = footer && footer.getBoundingClientRect().top <= window.innerHeight;
+      if (isFooterVisible || scrollBottom >= pageBottom) {
+        setActiveSection("thoughts");
+        return;
+      }
+
+      const targetLine = window.innerHeight * 0.42;
+      const current = observedSections
+        .map((section) => {
+          const rect = section.getBoundingClientRect();
+          const sectionCenter = rect.top + rect.height * 0.38;
+          return {
+            id: section.id,
+            distance: Math.abs(sectionCenter - targetLine),
+            visible: rect.bottom > 96 && rect.top < window.innerHeight - 96,
+          };
+        })
+        .filter((section) => section.visible)
+        .sort((a, b) => a.distance - b.distance)[0];
+
+      if (current) setActiveSection(sectionNav[current.id]);
+    };
+
+    const requestSectionUpdate = () => {
+      if (sectionTicking) return;
+      sectionTicking = true;
+      window.requestAnimationFrame(updateSectionFromScroll);
+    };
+
+    if (!setActiveSectionFromHash()) {
+      setActiveSection("latest");
+    }
+    updateSectionFromScroll();
+    window.addEventListener("scroll", requestSectionUpdate, { passive: true });
+    window.addEventListener("resize", requestSectionUpdate);
+  }
+
+  document.querySelectorAll("[data-section-nav]").forEach((link) => {
+    link.addEventListener("click", () => {
+      setActiveSection(link.dataset.sectionNav);
+    });
+  });
+}
+
 function initializeSitePage() {
   initAmbientBackground();
   initProjectCardFocus();
   initProjectMediaCarousels();
   initBlogFilters();
   initTilDateFilter();
+  initHomeSectionTracking();
 }
 
 window.initializeSitePage = initializeSitePage;

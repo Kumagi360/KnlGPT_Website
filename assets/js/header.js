@@ -23,23 +23,42 @@
     <header class="site-header">
       <a class="brand-mark" href="${href("index.html#top")}" aria-label="Kunal Gupta home">
         <svg class="brand-cell" viewBox="0 0 80 80" aria-hidden="true">
-          <rect x="1" y="1" width="78" height="78" fill="none" stroke="#151515" stroke-width="2"/>
+          <rect class="brand-mark-outline" x="1" y="1" width="78" height="78" fill="none" stroke-width="2"/>
           <g class="brand-wordmark" text-anchor="middle">
-            <text x="40" y="34"><tspan fill="#c95f2a">K</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">N</tspan><tspan fill="#151515">A</tspan><tspan fill="#c95f2a">L</tspan></text>
-            <text x="40" y="56.5"><tspan fill="#c95f2a">G</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">P</tspan><tspan fill="#c95f2a">T</tspan><tspan fill="#151515">A</tspan></text>
+            <text y="34"><tspan class="brand-mark-signal" x="16">K</tspan><tspan class="brand-mark-ink" x="28">U</tspan><tspan class="brand-mark-signal" x="40">N</tspan><tspan class="brand-mark-ink" x="52">A</tspan><tspan class="brand-mark-signal" x="64">L</tspan></text>
+            <text y="56.5"><tspan class="brand-mark-signal" x="16">G</tspan><tspan class="brand-mark-ink" x="28">U</tspan><tspan class="brand-mark-signal" x="40">P</tspan><tspan class="brand-mark-signal" x="52">T</tspan><tspan class="brand-mark-ink" x="64">A</tspan></text>
           </g>
         </svg>
       </a>
-      <nav class="primary-nav global-nav" aria-label="Primary navigation">
-        <a href="${href("index.html#top")}" data-nav="home">Home</a>
-        <a href="${href("projects.html")}" data-nav="projects">Projects</a>
-        <a href="${href("blog.html")}" data-nav="blog">Thoughts</a>
-        <a href="${href("til.html")}" data-nav="til">TIL</a>
-      </nav>
+      <div class="header-controls">
+        <nav class="primary-nav global-nav" aria-label="Primary navigation">
+          <a href="${href("index.html#top")}" data-nav="home">Home</a>
+          <a href="${href("projects.html")}" data-nav="projects">Projects</a>
+          <a href="${href("blog.html")}" data-nav="blog">Thoughts</a>
+          <a href="${href("til.html")}" data-nav="til">TIL</a>
+        </nav>
+        <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+          <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"/></svg>
+          <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.1A8.7 8.7 0 0 1 8.9 3.5a8.7 8.7 0 1 0 11.6 11.6Z"/></svg>
+          <span class="visually-hidden">Toggle color theme</span>
+        </button>
+      </div>
     </header>
   `;
 
   const header = template.content.querySelector(".site-header");
+  const scrollMeter = document.createElement("div");
+  scrollMeter.className = "scroll-meter";
+  scrollMeter.setAttribute("aria-hidden", "true");
+
+  function updateScrollMeter() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    scrollMeter.style.width = `${progress * 100}%`;
+  }
+
+  window.addEventListener("scroll", updateScrollMeter, { passive: true });
+  window.addEventListener("resize", updateScrollMeter);
 
   function setActiveNav() {
     const path = window.location.pathname.split("/").pop() || "index.html";
@@ -57,6 +76,31 @@
       else link.removeAttribute("aria-current");
     });
   }
+
+  function setTheme(theme) {
+    const isDark = theme === "dark";
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+    const toggle = header.querySelector(".theme-toggle");
+    toggle.setAttribute("aria-checked", String(isDark));
+    toggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {
+      // Theme selection remains available when storage is unavailable.
+    }
+  }
+
+  let savedTheme = "light";
+  try {
+    savedTheme = localStorage.getItem("theme") || "light";
+  } catch {
+    // Light mode is the site's default when storage is unavailable.
+  }
+  setTheme(savedTheme);
+
+  header.querySelector(".theme-toggle").addEventListener("click", () => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  });
 
   function readPageStyles(source = document) {
     return [...source.head.querySelectorAll("style")].map((item) => item.textContent);
@@ -191,6 +235,7 @@
         }
 
         scrollToDestination(url);
+        updateScrollMeter();
       };
 
       if (document.startViewTransition) await document.startViewTransition(update).finished;
@@ -220,5 +265,6 @@
 
   window.updateSiteHeader = setActiveNav;
   setActiveNav();
-  script.replaceWith(header);
+  script.replaceWith(scrollMeter, header);
+  updateScrollMeter();
 })();
