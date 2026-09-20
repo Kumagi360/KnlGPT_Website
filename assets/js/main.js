@@ -336,6 +336,10 @@ function initSectionNav() {
 function initLatestCarousel() {
   const carousel = document.querySelector("[data-latest-carousel]");
   if (!carousel) return;
+  if (carousel.refreshAutoRotation) {
+    carousel.refreshAutoRotation();
+    return;
+  }
 
   const track = carousel.querySelector(".latest-track");
   const cards = [...carousel.querySelectorAll("[data-latest-card]")].sort((first, second) => {
@@ -426,6 +430,10 @@ function initLatestCarousel() {
 
     window.addEventListener("resize", syncMediaRoll, { passive: true });
     window.addEventListener("load", syncMediaRoll, { once: true });
+    stage.querySelectorAll("img, video").forEach((media) => {
+      media.addEventListener(media instanceof HTMLVideoElement ? "loadedmetadata" : "load", syncMediaRoll);
+    });
+    if ("ResizeObserver" in window) new ResizeObserver(syncMediaRoll).observe(stage);
     syncMediaRoll();
     window.requestAnimationFrame(animate);
   };
@@ -434,7 +442,6 @@ function initLatestCarousel() {
 
   let activeIndex = 0;
   let autoTimer;
-  let isPaused = false;
 
   const setLatest = (index, shouldScroll = true) => {
     activeIndex = (index + cards.length) % cards.length;
@@ -454,18 +461,13 @@ function initLatestCarousel() {
   const restartAuto = () => {
     window.clearInterval(autoTimer);
     autoTimer = window.setInterval(() => {
-      if (!document.hidden && !isPaused) setLatest(activeIndex + 1);
+      if (!document.hidden && !carousel.matches(":hover") && !carousel.contains(document.activeElement)) {
+        setLatest(activeIndex + 1);
+      }
     }, 10000);
   };
 
-  const pauseAuto = () => {
-    isPaused = true;
-  };
-
-  const resumeAuto = () => {
-    isPaused = false;
-    restartAuto();
-  };
+  carousel.refreshAutoRotation = restartAuto;
 
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
@@ -484,12 +486,9 @@ function initLatestCarousel() {
     restartAuto();
   });
 
-  carousel.addEventListener("mouseenter", pauseAuto);
-  carousel.addEventListener("mouseleave", resumeAuto);
-  carousel.addEventListener("focusin", pauseAuto);
-  carousel.addEventListener("focusout", resumeAuto);
-  carousel.addEventListener("touchstart", pauseAuto, { passive: true });
-  carousel.addEventListener("touchend", resumeAuto, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) restartAuto();
+  });
 
   track.addEventListener(
     "scroll",
@@ -652,3 +651,5 @@ timelineItems.forEach((item) => {
 });
 
 renderWorldMap();
+
+window.initializeHomePage = initLatestCarousel;

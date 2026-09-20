@@ -613,7 +613,7 @@ main {
   display: grid;
   align-content: start;
   gap: 7px;
-  padding: 14px 16px 16px;
+  padding: 26px 16px 16px;
   border-bottom: 1px solid var(--line-strong);
   transition: background 260ms ease, transform 260ms ease, color 260ms ease;
 }

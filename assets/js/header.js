@@ -119,7 +119,7 @@
   function captureCurrentPage() {
     const content = document.createDocumentFragment();
     [...document.body.childNodes].forEach((node) => {
-      if (node !== header && !(node instanceof HTMLScriptElement)) content.append(node);
+      if (node !== header && node !== scrollMeter && !(node instanceof HTMLScriptElement)) content.append(node);
     });
 
     pageCache.set(currentPageKey, {
@@ -242,6 +242,9 @@
 
       if (document.startViewTransition) await document.startViewTransition(update).finished;
       else await update();
+
+      window.initializeHomePage?.();
+      window.refreshAutoplayVideos?.({ reload: true });
     } catch (error) {
       if (error.name !== "AbortError") window.location.assign(url);
     } finally {
@@ -261,7 +264,7 @@
 
     event.preventDefault();
     navigate(url, true);
-  });
+  }, { capture: true });
 
   window.addEventListener("popstate", () => navigate(new URL(window.location.href), false));
 
