@@ -90,8 +90,17 @@ function renderTilIndex(root, entries, manifest) {
 }
 
 function renderThoughtIndex(root, entries, manifest) {
-  root.innerHTML = entries
-    .filter((entry) => entry.type === "thought")
+  const thoughts = entries.filter((entry) => entry.type === "thought");
+  const tags = [...new Set(thoughts.flatMap((entry) => entry.tags || []))];
+  const filterBar = document.querySelector("[data-blog-filter-bar]");
+  if (filterBar) {
+    filterBar.hidden = tags.length === 0;
+    filterBar.innerHTML = tags.length
+      ? `<button type="button" class="is-active" data-blog-filter="all" aria-pressed="true">All</button>${tags.map((tag) => `<button type="button" data-blog-filter="${escapeHtml(tag)}" aria-pressed="false">${escapeHtml(tag)}</button>`).join("")}`
+      : "";
+  }
+
+  root.innerHTML = thoughts
     .map((entry) => `<a class="blog-card lead-card" href="blog.html?post=${encodeURIComponent(entry.id)}" data-blog-tags="${escapeHtml(entry.tags.join(" "))}" ${cardDataAttributes(entry, manifest)}><div class="blog-card-heading"><span>${escapeHtml(entry.category)}</span><h2>${escapeHtml(entry.title)}</h2></div><img src="${escapeHtml(entry.cover.src)}" alt="${escapeHtml(entry.cover.alt)}" /></a>`)
     .join("");
 }
