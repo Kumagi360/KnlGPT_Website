@@ -1,0 +1,20 @@
+{
+  "entries": [
+    {
+      "id": "article-slug",
+      "type": "thought",
+      "category": "Robotics",
+      "title": "Article title",
+      "tags": [
+        "robotics"
+      ],
+      "cover": {
+        "src": "assets/images/article-cover.jpg",
+        "alt": "Concise, descriptive image alt text"
+      },
+      "contentFile": "thoughts.json",
+      "pageClass": "blog-post-page",
+      "articleHtml": "<header class=\"post-hero simple-post-hero\">\n  <span>Robotics / Month Year</span>\n  <h1>Article title</h1>\n  <p>One-sentence deck.</p>\n  <img src=\"../assets/images/article-cover.jpg\" alt=\"Concise, descriptive image alt text\" />\n</header>\n<section class=\"post-body simple-article\">\n  <p>Opening paragraph.</p>\n  <figure class=\"article-media\">\n    <img src=\"../assets/images/article-detail.jpg\" alt=\"Descriptive image alt text\" />\n    <figcaption>A useful caption.</figcaption>\n  </figure>\n  <p>Article body.</p>\n</section>"
+    }
+  ]
+}
