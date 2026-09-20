@@ -8,36 +8,511 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260918-ux-touchup-11" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260919-hero-handoff" />
   </head>
   <body class="projects-page">
     <script src="assets/js/header.js"></script>
 
-    <main>
+    <nav class="section-nav project-year-nav" aria-label="Project archive years" data-project-year-nav>
+      <a href="#top" class="is-current" data-project-year-link="today">Today</a>
+      <a href="#subsea-construction-simulator" data-project-year-link="2025">2025</a>
+      <a href="#cornell-electric-vehicles" data-project-year-link="2024">2024</a>
+      <a href="#stigmergic-swarms" data-project-year-link="2023">2023</a>
+      <a href="#humanoid-joint-control" data-project-year-link="2022">2022</a>
+      <a href="#visions" data-project-year-link="2021">2021</a>
+      <a href="#martha" data-project-year-link="2020">2020</a>
+      <a href="#silverbacks-engineering" data-project-year-link="2019">2019</a>
+      <a href="#safe" data-project-year-link="2018">2018</a>
+    </nav>
+
+    <main id="top">
       <section class="article-hero project-hero">
-        <h1>Project archive.</h1>
-        <p>A few projects I had a lot of fun building. The notes show how they came together, including the parts that took a second try.</p>
+        <h1>Projects Archive</h1>
+        <p>A few projects I had a lot of fun building, outside the day job. Open System Briefs for more technical and deployment details.</p>
       </section>
 
       <section class="project-card-collection" aria-label="Project collection">
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum project-case-card--concept" id="edge-corrected-teleoperation">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Edge-Corrected Teleoperation project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/edge-corrected-teleoperation.png" alt="Robot arm using a camera to sort marbles on a workbench" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 01</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Edge-Corrected Teleoperation image">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Edge-Corrected Teleoperation image">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <span>In progress</span>
+              <h2>Edge-Corrected Teleoperation</h2>
+              <p class="lede">A way to make remote robot control less brittle when the connection is slow or a handoff is slightly off.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>The person keeps the call. The robot handles small corrections close to the work.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Edge-Corrected Teleoperation project evidence">
+                <li><span>Problem</span><strong>Lag and messy demonstrations</strong></li>
+                <li><span>Where it runs</span><strong>On the robot</strong></li>
+                <li><span>Job</span><strong>Small, safe corrections</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="edge-corrected-teleoperation-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="edge-corrected-teleoperation-system-brief">
+            <div>
+              <p>Remote teleoperation is never as clean as a replay. There is delay, a camera view that arrives late, and plenty of little inputs that only make sense in context. I am working on a local layer that can spot the intended motion and make a small adjustment before the robot acts on it.</p>
+              <aside class="project-brief-callout"><span>How it works</span><p>The operator still sends the same pose or velocity commands. A small model on the robot reads recent commands alongside fresh joint, force, and camera data. If it is confident, it adds a limited correction. If it is not, it leaves the operator’s command alone.</p></aside>
+              <p>The useful part is the logging. Raw commands, the local correction, and what happened next are saved together. That makes it possible to train on the moments where a person was compensating for bad latency, rather than treating every recorded motion as perfect.</p>
+              <pre class="project-brief-code"><code>operator command
+  → local robot state
+  → small correction, if useful
+  → move and log the result</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Edge-Corrected Teleoperation architecture">
+              <span>Remote input</span><b>→</b><span>Local check</span><b>→</b><span>Robot motion</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum project-case-card--concept" id="swarming-formations">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Swarming Formations project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/swarming-proto1.png" alt="Magnetic cube prototypes forming early gripper and structural arrangements" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 01</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Swarming Formations image">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Swarming Formations image">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <span>In progress</span>
+              <h2>Swarming Formations</h2>
+              <p class="lede">Small mobile parts that could become an end effector one day and a temporary structure the next.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>Build the shape you need, then pull it apart when you are done.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Swarming Formations project evidence">
+                <li><span>Tools</span><strong>Gripper, scoop, and more</strong></li>
+                <li><span>Structures</span><strong>Braces, supports, simple frames</strong></li>
+                <li><span>Current idea</span><strong>Soft cubes, flywheels, electromagnets</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="swarming-formations-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="swarming-formations-system-brief">
+            <div>
+              <p>The interesting bit is not just a gripper that changes shape. The same set of parts might make a scoop, a support under a load, or a rough frame around something that needs holding in place. A single robot body is good at one thing. A pile of parts has a chance to be useful in more situations.</p>
+              <aside class="project-brief-callout"><span>Current direction</span><p>I am playing with small cubes that have soft outer surfaces, flywheels inside, and electromagnets on their faces. In theory, each one moves itself and snaps into place with the others. The right shape and way of moving are still open questions. Cubes are just the first thing I am trying.</p></aside>
+              <p>The first tests are simple: can a few parts form a two-finger gripper, then rearrange into a scoop? Can they also make a stiff enough brace or small support? That means getting the joins right, checking how much load they take, and seeing what happens when one part does not quite land where it should.</p>
+              <pre class="project-brief-code"><code>move a few parts
+  → bring them together
+  → test a tool or support
+  → take it apart and try again</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Swarming Formations experiment flow">
+              <span>Move</span><b>→</b><span>Connect</span><b>→</b><span>Make a tool or structure</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="stigmergic-swarms" data-project-year="2023">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Stigmergic Swarms project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/stigmergic-swarms/experiment-rig.jpeg" alt="Stigmergic Swarms experiment rig with overhead camera and pool" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <video data-project-video autoplay muted playsinline preload="metadata" aria-label="Stigmergic Swarms experiment video">
+                      <source src="assets/video/stigmergic-swarms/experiment.mp4" type="video/mp4" />
+                    </video>
+                  </figure>
+                </div>
+              </div>
+              <div class="project-video-controls" aria-label="Stigmergic Swarms video controls">
+                <button type="button" data-project-video-play aria-pressed="false">Play</button>
+                <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 02</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Stigmergic Swarms media">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Stigmergic Swarms media">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <h2>Stigmergic Swarms</h2>
+              <p class="lede">A swarm that communicated through its environment, using bubbles as an underwater message bus.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>If robots cannot talk to each other, can they still coordinate by changing the world around them?</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Stigmergic Swarms project evidence">
+                <li><span>Agents</span><strong>Mobile robots with no direct link</strong></li>
+                <li><span>Medium</span><strong>Bubbles and dyed fluid in water</strong></li>
+                <li><span>Vision runtime</span><strong>1,000 ms → 150 ms</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="stigmergic-swarms-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="stigmergic-swarms-system-brief">
+            <div>
+              <p>At Cornell’s Collective Embodied Intelligence Lab, under Kirstin Petersen, I explored stigmergy: coordination through persistent changes to a shared environment. Bees leave pheromone trails in air. I wanted to know what that idea could look like in water, where connectivity is unreliable and the environment can carry a signal.</p>
+              <aside class="project-brief-callout"><span>The system</span><p>I built the full stack around small wheeled agents: a 3D-printed body, two drive wheels and a caster, a fiducial marker, motors, and a snorkel for releasing bubbles or dyed fluid. The agents had no radio link to one another or to the computer. An overhead vision system read a snapshot of the pool, tracked every marker, interpreted the traces in the water, and relayed the resulting state through a multithreaded TCP/IP command-and-data layer with a live query and visualization interface.</p></aside>
+              <p>The bubble pattern was the message. Its timing, speed, and formation could represent a bit, a location, a direction of travel, or another shared state. I wrote the distributed processing and vision algorithms that made that loop usable, including image segmentation and tracking work that reduced processing time from roughly one second to 150 milliseconds. With that feedback loop in place, the agents showed meaningful multi-agent behavior without ever receiving a direct message from each other.</p>
+              <pre class="project-brief-code"><code>camera reads the water + agent markers
+  → vision stack infers shared state
+  → bubble pattern carries a message
+  → swarm responds through the environment</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Stigmergic Swarms system flow">
+              <span>Agent makes a trace</span><b>→</b><span>Vision reads the pool</span><b>→</b><span>Swarm updates behavior</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum project-case-card--concept" id="subsea-construction-simulator" data-project-year="2025">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Subsea Sim offshore-rig scene">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/seabuilt-simulator.png" alt="Simulated remotely operated vehicle inspecting a subsea pipeline valve assembly" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 01</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Subsea Sim image">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Subsea Sim image">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <span>In progress</span>
+              <h2>Subsea Sim</h2>
+              <p class="lede">A photorealistic training ground for underwater vehicles working around an offshore rig before vessel time got expensive.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>The simulator made underwater autonomy answer to both what a camera saw and what the water did to a vehicle.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Subsea Sim project evidence">
+                <li><span>Origin</span><strong>Entrepreneur First</strong></li>
+                <li><span>Prototype</span><strong>Offshore-rig construction cell</strong></li>
+                <li><span>Status</span><strong>Shared with offshore engineering teams</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="subsea-construction-simulator-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="subsea-construction-simulator-system-brief">
+            <div>
+              <p>The idea started at Entrepreneur First, then I kept working on it after leaving. I built a small digital twin of an offshore rig where underwater vehicles could inspect, line up, and place construction components. A few leading offshore engineering firms saw it and got excited. It is not in my day-to-day now, but I would happily pick it back up.</p>
+              <aside class="project-brief-callout"><span>What I built</span><p>The sim used rig and survey geometry, ray-traced lighting, and underwater camera, sonar, and DVL models. I used controllable synthetic data to vary water clarity, lighting, sensor placement, and the state of the components while keeping the labels needed to train perception.</p></aside>
+              <p>The point was not to make an ocean scene look nice. I wanted a perception stack to deal with murky water, backscatter, changing light, currents, and a vehicle that did not stay perfectly still. The simulator produced RGB, depth, sonar, DVL, and pose data together, then ran the perception work in the loop with the vehicle controls.</p>
+              <pre class="project-brief-code"><code>rig CAD + survey geometry + water conditions
+  → calibrated RGB / sonar / DVL data
+  → perception + state estimation stack
+  → current-aware vehicle control
+  → inspect, align, place</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Subsea Sim architecture">
+              <span>Rig digital twin</span><b>→</b><span>Multimodal perception</span><b>→</b><span>Construction task</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="visions" data-project-year="2021">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Visions project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/visions/scene.jpg" alt="Visions immersive location-based experience" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <video data-project-video autoplay muted playsinline preload="metadata" aria-label="Visions experience demo">
+                      <source src="assets/video/visions/demo.mp4" type="video/mp4" />
+                    </video>
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/visions/map-screen.png" alt="Visions map interface" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/visions/attractions-screen.png" alt="Visions attractions interface" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-video-controls" aria-label="Visions video controls">
+                <button type="button" data-project-video-play aria-pressed="false">Play</button>
+                <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 04</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Visions media">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Visions media">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <h2>Visions</h2>
+              <p class="lede">Two location-based AR and VR experiences that made Montenegro's history feel less like a plaque and more like a place you could step into.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>VR can take you anywhere. I wanted it to take you 500 years back from exactly where you were standing.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Visions project evidence">
+                <li><span>Experiences</span><strong>KotorAR + VantageVR</strong></li>
+                <li><span>Launch</span><strong>Oculus Quest APK for paying visitors</strong></li>
+                <li><span>Partners</span><strong>Local operators + Montenegro NTO</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="visions-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="visions-system-brief">
+            <div>
+              <p>I built Visions while living in Montenegro between high school and my second year of college. COVID had emptied the usual ways of encountering a place, while tourism, more than 30% of Montenegro's GDP, needed better digital infrastructure. I was already deep into AR and VR, and history had always been the part of travel I cared about most. This was the bridge between them.</p>
+              <aside class="project-brief-callout"><span>What made it work</span><p>VantageVR did not drop visitors into a generic historical scene. In Perast, visitors put on the headset facing the same waterfront they had just been looking at, then saw the Battle of Perast and the town around them as it could have appeared more than five centuries earlier.</p></aside>
+              <p>For VantageVR, I worked with an asset developer to turn the researched story and scene design into a Unity experience packaged as an APK for Oculus Quest. The experience was launched for paying customers in Perast and aboard boats travelling to Our Lady of the Rocks. I validated the reconstruction through sustained work with local officials and museum curators, plus a lot of primary and secondary research on Perast.</p>
+              <p>KotorAR extended the idea to a phone. Visitors could hold up a phone at an attraction, see an AR reconstruction of its earlier form, then follow guides and context into the story around it. I owned the product and technology architecture around the app, including local-business and mass-transit integrations. The asset developer built the AR scenes; I made sure the experience connected those scenes to the city around them.</p>
+              <p>The project was backed by Montenegro's national tourism organization and was discussed in the country's Senate during the COVID era as part of the conversation around tourism technology infrastructure. I also ran feature iteration, customer and partner feedback, and the material needed to explain the product to funders and operators.</p>
+              <pre class="project-brief-code"><code>historical research + local validation
+  → Unity scene + Oculus Quest APK
+  → on-site VR recreation for visitors
+
+attraction + city data
+  → AR scene + guide context
+  → business and transit connections</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Visions experience flow">
+              <span>Place + history</span><b>→</b><span>AR / VR reconstruction</span><b>→</b><span>Visitor context</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="humanoid-joint-control" data-project-year="2022">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Humanoid Joint Control project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/humanoid-joint-control-featured.jpeg" alt="Humanoid robot prototype in the Dynamic Locomotion workshop" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/dynaloco-pcb.png" alt="Dynamic Locomotion humanoid joint-control circuit board" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/humanoid-joint-control.png" alt="Humanoid robot prototype with exposed leg-joint assemblies" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 03</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Humanoid Joint Control image">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Humanoid Joint Control image">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <h2>Humanoid Joint Control</h2>
+              <p class="lede">The electronics and firmware that helped Tik Tok keep its joints in step.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>If the joints are not on the same page, the rest of the robot has no chance.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Humanoid Joint Control project evidence">
+                <li><span>Scope</span><strong>Joint-control subsystem</strong></li>
+                <li><span>System</span><strong>10+ coordinated actuation boards</strong></li>
+                <li><span>Focus</span><strong>Encoder accuracy + real-time timing</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="humanoid-joint-control-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="humanoid-joint-control-system-brief">
+            <div>
+              <p>Tik Tok is an active biohybrid humanoid project at Dynamic Locomotion, so I can only share the slice I worked on: the joint boards. I designed and fabricated PCBs that read rotary encoders at the knees, hips, and ankles, with elbows planned for the same system.</p>
+              <aside class="project-brief-callout"><span>What the boards did</span><p>They turned joint position into low-latency feedback and shared it over CANOpen with the Nvidia Jetson handling onboard compute.</p></aside>
+              <p>On the firmware side, I worked on real-time control and a distributed scheduler for coordinated rollouts across more than ten actuation boards. The boards used fault-tolerant CANOpen and EtherCAT firmware on an ARM Cortex-M7 SAM microcontroller, with the practical aim of keeping a whole body in sync when one joint was not the only thing moving.</p>
+              <p>The payoff was seeing a multi-joint rollout start to resemble a gait. Nothing glamorous about a clean encoder trace, but it is a good day when the whole stack finally agrees on where the body is.</p>
+              <pre class="project-brief-code"><code>rotary encoder
+  → Cortex-M7 embedded control
+  → CANOpen / EtherCAT network
+  → Nvidia Jetson coordination
+  → multi-joint gait rollout</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Humanoid Joint Control work flow">
+              <span>Encoder feedback</span><b>→</b><span>Distributed joint control</span><b>→</b><span>Gait rollout</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="cornell-electric-vehicles" data-project-year="2024">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Cornell Electric Vehicles racecar">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <video data-project-video autoplay muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar driving">
+                      <source src="assets/video/cornell-electric-vehicles/car-driving.mp4" type="video/mp4" />
+                    </video>
+                  </figure>
+                  <figure class="project-media-slide">
+                    <video data-project-video autoplay muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar at the track">
+                      <source src="assets/video/cornell-electric-vehicles/track.mp4" type="video/mp4" />
+                    </video>
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/build-team.jpeg" alt="Cornell Electric Vehicles team building the racecar" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/machining.png" alt="Kunal machining a component in the Cornell Electric Vehicles workshop" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/prototype.jpeg" alt="Kunal holding an early electronics prototype" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/controller-boards.jpeg" alt="Cornell Electric Vehicles controller boards on a workbench" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/controller-boards-box.jpeg" alt="Cornell Electric Vehicles controller boards in a shipping box" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/car-and-controller.jpeg" alt="Kunal with the racecar and a controller board" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/test-bench.JPG" alt="Electrical test bench used for the Cornell Electric Vehicles project" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles/full-team.jpg" alt="Cornell Electric Vehicles full team" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-video-controls" aria-label="Cornell Electric Vehicles video controls">
+                <button type="button" data-project-video-play aria-pressed="false">Play</button>
+                <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 10</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Cornell Electric Vehicles media">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Cornell Electric Vehicles media">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <h2>Cornell Electric Vehicles</h2>
+              <p class="lede">A student racecar team where I spent four years building, breaking, and eventually leading the technical side.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>Make the car smarter, but never make it harder to trust.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Cornell Electric Vehicles project evidence">
+                <li><span>Role</span><strong>Technical Full-Team Lead</strong></li>
+                <li><span>Team</span><strong>Cornell Electric Vehicles</strong></li>
+                <li><span>Tenure</span><strong>2020–2024</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="cornell-electric-vehicles-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="cornell-electric-vehicles-system-brief">
+            <div>
+              <p>I started as the Electrical Automation project lead, became Electrical Lead, then Technical Full-Team Lead. While my co-lead handled recruiting and business, I kept the technical build moving as the team grew from 20 people to 60 and took on autonomy alongside the EV program.</p>
+              <aside class="project-brief-callout"><span>On the car</span><p>We got Level 1 autonomous emergency braking working and validated it with the actual vehicle.</p></aside>
+              <p>Most of my time went into two boards. One sat between an onboard Jetson and the motor controller, so autonomy could ask for control without blocking the driver from taking it back. I designed the PCB and the safety handoff around it. I also built several versions of a 2 kW BLDC controller. One of them took a roughly 150 kg car and driver around the Indy circuit, which was a pretty decent test plan.</p>
+              <p>We also got the early autonomy stack and data collection off the ground: RTK GPS, LiDAR, stereo cameras, SLAM, and object detection on a Jetson. Later teams took that further into Level 2 work. I am very happy I got to build some of the scaffolding.</p>
+              <pre class="project-brief-code"><code>Jetson autonomy commands
+  → CRC + safety checks
+  → actuation handoff board
+  → motor controller / driver fallback</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Cornell Electric Vehicles autonomy actuation flow">
+              <span>Jetson commands</span><b>→</b><span>Safety handoff</span><b>→</b><span>Vehicle actuation</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="silverbacks-engineering" data-project-year="2019">
+          <div class="project-case-summary">
+            <div class="project-case-media" data-project-carousel aria-label="Silverbacks Engineering project media">
+              <div class="project-media-viewport">
+                <div class="project-media-track">
+                  <figure class="project-media-slide is-active">
+                    <img src="assets/images/Silverbacks_driving.jpeg" alt="Silverbacks Engineering vehicle competing at Shell Eco-marathon Europe" />
+                  </figure>
+                </div>
+              </div>
+              <div class="project-media-controls">
+                <span data-carousel-count aria-live="polite">01 / 01</span>
+                <div>
+                  <button type="button" data-carousel-previous aria-label="Show previous Silverbacks Engineering image">←</button>
+                  <button type="button" data-carousel-next aria-label="Show next Silverbacks Engineering image">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="project-case-body">
+              <h2>Silverbacks Engineering</h2>
+              <p class="lede">A 12-person high-school team that took a tiny combustion car to Shell Eco-marathon Europe, then spent every lap looking for another drop of efficiency.</p>
+              <div class="project-case-statement project-case-statement--quiet">
+                <span>Project premise</span>
+                <p>Efficiency is a whole-car problem. The chassis, engine map, driver, and racing line all get a vote.</p>
+              </div>
+              <ul class="project-case-evidence" aria-label="Silverbacks Engineering project evidence">
+                <li><span>Role</span><strong>Team Lead</strong></li>
+                <li><span>Team</span><strong>12 students</strong></li>
+                <li><span>Result</span><strong>Top high-school efficiency result</strong></li>
+              </ul>
+            </div>
+          </div>
+          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="silverbacks-engineering-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
+          <div class="project-system-reveal project-technical" id="silverbacks-engineering-system-brief">
+            <div>
+              <p>I led a 12-person team through Shell Eco-marathon Europe, building a high-efficiency internal-combustion vehicle. We still hold one of the strongest efficiency results recorded by a high-school team in the competition.</p>
+              <aside class="project-brief-callout"><span>On the car</span><p>I built the steering-wheel communication system, giving the driver a two-way radio link without adding a separate handoff during a run.</p></aside>
+              <p>I worked on the carbon-fiber layup for the chassis, then moved between the GX35 Honda engine and the track. That meant mapping and tuning the engine, then writing software to compare driving lines and find the route around the circuit that cost the least energy.</p>
+              <pre class="project-brief-code"><code>chassis + GX35 tune + driver feedback
+  → model track energy cost
+  → choose driving line
+  → run, measure, refine</code></pre>
+            </div>
+            <div class="project-architecture" aria-label="Silverbacks Engineering system flow">
+              <span>Vehicle setup</span><b>→</b><span>Track model</span><b>→</b><span>Efficient lap</span>
+            </div>
+          </div>
+        </article>
+
         <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="map">
           <div class="project-case-summary">
           <div class="project-case-media" data-project-carousel aria-label="MAP Rover project media">
             <div class="project-media-viewport">
               <div class="project-media-track">
                 <figure class="project-media-slide is-active">
-                  <img src="assets/images/placeholders/projects-map-rover-wide.jpg" alt="MAP Rover in the field" />
-                </figure>
-                <figure class="project-media-slide">
-                  <img src="assets/images/placeholders/projects-map-rover-arm.jpg" alt="MAP Rover robotic arm assembly" />
-                </figure>
-                <figure class="project-media-slide">
-                  <img src="assets/images/placeholders/projects-map-rover-electronics.jpg" alt="MAP Rover electronics" />
+                  <img src="assets/images/map-rover.jpg" alt="MAP Rover prototype" />
                 </figure>
               </div>
             </div>
             <div class="project-media-controls">
-              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <span data-carousel-count aria-live="polite">01 / 01</span>
               <div>
                 <button type="button" data-carousel-previous aria-label="Show previous MAP Rover image">←</button>
                 <button type="button" data-carousel-next aria-label="Show next MAP Rover image">→</button>
@@ -46,10 +521,10 @@
           </div>
           <div class="project-case-body">
             <h2>MAP Rover</h2>
-            <p class="lede">Mobile Autonomous Pathfinder: a web- and GPS-enabled rover with onboard low-resolution object detection.</p>
+            <p class="lede">A little rover built to keep going once it was out of Wi-Fi range and off the lab floor.</p>
             <div class="project-case-statement project-case-statement--quiet">
               <span>Project premise</span>
-              <p>It is not much of a rover if it cannot leave the bench.</p>
+              <p>It had to work outside, not just look good parked next to a laptop.</p>
             </div>
             <ul class="project-case-evidence" aria-label="MAP Rover project evidence">
               <li><span>Navigation</span><strong>SLAM + EKF</strong></li>
@@ -61,9 +536,9 @@
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="map-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="map-system-brief">
               <div>
-                <p>MAP Rover was built for the point where the floor markings run out. It needed to know roughly where it was outside, not just show off individual features in a demo.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>Keep moving when every sensor has only part of the story.</p></aside>
-                <p>SLAM and an EKF helped estimate where the rover was and which data to trust next. A web interface kept that information handy without hauling the whole thing back to the bench.</p>
+                <p>MAP was for the point where the floor markings run out. I wanted it to have a decent idea of where it was outside, even when any single sensor was having a bad day.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>GPS, local sensors, and the camera all had useful opinions. They did not always agree.</p></aside>
+                <p>SLAM and an EKF gave the rover a best guess at its pose, while the web view made it easier to see what it thought was happening without hauling it back to the bench.</p>
                 <pre class="project-brief-code"><code>GPS + local sensors
   → estimate pose
   → detect + plan
@@ -79,24 +554,21 @@
           </div>
         </article>
 
-        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="martha">
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="martha" data-project-year="2020">
           <div class="project-case-summary">
           <div class="project-case-media" data-project-carousel aria-label="MARTHA project media">
             <div class="project-media-viewport">
               <div class="project-media-track">
                 <figure class="project-media-slide is-active">
-                  <img src="assets/images/placeholders/projects-martha-embedded-systems.jpg" alt="MARTHA embedded systems prototype" />
+                  <img src="assets/images/Martha_base.png" alt="MARTHA app interface" />
                 </figure>
                 <figure class="project-media-slide">
-                  <img src="assets/images/placeholders/projects-martha-engineering-bench.jpg" alt="MARTHA engineering bench" />
-                </figure>
-                <figure class="project-media-slide">
-                  <img src="assets/images/placeholders/projects-martha-hardware-testing.jpg" alt="MARTHA hardware testing" />
+                  <img src="assets/images/martha-dashboard.png" alt="MARTHA contact-tracing dashboard map" />
                 </figure>
               </div>
             </div>
             <div class="project-media-controls">
-              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <span data-carousel-count aria-live="polite">01 / 02</span>
               <div>
                 <button type="button" data-carousel-previous aria-label="Show previous MARTHA image">←</button>
                 <button type="button" data-carousel-next aria-label="Show next MARTHA image">→</button>
@@ -105,10 +577,10 @@
           </div>
           <div class="project-case-body">
             <h2>MARTHA</h2>
-            <p class="lede">Monitoring and Restriction-Tracking Hotspot Application: distancing and de-densification iOS app and webpage.</p>
+            <p class="lede">A campus app that made it easier to avoid a crowded room before you were already standing in it.</p>
             <div class="project-case-statement project-case-statement--quiet">
               <span>Project premise</span>
-              <p>Help people spot crowding before it becomes a problem.</p>
+              <p>Give people a little context before they walk into a packed space.</p>
             </div>
             <ul class="project-case-evidence" aria-label="MARTHA project evidence">
               <li><span>Built</span><strong>iOS app + webpage</strong></li>
@@ -120,9 +592,9 @@
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="martha-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="martha-system-brief">
             <div>
-              <p>MARTHA gave people a clearer view of crowding before they had to react. It paired hotspot awareness with lower-density options around campus, without making a walk to class feel dramatic.</p>
-              <aside class="project-brief-callout"><span>The question</span><p>How do you make risk clear without turning the whole experience into an alarm?</p></aside>
-              <p>The idea was simple: show where pressure was building, explain why it mattered, and make a lower-density option easier to choose.</p>
+              <p>MARTHA was a way to see where campus was getting crowded and choose a lower-density option before you had to make that call in the hallway.</p>
+              <aside class="project-brief-callout"><span>The question</span><p>How do you show useful risk information without making the whole app feel like a fire alarm?</p></aside>
+              <p>We kept it simple: show the pressure building, give it some context, and make the next choice obvious.</p>
               <pre class="project-brief-code"><code>campus activity
   → identify hotspot
   → explain context
@@ -138,24 +610,18 @@
           </div>
         </article>
 
-        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="safe">
+        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="safe" data-project-year="2018">
           <div class="project-case-summary">
           <div class="project-case-media" data-project-carousel aria-label="SAFE project media">
             <div class="project-media-viewport">
               <div class="project-media-track">
                 <figure class="project-media-slide is-active">
-                  <img src="assets/images/placeholders/projects-preppr-founder-wide.jpg" alt="SAFE project prototype" />
-                </figure>
-                <figure class="project-media-slide">
-                  <img src="assets/images/placeholders/projects-preppr-team-work.jpg" alt="SAFE project team at work" />
-                </figure>
-                <figure class="project-media-slide project-media-slide--portrait">
-                  <img src="assets/images/placeholders/projects-safe-sensor-pod-portrait.png" alt="Slender environmental sensor-pod placeholder in a home" />
+                  <img src="assets/images/safe-sensor-pods.jpeg" alt="SAFE sensor-pod prototypes and power adapter" />
                 </figure>
               </div>
             </div>
             <div class="project-media-controls">
-              <span data-carousel-count aria-live="polite">01 / 03</span>
+              <span data-carousel-count aria-live="polite">01 / 01</span>
               <div>
                 <button type="button" data-carousel-previous aria-label="Show previous SAFE image">←</button>
                 <button type="button" data-carousel-next aria-label="Show next SAFE image">→</button>
@@ -164,10 +630,10 @@
           </div>
           <div class="project-case-body">
             <h2>SAFE</h2>
-            <p class="lede">Smart Assistance for Elders: app, AI model, and sensor pod for predicting and preventing temperature-stress conditions.</p>
+            <p class="lede">A sensor pod and app built to catch heat stress early, before it became a bigger problem.</p>
             <div class="project-case-statement project-case-statement--quiet">
               <span>Project premise</span>
-              <p>Health sensing has to work in real homes, not just tidy datasets.</p>
+              <p>A health product has to survive real homes, not just a clean demo.</p>
             </div>
             <ul class="project-case-evidence" aria-label="SAFE project evidence">
               <li><span>Built</span><strong>Sensor pod + AI model</strong></li>
@@ -179,14 +645,14 @@
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="safe-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="safe-system-brief">
               <div>
-                <p>SAFE started with a simple idea: the lab is where data behaves. Homes are where the system needed to work. An app, a model, and an environmental sensor pod flagged temperature stress early.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>Homes are messy and unpredictable. The product needed to show uncertainty instead of hiding it behind one score.</p></aside>
-                <p>The goal was not just a classifier. It was a useful heads-up: gather context, estimate risk, and make the next step clear.</p>
+                <p>SAFE came from a simple problem: heat stress does not wait for a controlled experiment. We paired an environmental sensor pod with an app and a model that could flag when conditions were heading somewhere bad.</p>
+                <aside class="project-brief-callout"><span>The hard part</span><p>Homes are messy. The system needed to admit when it was unsure instead of pretending every reading added up to one neat score.</p></aside>
+                <p>The goal was a useful heads-up, not a fancy classifier. Pick up the context, make a call, and show someone what to do next.</p>
                 <pre class="project-brief-code"><code>signal + context
   → estimate risk
   → surface confidence
   → prompt next action</code></pre>
-                <p>The India pilot and related ANN research tested whether the system could stay useful when data quality, living conditions, and daily routines did not resemble a clean dataset.</p>
+                <p>The India pilot and related ANN research were a reality check: would it still help when data quality, homes, and daily routines looked nothing like a tidy dataset?</p>
               </div>
               <div class="project-architecture" aria-label="SAFE architecture">
                 <span>Sensor pod</span><b>→</b><span>AI model</span><b>→</b><span>Care signal</span>
@@ -197,76 +663,8 @@
               </div>
           </div>
         </article>
-        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="sage">
-          <div class="project-case-summary">
-          <div class="project-case-media" data-project-carousel aria-label="SAGE project media">
-            <div class="project-media-viewport">
-              <div class="project-media-track">
-                <figure class="project-media-slide is-active"><img src="assets/images/placeholders/projects-crm-analytics-wide.jpg" alt="SAGE graph analytics interface" /></figure>
-                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-crm-data-visualization.jpg" alt="SAGE data visualization" /></figure>
-                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-crm-network-graph.jpg" alt="SAGE network graph" /></figure>
-              </div>
-            </div>
-            <div class="project-media-controls"><span data-carousel-count aria-live="polite">01 / 03</span><div><button type="button" data-carousel-previous aria-label="Show previous SAGE image">←</button><button type="button" data-carousel-next aria-label="Show next SAGE image">→</button></div></div>
-          </div>
-          <div class="project-case-body">
-            <h2>SAGE</h2>
-            <p class="lede">Smart Analytical Graph of Events: interactive visualization of top-read Wikipedia article nodes and weighted content edges.</p>
-            <div class="project-case-statement project-case-statement--quiet"><span>Project premise</span><p>Events make more sense when you can see how they connect.</p></div>
-            <ul class="project-case-evidence" aria-label="SAGE project evidence"><li><span>Graph</span><strong>Wikipedia nodes</strong></li><li><span>Model</span><strong>Weighted edges</strong></li><li><span>Analysis</span><strong>Watson sentiment</strong></li></ul>
-          </div>
-          </div>
-          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="sage-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
-          <div class="project-system-reveal project-technical" id="sage-system-brief">
-              <div>
-                <p>SAGE used a graph to keep related events together. Top-read Wikipedia articles became nodes, and weighted edges showed how their content connected.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>Show the connections without turning the graph into a bowl of spaghetti.</p></aside>
-                <p>IBM Watson sentiment analysis added another layer, so the network could be read through both its structure and the language around an event.</p>
-                <pre class="project-brief-code"><code>article + event
-  → weighted edge
-  → sentiment signal
-  → graph view</code></pre>
-              </div>
-              <div class="project-architecture" aria-label="SAGE architecture"><span>Article nodes</span><b>→</b><span>Edge weights</span><b>→</b><span>Graph view</span></div>
-              <div class="project-brief-links" aria-label="SAGE project resources"><a href="#">Graph notes <span>↗</span></a><a href="#" download>Method brief <span>↓</span></a></div>
-          </div>
-        </article>
-        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="soar">
-          <div class="project-case-summary">
-          <div class="project-case-media" data-project-carousel aria-label="SOAR project media">
-            <div class="project-media-viewport">
-              <div class="project-media-track">
-                <figure class="project-media-slide is-active"><img src="assets/images/placeholders/projects-benchpress-database.jpg" alt="SOAR database interface" /></figure>
-                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-benchpress-operations-planning.jpg" alt="SOAR operations planning" /></figure>
-                <figure class="project-media-slide"><img src="assets/images/placeholders/projects-benchpress-team-management.jpg" alt="SOAR team management" /></figure>
-              </div>
-            </div>
-            <div class="project-media-controls"><span data-carousel-count aria-live="polite">01 / 03</span><div><button type="button" data-carousel-previous aria-label="Show previous SOAR image">←</button><button type="button" data-carousel-next aria-label="Show next SOAR image">→</button></div></div>
-          </div>
-          <div class="project-case-body">
-            <h2>SOAR</h2>
-            <p class="lede">Smart Operating and Rostering: secure database and frontend interface for staff break duty allocation and daily management.</p>
-            <div class="project-case-statement project-case-statement--quiet"><span>Project premise</span><p>Routine decisions work better when they do not live only in people's heads.</p></div>
-            <ul class="project-case-evidence" aria-label="SOAR project evidence"><li><span>Built</span><strong>Secure database</strong></li><li><span>Workflow</span><strong>Roster allocation</strong></li><li><span>Adoption</span><strong>200+ staff</strong></li></ul>
-          </div>
-          </div>
-          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="soar-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
-          <div class="project-system-reveal project-technical" id="soar-system-brief">
-              <div>
-                <p>SOAR put staff break-duty allocation and daily management in one place. The shared view replaced a chain of manual handoffs, which made the day a little less chaotic for everyone.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>A roster only helps when people understand it and know what to do when plans change.</p></aside>
-                <p>Head office and more than 200 staff at the International School of The Hague adopted the system. That meant day-to-day usability mattered as much as the data model.</p>
-                <pre class="project-brief-code"><code>staff + duty constraints
-  → allocate break cover
-  → publish roster
-  → resolve exceptions</code></pre>
-              </div>
-              <div class="project-architecture" aria-label="SOAR architecture"><span>Staff records</span><b>→</b><span>Duty logic</span><b>→</b><span>Daily roster</span></div>
-              <div class="project-brief-links" aria-label="SOAR project resources"><a href="#">Workflow notes <span>↗</span></a><a href="#" download>Project brief <span>↓</span></a></div>
-          </div>
-        </article>
       </section>
     </main>
-<script src="assets/js/site.js?v=20260919-ambient-persistent"></script>
+<script src="assets/js/site.js?v=20260919-project-video-controls-2"></script>
   </body>
 </html>
