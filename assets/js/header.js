@@ -25,8 +25,8 @@
         <svg class="brand-cell" viewBox="0 0 80 80" aria-hidden="true">
           <rect class="brand-mark-outline" x="1" y="1" width="78" height="78" fill="none" stroke-width="2"/>
           <g class="brand-wordmark" text-anchor="middle">
-            <text y="34"><tspan class="brand-mark-signal" x="16">K</tspan><tspan class="brand-mark-ink" x="28">U</tspan><tspan class="brand-mark-signal" x="40">N</tspan><tspan class="brand-mark-ink" x="52">A</tspan><tspan class="brand-mark-signal" x="64">L</tspan></text>
-            <text y="56.5"><tspan class="brand-mark-signal" x="16">G</tspan><tspan class="brand-mark-ink" x="28">U</tspan><tspan class="brand-mark-signal" x="40">P</tspan><tspan class="brand-mark-signal" x="52">T</tspan><tspan class="brand-mark-ink" x="64">A</tspan></text>
+            <text x="40" y="34"><tspan class="brand-mark-signal">K</tspan><tspan class="brand-mark-ink">U</tspan><tspan class="brand-mark-signal">N</tspan><tspan class="brand-mark-ink">A</tspan><tspan class="brand-mark-signal">L</tspan></text>
+            <text x="40" y="56.5"><tspan class="brand-mark-signal">G</tspan><tspan class="brand-mark-ink">U</tspan><tspan class="brand-mark-signal">P</tspan><tspan class="brand-mark-signal">T</tspan><tspan class="brand-mark-ink">A</tspan></text>
           </g>
         </svg>
       </a>

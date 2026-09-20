@@ -113,14 +113,24 @@ function initProjectMediaCarousels() {
     const count = carousel.querySelector("[data-carousel-count]");
     const previous = carousel.querySelector("[data-carousel-previous]");
     const next = carousel.querySelector("[data-carousel-next]");
+    const videoControls = carousel.querySelector(".project-video-controls");
     if (!track || slides.length < 2 || !previous || !next) return;
 
     let current = 0;
     const setSlide = (index) => {
       current = (index + slides.length) % slides.length;
       track.style.transform = `translateX(-${current * 100}%)`;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === current));
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === current;
+        slide.classList.toggle("is-active", isActive);
+        if (!isActive) slide.querySelectorAll("video").forEach((video) => video.pause());
+      });
+      const hasActiveVideo = Boolean(slides[current].querySelector("video"));
+      carousel.classList.toggle("has-active-video", hasActiveVideo);
+      if (!hasActiveVideo) carousel.classList.remove("is-video-controls-visible");
+      videoControls?.toggleAttribute("hidden", !hasActiveVideo);
       if (count) count.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      carousel.dispatchEvent(new CustomEvent("projectcarouselchange"));
     };
 
     previous.addEventListener("click", (event) => {
@@ -131,6 +141,70 @@ function initProjectMediaCarousels() {
       event.stopPropagation();
       setSlide(current + 1);
     });
+    setSlide(0);
+  });
+}
+
+function initProjectMediaVideos() {
+  document.querySelectorAll(".project-case-media").forEach((media) => {
+    const videos = [...media.querySelectorAll("[data-project-video]")];
+    if (!videos.length) return;
+    const playButton = media?.querySelector("[data-project-video-play]");
+    const muteButton = media?.querySelector("[data-project-video-mute]");
+    if (!media || !playButton || !muteButton) return;
+
+    const getActiveVideo = () => media.querySelector(".project-media-slide.is-active [data-project-video]");
+
+    const playActiveVideo = () => {
+      const video = getActiveVideo();
+      if (video) video.play().catch(() => {});
+    };
+
+    const syncControls = () => {
+      const video = getActiveVideo();
+      if (!video) return;
+      const isPaused = video.paused;
+      playButton.textContent = isPaused ? "Play" : "Pause";
+      playButton.setAttribute("aria-pressed", String(!isPaused));
+      muteButton.textContent = video.muted ? "Unmute" : "Mute";
+      muteButton.setAttribute("aria-pressed", String(video.muted));
+    };
+
+    const togglePlayback = () => {
+      const video = getActiveVideo();
+      if (!video) return;
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    media.addEventListener("pointerdown", () => {
+      if (media.classList.contains("has-active-video")) media.classList.add("is-video-controls-visible");
+    });
+    playButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      togglePlayback();
+    });
+    muteButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const video = getActiveVideo();
+      if (!video) return;
+      video.muted = !video.muted;
+      syncControls();
+    });
+    videos.forEach((video) => {
+      video.addEventListener("click", () => {
+        if (video.closest(".project-media-slide")?.classList.contains("is-active")) togglePlayback();
+      });
+      video.addEventListener("play", syncControls);
+      video.addEventListener("pause", syncControls);
+      video.addEventListener("volumechange", syncControls);
+    });
+    media.addEventListener("projectcarouselchange", () => {
+      playActiveVideo();
+      syncControls();
+    });
+    playActiveVideo();
+    syncControls();
   });
 }
 
@@ -298,13 +372,52 @@ function initHomeSectionTracking() {
   });
 }
 
+function initProjectYearTracking() {
+  if (!document.body.classList.contains("projects-page")) return;
+
+  const yearNav = document.querySelector("[data-project-year-nav]");
+  const milestones = [...document.querySelectorAll("[data-project-year]")];
+  if (!yearNav || !milestones.length) return;
+
+  const setYear = (year) => {
+    yearNav.querySelectorAll("[data-project-year-link]").forEach((link) => {
+      link.classList.toggle("is-current", link.dataset.projectYearLink === year);
+    });
+  };
+
+  const updateYear = () => {
+    const threshold = 132;
+    const current = milestones
+      .map((milestone) => ({ year: milestone.dataset.projectYear, top: milestone.getBoundingClientRect().top }))
+      .filter((milestone) => milestone.top <= threshold)
+      .sort((a, b) => b.top - a.top)[0];
+    setYear(current?.year || "today");
+  };
+
+  let ticking = false;
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      ticking = false;
+      updateYear();
+    });
+  };
+
+  updateYear();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+}
+
 function initializeSitePage() {
   initAmbientBackground();
   initProjectCardFocus();
   initProjectMediaCarousels();
+  initProjectMediaVideos();
   initBlogFilters();
   initTilDateFilter();
   initHomeSectionTracking();
+  initProjectYearTracking();
 }
 
 window.initializeSitePage = initializeSitePage;
