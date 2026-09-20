@@ -245,28 +245,34 @@ const interactiveCountryIds = new Set(countries.map((country) => country.id));
 const livedCountryIds = new Set(countries.filter((country) => country.status === "lived").map((country) => country.id));
 const visitedCountryIds = new Set(countries.filter((country) => country.status !== "lived").map((country) => country.id));
 
-function updateArchiveStats() {
+async function updateArchiveStats() {
   const countriesStat = document.querySelector("#stat-countries");
   if (countriesStat) countriesStat.textContent = String(countries.length).padStart(2, "0");
 
-  const statSources = [
-    ["#stat-projects", "projects.html", ".project-case-card"],
-    ["#stat-thoughts", "blog.html", ".blog-index .blog-card"],
-  ];
-
-  statSources.forEach(async ([target, source, selector]) => {
-    const stat = document.querySelector(target);
-    if (!stat) return;
-
+  const projectsStat = document.querySelector("#stat-projects");
+  if (projectsStat) {
     try {
-      const response = await fetch(source);
+      const response = await fetch("projects.html");
       if (!response.ok) return;
       const page = new DOMParser().parseFromString(await response.text(), "text/html");
-      stat.textContent = String(page.querySelectorAll(selector).length).padStart(2, "0");
+      projectsStat.textContent = String(page.querySelectorAll(".project-case-card").length).padStart(2, "0");
     } catch {
       // The static count remains visible if a page cannot be loaded.
     }
-  });
+  }
+
+  const thoughtsStat = document.querySelector("#stat-thoughts");
+  if (!thoughtsStat) return;
+
+  try {
+    const response = await fetch("https://gist.githubusercontent.com/Kumagi360/da7646f9c738a931fec4c48bcf528343/raw/manifest.json", { cache: "no-store" });
+    if (!response.ok) return;
+    const manifest = await response.json();
+    const count = manifest.entries.filter((entry) => entry.type === "thought").length;
+    thoughtsStat.textContent = String(count).padStart(2, "0");
+  } catch {
+    // The static count remains visible if the content manifest cannot be loaded.
+  }
 }
 
 function updateScrollMeter() {
@@ -332,7 +338,12 @@ function initLatestCarousel() {
   if (!carousel) return;
 
   const track = carousel.querySelector(".latest-track");
-  const cards = [...carousel.querySelectorAll("[data-latest-card]")];
+  const cards = [...carousel.querySelectorAll("[data-latest-card]")].sort((first, second) => {
+    const firstDate = first.querySelector("time")?.dateTime || "";
+    const secondDate = second.querySelector("time")?.dateTime || "";
+    return secondDate.localeCompare(firstDate);
+  });
+  cards.forEach((card) => track.append(card));
   const dots = [...carousel.querySelectorAll("[data-latest-dot]")];
   const previous = carousel.querySelector("[data-latest-previous]");
   const next = carousel.querySelector("[data-latest-next]");
@@ -346,6 +357,13 @@ function initLatestCarousel() {
     const frames = [...stage.querySelectorAll("figure")];
     if (frames.length < 2 || stage.dataset.duplicated) return;
 
+    let distance = 0;
+    let offset = 0;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartOffset = 0;
+    let lastTimestamp = 0;
+
     frames.forEach((frame) => {
       const duplicate = frame.cloneNode(true);
       duplicate.setAttribute("aria-hidden", "true");
@@ -355,17 +373,61 @@ function initLatestCarousel() {
 
     stage.dataset.duplicated = "true";
 
+    const render = () => {
+      stage.style.transform = `translateX(${-offset}px)`;
+    };
+
     const syncMediaRoll = () => {
       const duplicateStart = stage.children[frames.length];
-      const distance = duplicateStart.offsetLeft - stage.children[0].offsetLeft;
-      stage.style.setProperty("--media-roll-distance", `${distance}px`);
-      stage.style.setProperty("--media-roll-duration", `${Math.max(45, distance / 24)}s`);
-      stage.classList.toggle("is-scrolling", distance > 0 && !prefersReducedMotion);
+      distance = duplicateStart.offsetLeft - stage.children[0].offsetLeft;
+      offset = distance > 0 ? offset % distance : 0;
+      stage.classList.toggle("is-scrolling", distance > 0);
+      render();
     };
+
+    const animate = (timestamp) => {
+      if (lastTimestamp && distance > 0 && !dragging && !prefersReducedMotion && !document.hidden) {
+        offset = (offset + (timestamp - lastTimestamp) * 0.024) % distance;
+        render();
+      }
+      lastTimestamp = timestamp;
+      window.requestAnimationFrame(animate);
+    };
+
+    const stopDragging = (event) => {
+      if (!dragging) return;
+      dragging = false;
+      stage.classList.remove("is-dragging");
+      if (stage.hasPointerCapture?.(event.pointerId)) {
+        stage.releasePointerCapture(event.pointerId);
+      }
+      lastTimestamp = performance.now();
+    };
+
+    stage.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || distance === 0) return;
+      event.preventDefault();
+      dragging = true;
+      dragStartX = event.clientX;
+      dragStartOffset = offset;
+      stage.classList.add("is-dragging");
+      stage.setPointerCapture(event.pointerId);
+    });
+
+    stage.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      offset = (dragStartOffset - (event.clientX - dragStartX)) % distance;
+      if (offset < 0) offset += distance;
+      render();
+    });
+
+    stage.addEventListener("pointerup", stopDragging);
+    stage.addEventListener("pointercancel", stopDragging);
 
     window.addEventListener("resize", syncMediaRoll, { passive: true });
     window.addEventListener("load", syncMediaRoll, { once: true });
     syncMediaRoll();
+    window.requestAnimationFrame(animate);
   };
 
   mediaStages.forEach(startMediaRoll);
@@ -438,7 +500,7 @@ function initLatestCarousel() {
     { passive: true }
   );
 
-  setLatest(0, false);
+  setLatest(0);
   restartAuto();
 }
 
@@ -590,21 +652,3 @@ timelineItems.forEach((item) => {
 });
 
 renderWorldMap();
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      } else {
-        entry.target.classList.remove("is-visible");
-      }
-    });
-  },
-  { threshold: 0.12 }
-);
-
-document.querySelectorAll(".section, .hero-console, .project-tile").forEach((element) => {
-  element.classList.add("reveal");
-  revealObserver.observe(element);
-});
