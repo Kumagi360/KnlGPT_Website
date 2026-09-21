@@ -527,19 +527,19 @@ async function renderWorldMap() {
   const mapHost = document.querySelector("#worldMap");
   if (!mapHost || !window.d3 || !window.topojson) return;
 
-  mapHost.replaceChildren();
-
-  const width = 960;
-  const height = 460;
-  const svg = d3
-    .select(mapHost)
-    .append("svg")
-    .attr("class", "world-map")
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .attr("role", "img")
-    .attr("aria-label", "Hoverable real country outlines");
-
   try {
+    mapHost.textContent = "";
+
+    const width = 960;
+    const height = 460;
+    const svg = d3
+      .select(mapHost)
+      .append("svg")
+      .attr("class", "world-map")
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("role", "img")
+      .attr("aria-label", "Hoverable real country outlines");
+
     const world = window.WORLD_COUNTRIES_TOPOLOGY || (await d3.json("assets/data/countries-110m.json"));
     const features = topojson.feature(world, world.objects.countries).features;
     const projection = d3.geoNaturalEarth1().fitExtent([[8, 10], [width - 8, height - 16]], {
