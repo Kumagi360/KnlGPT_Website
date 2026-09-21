@@ -3716,6 +3716,22 @@ button.project-brief-toggle {
 }
 
 @media (max-width: 720px) {
+  /* A more generous phone rhythm. Desktop and tablet keep their existing density. */
+  .home-page .section {
+    padding-block: clamp(72px, 18vw, 96px);
+  }
+
+  .project-card-collection {
+    gap: clamp(76px, 19vw, 104px);
+  }
+
+  .project-index-grid,
+  .blog-index {
+    gap: clamp(28px, 8vw, 36px);
+  }
+}
+
+@media (max-width: 720px) {
   .blog-index-page:not(.til-index-page) .blog-index {
     grid-template-columns: 1fr;
   }
@@ -5996,6 +6012,71 @@ blockquote {
 }
 
 @media (max-width: 720px) {
+  /* Keep phone layouts comfortably inset without changing the desktop composition. */
+  :root {
+    --mobile-gutter: clamp(18px, 5vw, 24px);
+  }
+
+  .section,
+  .hero-section,
+  .project-card-collection,
+  .article-layout {
+    padding-inline: var(--mobile-gutter);
+  }
+
+  .home-page .section {
+    padding-block: clamp(56px, 14vw, 72px);
+  }
+
+  .project-card-collection {
+    gap: clamp(56px, 15vw, 76px);
+  }
+
+  .project-tile-grid {
+    gap: clamp(40px, 11vw, 52px);
+    margin-top: clamp(42px, 12vw, 58px);
+  }
+
+  .timeline-track {
+    gap: 20px;
+  }
+
+  .education-panel {
+    margin-bottom: 12px;
+  }
+
+  /* Expanded briefs contain long code and prose. Let them wrap inside the card
+     instead of forcing the grid wider than the phone viewport. */
+  .project-system-reveal,
+  .project-system-reveal > *,
+  .project-system-reveal > * > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .project-brief-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .til-index-page .blog-index {
+    width: calc(100% - (var(--mobile-gutter) * 2)) !important;
+    max-width: none !important;
+  }
+
+  .til-index-page .blog-card {
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .til-index-page .blog-index {
+    width: calc(100% - (var(--mobile-gutter) * 2)) !important;
+  }
+}
+
+@media (max-width: 720px) {
   .project-case-card--structured {
     gap: 22px;
   }
@@ -6135,6 +6216,15 @@ blockquote {
     height: min(54vh, 460px);
   }
 
+  .project-case-card--addendum .project-case-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-case-card--addendum .project-case-summary > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .project-case-card--hybrid::after,
   .project-case-card--hybrid:hover::after,
   .project-case-card--hybrid:focus-within::after {
@@ -6177,5 +6267,39 @@ blockquote {
   .project-brief-links a {
     flex: 1 1 auto;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 1080px) {
+  /* Addendum briefs need a genuinely shrinkable track at tablet and phone widths. */
+  .project-case-card--addendum .project-case-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-case-card--addendum .project-case-summary > *,
+  .project-case-card--addendum .project-system-reveal,
+  .project-case-card--addendum .project-system-reveal > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .project-case-card--addendum .project-brief-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 720px) {
+  .til-index-page .blog-index {
+    gap: clamp(28px, 8vw, 36px) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .project-case-card .project-case-body h2 {
+    font-size: clamp(2.25rem, 11.5vw, 2.9rem);
+    line-height: 0.94;
+    overflow-wrap: anywhere;
   }
 }
