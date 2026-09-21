@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260919-header-render" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260920-map-mobile" />
   </head>
   <body class="projects-page">
-    <script src="assets/js/header.js?v=20260919-media-lifecycle-4"></script>
+    <script src="assets/js/header.js?v=20260920-thoughts-restored"></script>
 
     <nav class="section-nav project-year-nav" aria-label="Project archive years" data-project-year-nav>
       <a href="#top" class="is-current" data-project-year-link="today">Today</a>
@@ -22,13 +22,12 @@
       <a href="#visions" data-project-year-link="2021">2021</a>
       <a href="#martha" data-project-year-link="2020">2020</a>
       <a href="#silverbacks-engineering" data-project-year-link="2019">2019</a>
-      <a href="#safe" data-project-year-link="2018">2018</a>
     </nav>
 
     <main id="top">
       <section class="article-hero project-hero">
         <h1>Projects Archive</h1>
-        <p>A few projects I had a lot of fun building, outside the day job. Open System Briefs for more technical and deployment details.</p>
+        <p>A few projects I had a lot of fun building, outside the day job.<br />Open System Briefs for more technical and deployment details.</p>
       </section>
 
       <section class="project-card-collection" aria-label="Project collection">
@@ -53,15 +52,15 @@
             <div class="project-case-body">
               <span>In progress</span>
               <h2>Edge-Corrected Teleoperation</h2>
-              <p class="lede">A way to make remote robot control less brittle when the connection is slow or a handoff is slightly off.</p>
+              <p class="lede">Adjusting joint rollouts on-system to align with intent, rather than relying on tracking accuracy</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>The person keeps the call. The robot handles small corrections close to the work.</p>
+                <p>Teleoperation is brittle with feedback latency and sensitive to control resolution</p>
               </div>
               <ul class="project-case-evidence" aria-label="Edge-Corrected Teleoperation project evidence">
-                <li><span>Problem</span><strong>Lag and messy demonstrations</strong></li>
-                <li><span>Where it runs</span><strong>On the robot</strong></li>
-                <li><span>Job</span><strong>Small, safe corrections</strong></li>
+                <li><span>Problem</span><strong>Lag and imperfect instructions</strong></li>
+                <li><span>Hardware</span><strong>Jetson Nano Super</strong></li>
+                <li><span>Purpose</span><strong>Corrections and safety adherence</strong></li>
               </ul>
             </div>
           </div>
@@ -69,15 +68,9 @@
           <div class="project-system-reveal project-technical" id="edge-corrected-teleoperation-system-brief">
             <div>
               <p>Remote teleoperation is never as clean as a replay. There is delay, a camera view that arrives late, and plenty of little inputs that only make sense in context. I am working on a local layer that can spot the intended motion and make a small adjustment before the robot acts on it.</p>
-              <aside class="project-brief-callout"><span>How it works</span><p>The operator still sends the same pose or velocity commands. A small model on the robot reads recent commands alongside fresh joint, force, and camera data. If it is confident, it adds a limited correction. If it is not, it leaves the operator’s command alone.</p></aside>
-              <p>The useful part is the logging. Raw commands, the local correction, and what happened next are saved together. That makes it possible to train on the moments where a person was compensating for bad latency, rather than treating every recorded motion as perfect.</p>
-              <pre class="project-brief-code"><code>operator command
-  → local robot state
-  → small correction, if useful
-  → move and log the result</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Edge-Corrected Teleoperation architecture">
-              <span>Remote input</span><b>→</b><span>Local check</span><b>→</b><span>Robot motion</span>
+              <aside class="project-brief-callout"><span>The concept</span><p>The teleoperator can continue to use inexpensive operating surfaces, relaying pose and joint velocity commands. However, a small model local to the robot processes these commands against fresh joint, force, and camera data from the robot. For repeatable actions, the intent is likely sufficiently captured to produce a local high confidence rollout. If this rollout disagrees with the teleoperated commands, or breaks a safety policy, the model can augment actuiation commands with a limited correction.</p></aside>
+              <p>In addition to potentially improving performance, the raw commands, local correction, and final rollout are logged together. This makes it possible to train on moments where a person was compensating for bad latency, rather than treating every recorded motion as perfect. As an 'inverse corrective action', a future full-featured supervisor/control model can be trained off a corpus of such corrections.</p>
+              <pre class="project-brief-code"><code>operator command   → local state check  → intention or safety alignment comparison   → augmented operator command -> local logged result</code></pre>
             </div>
           </div>
         </article>
@@ -103,31 +96,24 @@
             <div class="project-case-body">
               <span>In progress</span>
               <h2>Swarming Formations</h2>
-              <p class="lede">Small mobile parts that could become an end effector one day and a temporary structure the next.</p>
+              <p class="lede">Modular swarm networked units with orientation-control and deformable sensing skin</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>Build the shape you need, then pull it apart when you are done.</p>
+                <p>End effectors and structures have narrowly defined utility at design-time. If intelligence is generalizing, why shouldn't the morphology?</p>
               </div>
               <ul class="project-case-evidence" aria-label="Swarming Formations project evidence">
-                <li><span>Tools</span><strong>Gripper, scoop, and more</strong></li>
+                <li><span>Configurations</span><strong>Gripper, scoop, platform, etc</strong></li>
                 <li><span>Structures</span><strong>Braces, supports, simple frames</strong></li>
-                <li><span>Current idea</span><strong>Soft cubes, flywheels, electromagnets</strong></li>
+                <li><span>compsition</span><strong>Soft cubes, flywheels, electromagnets</strong></li>
               </ul>
             </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="swarming-formations-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="swarming-formations-system-brief">
             <div>
-              <p>The interesting bit is not just a gripper that changes shape. The same set of parts might make a scoop, a support under a load, or a rough frame around something that needs holding in place. A single robot body is good at one thing. A pile of parts has a chance to be useful in more situations.</p>
-              <aside class="project-brief-callout"><span>Current direction</span><p>I am playing with small cubes that have soft outer surfaces, flywheels inside, and electromagnets on their faces. In theory, each one moves itself and snaps into place with the others. The right shape and way of moving are still open questions. Cubes are just the first thing I am trying.</p></aside>
-              <p>The first tests are simple: can a few parts form a two-finger gripper, then rearrange into a scoop? Can they also make a stiff enough brace or small support? That means getting the joins right, checking how much load they take, and seeing what happens when one part does not quite land where it should.</p>
-              <pre class="project-brief-code"><code>move a few parts
-  → bring them together
-  → test a tool or support
-  → take it apart and try again</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Swarming Formations experiment flow">
-              <span>Move</span><b>→</b><span>Connect</span><b>→</b><span>Make a tool or structure</span>
+              <p>The same set of subcomponents could make a scoop, a support under a load, or a scaffolding. A single robot body is good at one thing, but having a cluster of components with ability to rearrange with orientation adjustments could generalize aspects of otherwise fixed robot layouts.</p>
+              <aside class="project-brief-callout"><span>Current direction</span><p>I've prototyped 1cm^3 small cubes with soft outer surfaces, micro-flywheels, and electromagnets on faces. In theory, each can reorient itself and selectively adhere/repel into place among others others. The right packaging and method of central coordination are still open questions. A little far fetched, but exciting as a hardware experiment.</p></aside>
+              <p>Shrinking a meaningful inductive charging solution is proving tricky. Getting the joins right, characterising how much load each entity can take, and seeing what happens when parts don't interact correctly will determine if this project has a future.</p>
             </div>
           </div>
         </article>
@@ -138,12 +124,12 @@
               <div class="project-media-viewport">
                 <div class="project-media-track">
                   <figure class="project-media-slide is-active">
-                    <img src="assets/images/stigmergic-swarms/experiment-rig.jpeg" alt="Stigmergic Swarms experiment rig with overhead camera and pool" />
-                  </figure>
-                  <figure class="project-media-slide">
                     <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Stigmergic Swarms experiment video">
                       <source src="assets/video/stigmergic-swarms/experiment.mp4" type="video/mp4" />
                     </video>
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/stigmergic-swarms/experiment-rig.jpeg" alt="Stigmergic Swarms experiment rig with overhead camera and pool" />
                   </figure>
                 </div>
               </div>
@@ -161,15 +147,15 @@
             </div>
             <div class="project-case-body">
               <h2>Stigmergic Swarms</h2>
-              <p class="lede">A swarm that communicated through its environment, using bubbles as an underwater message bus.</p>
+              <p class="lede">Mobile robot swarms using a fluid surface as a messaging board</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>If robots cannot talk to each other, can they still coordinate by changing the world around them?</p>
+                <p>If robots can't directly communicate, can they coordinate by marking their shared environment?</p>
               </div>
               <ul class="project-case-evidence" aria-label="Stigmergic Swarms project evidence">
-                <li><span>Agents</span><strong>Mobile robots with no direct link</strong></li>
-                <li><span>Medium</span><strong>Bubbles and dyed fluid in water</strong></li>
-                <li><span>Vision runtime</span><strong>1,000 ms → 150 ms</strong></li>
+                <li><span>Agents</span><strong>Partially submerged, inverted, wheeled rovers</strong></li>
+                <li><span>Medium</span><strong>Bubbles / dyes on water</strong></li>
+                <li><span>vocabulary</span><strong>∞</strong></li>
               </ul>
             </div>
           </div>
@@ -177,15 +163,9 @@
           <div class="project-system-reveal project-technical" id="stigmergic-swarms-system-brief">
             <div>
               <p>At Cornell’s Collective Embodied Intelligence Lab, under Kirstin Petersen, I explored stigmergy: coordination through persistent changes to a shared environment. Bees leave pheromone trails in air. I wanted to know what that idea could look like in water, where connectivity is unreliable and the environment can carry a signal.</p>
-              <aside class="project-brief-callout"><span>The system</span><p>I built the full stack around small wheeled agents: a 3D-printed body, two drive wheels and a caster, a fiducial marker, motors, and a snorkel for releasing bubbles or dyed fluid. The agents had no radio link to one another or to the computer. An overhead vision system read a snapshot of the pool, tracked every marker, interpreted the traces in the water, and relayed the resulting state through a multithreaded TCP/IP command-and-data layer with a live query and visualization interface.</p></aside>
+              <aside class="project-brief-callout"><span>The system</span><p>I helped build the full stack around inexpensive wheeled agents: a 3D-printed body, two driven wheels, identity marker, snorkel for releasing bubbles / dyed fluid, and a fan for directing the emission. The agents had no method of communication with each other, only sandboxed link to a walled controller for individual agent maneuvers. Mounted under the water tank was a camera and traditional vision stack: reading a snapshot of the pool, tracking every marker, interpreting the traces in the water, and relaying the resulting state through a live query and visualization interface.</p></aside>
               <p>The bubble pattern was the message. Its timing, speed, and formation could represent a bit, a location, a direction of travel, or another shared state. I wrote the distributed processing and vision algorithms that made that loop usable, including image segmentation and tracking work that reduced processing time from roughly one second to 150 milliseconds. With that feedback loop in place, the agents showed meaningful multi-agent behavior without ever receiving a direct message from each other.</p>
-              <pre class="project-brief-code"><code>camera reads the water + agent markers
-  → vision stack infers shared state
-  → bubble pattern carries a message
-  → swarm responds through the environment</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Stigmergic Swarms system flow">
-              <span>Agent makes a trace</span><b>→</b><span>Vision reads the pool</span><b>→</b><span>Swarm updates behavior</span>
+              <p>While the outcome of this particular investigation was incorporated into a larger stream of research yet to be published, the project was a first exposure to swarm robotics and the potential for low-cost high-volume robots to be placed in harsh or restrictive conditions.</p>
             </div>
           </div>
         </article>
@@ -211,32 +191,29 @@
             <div class="project-case-body">
               <span>In progress</span>
               <h2>Subsea Sim</h2>
-              <p class="lede">A photorealistic training ground for underwater vehicles working around an offshore rig before vessel time got expensive.</p>
+              <p class="lede">Photoreal closed-loop for underwater robots and complex underwater scenes</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>The simulator made underwater autonomy answer to both what a camera saw and what the water did to a vehicle.</p>
+                <p>ROV to UAV transition lags in part due to inadequate sim tooling</p>
               </div>
               <ul class="project-case-evidence" aria-label="Subsea Sim project evidence">
                 <li><span>Origin</span><strong>Entrepreneur First</strong></li>
                 <li><span>Prototype</span><strong>Offshore-rig construction cell</strong></li>
-                <li><span>Status</span><strong>Shared with offshore engineering teams</strong></li>
+                <li><span>Status</span><strong>Demo'ed to offshore engineering teams</strong></li>
               </ul>
             </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="subsea-construction-simulator-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="subsea-construction-simulator-system-brief">
             <div>
-              <p>The idea started at Entrepreneur First, then I kept working on it after leaving. I built a small digital twin of an offshore rig where underwater vehicles could inspect, line up, and place construction components. A few leading offshore engineering firms saw it and got excited. It is not in my day-to-day now, but I would happily pick it back up.</p>
-              <aside class="project-brief-callout"><span>What I built</span><p>The sim used rig and survey geometry, ray-traced lighting, and underwater camera, sonar, and DVL models. I used controllable synthetic data to vary water clarity, lighting, sensor placement, and the state of the components while keeping the labels needed to train perception.</p></aside>
+              <p>The idea started at Entrepreneur First, then I kept working on it after leaving. I built a small digital twin of an offshore rig where underwater vehicles could inspect, lay, and operate on the seabed.</p>
+              <aside class="project-brief-callout"><span>Why now</span><p>Subsea robotics applications have seen massive growth in recent years due to an explosion in offshore construction, surveillance, and inspection projects, particular in Asia-Pacific. Yet, these projects remain tremendously expensive due to the need for a surface 'spread' of vessels, hosting remotely operated vehicles (ROV) and their scarce highly trained pilots. These spreads lack operational flexibility, and are bottlenecked by umbilical-based teleoperation methods in water. Unmanned vehicles may be the answer, but require a sim as capable as those available for terrestrial or aerial vehicles in order to be developed and deployed. I've since shown a few leading offshore engineering firms this project, to much excitement about potential productionization.</p></aside>
               <p>The point was not to make an ocean scene look nice. I wanted a perception stack to deal with murky water, backscatter, changing light, currents, and a vehicle that did not stay perfectly still. The simulator produced RGB, depth, sonar, DVL, and pose data together, then ran the perception work in the loop with the vehicle controls.</p>
               <pre class="project-brief-code"><code>rig CAD + survey geometry + water conditions
   → calibrated RGB / sonar / DVL data
   → perception + state estimation stack
   → current-aware vehicle control
-  → inspect, align, place</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Subsea Sim architecture">
-              <span>Rig digital twin</span><b>→</b><span>Multimodal perception</span><b>→</b><span>Construction task</span>
+  → ROS integration for engineering assets to be loaded and actutated</code></pre>
             </div>
           </div>
         </article>
@@ -276,14 +253,14 @@
             </div>
             <div class="project-case-body">
               <h2>Visions</h2>
-              <p class="lede">Two location-based AR and VR experiences that made Montenegro's history feel less like a plaque and more like a place you could step into.</p>
+              <p class="lede">Generalizable mixed reality offerings to make historical and cultural tourism more immersive</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>VR can take you anywhere. I wanted it to take you 500 years back from exactly where you were standing.</p>
+                <p>Why rely on imagination, when we can render historical scenes onto the real world, to be experienced right where they happened?</p>
               </div>
               <ul class="project-case-evidence" aria-label="Visions project evidence">
-                <li><span>Experiences</span><strong>KotorAR + VantageVR</strong></li>
-                <li><span>Launch</span><strong>Oculus Quest APK for paying visitors</strong></li>
+                <li><span>Experiences</span><strong>CityAR + VantageVR</strong></li>
+                <li><span>Launched</span><strong>Montenegro, Summer 2021</strong></li>
                 <li><span>Partners</span><strong>Local operators + Montenegro NTO</strong></li>
               </ul>
             </div>
@@ -291,21 +268,11 @@
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="visions-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="visions-system-brief">
             <div>
-              <p>I built Visions while living in Montenegro between high school and my second year of college. COVID had emptied the usual ways of encountering a place, while tourism, more than 30% of Montenegro's GDP, needed better digital infrastructure. I was already deep into AR and VR, and history had always been the part of travel I cared about most. This was the bridge between them.</p>
-              <aside class="project-brief-callout"><span>What made it work</span><p>VantageVR did not drop visitors into a generic historical scene. In Perast, visitors put on the headset facing the same waterfront they had just been looking at, then saw the Battle of Perast and the town around them as it could have appeared more than five centuries earlier.</p></aside>
+              <p>I built Visions while returning to Kotor in Montenegro between the end of high school and my second year of college. COVID had emptied the historic old-town, with cruise ships and buses from up and down the Balkans missing. Tourism, accounting for 30%+ of Montenegro's GDP, needed its attractions to stand out more in order to attract a limited crowd. I was already deep into AR/VR at the time, and experiencing history had always been the part of travel I cared about most.</p>
+              <aside class="project-brief-callout"><span>What made it work</span><p>VantageVR was not designed as an in-home experience. In the Naval Museum at Perast visitors put on the headset facing the waterfront stretched out in front of them. They experienced the 1654 Battle of Perast, with Ottoman sea forces attacking the Venetian town around them, with entities and structures recreated and overlaid as they would have been centuries ago.</p></aside>
               <p>For VantageVR, I worked with an asset developer to turn the researched story and scene design into a Unity experience packaged as an APK for Oculus Quest. The experience was launched for paying customers in Perast and aboard boats travelling to Our Lady of the Rocks. I validated the reconstruction through sustained work with local officials and museum curators, plus a lot of primary and secondary research on Perast.</p>
               <p>KotorAR extended the idea to a phone. Visitors could hold up a phone at an attraction, see an AR reconstruction of its earlier form, then follow guides and context into the story around it. I owned the product and technology architecture around the app, including local-business and mass-transit integrations. The asset developer built the AR scenes; I made sure the experience connected those scenes to the city around them.</p>
-              <p>The project was backed by Montenegro's national tourism organization and was discussed in the country's Senate during the COVID era as part of the conversation around tourism technology infrastructure. I also ran feature iteration, customer and partner feedback, and the material needed to explain the product to funders and operators.</p>
-              <pre class="project-brief-code"><code>historical research + local validation
-  → Unity scene + Oculus Quest APK
-  → on-site VR recreation for visitors
-
-attraction + city data
-  → AR scene + guide context
-  → business and transit connections</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Visions experience flow">
-              <span>Place + history</span><b>→</b><span>AR / VR reconstruction</span><b>→</b><span>Visitor context</span>
+              <p>The project was backed by Montenegro's national tourism organization and was discussed in the country's Senate during the COVID era as part of the conversation around tourism technology infrastructure. It came as small businesses suffered a lack of visibility in an increasingly restricted old-towns, and is a concept that has since seen adaptations in many major cities worldwide.</p>
             </div>
           </div>
         </article>
@@ -316,10 +283,13 @@ attraction + city data
               <div class="project-media-viewport">
                 <div class="project-media-track">
                   <figure class="project-media-slide is-active">
-                    <img src="assets/images/humanoid-joint-control-featured.jpeg" alt="Humanoid robot prototype in the Dynamic Locomotion workshop" />
+                    <img src="assets/images/dynaloco-pcb.png" alt="Dynamic Locomotion humanoid joint-control circuit board" />
                   </figure>
                   <figure class="project-media-slide">
-                    <img src="assets/images/dynaloco-pcb.png" alt="Dynamic Locomotion humanoid joint-control circuit board" />
+                    <img src="assets/images/humanoid-joint-control-tiktok-workshop.jpeg" alt="Tik Tok humanoid robot in the Dynamic Locomotion workshop" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/humanoid-joint-control-featured.jpeg" alt="Humanoid robot prototype in the Dynamic Locomotion workshop" />
                   </figure>
                   <figure class="project-media-slide">
                     <img src="assets/images/humanoid-joint-control.png" alt="Humanoid robot prototype with exposed leg-joint assemblies" />
@@ -327,7 +297,7 @@ attraction + city data
                 </div>
               </div>
               <div class="project-media-controls">
-                <span data-carousel-count aria-live="polite">01 / 03</span>
+                <span data-carousel-count aria-live="polite">01 / 04</span>
                 <div>
                   <button type="button" data-carousel-previous aria-label="Show previous Humanoid Joint Control image">←</button>
                   <button type="button" data-carousel-next aria-label="Show next Humanoid Joint Control image">→</button>
@@ -336,33 +306,29 @@ attraction + city data
             </div>
             <div class="project-case-body">
               <h2>Humanoid Joint Control</h2>
-              <p class="lede">The electronics and firmware that helped Tik Tok keep its joints in step.</p>
+              <p class="lede">The electronics and controls that helped a high efficiency biped keep its legs in check under motion</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>If the joints are not on the same page, the rest of the robot has no chance.</p>
+                <p>High-precision, low-latency joint measurement is critical to a consistent gait</p>
               </div>
               <ul class="project-case-evidence" aria-label="Humanoid Joint Control project evidence">
-                <li><span>Scope</span><strong>Joint-control subsystem</strong></li>
-                <li><span>System</span><strong>10+ coordinated actuation boards</strong></li>
-                <li><span>Focus</span><strong>Encoder accuracy + real-time timing</strong></li>
+                <li><span>Scope</span><strong>6 high-rate PCBs</strong></li>
+                <li><span>System</span><strong>Tik Tok <small class="project-evidence-detail">(before that Tik Tok)</small></strong></li>
+                <li><span>Focus</span><strong>Encoder accuracy + control scheduling</strong></li>
               </ul>
             </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="humanoid-joint-control-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="humanoid-joint-control-system-brief">
             <div>
-              <p>Tik Tok is an active biohybrid humanoid project at Dynamic Locomotion, so I can only share the slice I worked on: the joint boards. I designed and fabricated PCBs that read rotary encoders at the knees, hips, and ankles, with elbows planned for the same system.</p>
-              <aside class="project-brief-callout"><span>What the boards did</span><p>They turned joint position into low-latency feedback and shared it over CANOpen with the Nvidia Jetson handling onboard compute.</p></aside>
-              <p>On the firmware side, I worked on real-time control and a distributed scheduler for coordinated rollouts across more than ten actuation boards. The boards used fault-tolerant CANOpen and EtherCAT firmware on an ARM Cortex-M7 SAM microcontroller, with the practical aim of keeping a whole body in sync when one joint was not the only thing moving.</p>
+              <p>Tik Tok is an active bio-hybrid humanoid project spun out of Professor Andy Ruina's work at Cornell. I helped design and fabricate the PCBs that captured and relayed rotations at the knees, hips, and ankles. The boards homed multiple subsystems in a fixed packaging, making layout and assembly challenging. Here I learned to use stencil and validation tooling for SMD components, alongside signal integrity and mixed signal logic.</p>
+              <aside class="project-brief-callout"><span>Embedded SW</span><p>I worked on real-time control and a distributed scheduler for coordinated rollouts across 6 joint actuation boards. Central compute was FreeRTOS on a stripped Jetson Orin, while networking with the boards was across fault-tolerant CANOpen and EtherCAT. Edge processing was on ARM Cortex-M7 SAM microcontroller.</p></aside>
               <p>The payoff was seeing a multi-joint rollout start to resemble a gait. Nothing glamorous about a clean encoder trace, but it is a good day when the whole stack finally agrees on where the body is.</p>
               <pre class="project-brief-code"><code>rotary encoder
-  → Cortex-M7 embedded control
-  → CANOpen / EtherCAT network
-  → Nvidia Jetson coordination
+  → Cortex-M7 embedded procesing
+  → CANOpen / EtherCAT communication
+  → Nvidia Jetson timestamp alignment
   → multi-joint gait rollout</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Humanoid Joint Control work flow">
-              <span>Encoder feedback</span><b>→</b><span>Distributed joint control</span><b>→</b><span>Gait rollout</span>
             </div>
           </div>
         </article>
@@ -373,13 +339,13 @@ attraction + city data
               <div class="project-media-viewport">
                 <div class="project-media-track">
                   <figure class="project-media-slide is-active">
-                    <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar driving">
-                      <source src="assets/video/cornell-electric-vehicles/car-driving.mp4" type="video/mp4" />
+                    <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar at the track">
+                      <source src="assets/video/cornell-electric-vehicles/track.mp4" type="video/mp4" />
                     </video>
                   </figure>
                   <figure class="project-media-slide">
-                    <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar at the track">
-                      <source src="assets/video/cornell-electric-vehicles/track.mp4" type="video/mp4" />
+                    <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar driving">
+                      <source src="assets/video/cornell-electric-vehicles/car-driving.mp4" type="video/mp4" />
                     </video>
                   </figure>
                   <figure class="project-media-slide">
@@ -406,6 +372,15 @@ attraction + city data
                   <figure class="project-media-slide">
                     <img src="assets/images/cornell-electric-vehicles/full-team.jpg" alt="Cornell Electric Vehicles full team" />
                   </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles-perception.png" alt="Cornell Electric Vehicles perception output identifying road users" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles-pcb-layout.jpg" alt="Cornell Electric Vehicles controller board PCB layout" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/cornell-electric-vehicles-pcb-render.png" alt="Cornell Electric Vehicles controller board 3D render" />
+                  </figure>
                 </div>
               </div>
               <div class="project-video-controls" aria-label="Cornell Electric Vehicles video controls">
@@ -413,7 +388,7 @@ attraction + city data
                 <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
               </div>
               <div class="project-media-controls">
-                <span data-carousel-count aria-live="polite">01 / 10</span>
+                <span data-carousel-count aria-live="polite">01 / 13</span>
                 <div>
                   <button type="button" data-carousel-previous aria-label="Show previous Cornell Electric Vehicles media">←</button>
                   <button type="button" data-carousel-next aria-label="Show next Cornell Electric Vehicles media">→</button>
@@ -422,32 +397,25 @@ attraction + city data
             </div>
             <div class="project-case-body">
               <h2>Cornell Electric Vehicles</h2>
-              <p class="lede">A student racecar team where I spent four years building, breaking, and eventually leading the technical side.</p>
+              <p class="lede">Electric vehicles ground-up designed and manufactured in-house for energy efficiency and increasing levels of autonomy</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>Make the car smarter, but never make it harder to trust.</p>
+                <p>For the automotive industry, electrification is still maturing, while autonomy is yet unsolved</p>
               </div>
               <ul class="project-case-evidence" aria-label="Cornell Electric Vehicles project evidence">
-                <li><span>Role</span><strong>Technical Full-Team Lead</strong></li>
-                <li><span>Team</span><strong>Cornell Electric Vehicles</strong></li>
-                <li><span>Tenure</span><strong>2020–2024</strong></li>
+                <li><span>Role</span><strong>Full-Team Lead</strong></li>
+                <li><span>Team Size</span><strong>60 students and faculty across ME, EE, CS, Ops</strong></li>
+                <li><span>Tenure</span><strong>2021 - 2024</strong></li>
               </ul>
             </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="cornell-electric-vehicles-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="cornell-electric-vehicles-system-brief">
             <div>
-              <p>I started as the Electrical Automation project lead, became Electrical Lead, then Technical Full-Team Lead. While my co-lead handled recruiting and business, I kept the technical build moving as the team grew from 20 people to 60 and took on autonomy alongside the EV program.</p>
-              <aside class="project-brief-callout"><span>On the car</span><p>We got Level 1 autonomous emergency braking working and validated it with the actual vehicle.</p></aside>
-              <p>Most of my time went into two boards. One sat between an onboard Jetson and the motor controller, so autonomy could ask for control without blocking the driver from taking it back. I designed the PCB and the safety handoff around it. I also built several versions of a 2 kW BLDC controller. One of them took a roughly 150 kg car and driver around the Indy circuit, which was a pretty decent test plan.</p>
-              <p>We also got the early autonomy stack and data collection off the ground: RTK GPS, LiDAR, stereo cameras, SLAM, and object detection on a Jetson. Later teams took that further into Level 2 work. I am very happy I got to build some of the scaffolding.</p>
-              <pre class="project-brief-code"><code>Jetson autonomy commands
-  → CRC + safety checks
-  → actuation handoff board
-  → motor controller / driver fallback</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="Cornell Electric Vehicles autonomy actuation flow">
-              <span>Jetson commands</span><b>→</b><span>Safety handoff</span><b>→</b><span>Vehicle actuation</span>
+              <p>When I joined Cornell Electric Vehicles, it was a team of ~20 and solely purposed for Shell Eco Marathon Americas energy efficiency competition. However, it had already been 10 years since the first mass-market Nissan Leaf <em>(quite full-circle, this is the robotaxi platform of choice for Wayve!)</em>, and a few of us felt the team needed a new mandate. My first year was across our sapling Autonomy team, where traditional computer vision and SLAM led us to promising results in sim and virtual competitions (still COVID-era). In parallel however, I learned more about PCB design, and leaned into building the first 'Electrical Automation' board. This board served as what industry calls a 'vehicle interface controller', switching and conducting integrity checks on actuation outputs/feedback from our onboard autonomy compute. This effort paved the way for our eventual L1 autonomy demonstration: Autonomous Emergency Braking. The team has since championed the autonomy stack well past L1, and on vehicles of multiple scales, making autonomy a first-class pursuit of its members.</p>
+              <aside class="project-brief-callout"><span>My Journey</span><p>In my second year, I took the role of Electrical Lead and helped grow the overall team to 40. With promising results on both energy efficiency results and autonomy development, I took on Full-Team Lead in my final year. Here, we grew the org to 60, and won numerous accolades both as a Cornell student team and a Shell Eco Marathon competitor. We raised among the highest fundraising sums of the student teams, and began partnering with labs and professors from the Cornell community to buildout our role as a bridge between students and frontier autonomy in industry. Personally, this project led me to Wayve, where I'm now deploying autonomous vehicles to public roads in some of the most complex geographies worldwide!</p></aside>
+              <p>Most of my engineering time went into 7 revisions of our 2kW BLDC Motor Controller (or 'Electric Speed Controller'). I experimented with everything mixed signal and power here: different power layouts, commutation patterns, heat dissipation, and (most frustratingly) load protections. One of these Motor Controllers ran our 150kg car and driver around the paddocks of the iconic Indianapolis Motor Speedway!</p>
+              <p>Outside of electrical and autonomy development, the workshop became a second home for me in college, and my teammates a second family. I learned a ton, from carbon fiber resin layups and machining extrusions, to aero profiling and low-latency telemetry. From a birds-eye view of technical roadmaps running all-hands, to the minutia of subteam struggles, some of my best (and most challenging) memories are with the team.</p>
             </div>
           </div>
         </article>
@@ -460,10 +428,28 @@ attraction + city data
                   <figure class="project-media-slide is-active">
                     <img src="assets/images/Silverbacks_driving.jpeg" alt="Silverbacks Engineering vehicle competing at Shell Eco-marathon Europe" />
                   </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/silverbacks-engine-bay.jpg" alt="Silverbacks Engineering vehicle engine bay" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/silverbacks-shell-eco-marathon.jpg" alt="Silverbacks Engineering team at Shell Eco-marathon Europe" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <img src="assets/images/silverbacks-team.jpg" alt="Silverbacks Engineering team with its vehicle at Shell Eco-marathon Europe" />
+                  </figure>
+                  <figure class="project-media-slide">
+                    <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="Silverbacks Engineering vehicle at Shell Eco-marathon Europe">
+                      <source src="assets/video/silverbacks-engineering.mp4" type="video/mp4" />
+                    </video>
+                  </figure>
                 </div>
               </div>
+              <div class="project-video-controls" aria-label="Silverbacks Engineering video controls">
+                <button type="button" data-project-video-play aria-pressed="false">Play</button>
+                <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
+              </div>
               <div class="project-media-controls">
-                <span data-carousel-count aria-live="polite">01 / 01</span>
+                <span data-carousel-count aria-live="polite">01 / 05</span>
                 <div>
                   <button type="button" data-carousel-previous aria-label="Show previous Silverbacks Engineering image">←</button>
                   <button type="button" data-carousel-next aria-label="Show next Silverbacks Engineering image">→</button>
@@ -472,10 +458,10 @@ attraction + city data
             </div>
             <div class="project-case-body">
               <h2>Silverbacks Engineering</h2>
-              <p class="lede">A 12-person high-school team that took a tiny combustion car to Shell Eco-marathon Europe, then spent every lap looking for another drop of efficiency.</p>
+              <p class="lede">Lightweight and finely tuned prototype vehicle for supermileage</p>
               <div class="project-case-statement project-case-statement--quiet">
                 <span>Project premise</span>
-                <p>Efficiency is a whole-car problem. The chassis, engine map, driver, and racing line all get a vote.</p>
+                <p>ICE efficiency is a complex optimization with chassis, engine map, and driving profile all contributing</p>
               </div>
               <ul class="project-case-evidence" aria-label="Silverbacks Engineering project evidence">
                 <li><span>Role</span><strong>Team Lead</strong></li>
@@ -487,70 +473,9 @@ attraction + city data
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="silverbacks-engineering-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="silverbacks-engineering-system-brief">
             <div>
-              <p>I led a 12-person team through Shell Eco-marathon Europe, building a high-efficiency internal-combustion vehicle. We still hold one of the strongest efficiency results recorded by a high-school team in the competition.</p>
-              <aside class="project-brief-callout"><span>On the car</span><p>I built the steering-wheel communication system, giving the driver a two-way radio link without adding a separate handoff during a run.</p></aside>
-              <p>I worked on the carbon-fiber layup for the chassis, then moved between the GX35 Honda engine and the track. That meant mapping and tuning the engine, then writing software to compare driving lines and find the route around the circuit that cost the least energy.</p>
-              <pre class="project-brief-code"><code>chassis + GX35 tune + driver feedback
-  → model track energy cost
-  → choose driving line
-  → run, measure, refine</code></pre>
+              <p>Many high schools have teams where students explore engineering, but at the International School of The Hague the team was more serious. The Netherlands has a sterling record of high school and university teams competing at the frontiers of energy technology in mobility, particularly across battery-electric and hydrogen fuel sources. The Silverbacks Engineering team I led still holds one of the strongest efficiency results recorded by a high-school team in the Shell Eco Marathon Europe competiton.</p>
+              <aside class="project-brief-callout"><span>On the car</span><p>Outside of exercising leadership as a skill, I had two major technical contributions to the team. I designed the steering wheel and its embedded communication system, giving the driver a two-way radio link for contact with the off-track. This included transcribed messages on a display embedded in the wheel, as well as a color coding system for engine modes and status. I also spent much time with our GX35 Honda engine, working on engine mappings for RPM-Torque ranges, in order to maximize volumetric efficiency across our expected driving ranges.</p></aside>
             </div>
-            <div class="project-architecture" aria-label="Silverbacks Engineering system flow">
-              <span>Vehicle setup</span><b>→</b><span>Track model</span><b>→</b><span>Efficient lap</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-case-card project-case-card--hybrid project-case-card--addendum" id="map">
-          <div class="project-case-summary">
-          <div class="project-case-media" data-project-carousel aria-label="MAP Rover project media">
-            <div class="project-media-viewport">
-              <div class="project-media-track">
-                <figure class="project-media-slide is-active">
-                  <img src="assets/images/map-rover.jpg" alt="MAP Rover prototype" />
-                </figure>
-              </div>
-            </div>
-            <div class="project-media-controls">
-              <span data-carousel-count aria-live="polite">01 / 01</span>
-              <div>
-                <button type="button" data-carousel-previous aria-label="Show previous MAP Rover image">←</button>
-                <button type="button" data-carousel-next aria-label="Show next MAP Rover image">→</button>
-              </div>
-            </div>
-          </div>
-          <div class="project-case-body">
-            <h2>MAP Rover</h2>
-            <p class="lede">A little rover built to keep going once it was out of Wi-Fi range and off the lab floor.</p>
-            <div class="project-case-statement project-case-statement--quiet">
-              <span>Project premise</span>
-              <p>It had to work outside, not just look good parked next to a laptop.</p>
-            </div>
-            <ul class="project-case-evidence" aria-label="MAP Rover project evidence">
-              <li><span>Navigation</span><strong>SLAM + EKF</strong></li>
-              <li><span>Perception</span><strong>Onboard detection</strong></li>
-              <li><span>Target</span><strong>1+ mile / charge</strong></li>
-            </ul>
-          </div>
-          </div>
-          <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="map-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
-          <div class="project-system-reveal project-technical" id="map-system-brief">
-              <div>
-                <p>MAP was for the point where the floor markings run out. I wanted it to have a decent idea of where it was outside, even when any single sensor was having a bad day.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>GPS, local sensors, and the camera all had useful opinions. They did not always agree.</p></aside>
-                <p>SLAM and an EKF gave the rover a best guess at its pose, while the web view made it easier to see what it thought was happening without hauling it back to the bench.</p>
-                <pre class="project-brief-code"><code>GPS + local sensors
-  → estimate pose
-  → detect + plan
-  → drive + report</code></pre>
-              </div>
-              <div class="project-architecture" aria-label="MAP Rover architecture">
-                <span>GPS + sensors</span><b>→</b><span>SLAM / EKF</span><b>→</b><span>Drive + web</span>
-              </div>
-              <div class="project-brief-links" aria-label="MAP Rover project resources">
-                <a href="#">Build notes <span>↗</span></a>
-                <a href="#" download>Project brief <span>↓</span></a>
-              </div>
           </div>
         </article>
 
@@ -577,35 +502,24 @@ attraction + city data
           </div>
           <div class="project-case-body">
             <h2>MARTHA</h2>
-            <p class="lede">A campus app that made it easier to avoid a crowded room before you were already standing in it.</p>
+            <p class="lede">COVID-era service to help avoid a crowd before you even leave the house</p>
             <div class="project-case-statement project-case-statement--quiet">
               <span>Project premise</span>
-              <p>Give people a little context before they walk into a packed space.</p>
+              <p>Social distancing on a college campus was impractical at best, but impossible without remote hotspot tracking</p>
             </div>
             <ul class="project-case-evidence" aria-label="MARTHA project evidence">
-              <li><span>Built</span><strong>iOS app + webpage</strong></li>
-              <li><span>Milestone</span><strong>HackOurCampus finalist</strong></li>
-              <li><span>Direction</span><strong>Cornell campus deployment</strong></li>
+              <li><span>Built</span><strong>IOS app + aggregation website</strong></li>
+              <li><span>Milestone</span><strong>Cornell HackOurCampus FInalist</strong></li>
+              <li><span>Direction</span><strong>Campus-wide deployment</strong></li>
             </ul>
           </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="martha-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="martha-system-brief">
             <div>
-              <p>MARTHA was a way to see where campus was getting crowded and choose a lower-density option before you had to make that call in the hallway.</p>
-              <aside class="project-brief-callout"><span>The question</span><p>How do you show useful risk information without making the whole app feel like a fire alarm?</p></aside>
-              <p>We kept it simple: show the pressure building, give it some context, and make the next choice obvious.</p>
-              <pre class="project-brief-code"><code>campus activity
-  → identify hotspot
-  → explain context
-  → suggest lower-density route</code></pre>
-            </div>
-            <div class="project-architecture" aria-label="MARTHA architecture">
-              <span>Campus signal</span><b>→</b><span>Hotspot view</span><b>→</b><span>Next choice</span>
-            </div>
-            <div class="project-brief-links" aria-label="MARTHA project resources">
-              <a href="#">Product notes <span>↗</span></a>
-              <a href="#" download>Concept brief <span>↓</span></a>
+              <p>MARTHA ("Monitoring and Restriction Tracking Hotspot Application", but more importantly named for Cornell President Martha Pollock) was a hackathon solution to the problem of avoiding hotspots for unsafe activity around campus. Dining halls, frat row, and campus buildings were the most obvious places to avoid, but how could you know if your walking route to classes was packed?</p>
+              <aside class="project-brief-callout"><span>The UI</span><p>We kept user interfaces simple: an app that serves as an 'opt-in' tracker and live hotspot display for students, and a website that serves as a supervisory view for Campus enforcement/planning to identify long-term trends and patterns in distribution.</p></aside>
+              <p>While lockdown ended before a solution like this became necessary, Fall 2020 was the perfect time to build and demo the capability of such a service. There are potential post-COVID applications of such opt-in tracking tech, like crowd management for venues, city organizers, or even for public services to track usage.</p>
             </div>
           </div>
         </article>
@@ -618,10 +532,19 @@ attraction + city data
                 <figure class="project-media-slide is-active">
                   <img src="assets/images/safe-sensor-pods.jpeg" alt="SAFE sensor-pod prototypes and power adapter" />
                 </figure>
+                <figure class="project-media-slide">
+                  <video data-project-video autoplay loop muted playsinline preload="metadata" aria-label="SAFE project presentation">
+                    <source src="assets/video/safe-talk.mp4" type="video/mp4" />
+                  </video>
+                </figure>
               </div>
             </div>
+            <div class="project-video-controls" aria-label="SAFE video controls">
+              <button type="button" data-project-video-play aria-pressed="false">Play</button>
+              <button type="button" data-project-video-mute aria-pressed="true">Unmute</button>
+            </div>
             <div class="project-media-controls">
-              <span data-carousel-count aria-live="polite">01 / 01</span>
+              <span data-carousel-count aria-live="polite">01 / 02</span>
               <div>
                 <button type="button" data-carousel-previous aria-label="Show previous SAFE image">←</button>
                 <button type="button" data-carousel-next aria-label="Show next SAFE image">→</button>
@@ -630,41 +553,30 @@ attraction + city data
           </div>
           <div class="project-case-body">
             <h2>SAFE</h2>
-            <p class="lede">A sensor pod and app built to catch heat stress early, before it became a bigger problem.</p>
+            <p class="lede">Sensor pod and paired mobile app to detect and prevent heat stress early</p>
             <div class="project-case-statement project-case-statement--quiet">
               <span>Project premise</span>
-              <p>A health product has to survive real homes, not just a clean demo.</p>
+              <p>In-home heatstroke is becoming a major health hazard for the elderly in developing-world households</p>
             </div>
             <ul class="project-case-evidence" aria-label="SAFE project evidence">
-              <li><span>Built</span><strong>Sensor pod + AI model</strong></li>
+              <li><span>Built</span><strong>Sensor array + AI model</strong></li>
               <li><span>Pilot</span><strong>India field test</strong></li>
-              <li><span>Research</span><strong>ANN papers</strong></li>
+              <li><span>Research</span><strong>Model input nullification handling</strong></li>
             </ul>
           </div>
           </div>
           <button class="project-brief-toggle" type="button" data-project-brief-toggle aria-controls="safe-system-brief" aria-expanded="false">Open system brief <span>+</span></button>
           <div class="project-system-reveal project-technical" id="safe-system-brief">
               <div>
-                <p>SAFE came from a simple problem: heat stress does not wait for a controlled experiment. We paired an environmental sensor pod with an app and a model that could flag when conditions were heading somewhere bad.</p>
-                <aside class="project-brief-callout"><span>The hard part</span><p>Homes are messy. The system needed to admit when it was unsure instead of pretending every reading added up to one neat score.</p></aside>
-                <p>The goal was a useful heads-up, not a fancy classifier. Pick up the context, make a call, and show someone what to do next.</p>
-                <pre class="project-brief-code"><code>signal + context
-  → estimate risk
-  → surface confidence
-  → prompt next action</code></pre>
-                <p>The India pilot and related ANN research were a reality check: would it still help when data quality, homes, and daily routines looked nothing like a tidy dataset?</p>
-              </div>
-              <div class="project-architecture" aria-label="SAFE architecture">
-                <span>Sensor pod</span><b>→</b><span>AI model</span><b>→</b><span>Care signal</span>
-              </div>
-              <div class="project-brief-links" aria-label="SAFE project resources">
-                <a href="#">Research notes <span>↗</span></a>
-                <a href="#" download>Project brief <span>↓</span></a>
+                <p>SAFE was a concept inspired by the heatstroke of an elderly relative in their home in India. It sounds like an isolated incident, and not one we usually hear of in the West, but is surprisingly common in the East, particularly among the elderly. The research is that bodily thermal regulation capability reduces with age, as well as the ability to accurately gauge enviornmental conditions. Combined with rising temperatures globally, and the liklihood of households in developing countries to lack central climate control, SAFE was intended to act as a canary for unsafe enviornmental conditions.</p>
+                <aside class="project-brief-callout"><span>How it worked</span><p>In the 3D-printed pod was a host of ambient climate sensors and a cellular-equipped microcontroller. As a pod is first plugged into the wall, a unique identification key is generated, allowing pairing with a mobile app. From here, the pod consumes ~500mW of power and passively logs enviornmental conditions to the cloud. In the cloud my SAFE regression model, trained on public thermoregulatory incident databases, would estimate the suitability of the enviornment for the given elderly profile provided via the app. As a result, a dynamic risk assessment is provided to the holder of the app, for them to act on as guided by generated recommendations.</p></aside>
+                <p>To trial the system, I took a handful of pods to India and presented to an esteemed geriatric physician, who oversaw my successful trials in a handful of old-age homes. Should the system have been taken forward and productionised, it could have application in senior homes and hospitals everywhere.</p>
+                <p>One interesting failure mode I noted from the India field trials was due to missing inputs (mainly sensor drop-outs), causing the model to fail forward passes and provide inaccurate risk assessments. This prompted my research on neural network input nullification for healthcare applications, and proposal on a heuristic to reduce the impact of missing data. The resulting paper was presented in a talk to University of Amsterdam faculty.</p>
               </div>
           </div>
         </article>
       </section>
     </main>
-<script src="assets/js/site.js?v=20260919-media-lifecycle-2"></script>
+<script src="assets/js/site.js?v=20260920-final-nav-state"></script>
   </body>
 </html>
