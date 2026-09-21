@@ -2126,11 +2126,12 @@ main {
 }
 
 .project-case-card.is-expanded .project-technical {
-  max-height: 440px;
+  max-height: 9999px;
   margin-top: 26px;
   padding-top: 20px;
   border-top: 1px solid var(--line-strong);
   opacity: 1;
+  overflow: visible;
 }
 
 .project-technical h3 {
@@ -2494,6 +2495,14 @@ main {
   line-height: 1.18;
 }
 
+.project-evidence-detail {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.76em;
+  font-weight: 500;
+}
+
 .project-case-card--editorial:hover .project-media-slide img,
 .project-case-card--editorial:focus-within .project-media-slide img,
 .project-case-card--editorial.is-expanded .project-media-slide img {
@@ -2681,13 +2690,11 @@ button.project-brief-toggle {
 }
 
 .project-case-card--hybrid.is-expanded .project-system-reveal.project-technical {
-  max-height: min(58vh, 620px);
+  max-height: 9999px;
   margin-top: 18px;
   padding-top: 0;
   border-top-color: transparent;
-  overflow-y: auto;
-  scrollbar-color: rgba(201, 95, 42, 0.72) transparent;
-  scrollbar-width: thin;
+  overflow: visible;
 }
 
 .project-brief-callout {
@@ -3459,6 +3466,14 @@ button.project-brief-toggle {
 
 .blog-index {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+
+.archive-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
 }
 
 .til-index-page .blog-index {
@@ -4457,7 +4472,7 @@ blockquote {
   }
 
   .map-canvas {
-    inset: 92px 12px 22px;
+    inset: 70px 12px;
   }
 
   .atlas-copy,
@@ -4466,7 +4481,18 @@ blockquote {
   }
 
   .map-popover {
-    bottom: 36px;
+    bottom: 18px;
+    min-width: 0;
+    padding: 6px 10px;
+  }
+
+  .map-popover strong {
+    font-size: 1rem;
+  }
+
+  .map-popover span {
+    margin-top: 3px;
+    font-size: 0.62rem;
   }
 
   .map-legend {
@@ -4587,12 +4613,20 @@ blockquote {
   }
 
   .map-canvas {
-    inset: 118px 10px 18px;
+    inset: 70px 10px;
   }
 
   .map-popover {
     margin: 0;
-    padding: 8px 10px;
+    padding: 5px 8px;
+  }
+
+  .map-popover strong {
+    font-size: 0.9rem;
+  }
+
+  .map-popover span {
+    font-size: 0.58rem;
   }
 
   .map-legend {
@@ -6087,10 +6121,10 @@ blockquote {
   }
 
   .project-case-card--hybrid.is-expanded .project-system-reveal.project-technical {
-    max-height: min(62vh, 620px);
+    max-height: 9999px;
     margin-top: 18px;
     padding-top: 0;
-    overflow-y: auto;
+    overflow: visible;
     border-top-color: transparent;
     opacity: 1;
   }
@@ -6137,7 +6171,7 @@ blockquote {
   }
 
   .project-case-card--hybrid.is-expanded .project-system-reveal.project-technical {
-    max-height: min(66vh, 620px);
+    max-height: 9999px;
   }
 
   .project-brief-links a {
