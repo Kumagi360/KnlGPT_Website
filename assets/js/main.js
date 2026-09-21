@@ -252,7 +252,7 @@ async function updateArchiveStats() {
   const projectsStat = document.querySelector("#stat-projects");
   if (projectsStat) {
     try {
-      const response = await fetch("projects.html");
+      const response = await fetch("projects.html", { cache: "no-store" });
       if (!response.ok) return;
       const page = new DOMParser().parseFromString(await response.text(), "text/html");
       projectsStat.textContent = String(page.querySelectorAll(".project-case-card").length).padStart(2, "0");
