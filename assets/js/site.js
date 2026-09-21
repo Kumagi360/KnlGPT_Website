@@ -355,7 +355,8 @@ function initHomeSectionTracking() {
       const pageBottom = document.documentElement.scrollHeight - 32;
       const isFooterVisible = footer && footer.getBoundingClientRect().top <= window.innerHeight;
       if (isFooterVisible || scrollBottom >= pageBottom) {
-        setActiveSection("thoughts");
+        const lastSection = observedSections.at(-1);
+        if (lastSection) setActiveSection(sectionNav[lastSection.id]);
         return;
       }
 
@@ -405,8 +406,13 @@ function initProjectYearTracking() {
   if (!yearNav || !milestones.length) return;
 
   const setYear = (year) => {
-    yearNav.querySelectorAll("[data-project-year-link]").forEach((link) => {
-      link.classList.toggle("is-current", link.dataset.projectYearLink === year);
+    const links = [...yearNav.querySelectorAll("[data-project-year-link]")];
+    const activeYear = links.some((link) => link.dataset.projectYearLink === year)
+      ? year
+      : links.at(-1)?.dataset.projectYearLink;
+
+    links.forEach((link) => {
+      link.classList.toggle("is-current", link.dataset.projectYearLink === activeYear);
     });
   };
 
