@@ -576,7 +576,10 @@ async function renderWorldMap() {
       })
       .attr("data-country", (feature) => String(feature.id))
       .attr("tabindex", (feature) => (interactiveCountryIds.has(String(feature.id)) ? 0 : -1))
-      .attr("aria-label", (feature) => (interactiveCountryIds.has(String(feature.id)) ? `${countries.find((country) => country.id === String(feature.id))?.title} country name` : "Country border"))
+      .attr("aria-label", (feature) => {
+        const country = countries.find((entry) => entry.id === String(feature.id));
+        return country ? `${country.title}, ${country.status === "lived" ? "lived in" : "visited"}` : "Country border";
+      })
       .attr("d", path);
 
     countryPaths.filter((feature) => interactiveCountryIds.has(String(feature.id))).raise();
