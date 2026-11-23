@@ -136,6 +136,23 @@ const countries = [
     ],
   },
   {
+    id: "442",
+    status: "visited",
+    title: "Luxembourg",
+  },
+  {
+    id: "hong-kong",
+    status: "visited",
+    title: "Hong Kong",
+    coordinates: [114.1694, 22.3193],
+  },
+  {
+    id: "singapore",
+    status: "visited",
+    title: "Singapore",
+    coordinates: [103.8198, 1.3521],
+  },
+  {
     id: "300",
     status: "lived",
     meta: "Greece / lived here",
@@ -563,6 +580,19 @@ async function renderWorldMap() {
       .attr("d", path);
 
     countryPaths.filter((feature) => interactiveCountryIds.has(String(feature.id))).raise();
+
+    svg
+      .append("g")
+      .selectAll("circle")
+      .data(countries.filter((country) => country.coordinates))
+      .join("circle")
+      .attr("class", "country country-marker is-visited")
+      .attr("data-country", (country) => country.id)
+      .attr("tabindex", 0)
+      .attr("aria-label", (country) => `${country.title} country name`)
+      .attr("cx", (country) => projection(country.coordinates)[0])
+      .attr("cy", (country) => projection(country.coordinates)[1])
+      .attr("r", 4.5);
 
     countryPaths.each(function (feature) {
       const id = String(feature.id);

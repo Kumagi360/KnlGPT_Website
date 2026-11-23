@@ -104,7 +104,7 @@ function renderThoughtIndex(root, entries, manifest) {
     ? thoughts
       .map((entry) => `<a class="blog-card lead-card" href="blog.html?post=${encodeURIComponent(entry.id)}" data-blog-tags="${escapeHtml(entry.tags.join(" "))}" ${cardDataAttributes(entry, manifest)}><div class="blog-card-heading"><span>${escapeHtml(entry.category)}</span><h2>${escapeHtml(entry.title)}</h2></div><img src="${escapeHtml(entry.cover.src)}" alt="${escapeHtml(entry.cover.alt)}" /></a>`)
       .join("")
-    : '<p class="archive-empty">Head empty, no thoughts yet</p>';
+    : '<p class="archive-empty">Head empty, no blogs yet</p>';
 }
 
 function enableCardPrefetch(root) {

@@ -97,7 +97,7 @@
       const focus = (item) => {
         item.isFrozen = true;
         const related = neighbors.get(item.id);
-        node.classed("is-active", (other) => other.id === item.id);
+        node.classed("is-active", (other) => related.has(other.id));
         node.filter((other) => other.id === item.id).raise();
         link.classed("is-active", (other) => other.source.id === item.id || other.target.id === item.id);
         setReadout(`${item.title} / ${related.size - 1} connection${related.size === 2 ? "" : "s"}`);

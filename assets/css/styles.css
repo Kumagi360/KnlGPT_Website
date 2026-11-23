@@ -6,8 +6,8 @@
   --muted: #6e7773;
   --line: rgba(17, 17, 17, 0.14);
   --line-strong: rgba(17, 17, 17, 0.28);
-  --signal: #c95f2a;
-  --oxide: #c95f2a;
+  --signal: #d66a32;
+  --oxide: #d66a32;
   --cyan: #2aa7a2;
   --moss: #829b65;
   --violet: #7a6fa8;
@@ -85,6 +85,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -467,7 +468,7 @@ main {
 }
 
 .brand-mark-signal {
-  fill: #c86436;
+  fill: #d66a32;
 }
 
 :root[data-theme="dark"] .brand-mark-outline {
@@ -896,17 +897,6 @@ main {
   background-size: 84px 84px;
   color: var(--ink);
   overflow: hidden;
-}
-
-.atlas-map::after {
-  content: "</>";
-  position: absolute;
-  right: 18px;
-  bottom: 16px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
-  color: rgba(17, 17, 17, 0.32);
-  pointer-events: none;
 }
 
 .portrait-rig {
@@ -1536,7 +1526,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: clamp(14px, 1.8vw, 28px);
-  margin-top: clamp(36px, 5vw, 70px);
+  margin-top: clamp(10px, calc(2.5vw - 8px), 27px);
   align-items: start;
 }
 
@@ -1899,7 +1889,7 @@ main {
 
 .atlas-map {
   position: relative;
-  min-height: clamp(660px, 70vw, 920px);
+  min-height: clamp(540px, 48vw, 700px);
   border: 1px solid var(--line-strong);
   overflow: hidden;
   background:
@@ -1966,6 +1956,10 @@ main {
   stroke-width: 0.95;
   cursor: pointer;
   pointer-events: all;
+}
+
+.country-marker {
+  vector-effect: non-scaling-stroke;
 }
 
 .country.is-visited:hover,
@@ -2534,6 +2528,19 @@ main {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 20px;
   align-items: end;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline: clamp(12px, 2vw, 24px);
+}
+
+.project-system-reveal.project-technical > *,
+.project-system-reveal.project-technical :is(p, h3, span, pre, code, a) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.project-system-reveal.project-technical :is(p, h3, span, a) {
+  overflow-wrap: anywhere;
 }
 
 .project-system-reveal.project-technical h3 {
@@ -2907,6 +2914,9 @@ button.project-brief-toggle {
   font-family: "IBM Plex Mono", monospace;
   font-size: 11px;
   line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .project-brief-links {
@@ -4945,10 +4955,10 @@ blockquote {
   }
 
   .theme-toggle {
-    --toggle-thumb-size: 20px;
+    --toggle-thumb-size: 18px;
     --toggle-thumb-left: 3px;
-    --toggle-thumb-travel: 14px;
-    --toggle-icon-size: 11px;
+    --toggle-thumb-travel: 18px;
+    --toggle-icon-size: 10px;
     width: 40px;
     height: 28px;
     flex-basis: 40px;
@@ -4995,26 +5005,12 @@ blockquote {
   }
 
   .theme-toggle {
+    --toggle-thumb-size: 16px;
+    --toggle-thumb-travel: 15px;
+    --toggle-icon-size: 9px;
     width: 36px;
     height: 26px;
     flex-basis: 36px;
-  }
-
-  .theme-toggle::before {
-    width: 18px;
-    height: 18px;
-  }
-
-  .theme-toggle[aria-checked="true"]::before {
-    transform: translateX(12px);
-  }
-
-  .theme-toggle-sun {
-    left: 6px;
-  }
-
-  .theme-toggle-moon {
-    right: 5px;
   }
 }
 
@@ -6205,7 +6201,7 @@ blockquote {
 
   .project-tile-grid {
     gap: clamp(40px, 11vw, 52px);
-    margin-top: clamp(42px, 12vw, 58px);
+    margin-top: clamp(13px, calc(6vw - 8px), 21px);
   }
 
   .timeline-track {
