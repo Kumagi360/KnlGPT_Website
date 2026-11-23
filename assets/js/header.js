@@ -60,6 +60,26 @@
   window.addEventListener("scroll", updateScrollMeter, { passive: true });
   window.addEventListener("resize", updateScrollMeter);
 
+  let lastScrollY = window.scrollY;
+  function updateHeaderVisibility() {
+    const scrollY = window.scrollY;
+    const controls = header.querySelector(".header-controls");
+    const shouldShow = scrollY < 96 || scrollY < lastScrollY;
+
+    if (shouldShow || controls.contains(document.activeElement)) {
+      header.classList.remove("is-controls-hidden");
+    } else if (scrollY > lastScrollY) {
+      header.classList.add("is-controls-hidden");
+    }
+
+    lastScrollY = scrollY;
+  }
+
+  window.addEventListener("scroll", updateHeaderVisibility, { passive: true });
+  header.querySelector(".header-controls").addEventListener("focusin", () => {
+    header.classList.remove("is-controls-hidden");
+  });
+
   function setActiveNav() {
     const path = window.location.pathname.split("/").pop() || "index.html";
     let active = "";

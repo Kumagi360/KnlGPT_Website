@@ -58,25 +58,31 @@
         .attr("aria-label", (item) => item.title);
       const nodeContent = node.append("g").attr("class", "graph-node-content");
       nodeContent.append("circle").attr("r", 5);
-      nodeContent.append("text").attr("y", 24).text((item) => item.title);
+      const labelGroup = nodeContent.append("g").attr("class", "graph-node-label-group");
+      labelGroup.append("text").text((item) => item.title);
       nodeContent.each(function (item) {
-        const text = d3.select(this).select("text");
+        const content = d3.select(this);
+        const labelGroup = content.select(".graph-node-label-group");
+        const text = labelGroup.select("text");
         const textWidth = text.node().getComputedTextLength();
         const width = textWidth * 1.25;
         item.labelWidth = width + 12;
         item.collisionRadius = Math.min(62, Math.max(34, textWidth / 3 + 18));
-        d3.select(this).insert("rect", "circle")
+        content.insert("rect", "circle")
           .attr("class", "graph-node-hitbox")
-          .attr("x", -(width + 12) * 0.75)
+          .attr("x", -(width + 12) * 0.65)
           .attr("y", -5)
-          .attr("width", (width + 12) * 1.5)
-          .attr("height", 42);
-        d3.select(this).insert("rect", "text")
-          .attr("x", -width / 2 - 6)
-          .attr("y", 9)
-          .attr("width", width + 12)
-          .attr("height", 23)
+          .attr("width", (width + 12) * 1.3)
+          .attr("height", 36);
+        const textBounds = text.node().getBBox();
+        labelGroup.insert("rect", "text")
+          .attr("class", "graph-node-label")
+          .attr("x", textBounds.x - 7)
+          .attr("y", textBounds.y - 5)
+          .attr("width", textBounds.width + 14)
+          .attr("height", textBounds.height + 10)
           .attr("rx", 2);
+        labelGroup.attr("transform", "translate(0, 24)");
       });
 
       const simulation = d3.forceSimulation(graphNodes)
@@ -88,32 +94,83 @@
       simulation.stop();
       for (let step = 0; step < 180; step += 1) simulation.tick();
 
+      let zoomTransform = d3.zoomIdentity;
+      const positionLabel = (item, x = 0, y = 24) => {
+        const content = node.filter((other) => other.id === item.id).select(".graph-node-content");
+        const labelGroup = content.select(".graph-node-label-group");
+        const text = labelGroup.select("text");
+        const label = labelGroup.select(".graph-node-label");
+
+        const textBounds = text.node().getBBox();
+        label
+          .attr("x", textBounds.x - 7)
+          .attr("y", textBounds.y - 5)
+          .attr("width", textBounds.width + 14)
+          .attr("height", textBounds.height + 10);
+        item.labelTargetX = x;
+        item.labelTargetY = y;
+      };
+      const moveLabelAwayFromPointer = (event, item) => {
+        const [pointerX, pointerY] = d3.pointer(event, svg.node());
+        const [nodeX, nodeY] = zoomTransform.apply([item.x, item.y]);
+        const deltaX = pointerX - nodeX;
+        const deltaY = pointerY - nodeY;
+        const distance = Math.hypot(deltaX, deltaY) || 1;
+        positionLabel(item, -deltaX / distance * 28, -deltaY / distance * 28);
+      };
       const reset = (item) => {
         if (item) item.isFrozen = false;
         link.classed("is-active", false);
         node.classed("is-active", false);
+        if (item) positionLabel(item);
         setReadout(`${graphNodes.length} notes / ${graphLinks.length} connections`);
       };
       const focus = (item) => {
         item.isFrozen = true;
         const related = neighbors.get(item.id);
         node.classed("is-active", (other) => related.has(other.id));
+        node.filter((other) => related.has(other.id)).each(function (other) {
+          positionLabel(other);
+        });
         node.filter((other) => other.id === item.id).raise();
         link.classed("is-active", (other) => other.source.id === item.id || other.target.id === item.id);
         setReadout(`${item.title} / ${related.size - 1} connection${related.size === 2 ? "" : "s"}`);
       };
 
-      node.on("mouseenter focus", (_, item) => focus(item))
-        .on("mouseleave blur", (_, item) => reset(item))
+      node.on("mouseenter", (event, item) => {
+        focus(item);
+        moveLabelAwayFromPointer(event, item);
+      })
+        .on("mousemove", (event, item) => moveLabelAwayFromPointer(event, item))
+        .on("focus", (_, item) => focus(item))
+        .on("mouseleave", function (_, item) {
+          if (document.activeElement === this) this.blur();
+          else reset(item);
+        })
+        .on("blur", (_, item) => reset(item))
         .on("click", (_, item) => focus(item));
 
       const zoom = d3.zoom()
         .scaleExtent([0.35, 3])
         .on("zoom", (event) => {
+          zoomTransform = event.transform;
           viewport.attr("transform", event.transform);
-          nodeContent.attr("transform", `scale(${1 / event.transform.k})`);
+          nodeContent.attr("transform", `scale(${Math.pow(event.transform.k, -0.5)})`);
         });
       svg.call(zoom);
+      svg.on("click.clear-selection", (event) => {
+        if (!window.matchMedia("(max-width: 720px)").matches || event.defaultPrevented) return;
+        if (event.target.closest(".graph-nodes > g")) return;
+        graphNodes.forEach((item) => { item.isFrozen = false; });
+        reset();
+      });
+      const initialScale = window.matchMedia("(max-width: 480px)").matches ? 1.4
+        : window.matchMedia("(max-width: 720px)").matches ? 1.2 : 1;
+      if (initialScale > 1) {
+        svg.call(zoom.transform, d3.zoomIdentity
+          .translate(width * (1 - initialScale) / 2, height * (1 - initialScale) / 2)
+          .scale(initialScale));
+      }
       resetButton?.addEventListener("click", () => {
         svg.transition().duration(180).call(zoom.transform, d3.zoomIdentity);
       });
@@ -126,6 +183,10 @@
       graphNodes.forEach((item) => {
         item.baseX = item.x;
         item.baseY = item.y;
+        item.labelX = 0;
+        item.labelY = 24;
+        item.labelTargetX = 0;
+        item.labelTargetY = 24;
         item.driftX = 6 + Math.random() * 14;
         item.driftY = 6 + Math.random() * 14;
         item.driftSpeed = 0.00018 + Math.random() * 0.00022;
@@ -134,11 +195,15 @@
       });
       d3.timer((elapsed) => {
         graphNodes.forEach((item) => {
+          item.labelX += (item.labelTargetX - item.labelX) * 0.22;
+          item.labelY += (item.labelTargetY - item.labelY) * 0.22;
           if (item.isFrozen) return;
           item.x = item.baseX + Math.sin(elapsed * item.driftSpeed + item.driftPhase) * item.driftX;
           item.y = item.baseY + Math.cos(elapsed * item.driftSpeed * 0.83 + item.driftPhaseY) * item.driftY;
         });
         renderPositions();
+        node.select(".graph-node-label-group")
+          .attr("transform", (item) => `translate(${item.labelX}, ${item.labelY})`);
       });
       reset();
     } catch {
