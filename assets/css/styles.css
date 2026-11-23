@@ -99,6 +99,8 @@ body {
 }
 
 .knowledge-graph {
+  --graph-label-size: 13px;
+  --graph-label-active-size: 14px;
   position: relative;
   color: var(--ink);
 }
@@ -112,7 +114,7 @@ body {
   width: min(calc(var(--max) - clamp(36px, 8vw, 108px)), calc(100% - 36px));
   margin: 0 auto 42px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--graph-label-size);
   text-align: center;
 }
 
@@ -204,7 +206,7 @@ body {
 .graph-nodes text {
   fill: var(--muted);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 12px;
+  font-size: var(--graph-label-size);
   text-anchor: middle;
   pointer-events: none;
   transition: fill 180ms ease;
@@ -232,7 +234,7 @@ body {
 .graph-nodes g.is-active text,
 .graph-nodes g:focus text {
   fill: var(--signal);
-  font-size: 13px;
+  font-size: var(--graph-label-active-size);
 }
 
 .graph-nodes g.is-active rect:not(.graph-node-hitbox),
@@ -253,6 +255,11 @@ body {
 }
 
 @media (max-width: 720px) {
+  .knowledge-graph {
+    --graph-label-size: 14px;
+    --graph-label-active-size: 15px;
+  }
+
   .thoughts-graph {
     width: min(100% - 32px, 680px);
   }
@@ -266,6 +273,13 @@ body {
   .graph-loading,
   .graph-empty {
     min-height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .knowledge-graph {
+    --graph-label-size: 15px;
+    --graph-label-active-size: 16px;
   }
 }
 
@@ -416,6 +430,9 @@ main {
 }
 
 .site-header {
+  --header-inline-padding: clamp(18px, 4vw, 54px);
+  --header-block-padding: 14px;
+  --brand-edge-offset: 16px;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -423,10 +440,11 @@ main {
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 18px;
-  padding: 14px clamp(18px, 4vw, 54px);
+  padding: var(--header-block-padding) var(--header-inline-padding);
   border-bottom: 1px solid var(--line);
   background: rgba(var(--paper-rgb), 0.84);
   backdrop-filter: blur(18px);
+  transition: background 220ms ease, border-color 220ms ease;
 }
 
 .brand-mark,
@@ -437,9 +455,9 @@ main {
 }
 
 .brand-mark {
-  margin-left: 16px;
+  margin-left: var(--brand-edge-offset);
   font-weight: 700;
-  transition: opacity 160ms ease;
+  transition: opacity 160ms ease, transform 240ms ease;
 }
 
 .brand-mark:hover {
@@ -515,6 +533,24 @@ main {
   align-items: center;
   gap: 10px;
   min-width: 0;
+  transform-origin: right top;
+  transition: opacity 200ms ease, transform 240ms ease;
+}
+
+.site-header.is-controls-hidden .header-controls {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-16px);
+}
+
+.site-header.is-controls-hidden .brand-mark {
+  transform: translateX(calc(-1 * (var(--header-inline-padding) + var(--brand-edge-offset) - var(--header-block-padding))));
+}
+
+.site-header:focus-within .header-controls {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .theme-toggle {
@@ -608,6 +644,13 @@ main {
 
 :root[data-theme="dark"] .site-header {
   background: color-mix(in srgb, var(--paper) 88%, transparent);
+}
+
+.site-header.is-controls-hidden,
+:root[data-theme="dark"] .site-header.is-controls-hidden {
+  border-bottom-color: transparent;
+  background: transparent;
+  backdrop-filter: none;
 }
 
 :root[data-theme="dark"] .primary-nav {
@@ -4909,14 +4952,13 @@ blockquote {
 
 @media (max-width: 560px) {
   .site-header {
+    --header-inline-padding: 12px;
+    --header-block-padding: 10px;
+    --brand-edge-offset: 0px;
     grid-template-columns: auto minmax(0, 1fr);
     gap: 8px;
-    padding: 10px 12px;
+    padding: var(--header-block-padding) var(--header-inline-padding);
     overflow: visible;
-  }
-
-  .brand-mark {
-    margin-left: 0;
   }
 
   .brand-cell {
@@ -4982,8 +5024,10 @@ blockquote {
 
 @media (max-width: 360px) {
   .site-header {
+    --header-inline-padding: 10px;
+    --header-block-padding: 8px;
     gap: 6px;
-    padding: 8px 10px;
+    padding: var(--header-block-padding) var(--header-inline-padding);
   }
 
   .brand-cell {
