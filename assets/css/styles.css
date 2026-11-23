@@ -97,6 +97,177 @@ body {
   overflow-x: hidden;
 }
 
+.knowledge-graph {
+  position: relative;
+  color: var(--ink);
+}
+
+.thoughts-graph {
+  width: min(calc(var(--max) - clamp(36px, 8vw, 108px)), calc(100% - 36px));
+  margin: 0 auto 12px;
+}
+
+.graph-caption {
+  width: min(calc(var(--max) - clamp(36px, 8vw, 108px)), calc(100% - 36px));
+  margin: 0 auto 42px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.graph-canvas {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.graph-canvas::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border: 1px solid var(--line);
+  background: rgba(var(--panel-rgb), 0.38);
+  content: "";
+}
+
+.knowledge-graph-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  overflow: visible;
+}
+
+.knowledge-graph-svg:active {
+  cursor: grabbing;
+}
+
+.graph-reset {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.graph-reset:hover,
+.graph-reset:focus-visible {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.graph-reset svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.graph-links line {
+  stroke: rgba(var(--ink-rgb), 0.28);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 180ms ease, stroke 180ms ease;
+}
+
+.graph-links line.is-active {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+}
+
+.graph-nodes g {
+  cursor: grab;
+  outline: none;
+}
+
+.graph-nodes circle {
+  fill: var(--signal);
+  stroke: var(--surface);
+  stroke-width: 1;
+  transition: r 180ms ease, fill 180ms ease;
+}
+
+.graph-nodes text {
+  fill: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  text-anchor: middle;
+  pointer-events: none;
+  transition: fill 180ms ease;
+}
+
+.graph-nodes rect:not(.graph-node-hitbox) {
+  fill: var(--surface);
+  stroke: var(--line-strong);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.graph-nodes .graph-node-hitbox {
+  fill: transparent;
+  pointer-events: all;
+  stroke: none;
+}
+
+.graph-nodes g.is-active circle,
+.graph-nodes g:focus circle {
+  r: 9px;
+}
+
+.graph-nodes g.is-active text,
+.graph-nodes g:focus text {
+  fill: var(--signal);
+  font-size: 13px;
+}
+
+.graph-nodes g.is-active rect:not(.graph-node-hitbox),
+.graph-nodes g:focus rect:not(.graph-node-hitbox) {
+  opacity: 1;
+}
+
+.graph-loading,
+.graph-empty {
+  display: grid;
+  min-height: 100%;
+  margin: 0;
+  place-items: center;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .thoughts-graph {
+    width: min(100% - 32px, 680px);
+  }
+
+  .graph-caption {
+    width: min(100% - 32px, 680px);
+  }
+
+  .graph-canvas,
+  .knowledge-graph-svg,
+  .graph-loading,
+  .graph-empty {
+    min-height: 0;
+  }
+}
+
 .scroll-meter {
   position: fixed;
   top: 0;
