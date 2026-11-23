@@ -1,5 +1,11 @@
 # KnlGPT Website
 
+## Obsidian graph
+
+The Thoughts page loads its live graph from the dedicated [Obsidian graph Gist](https://gist.github.com/Kumagi360/1b56f82691576d8060e7fe3373a5c018). Local graph files are an empty fallback only.
+
+The reusable `$publish-obsidian-graph` skill creates the public directory-tree export. It excludes the vault's top-level `Private/` directory and folder-index notes whose filename matches their parent directory.
+
 Static personal website for Kunal Gupta, built for GitHub Pages.
 
 ## Structure
