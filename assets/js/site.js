@@ -417,6 +417,12 @@ function initProjectYearTracking() {
   };
 
   const updateYear = () => {
+    const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    if (atPageEnd) {
+      setYear("2019");
+      return;
+    }
+
     const threshold = 132;
     const current = milestones
       .map((milestone) => ({ year: milestone.dataset.projectYear, top: milestone.getBoundingClientRect().top }))
