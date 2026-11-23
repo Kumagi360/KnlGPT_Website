@@ -12,7 +12,8 @@
   const template = document.createElement("template");
   const pageCache = new Map();
   const loadedScripts = new Set([...document.scripts].map((item) => item.src).filter(Boolean));
-  let currentPageKey = `${window.location.pathname}${window.location.search}`;
+  const pageKey = ({ pathname, search }) => `${pathname === "/" ? "/index.html" : pathname}${search}`;
+  let currentPageKey = pageKey(window.location);
   let navigationController;
 
   document.head.querySelectorAll("style").forEach((item) => {
@@ -110,11 +111,11 @@
     }
   }
 
-  let savedTheme = "light";
+  let savedTheme = "dark";
   try {
-    savedTheme = localStorage.getItem("theme") || "light";
+    savedTheme = localStorage.getItem("theme") === "light" ? "light" : "dark";
   } catch {
-    // Light mode is the site's default when storage is unavailable.
+    // Dark mode is the site's default when storage is unavailable.
   }
   setTheme(savedTheme);
 
@@ -221,7 +222,7 @@
   }
 
   async function navigate(url, addHistory) {
-    const nextPageKey = `${url.pathname}${url.search}`;
+    const nextPageKey = pageKey(url);
     if (nextPageKey === currentPageKey) {
       scrollToDestination(url);
       return;
