@@ -2,7 +2,7 @@
   <title id="title">Kunal Gupta</title>
   <rect x="1" y="1" width="78" height="78" fill="none" stroke="#151515" stroke-width="2"/>
   <g font-family="Inter Tight, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="2" text-anchor="middle">
-    <text x="40" y="34"><tspan fill="#d66a32">K</tspan><tspan fill="#151515">U</tspan><tspan fill="#d66a32">N</tspan><tspan fill="#151515">A</tspan><tspan fill="#d66a32">L</tspan></text>
-    <text x="40" y="56.5"><tspan fill="#d66a32">G</tspan><tspan fill="#151515">U</tspan><tspan fill="#d66a32">P</tspan><tspan fill="#d66a32">T</tspan><tspan fill="#151515">A</tspan></text>
+    <text x="40" y="34"><tspan fill="#c95f2a">K</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a">N</tspan><tspan fill="#151515">A</tspan><tspan fill="#c95f2a">L</tspan></text>
+    <text x="40" y="56.5"><tspan fill="#c95f2a">G</tspan><tspan fill="#151515">U</tspan><tspan fill="#c95f2a" dx="0.5">P</tspan><tspan fill="#c95f2a">T</tspan><tspan fill="#151515" dx="-0.5">A</tspan></text>
   </g>
 </svg>
