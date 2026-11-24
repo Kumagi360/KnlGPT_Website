@@ -2016,10 +2016,6 @@ main {
   pointer-events: all;
 }
 
-.country-marker {
-  vector-effect: non-scaling-stroke;
-}
-
 :root[data-theme="dark"] .atlas-map::before {
   border-color: rgba(var(--ink-rgb), 0.26);
 }
@@ -2051,6 +2047,13 @@ main {
   outline: none;
   transform: scale(1.025);
   filter: drop-shadow(0 10px 18px rgba(var(--brand-ink-rgb), 0.12));
+}
+
+/* A screen-space stroke would obscure these territories at world-map scale. */
+.country.is-visited:is([data-country="344"], [data-country="702"]) {
+  stroke: none;
+  transform: none;
+  filter: none;
 }
 
 .map-legend {

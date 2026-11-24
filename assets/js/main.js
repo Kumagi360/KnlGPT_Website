@@ -141,16 +141,14 @@ const countries = [
     title: "Luxembourg",
   },
   {
-    id: "hong-kong",
+    id: "344",
     status: "visited",
     title: "Hong Kong",
-    coordinates: [114.1694, 22.3193],
   },
   {
-    id: "singapore",
+    id: "702",
     status: "visited",
     title: "Singapore",
-    coordinates: [103.8198, 1.3521],
   },
   {
     id: "300",
@@ -559,6 +557,8 @@ async function renderWorldMap() {
 
     const world = window.WORLD_COUNTRIES_TOPOLOGY || (await d3.json("assets/data/countries-110m.json"));
     const features = topojson.feature(world, world.objects.countries).features;
+    const countryIds = new Set(features.map((feature) => String(feature.id)));
+    features.push(...(window.WORLD_ATLAS_SMALL_TERRITORIES || []).filter((feature) => !countryIds.has(feature.id)));
     const projection = d3.geoNaturalEarth1().fitExtent([[8, 10], [width - 8, height - 16]], {
       type: "Sphere",
     });
@@ -583,19 +583,6 @@ async function renderWorldMap() {
       .attr("d", path);
 
     countryPaths.filter((feature) => interactiveCountryIds.has(String(feature.id))).raise();
-
-    svg
-      .append("g")
-      .selectAll("circle")
-      .data(countries.filter((country) => country.coordinates))
-      .join("circle")
-      .attr("class", "country country-marker is-visited")
-      .attr("data-country", (country) => country.id)
-      .attr("tabindex", 0)
-      .attr("aria-label", (country) => `${country.title} country name`)
-      .attr("cx", (country) => projection(country.coordinates)[0])
-      .attr("cy", (country) => projection(country.coordinates)[1])
-      .attr("r", 4.5);
 
     countryPaths.each(function (feature) {
       const id = String(feature.id);
