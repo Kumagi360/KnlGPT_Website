@@ -7,7 +7,7 @@
   const favicon = document.querySelector('link[rel="icon"]') || document.createElement("link");
   favicon.rel = "icon";
   favicon.type = "image/svg+xml";
-  favicon.href = href("assets/images/kg-mark.svg?v=20261123-teal");
+  favicon.href = href("assets/images/kg-mark.svg?v=20261123-dark-palette");
   if (!favicon.isConnected) document.head.append(favicon);
   const template = document.createElement("template");
   const pageCache = new Map();
