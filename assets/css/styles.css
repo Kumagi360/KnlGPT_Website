@@ -576,7 +576,7 @@ main {
   transform: translateX(calc(-1 * (var(--header-inline-padding) + var(--brand-edge-offset) - var(--header-block-padding))));
 }
 
-.site-header:focus-within .header-controls {
+.site-header:has(:focus-visible) .header-controls {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);

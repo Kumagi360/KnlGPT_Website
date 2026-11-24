@@ -64,10 +64,9 @@
   let lastScrollY = window.scrollY;
   function updateHeaderVisibility() {
     const scrollY = window.scrollY;
-    const controls = header.querySelector(".header-controls");
     const shouldShow = scrollY < 96 || scrollY < lastScrollY;
 
-    if (shouldShow || controls.contains(document.activeElement)) {
+    if (shouldShow || header.querySelector(":focus-visible")) {
       header.classList.remove("is-controls-hidden");
     } else if (scrollY > lastScrollY) {
       header.classList.add("is-controls-hidden");
@@ -77,8 +76,10 @@
   }
 
   window.addEventListener("scroll", updateHeaderVisibility, { passive: true });
-  header.querySelector(".header-controls").addEventListener("focusin", () => {
-    header.classList.remove("is-controls-hidden");
+  header.addEventListener("focusin", (event) => {
+    if (event.target.matches(":focus-visible")) {
+      header.classList.remove("is-controls-hidden");
+    }
   });
 
   function setActiveNav() {
