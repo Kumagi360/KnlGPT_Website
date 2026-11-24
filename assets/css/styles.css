@@ -24,7 +24,7 @@
   --ink-subtle: #394b5a;
   --paper-rgb: 233, 238, 244;
   --ink-rgb: 17, 32, 51;
-  --surface-rgb: 245, 248, 251;
+  --surface-rgb: 241, 245, 249;
   --panel-rgb: 245, 247, 250;
   --radius: 8px;
   --max: 1440px;
@@ -98,6 +98,18 @@ body {
   overflow-x: hidden;
 }
 
+:root:not([data-theme="dark"]) {
+  --pearl-canvas:
+    radial-gradient(ellipse at 2% 58%, #cde3e4, transparent 41%),
+    radial-gradient(ellipse at 96% 32%, #dad4e6, transparent 43%),
+    linear-gradient(132deg, #e8edf3, #f4f5f5 35%, #fbfbf9 44%, #d8e3eb 58%, #f1f2f5 79%);
+}
+
+:root:not([data-theme="dark"]) body {
+  background-image: var(--pearl-canvas);
+  background-attachment: fixed;
+}
+
 .knowledge-graph {
   --graph-label-size: 13px;
   --graph-label-active-size: 14px;
@@ -119,7 +131,7 @@ body {
   width: min(calc(var(--max) - clamp(36px, 8vw, 108px)), calc(100% - 36px));
   margin: 0 auto 42px;
   color: var(--muted);
-  font-size: var(--graph-label-size);
+  font-size: var(--graph-label-size, 13px);
   text-align: center;
 }
 
@@ -451,6 +463,21 @@ main {
   background: rgba(var(--paper-rgb), 0.84);
   backdrop-filter: blur(18px);
   transition: background 220ms ease, border-color 220ms ease;
+}
+
+:root:not([data-theme="dark"]) .site-header {
+  background: transparent;
+}
+
+:root:not([data-theme="dark"]) .site-header:not(.is-controls-hidden)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--pearl-canvas);
+  background-attachment: fixed;
+  opacity: 0.86;
 }
 
 .brand-mark,
@@ -4195,6 +4222,19 @@ blockquote {
   pointer-events: none;
   mix-blend-mode: multiply;
   background-image: var(--media-sheen);
+}
+
+:root:not([data-theme="dark"]) .media-sheen {
+  background: var(--pearl-canvas);
+  background-attachment: fixed;
+}
+
+:root:not([data-theme="dark"]) .media-sheen img {
+  mix-blend-mode: multiply;
+}
+
+:root:not([data-theme="dark"]) .media-sheen::after {
+  opacity: 0.3;
 }
 
 :is(.latest-card, .education-panel, .project-media-viewport, .blog-card, .article-card-grid > div, .til-column, .til-subcard),
