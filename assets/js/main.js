@@ -348,6 +348,162 @@ function initSectionNav() {
   updateSectionNav();
 }
 
+function cloneMediaFrame(frame) {
+  const clone = frame.cloneNode(true);
+  clone.setAttribute("aria-hidden", "true");
+  clone.querySelector("img")?.setAttribute("alt", "");
+  return clone;
+}
+
+function initMediaRoll(viewport, stage, reducedMotion, playback) {
+  let frames = [];
+  let distance = 0;
+  let offset = 0;
+  let hovering = false;
+  let drag;
+  let lastTimestamp = 0;
+
+  function render() {
+    stage.style.transform = `translateX(${-offset}px)`;
+  }
+
+  function removeCopy(copy) {
+    const video = copy.querySelector("video");
+    if (video) {
+      playback.unobserve(video);
+      video.pause();
+    }
+    copy.remove();
+  }
+
+  function sync() {
+    if (!frames.length || !viewport.clientWidth) return;
+    const first = frames[0].getBoundingClientRect();
+    const last = frames[frames.length - 1].getBoundingClientRect();
+    const gap = parseFloat(getComputedStyle(stage).columnGap);
+    distance = (last.right - first.left) / (stage.currentCSSZoom || 1) + gap;
+    if (distance <= 0) return;
+
+    // Keep a full viewport of frames beyond the point where the track wraps.
+    const copies = 1 + Math.ceil((viewport.clientWidth + gap) / distance);
+    const length = copies * frames.length;
+    while (stage.children.length > length) removeCopy(stage.lastElementChild);
+    while (stage.children.length < length) {
+      const copy = cloneMediaFrame(frames[stage.children.length % frames.length]);
+      stage.append(copy);
+      const video = copy.querySelector("video");
+      if (video) playback.observe(video);
+    }
+    offset %= distance;
+    render();
+  }
+
+  function setFrames(items) {
+    frames = items;
+    viewport.hidden = frames.length === 0;
+    stage.querySelectorAll('figure[aria-hidden="true"]').forEach(removeCopy);
+    stage.replaceChildren(...frames);
+    offset = 0;
+    distance = 0;
+    hovering = viewport.matches(":hover") && window.matchMedia("(hover: hover)").matches;
+  }
+
+  viewport.addEventListener("pointerenter", (event) => {
+    if (event.pointerType === "mouse") hovering = true;
+  });
+  viewport.addEventListener("pointerleave", (event) => {
+    if (event.pointerType === "mouse") hovering = false;
+  });
+  viewport.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0 || !distance) return;
+    drag = { id: event.pointerId, x: event.clientX };
+    viewport.setPointerCapture(event.pointerId);
+    viewport.classList.add("is-dragging");
+  });
+  viewport.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== drag?.id) return;
+    const delta = (drag.x - event.clientX) / (stage.currentCSSZoom || 1);
+    offset = ((offset + delta) % distance + distance) % distance;
+    drag.x = event.clientX;
+    render();
+  });
+  viewport.addEventListener("lostpointercapture", (event) => {
+    if (event.pointerId !== drag?.id) return;
+    drag = undefined;
+    if (event.pointerType === "mouse") hovering = viewport.matches(":hover");
+    viewport.classList.remove("is-dragging");
+  });
+  viewport.addEventListener("dragstart", (event) => event.preventDefault());
+
+  function animate(timestamp) {
+    if (lastTimestamp && distance && !hovering && !drag && !reducedMotion.matches &&
+        !document.hidden && viewport.isConnected && !viewport.hidden) {
+      offset = (offset + (timestamp - lastTimestamp) * 0.024) % distance;
+      render();
+    }
+    lastTimestamp = timestamp;
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+  return { setFrames, sync };
+}
+
+function initLatestMedia(media, reducedMotion) {
+  const firstStage = media.querySelector(".media-roll");
+  const frames = [...firstStage.children];
+  // Only decode playing video frames when the video is visible in its clipped row.
+  const playback = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, intersectionRatio }) => {
+      if (intersectionRatio >= 0.05) target.play().catch(() => {});
+      else target.pause();
+    });
+  }, { threshold: 0.05 });
+  firstStage.querySelectorAll("video").forEach((video) => playback.observe(video));
+  if (frames.length < 2) return;
+
+  const rows = document.createElement("div");
+  rows.className = "media-rolls";
+  media.append(rows);
+  const secondStage = document.createElement("div");
+  secondStage.className = "media-roll";
+  const rolls = [firstStage, secondStage].map((stage) => {
+    const viewport = document.createElement("div");
+    viewport.className = "media-roll-row";
+    viewport.append(stage);
+    rows.append(viewport);
+    return initMediaRoll(viewport, stage, reducedMotion, playback);
+  });
+  let twoRows;
+
+  function layout() {
+    if (!media.clientHeight) return;
+    const styles = getComputedStyle(media);
+    const baseHeight = parseFloat(styles.minHeight) - 2 * parseFloat(styles.paddingTop);
+    const gap = parseFloat(getComputedStyle(rows).rowGap);
+    const split = baseHeight <= media.clientHeight * 0.7;
+    const rowHeight = split ? Math.min(baseHeight, (media.clientHeight - 3 * gap) / 2) : baseHeight;
+    media.style.setProperty("--media-height", `${rowHeight}px`);
+
+    if (split !== twoRows) {
+      twoRows = split;
+      const midpoint = Math.ceil(frames.length / 2);
+      const top = split ? frames.slice(0, midpoint) : frames;
+      const bottom = split ? frames.slice(midpoint) : [];
+      rolls[0].setFrames(top);
+      rolls[1].setFrames(bottom);
+    }
+    rolls.forEach((roll) => roll.sync());
+  }
+
+  frames.forEach((frame) => {
+    const asset = frame.firstElementChild;
+    asset.addEventListener(asset instanceof HTMLVideoElement ? "loadedmetadata" : "load", layout);
+  });
+  new ResizeObserver(layout).observe(media);
+  layout();
+}
+
 function initLatestCarousel() {
   const carousel = document.querySelector("[data-latest-carousel]");
   if (!carousel) return;
@@ -367,93 +523,12 @@ function initLatestCarousel() {
   const previous = carousel.querySelector("[data-latest-previous]");
   const next = carousel.querySelector("[data-latest-next]");
   const current = carousel.querySelector("#latestCurrent");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!track || cards.length < 2) return;
 
-  const mediaStages = [...carousel.querySelectorAll(".media-roll")];
-
-  const startMediaRoll = (stage) => {
-    const frames = [...stage.querySelectorAll("figure")];
-    if (frames.length < 2 || stage.dataset.duplicated) return;
-
-    let distance = 0;
-    let offset = 0;
-    let dragging = false;
-    let dragStartX = 0;
-    let dragStartOffset = 0;
-    let lastTimestamp = 0;
-
-    frames.forEach((frame) => {
-      const duplicate = frame.cloneNode(true);
-      duplicate.setAttribute("aria-hidden", "true");
-      duplicate.querySelector("img")?.setAttribute("alt", "");
-      stage.append(duplicate);
-    });
-
-    stage.dataset.duplicated = "true";
-
-    const render = () => {
-      stage.style.transform = `translateX(${-offset}px)`;
-    };
-
-    const syncMediaRoll = () => {
-      const duplicateStart = stage.children[frames.length];
-      distance = duplicateStart.offsetLeft - stage.children[0].offsetLeft;
-      offset = distance > 0 ? offset % distance : 0;
-      stage.classList.toggle("is-scrolling", distance > 0);
-      render();
-    };
-
-    const animate = (timestamp) => {
-      if (lastTimestamp && distance > 0 && !dragging && !prefersReducedMotion && !document.hidden) {
-        offset = (offset + (timestamp - lastTimestamp) * 0.024) % distance;
-        render();
-      }
-      lastTimestamp = timestamp;
-      window.requestAnimationFrame(animate);
-    };
-
-    const stopDragging = (event) => {
-      if (!dragging) return;
-      dragging = false;
-      stage.classList.remove("is-dragging");
-      if (stage.hasPointerCapture?.(event.pointerId)) {
-        stage.releasePointerCapture(event.pointerId);
-      }
-      lastTimestamp = performance.now();
-    };
-
-    stage.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0 || distance === 0) return;
-      event.preventDefault();
-      dragging = true;
-      dragStartX = event.clientX;
-      dragStartOffset = offset;
-      stage.classList.add("is-dragging");
-      stage.setPointerCapture(event.pointerId);
-    });
-
-    stage.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      offset = (dragStartOffset - (event.clientX - dragStartX)) % distance;
-      if (offset < 0) offset += distance;
-      render();
-    });
-
-    stage.addEventListener("pointerup", stopDragging);
-    stage.addEventListener("pointercancel", stopDragging);
-
-    window.addEventListener("resize", syncMediaRoll, { passive: true });
-    window.addEventListener("load", syncMediaRoll, { once: true });
-    stage.querySelectorAll("img, video").forEach((media) => {
-      media.addEventListener(media instanceof HTMLVideoElement ? "loadedmetadata" : "load", syncMediaRoll);
-    });
-    if ("ResizeObserver" in window) new ResizeObserver(syncMediaRoll).observe(stage);
-    syncMediaRoll();
-    window.requestAnimationFrame(animate);
-  };
-
-  mediaStages.forEach(startMediaRoll);
+  carousel.querySelectorAll(".latest-media").forEach((media) => {
+    initLatestMedia(media, reducedMotion);
+  });
 
   let activeIndex = 0;
   let autoTimer;
@@ -520,8 +595,9 @@ function initLatestCarousel() {
 
 function setCountry(countryId) {
   const country = countries.find((entry) => entry.id === String(countryId));
-  if (!country) return;
+  if (!country || (mapPopover.classList.contains("is-visible") && popoverTitle.textContent === country.title)) return;
   mapPopover.classList.add("is-visible");
+  mapPopover.classList.toggle("is-lived", country.status === "lived");
   popoverTitle.textContent = country.title;
   document.querySelectorAll(".country").forEach((countryShape) => {
     countryShape.classList.toggle("is-active", countryShape.dataset.country === String(countryId));
@@ -529,6 +605,7 @@ function setCountry(countryId) {
 }
 
 function clearCountry() {
+  if (!mapPopover.classList.contains("is-visible")) return;
   mapPopover.classList.remove("is-visible");
   document.querySelectorAll(".country").forEach((shape) => {
     shape.classList.remove("is-active");
@@ -552,21 +629,22 @@ async function renderWorldMap() {
       .append("svg")
       .attr("class", "world-map")
       .attr("viewBox", `0 0 ${width} ${height}`)
-      .attr("role", "img")
-      .attr("aria-label", "Hoverable real country outlines");
+      .attr("role", "group")
+      .attr("tabindex", 0)
+      .attr("aria-label", "World map. Scroll or pinch to zoom, and drag to pan. With the map focused, use plus, minus, or the arrow keys.");
 
     const world = window.WORLD_COUNTRIES_TOPOLOGY || (await d3.json("assets/data/countries-110m.json"));
     const features = topojson.feature(world, world.objects.countries).features;
     const countryIds = new Set(features.map((feature) => String(feature.id)));
     features.push(...(window.WORLD_ATLAS_SMALL_TERRITORIES || []).filter((feature) => !countryIds.has(feature.id)));
-    const projection = d3.geoNaturalEarth1().fitExtent([[8, 10], [width - 8, height - 16]], {
+    const projection = d3.geoNaturalEarth1().fitExtent([[4, 4], [width - 4, height - 4]], {
       type: "Sphere",
     });
     const path = d3.geoPath(projection);
 
-    const countryPaths = svg
-      .append("g")
-      .selectAll("path")
+    // Every country outline and highlight uses the same projected path and camera.
+    const mapLayer = svg.append("g");
+    const countryPaths = mapLayer.selectAll("path")
       .data(features)
       .join("path")
       .attr("class", (feature) => {
@@ -575,101 +653,290 @@ async function renderWorldMap() {
         return `country${state}`;
       })
       .attr("data-country", (feature) => String(feature.id))
-      .attr("tabindex", (feature) => (interactiveCountryIds.has(String(feature.id)) ? 0 : -1))
+      .attr("tabindex", (feature) => (interactiveCountryIds.has(String(feature.id)) ? 0 : null))
       .attr("aria-label", (feature) => {
         const country = countries.find((entry) => entry.id === String(feature.id));
-        return country ? `${country.title}, ${country.status === "lived" ? "lived in" : "visited"}` : "Country border";
+        return country ? `${country.title}, ${country.status === "lived" ? "lived" : "visited"}` : "Country border";
       })
       .attr("d", path);
 
     countryPaths.filter((feature) => interactiveCountryIds.has(String(feature.id))).raise();
 
-    countryPaths.each(function (feature) {
-      const id = String(feature.id);
-      if (!interactiveCountryIds.has(id)) return;
-      const activate = () => setCountry(id);
-      this.addEventListener("mouseenter", activate);
-      this.addEventListener("mouseover", activate);
-      this.addEventListener("mouseleave", clearCountry);
-      this.addEventListener("focus", activate);
-      this.addEventListener("click", activate);
-      this.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          activate();
-        }
-      });
-    });
+    let dragging = false;
 
-    mapHost.addEventListener("mouseover", (event) => {
-      const target = event.target.closest?.(".country");
-      if (target && interactiveCountryIds.has(target.dataset.country)) {
-        setCountry(target.dataset.country);
-      }
-    });
-
-    mapHost.addEventListener("mousemove", (event) => {
-      const target = event.target.closest?.(".country");
-      if (!target || !interactiveCountryIds.has(target.dataset.country)) {
+    function showCountry(target) {
+      const country = target?.closest(".country");
+      if (country && mapHost.contains(country) && interactiveCountryIds.has(country.dataset.country)) {
+        setCountry(country.dataset.country);
+      } else {
         clearCountry();
       }
-    });
+    }
 
-    mapHost.addEventListener("click", (event) => {
-      const target = event.target.closest?.(".country");
-      if (target && interactiveCountryIds.has(target.dataset.country)) {
-        setCountry(target.dataset.country);
+    function updateHover(event) {
+      if (event && Number.isFinite(event.clientX)) {
+        showCountry(document.elementFromPoint(event.clientX, event.clientY));
       }
-    });
+    }
 
-    mapHost.addEventListener("focusin", (event) => {
-      const target = event.target.closest?.(".country");
-      if (target && interactiveCountryIds.has(target.dataset.country)) {
-        setCountry(target.dataset.country);
-      }
-    });
+    const zoom = d3.zoom()
+      .scaleExtent([1, 24])
+      .translateExtent([[0, 0], [width, height]])
+      .filter((event) => (!event.ctrlKey || event.type === "wheel") && !event.button &&
+        (event.type !== "touchstart" || event.touches.length > 1 || d3.zoomTransform(svg.node()).k > 1))
+      .on("start", ({ sourceEvent }) => {
+        dragging = sourceEvent?.type === "mousedown" || sourceEvent?.type === "touchstart";
+      })
+      .on("zoom", ({ transform, sourceEvent }) => {
+        mapLayer.attr("transform", transform);
+        svg.classed("is-zoomed", transform.k > 1);
+        if (dragging) clearCountry();
+        else updateHover(sourceEvent);
+      })
+      .on("end", ({ sourceEvent }) => {
+        dragging = false;
+        updateHover(sourceEvent);
+      });
 
-    mapHost.addEventListener("focusout", () => {
-      clearCountry();
-    });
+    svg.call(zoom);
 
+    mapHost.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "touch" && !dragging) showCountry(event.target);
+    });
+    mapHost.addEventListener("pointerdown", (event) => {
+      if (event.isPrimary && event.button === 0) showCountry(event.target);
+    });
+    mapHost.addEventListener("pointerleave", (event) => {
+      if (event.pointerType !== "touch") clearCountry();
+    });
+    mapHost.addEventListener("click", (event) => showCountry(event.target));
+    mapHost.addEventListener("focusin", (event) => showCountry(event.target));
+    mapHost.addEventListener("focusout", clearCountry);
     mapHost.addEventListener("keydown", (event) => {
-      const target = event.target.closest?.(".country");
-      if (target && interactiveCountryIds.has(target.dataset.country) && (event.key === "Enter" || event.key === " ")) {
+      if (event.target !== svg.node()) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showCountry(event.target);
+        }
+        return;
+      }
+
+      const directions = { ArrowLeft: [1, 0], ArrowRight: [-1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] };
+      const direction = directions[event.key];
+      if (direction) {
         event.preventDefault();
-        setCountry(target.dataset.country);
+        const step = 40 / d3.zoomTransform(svg.node()).k;
+        svg.call(zoom.translateBy, direction[0] * step, direction[1] * step);
+      } else if (event.key === "+" || event.key === "=" || event.key === "-") {
+        event.preventDefault();
+        svg.call(zoom.scaleBy, event.key === "-" ? 0.8 : 1.25);
       }
     });
 
-    mapHost.addEventListener("mouseleave", () => {
+    const mapFrame = mapHost.parentElement;
+    function resetMapView() {
       clearCountry();
-    });
+      svg.interrupt().call(zoom.transform, d3.zoomIdentity);
+    }
 
+    mapFrame.querySelector(".map-reset").addEventListener("click", resetMapView);
+    new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) resetMapView();
+    }).observe(mapFrame);
   } catch (error) {
     mapHost.classList.add("map-fallback");
   }
+}
+
+function initExperienceCarousel() {
+  const board = document.querySelector(".timeline-board");
+  if (!board || board.classList.contains("is-carousel")) return;
+
+  const track = board.querySelector(".timeline-track");
+  const entries = [...track.children];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const visibleRows = 3;
+  const initialRow = entries.length;
+  let rowHeight = 0;
+  let timer = 0;
+  let frame = 0;
+  let inView = false;
+  let hovering = false;
+  let touchPaused = false;
+  let drag;
+
+  function copyEntries() {
+    return entries.map((entry) => {
+      const copy = entry.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      return copy;
+    });
+  }
+
+  // The extra copies let both autoplay and manual scrolling wrap in either direction.
+  track.replaceChildren(...copyEntries(), ...entries, ...copyEntries());
+  board.classList.add("is-carousel");
+
+  function wrapScroll() {
+    if (!rowHeight) return;
+    const offset = board.scrollTop;
+    const cycle = entries.length * rowHeight;
+    const first = cycle - (visibleRows - 1) * rowHeight;
+
+    // A cached homepage can be reattached with its scroll container reset.
+    if (!offset) board.scrollTop = initialRow * rowHeight;
+    else if (offset < first - 1) board.scrollTop = offset + cycle;
+    else if (offset > first + cycle + 1) board.scrollTop = offset - cycle;
+  }
+
+  function schedule() {
+    clearTimeout(timer);
+    cancelAnimationFrame(frame);
+    frame = 0;
+    if (!inView || !rowHeight || !board.isConnected || document.hidden || reducedMotion.matches ||
+        hovering || touchPaused || drag || board.matches(":focus-visible")) return;
+
+    timer = window.setTimeout(() => {
+      const from = board.scrollTop;
+      const row = from / rowHeight;
+      const to = Math.abs(row - Math.round(row)) * rowHeight < 1
+        ? (Math.round(row) + 1) * rowHeight
+        : Math.ceil(row) * rowHeight;
+      const start = performance.now();
+
+      function move(now) {
+        const progress = Math.min(1, (now - start) / 420);
+        board.scrollTop = from + (to - from) * (1 - (1 - progress) ** 3);
+        if (progress < 1) frame = requestAnimationFrame(move);
+        else {
+          wrapScroll();
+          schedule();
+        }
+      }
+
+      frame = requestAnimationFrame(move);
+    }, 1500);
+  }
+
+  function sizeCarousel() {
+    if (!board.isConnected) return;
+    let row = rowHeight && board.scrollTop ? board.scrollTop / rowHeight : initialRow;
+    const nearestRow = Math.round(row);
+    if (frame || Math.abs(row - nearestRow) * rowHeight < 2) row = nearestRow;
+    const nextHeight = parseFloat(getComputedStyle(entries[0]).height);
+
+    if (!nextHeight || Math.abs(nextHeight - rowHeight) < 0.01) return;
+    rowHeight = nextHeight;
+    board.style.setProperty("--timeline-height", `${rowHeight * visibleRows + 1}px`);
+    board.scrollTop = row * rowHeight;
+    wrapScroll();
+    schedule();
+  }
+
+  // Cover breakpoint changes, font loads, and education content wrapping.
+  const resize = new ResizeObserver(sizeCarousel);
+  resize.observe(track);
+  sizeCarousel();
+
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    if (!inView) {
+      hovering = false;
+      touchPaused = false;
+    } else {
+      wrapScroll();
+    }
+    schedule();
+  }).observe(board);
+
+  board.addEventListener("scroll", () => {
+    if (!frame) wrapScroll();
+  }, { passive: true });
+  board.addEventListener("pointerenter", (event) => {
+    if (event.pointerType !== "mouse") return;
+    hovering = true;
+    schedule();
+  });
+  board.addEventListener("pointerleave", (event) => {
+    if (event.pointerType !== "mouse") return;
+    hovering = false;
+    schedule();
+  });
+  board.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    if (event.pointerType === "touch") {
+      touchPaused = true;
+    } else {
+      event.preventDefault();
+      drag = { id: event.pointerId, y: event.clientY };
+      board.setPointerCapture(event.pointerId);
+      board.classList.add("is-dragging");
+    }
+    schedule();
+  });
+  board.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== drag?.id) return;
+    board.scrollTop += (drag.y - event.clientY) / (board.currentCSSZoom || 1);
+    drag.y = event.clientY;
+    wrapScroll();
+  });
+  board.addEventListener("lostpointercapture", (event) => {
+    if (event.pointerId !== drag?.id) return;
+    drag = undefined;
+    hovering = board.matches(":hover");
+    board.classList.remove("is-dragging");
+    schedule();
+  });
+
+  function releaseTouch() {
+    if (!touchPaused) return;
+    touchPaused = false;
+    schedule();
+  }
+
+  document.addEventListener("pointerdown", (event) => {
+    if (!board.contains(event.target)) releaseTouch();
+  });
+  window.addEventListener("scroll", releaseTouch, { passive: true });
+  document.addEventListener("visibilitychange", schedule);
+  reducedMotion.addEventListener("change", schedule);
+  board.addEventListener("focus", schedule);
+  board.addEventListener("blur", schedule);
+}
+
+function initAtlasTicker() {
+  const track = document.querySelector(".atlas-ticker-track");
+  if (!track || track.hasChildNodes()) return;
+
+  const list = document.createElement("ul");
+  list.className = "atlas-ticker-list";
+  list.setAttribute("role", "list");
+  countries.forEach(({ title, status }) => {
+    const item = document.createElement("li");
+    const description = document.createElement("span");
+    description.className = "visually-hidden";
+    description.textContent = status === "lived" ? " (lived)" : " (visited)";
+    item.classList.toggle("is-lived", status === "lived");
+    item.append(title, description);
+    list.append(item);
+  });
+
+  const repeat = list.cloneNode(true);
+  repeat.setAttribute("aria-hidden", "true");
+  track.append(list, repeat);
+}
+
+function initializeHomePage() {
+  initLatestCarousel();
+  initExperienceCarousel();
+  initAtlasTicker();
 }
 
 window.addEventListener("scroll", updateScrollMeter, { passive: true });
 updateScrollMeter();
 updateArchiveStats();
 initSectionNav();
-initLatestCarousel();
-
-const timelineItems = [...document.querySelectorAll(".timeline-item")];
-
-timelineItems.forEach((item) => {
-  item.addEventListener("mouseenter", () => {
-    timelineItems.forEach((otherItem) => {
-      otherItem.classList.toggle("is-active", otherItem === item);
-    });
-  });
-
-  item.addEventListener("mouseleave", () => {
-    item.classList.remove("is-active");
-  });
-});
-
+initializeHomePage();
 renderWorldMap();
 
-window.initializeHomePage = initLatestCarousel;
+window.initializeHomePage = initializeHomePage;

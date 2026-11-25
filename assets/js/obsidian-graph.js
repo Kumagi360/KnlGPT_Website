@@ -164,16 +164,44 @@
         graphNodes.forEach((item) => { item.isFrozen = false; });
         reset();
       });
-      const initialScale = window.matchMedia("(max-width: 480px)").matches ? 1.4
-        : window.matchMedia("(max-width: 720px)").matches ? 1.2 : 1;
-      if (initialScale > 1) {
-        svg.call(zoom.transform, d3.zoomIdentity
-          .translate(width * (1 - initialScale) / 2, height * (1 - initialScale) / 2)
-          .scale(initialScale));
+      const phone = window.matchMedia("(max-width: 480px)");
+      const tablet = window.matchMedia("(max-width: 720px)");
+      const layoutScale = () => phone.matches ? 1.4 : tablet.matches ? 1.2 : 1;
+      const centeredZoom = (scale) => d3.zoomIdentity
+        .translate(width * (1 - scale) / 2, height * (1 - scale) / 2)
+        .scale(scale);
+      let previousScale = layoutScale();
+      svg.call(zoom.transform, centeredZoom(previousScale));
+
+      function resizeZoom() {
+        const nextScale = layoutScale();
+        if (nextScale === previousScale) return;
+
+        const center = [width / 2, height / 2];
+        const [x, y] = zoomTransform.invert(center);
+        const scale = Math.max(0.35, Math.min(3, zoomTransform.k * nextScale / previousScale));
+        previousScale = nextScale;
+        svg.interrupt().call(zoom.transform, d3.zoomIdentity
+          .translate(center[0] - x * scale, center[1] - y * scale)
+          .scale(scale));
       }
+
+      phone.addEventListener("change", resizeZoom);
+      tablet.addEventListener("change", resizeZoom);
       resetButton?.addEventListener("click", () => {
-        svg.transition().duration(180).call(zoom.transform, d3.zoomIdentity);
+        svg.transition().duration(180).call(zoom.transform, centeredZoom(layoutScale()));
       });
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) return;
+        svg.interrupt().call(zoom.transform, centeredZoom(layoutScale()));
+        graphNodes.forEach((item) => {
+          if (!item.isFrozen) return;
+          item.isFrozen = false;
+          positionLabel(item);
+        });
+        reset();
+      }).observe(host.closest(".thoughts-graph") || host);
+
       const renderPositions = () => {
         link.attr("x1", (item) => item.source.x).attr("y1", (item) => item.source.y)
           .attr("x2", (item) => item.target.x).attr("y2", (item) => item.target.y);
