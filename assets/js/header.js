@@ -24,7 +24,7 @@
     <header class="site-header">
       <a class="brand-mark" href="${href("index.html#top")}" aria-label="Kunal Gupta home">
         <svg class="brand-cell" viewBox="0 0 80 80" aria-hidden="true">
-          <rect class="brand-mark-outline" x="1" y="1" width="78" height="78" fill="none" stroke-width="2"/>
+          <rect class="brand-mark-outline" x="1" y="1" width="78" height="78" stroke-width="2"/>
           <g class="brand-wordmark" text-anchor="middle">
             <text x="40" y="34"><tspan class="brand-mark-signal">K</tspan><tspan class="brand-mark-ink">U</tspan><tspan class="brand-mark-signal">N</tspan><tspan class="brand-mark-ink">A</tspan><tspan class="brand-mark-signal">L</tspan></text>
             <text x="40" y="56.5"><tspan class="brand-mark-signal">G</tspan><tspan class="brand-mark-ink">U</tspan><tspan class="brand-mark-signal" dx="0.5">P</tspan><tspan class="brand-mark-signal">T</tspan><tspan class="brand-mark-ink" dx="-0.5">A</tspan></text>
@@ -39,6 +39,7 @@
           <a href="${href("til.html")}" data-nav="til">TIL</a>
         </nav>
         <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+          <span class="theme-toggle-track" aria-hidden="true"></span>
           <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"/></svg>
           <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.1A8.7 8.7 0 0 1 8.9 3.5a8.7 8.7 0 1 0 11.6 11.6Z"/></svg>
           <span class="visually-hidden">Toggle color theme</span>
@@ -124,6 +125,39 @@
     setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
   });
 
+  function socialLinks() {
+    return `
+      <nav class="social-links" aria-label="Social profiles">
+        <a href="https://www.linkedin.com/in/kunalgupta360/" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5V9.5h3ZM6.5 8.2a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4ZM19 19h-3v-4.6c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4V19h-3V9.5h2.9v1.3h.1a3.1 3.1 0 0 1 2.8-1.5c3 0 3.5 2 3.5 4.5Z"/></svg>
+        </a>
+        <a href="https://github.com/Kumagi360" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.61-3.37-1.19-3.37-1.19-.46-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.83c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.76c0 .26.18.57.69.47A10 10 0 0 0 12 2Z"/></svg>
+        </a>
+        <a href="https://x.com/Kumagi360" aria-label="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.9 2.8H21l-6.8 7.8 8 10.6H16l-4.9-6.4-5.6 6.4H2.4l7.3-8.4L2 2.8h6.4l4.4 5.8Zm-1.1 16.5h1.7L7.5 4.6H5.7Z"/></svg>
+        </a>
+      </nav>`;
+  }
+
+  function populatePageLinks() {
+    const hero = document.querySelector("[data-hero-socials]");
+    if (hero && !hero.firstElementChild) hero.innerHTML = socialLinks();
+
+    const footer = document.querySelector(".site-footer");
+    if (footer && !footer.firstElementChild) {
+      footer.innerHTML = `
+        <div>
+          <p>© Kunal Gupta, 2026</p>
+          <span>Robots / Travel / Writing</span>
+        </div>
+        <div class="footer-links">
+          ${hero ? '<a href="#top">Back to top ↑</a>' : ""}
+          ${socialLinks()}
+        </div>`;
+    }
+  }
+
   function readPageStyles(source = document) {
     return [...source.head.querySelectorAll("style")].map((item) => item.textContent);
   }
@@ -194,6 +228,7 @@
 
     setPageStyles(page.styles);
     document.body.append(page.content);
+    populatePageLinks();
   }
 
   async function loadPageScripts(documentSource, pageUrl) {
@@ -294,4 +329,5 @@
   setActiveNav();
   script.replaceWith(scrollMeter, header);
   updateScrollMeter();
+  document.addEventListener("DOMContentLoaded", populatePageLinks, { once: true });
 })();
