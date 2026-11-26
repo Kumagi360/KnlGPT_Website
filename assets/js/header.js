@@ -11,7 +11,9 @@
   if (!favicon.isConnected) document.head.append(favicon);
   const template = document.createElement("template");
   const pageCache = new Map();
-  const loadedScripts = new Set([...document.scripts].map((item) => item.src).filter(Boolean));
+  const primaryNav = script.previousElementSibling;
+  const homeUrl = href(window.location.protocol === "file:" ? "index.html" : "./");
+  const pageMetaSelector = 'link[rel="canonical"], meta[name="description"], meta[name="robots"], meta[property^="og:"], meta[name^="twitter:"], script[type="application/ld+json"]';
   const pageKey = ({ pathname, search }) => `${pathname === "/" ? "/index.html" : pathname}${search}`;
   let currentPageKey = pageKey(window.location);
   let navigationController;
@@ -22,7 +24,7 @@
 
   template.innerHTML = `
     <header class="site-header">
-      <a class="brand-mark" href="${href("index.html#top")}" aria-label="Kunal Gupta home">
+      <a class="brand-mark" href="${homeUrl}" aria-label="Kunal Gupta home">
         <svg class="brand-cell" viewBox="0 0 80 80" aria-hidden="true">
           <rect class="brand-mark-outline" x="1" y="1" width="78" height="78" stroke-width="2"/>
           <g class="brand-wordmark" text-anchor="middle">
@@ -32,12 +34,6 @@
         </svg>
       </a>
       <div class="header-controls">
-        <nav class="primary-nav global-nav" aria-label="Primary navigation">
-          <a href="${href("index.html#top")}" data-nav="home">Home</a>
-          <a href="${href("projects.html")}" data-nav="projects">Projects</a>
-          <a href="${href("blog.html")}" data-nav="blog">Thoughts</a>
-          <a href="${href("til.html")}" data-nav="til">TIL</a>
-        </nav>
         <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode">
           <span class="theme-toggle-track" aria-hidden="true"></span>
           <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"/></svg>
@@ -49,6 +45,10 @@
   `;
 
   const header = template.content.querySelector(".site-header");
+  primaryNav.querySelectorAll("a").forEach((link) => {
+    link.href = link.dataset.nav === "home" ? homeUrl : link.href;
+  });
+  header.querySelector(".header-controls").prepend(primaryNav);
   const scrollMeter = document.createElement("div");
   scrollMeter.className = "scroll-meter";
   scrollMeter.setAttribute("aria-hidden", "true");
@@ -158,6 +158,10 @@
     }
   }
 
+  function readPageMeta(source = document) {
+    return Array.from(source.head.querySelectorAll(pageMetaSelector), (node) => document.importNode(node, true));
+  }
+
   function readPageStyles(source = document) {
     return [...source.head.querySelectorAll("style")].map((item) => item.textContent);
   }
@@ -181,7 +185,7 @@
     pageCache.set(currentPageKey, {
       bodyClass: document.body.className,
       content,
-      description: document.querySelector('meta[name="description"]')?.content || "",
+      meta: readPageMeta(),
       lang: document.documentElement.lang,
       styles: readPageStyles(),
       title: document.title,
@@ -203,7 +207,7 @@
 
     [...documentSource.body.childNodes].forEach((node) => {
       const isElement = node.nodeType === Node.ELEMENT_NODE;
-      const isHeader = isElement && (node.matches(".site-header") || node.matches('script[src*="assets/js/header.js"]'));
+      const isHeader = isElement && (node.matches(".site-header, .global-nav") || node.matches('script[src*="assets/js/header.js"]'));
       const isScript = isElement && node.matches("script");
       if (!isHeader && !isScript) content.append(document.importNode(node, true));
     });
@@ -211,7 +215,7 @@
     return {
       bodyClass: documentSource.body.className,
       content,
-      description: documentSource.querySelector('meta[name="description"]')?.content || "",
+      meta: readPageMeta(documentSource),
       lang: documentSource.documentElement.lang,
       styles: readPageStyles(documentSource),
       title: documentSource.title,
@@ -223,8 +227,8 @@
     document.documentElement.lang = page.lang || "en";
     document.title = page.title;
 
-    const description = document.querySelector('meta[name="description"]');
-    if (description) description.content = page.description;
+    document.head.querySelectorAll(pageMetaSelector).forEach((node) => node.remove());
+    document.head.append(...page.meta);
 
     setPageStyles(page.styles);
     document.body.append(page.content);
@@ -236,7 +240,8 @@
 
     for (const sourceScript of scripts) {
       const source = new URL(sourceScript.getAttribute("src"), pageUrl).href;
-      if (/\/(header|site)\.js(?:\?|$)/.test(source) || loadedScripts.has(source)) continue;
+      if (/\/(header|site)\.js(?:\?|$)/.test(source)) continue;
+      if (Array.from(document.scripts).some((script) => script.src === source)) continue;
 
       await new Promise((resolve, reject) => {
         const nextScript = document.createElement("script");
@@ -245,7 +250,6 @@
         nextScript.onerror = reject;
         document.body.append(nextScript);
       });
-      loadedScripts.add(source);
     }
   }
 

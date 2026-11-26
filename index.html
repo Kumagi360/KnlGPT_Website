@@ -3,20 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | Kunal Gupta</title>
-    <meta
-      name="description"
-      content="Welcome to my personal website! I document projects, travels, and ideas here."
-    />
+    <title>Kunal Gupta | Robotics &amp; Autonomous Vehicles</title>
+    <meta name="description" content="I’m a robotics engineer at Wayve, where I work on autonomous vehicles. This is where I keep my robotics projects, travel notes, and things I’m learning." />
     <link rel="canonical" href="https://knlgpt.xyz/" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/kg-mark.svg?v=20261123-dark-palette" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kunal Gupta | Robotics &amp; Autonomous Vehicles" />
+    <meta property="og:description" content="I’m a robotics engineer at Wayve, where I work on autonomous vehicles. This is where I keep my robotics projects, travel notes, and things I’m learning." />
+    <meta property="og:url" content="https://knlgpt.xyz/" />
+    <meta property="og:image" content="https://knlgpt.xyz/assets/images/placeholders/home-hero-portrait.jpg" />
+    <meta property="og:image:alt" content="Portrait of Kunal Gupta" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kunal Gupta",
+        "@type": "ProfilePage",
         "url": "https://knlgpt.xyz/",
-        "jobTitle": "Robotics Engineer",
-        "description": "Robotics engineer, founder, traveler, and writer."
+        "mainEntity": {
+          "@type": "Person",
+          "@id": "https://knlgpt.xyz/#kunal-gupta",
+          "name": "Kunal Gupta",
+          "url": "https://knlgpt.xyz/",
+          "image": "https://knlgpt.xyz/assets/images/placeholders/home-hero-portrait.jpg",
+          "jobTitle": "Robotics Engineer",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Wayve"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/kunalgupta360/",
+            "https://github.com/Kumagi360",
+            "https://x.com/Kumagi360"
+          ]
+        }
       }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,10 +45,16 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css?v=featured-project-width" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20261125-seo" />
   </head>
   <body class="home-page">
-    <script src="assets/js/header.js?v=20261125"></script>
+    <nav class="primary-nav global-nav" aria-label="Primary navigation">
+      <a href="./" data-nav="home">Home</a>
+      <a href="projects.html" data-nav="projects">Projects</a>
+      <a href="blog.html" data-nav="blog">Thoughts</a>
+      <a href="til.html" data-nav="til">TIL</a>
+    </nav>
+    <script src="assets/js/header.js?v=20261125-seo"></script>
 
     <nav class="section-nav" aria-label="Homepage sections">
       <a href="#latest" data-section-nav="latest">Recent</a>
@@ -636,7 +662,7 @@
     <script src="assets/vendor/topojson-client.min.js"></script>
     <script src="assets/data/countries-110m.js"></script>
     <script src="assets/data/atlas-small-territories.js"></script>
-    <script src="assets/js/site.js?v=featured-project-width"></script>
+    <script src="assets/js/site.js?v=20261125-seo"></script>
     <script src="assets/js/main.js?v=featured-project-width"></script>
   </body>
 </html>

@@ -4188,6 +4188,10 @@ button.project-brief-toggle {
   transform: translateY(-1px);
 }
 
+.til-date-filter[hidden] {
+  display: none;
+}
+
 .til-date-filter {
   max-width: var(--max);
   margin: 0 auto;
@@ -4365,6 +4369,16 @@ button.project-brief-toggle {
 .blog-index-page:not(.til-index-page) .article-hero {
   padding-top: clamp(48px, 6vw, 78px);
   padding-bottom: clamp(42px, 5vw, 64px);
+}
+
+body > .primary-nav {
+  width: max-content;
+  max-width: calc(100% - 32px);
+  margin: 16px auto;
+}
+
+.graph-caption a {
+  text-decoration: underline;
 }
 
 .projects-page .project-hero {

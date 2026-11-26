@@ -250,6 +250,8 @@ function initTilDateFilter() {
   const selection = document.querySelector("[data-til-date-selection]");
   if (!cards.length || !minInput || !maxInput || !startOutput || !endOutput || !selection) return;
 
+  minInput.closest(".til-date-filter").hidden = false;
+
   const dayMs = 86_400_000;
   const dateForCard = (card) => {
     const match = card.getAttribute("href")?.match(/(\d{4})-(\d{2})-(\d{2})/);
@@ -298,8 +300,8 @@ function initTilDateFilter() {
     });
   };
 
-  minInput.addEventListener("input", () => update(minInput));
-  maxInput.addEventListener("input", () => update(maxInput));
+  minInput.oninput = () => update(minInput);
+  maxInput.oninput = () => update(maxInput);
   if (window.tilDateFilterTimer) window.clearInterval(window.tilDateFilterTimer);
   window.tilDateFilterTimer = window.setInterval(() => {
     const nextToday = pacificToday();

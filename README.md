@@ -49,3 +49,9 @@ This site is intended to publish from the repository root on the `main` branch.
 ## Card Content
 
 TIL and Thought card content lives in the public [content Gist](https://gist.github.com/Kumagi360/da7646f9c738a931fec4c48bcf528343), not this repository. It contains a lightweight `manifest.json`, one `til--YYYY-MM.json` file per month, and `thoughts.json`. Publishing a card updates the Gist only, so it needs no website commit or Pages deployment.
+
+## Search pages
+
+The four main pages have static HTML and canonical URLs in `sitemap.xml`. Edit project cards directly in `projects.html`.
+
+TIL loads the full, current archive from the content Gist. The initial HTML includes a fallback of 12 existing cards. To refresh that snapshot, save the public manifest locally and run `python3 scripts/refresh-til-preview.py /path/to/manifest.json`.

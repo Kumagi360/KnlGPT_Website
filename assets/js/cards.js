@@ -168,7 +168,7 @@ async function initializeCards(kind) {
     refreshPage();
   } catch (error) {
     console.error(error);
-    showLoadError(root);
+    if (!root.isConnected || !root.querySelector(".blog-card")) showLoadError(root);
   }
 }
 
