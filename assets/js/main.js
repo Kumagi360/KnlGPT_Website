@@ -297,7 +297,11 @@ function updateScrollMeter() {
 }
 
 function initSectionNav() {
-  const links = [...document.querySelectorAll("[data-section-nav]")];
+  const nav = document.querySelector(".home-page .section-nav");
+  if (!nav) return;
+
+  const links = [...nav.querySelectorAll("[data-section-nav]")];
+  const collage = document.querySelector(".project-collage-viewport");
   const sections = links
     .map((link) => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
@@ -307,6 +311,12 @@ function initSectionNav() {
   let isScheduled = false;
   const updateSectionNav = () => {
     isScheduled = false;
+    const rail = nav.getBoundingClientRect();
+    const media = collage?.getBoundingClientRect();
+    const overlaps = media && rail.height && rail.left < media.right && rail.right > media.left &&
+      rail.top < media.bottom && rail.bottom > media.top;
+    nav.classList.toggle("is-over-collage", Boolean(overlaps));
+
     const viewportCenter = window.innerHeight / 2;
     const centeredSection = sections.find((section) => {
       const { top, bottom } = section.getBoundingClientRect();
@@ -346,6 +356,160 @@ function initSectionNav() {
   window.addEventListener("scroll", scheduleUpdate, { passive: true });
   window.addEventListener("resize", scheduleUpdate);
   updateSectionNav();
+}
+
+function initProjectCollage() {
+  const collage = document.querySelector(".project-collage-viewport");
+  if (!collage || collage.children.length > 1) return;
+
+  const strip = collage.firstElementChild;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let cycle = 0;
+  let inView = false;
+  let frame = 0;
+  let last = 0;
+  let fraction = 0;
+  let idleTimer = 0;
+  let pointer;
+  let dragged = false;
+
+  function copyStrip() {
+    const copy = strip.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    copy.querySelectorAll("a").forEach((link) => { link.tabIndex = -1; });
+    return copy;
+  }
+
+  collage.prepend(copyStrip());
+  collage.append(copyStrip());
+
+  function sizeCollage() {
+    const style = getComputedStyle(strip);
+    const width = parseFloat(style.width);
+    if (width === cycle) return;
+    collage.scrollLeft += cycle ? width - cycle : width - parseFloat(style.columnGap) - 24;
+    cycle = width;
+  }
+
+  function animate(now) {
+    if (last) {
+      fraction += Math.min(now - last, 48) * 0.022;
+      const pixels = Math.floor(fraction);
+      if (pixels) {
+        const next = collage.scrollLeft + pixels;
+        collage.scrollLeft = next >= cycle * 2 ? next - cycle : next;
+        fraction -= pixels;
+      }
+    }
+    last = now;
+    frame = requestAnimationFrame(animate);
+  }
+
+  function schedule() {
+    cancelAnimationFrame(frame);
+    last = 0;
+    if (inView && cycle && !document.hidden && !reducedMotion.matches &&
+        !idleTimer && !pointer && !collage.matches(":focus-visible, :has(:focus-visible)")) {
+      frame = requestAnimationFrame(animate);
+    }
+  }
+
+  function waitAfterPanning() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      idleTimer = 0;
+      schedule();
+    }, 90);
+    schedule();
+  }
+
+  new ResizeObserver(sizeCollage).observe(strip);
+  sizeCollage();
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    schedule();
+  }).observe(collage);
+
+  const visibleVideos = new Set();
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) {
+        visibleVideos.add(target);
+        if (!reducedMotion.matches) target.play().catch(() => {});
+      } else {
+        visibleVideos.delete(target);
+        target.pause();
+      }
+    });
+  });
+  collage.querySelectorAll("video").forEach((video) => videoObserver.observe(video));
+
+  function updateMotionPreference() {
+    visibleVideos.forEach((video) => {
+      if (reducedMotion.matches) video.pause();
+      else video.play().catch(() => {});
+    });
+    schedule();
+  }
+
+  reducedMotion.addEventListener("change", updateMotionPreference);
+  updateMotionPreference();
+
+  collage.addEventListener("scroll", () => {
+    if (idleTimer) waitAfterPanning();
+    if (collage.scrollLeft < 1) collage.scrollLeft += cycle;
+    else if (collage.scrollLeft >= collage.scrollWidth - collage.clientWidth - 1) {
+      collage.scrollLeft -= cycle;
+    }
+  }, { passive: true });
+
+  collage.addEventListener("wheel", (event) => {
+    if (event.deltaX || event.shiftKey) waitAfterPanning();
+  }, { passive: true });
+
+  collage.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    pointer = { id: event.pointerId, x: event.clientX, type: event.pointerType };
+    dragged = false;
+    schedule();
+  });
+
+  collage.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== pointer?.id || pointer.type === "touch") return;
+    const delta = pointer.x - event.clientX;
+    if (!dragged && Math.abs(delta) < 5) return;
+    if (!dragged) {
+      dragged = true;
+      collage.setPointerCapture(pointer.id);
+      collage.classList.add("is-dragging");
+    }
+    collage.scrollLeft += delta / (collage.currentCSSZoom || 1);
+    pointer.x = event.clientX;
+  });
+
+  function releasePointer(event) {
+    if (event.pointerId !== pointer?.id) return;
+    const wasTouch = pointer.type === "touch";
+    pointer = undefined;
+    collage.classList.remove("is-dragging");
+    if (wasTouch) waitAfterPanning();
+    else schedule();
+  }
+
+  collage.addEventListener("click", (event) => {
+    if (dragged && event.detail) event.preventDefault();
+  }, true);
+  collage.addEventListener("dragstart", (event) => event.preventDefault());
+  collage.addEventListener("pointerleave", (event) => {
+    if (!dragged && pointer?.type !== "touch") releasePointer(event);
+  });
+  collage.addEventListener("pointerup", releasePointer);
+  collage.addEventListener("pointercancel", releasePointer);
+  collage.addEventListener("lostpointercapture", releasePointer);
+  ["focusin", "focusout"].forEach((type) => {
+    collage.addEventListener(type, () => queueMicrotask(schedule));
+  });
+  document.addEventListener("visibilitychange", schedule);
 }
 
 function cloneMediaFrame(frame) {
@@ -481,8 +645,10 @@ function initLatestMedia(media, reducedMotion) {
     const styles = getComputedStyle(media);
     const baseHeight = parseFloat(styles.minHeight) - 2 * parseFloat(styles.paddingTop);
     const gap = parseFloat(getComputedStyle(rows).rowGap);
-    const split = baseHeight <= media.clientHeight * 0.7;
-    const rowHeight = split ? Math.min(baseHeight, (media.clientHeight - 3 * gap) / 2) : baseHeight;
+    const twoRowHeight = Math.min(baseHeight, (media.clientHeight - 3 * gap) / 2);
+    const split = styles.getPropertyValue("--media-max-rows").trim() !== "1" &&
+      baseHeight <= media.clientHeight * 0.7 && twoRowHeight >= 180;
+    const rowHeight = split ? twoRowHeight : baseHeight;
     media.style.setProperty("--media-height", `${rowHeight}px`);
 
     if (split !== twoRows) {
@@ -518,7 +684,6 @@ function initLatestCarousel() {
     const secondDate = second.querySelector("time")?.dateTime || "";
     return secondDate.localeCompare(firstDate);
   });
-  cards.forEach((card) => track.append(card));
   const dots = [...carousel.querySelectorAll("[data-latest-dot]")];
   const previous = carousel.querySelector("[data-latest-previous]");
   const next = carousel.querySelector("[data-latest-next]");
@@ -526,11 +691,17 @@ function initLatestCarousel() {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!track || cards.length < 2) return;
 
+  const slides = document.createElement("div");
+  slides.className = "latest-slides";
+  slides.append(...cards);
+  track.append(slides);
+
   carousel.querySelectorAll(".latest-media").forEach((media) => {
     initLatestMedia(media, reducedMotion);
   });
 
   let activeIndex = 0;
+  let slideHeight = 0;
   let autoTimer;
 
   const setLatest = (index, shouldScroll = true) => {
@@ -544,8 +715,16 @@ function initLatestCarousel() {
     });
     if (current) current.textContent = String(activeIndex + 1).padStart(2, "0");
     if (shouldScroll) {
-      track.scrollTo({ left: track.clientWidth * activeIndex, behavior: "smooth" });
+      track.scrollTo({ top: slideHeight * activeIndex });
     }
+  };
+
+  const sizeTrack = () => {
+    const height = parseFloat(getComputedStyle(cards[0]).height);
+    if (!height || height === slideHeight) return;
+    slideHeight = height;
+    track.style.setProperty("--latest-slide-height", `${height}px`);
+    track.scrollTo({ top: slideHeight * activeIndex, behavior: "instant" });
   };
 
   const restartAuto = () => {
@@ -583,12 +762,15 @@ function initLatestCarousel() {
   track.addEventListener(
     "scroll",
     () => {
-      const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+      if (!slideHeight) return;
+      const index = Math.round(track.scrollTop / slideHeight);
       if (index !== activeIndex) setLatest(index, false);
     },
     { passive: true }
   );
 
+  new ResizeObserver(sizeTrack).observe(slides);
+  sizeTrack();
   setLatest(0);
   restartAuto();
 }
@@ -622,13 +804,14 @@ async function renderWorldMap() {
   try {
     mapHost.textContent = "";
 
-    const width = 960;
+    const width = 900;
     const height = 460;
     const svg = d3
       .select(mapHost)
       .append("svg")
       .attr("class", "world-map")
       .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("preserveAspectRatio", "xMidYMax meet")
       .attr("role", "group")
       .attr("tabindex", 0)
       .attr("aria-label", "World map. Scroll or pinch to zoom, and drag to pan. With the map focused, use plus, minus, or the arrow keys.");
@@ -637,7 +820,7 @@ async function renderWorldMap() {
     const features = topojson.feature(world, world.objects.countries).features;
     const countryIds = new Set(features.map((feature) => String(feature.id)));
     features.push(...(window.WORLD_ATLAS_SMALL_TERRITORIES || []).filter((feature) => !countryIds.has(feature.id)));
-    const projection = d3.geoNaturalEarth1().fitExtent([[4, 4], [width - 4, height - 4]], {
+    const projection = d3.geoNaturalEarth1().fitExtent([[4, 1], [width - 4, height - 1]], {
       type: "Sphere",
     });
     const path = d3.geoPath(projection);
@@ -928,6 +1111,7 @@ function initAtlasTicker() {
 
 function initializeHomePage() {
   initLatestCarousel();
+  initProjectCollage();
   initExperienceCarousel();
   initAtlasTicker();
 }
