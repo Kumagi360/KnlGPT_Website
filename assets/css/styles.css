@@ -1711,7 +1711,8 @@ main {
 
 .home-page .section.focus-section {
   max-width: none;
-  padding-inline: 0;
+  gap: 0;
+  padding: clamp(22px, 3.5vw, 44px) 0 clamp(24px, 3.5vw, 42px);
   border-top-color: transparent;
   scroll-margin-top: 112px;
 }
@@ -1739,8 +1740,8 @@ main {
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
-  margin-top: clamp(10px, calc(2.5vw - 8px), 27px);
   cursor: grab;
+  user-select: none;
 }
 
 .project-collage-viewport:focus-visible {
@@ -1780,35 +1781,13 @@ main {
   width: 100%;
 }
 
-.project-tile-row {
-  position: relative;
-  inset-inline-start: clamp(13px, 1.3vw, 21px);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  justify-self: stretch;
-  gap: clamp(14px, 1.4vw, 22px);
-}
-
-.project-tile-row .project-tile:first-child {
-  flex-shrink: 0;
-}
-
-.project-tile-row .project-tile:last-child {
-  margin-top: clamp(4px, 0.7vw, 10px);
-}
-
-.project-tile-row .project-tile-label {
-  gap: 5px;
-}
-
 .project-collage-strip > .project-collage-column {
   width: calc(var(--project-tile-width) * var(--project-tile-size, 1));
 }
 
 .project-collage-column--offset {
   --collage-column-drop: clamp(14px, 1.8vw, 28px);
-  --collage-row-gap: clamp(35px, 3.3vw, 47px);
+  --collage-row-gap: clamp(22px, 2.4vw, 32px);
 }
 
 .project-collage-strip > .project-collage-column > .project-tile + .project-tile {
@@ -1830,8 +1809,14 @@ main {
 }
 
 .tile-racecar {
-  --collage-column-drop: clamp(64px, 6.6vw, 101px);
+  --collage-column-drop: clamp(45px, 4.8vw, 76px);
   flex: 2 1 calc(38.5rem * var(--project-tile-scale));
+}
+
+.tile-racecar > .project-tile + .project-tile {
+  inset-inline-start: clamp(12px, 2vw, 28px);
+  max-width: 48%;
+  justify-self: center;
 }
 
 .tile-humanoid {
@@ -1843,6 +1828,11 @@ main {
   flex: 1 1 calc(28rem * var(--project-tile-scale));
 }
 
+.tile-swarms > .project-tile + .project-tile {
+  inset-inline-end: clamp(14px, 3vw, 48px);
+  justify-self: end;
+}
+
 @media (max-width: 1080px) {
   .project-collage-viewport {
     --project-tile-gap: calc(22px * var(--project-tile-scale));
@@ -1852,8 +1842,7 @@ main {
 @media (max-width: 720px) {
   .project-collage-viewport {
     --project-tile-gap: clamp(40px, 11vw, 52px);
-    --project-tile-width: min(28.5rem, calc((var(--max) - 2 * var(--mobile-gutter)) * var(--project-tile-scale)));
-    margin-top: clamp(13px, calc(6vw - 8px), 21px);
+    --project-tile-width: min(20rem, calc((var(--max) - 2 * var(--mobile-gutter)) * var(--project-tile-scale)));
   }
 
   .project-collage-featured {
@@ -1870,14 +1859,13 @@ main {
   }
 
   .project-collage-featured .tile-swarms {
-    width: calc(1.13 * max(var(--project-tile-width) * 1.16, var(--project-tile-width) * 0.82 + 106px));
+    width: calc(var(--project-tile-width) * 1.16);
   }
 }
 
 .project-collage-viewport.is-dragging,
 .project-collage-viewport.is-dragging .project-tile {
   cursor: grabbing;
-  user-select: none;
 }
 
 .project-tile-media {
@@ -2304,6 +2292,7 @@ main {
 
 .atlas-ticker {
   --ticker-gap: clamp(24px, 3.5vw, 54px);
+  contain: paint;
   overflow: hidden;
   background: var(--paper);
 }
@@ -5152,7 +5141,7 @@ blockquote {
   }
 
   .atlas-map {
-    --atlas-height: clamp(300px, 58vw, 420px);
+    min-height: 0;
   }
 
   .latest-card {
@@ -5161,6 +5150,21 @@ blockquote {
 
   .latest-card-copy {
     min-height: 0;
+    gap: clamp(9px, 2vw, 14px);
+    padding: clamp(15px, 4vw, 24px);
+  }
+
+  .latest-card-copy time {
+    font-size: clamp(0.625rem, 2vw, 0.6875rem);
+  }
+
+  .latest-card-copy h3 {
+    font-size: clamp(1.15rem, calc(0.85rem + 1.25vw), 1.375rem);
+  }
+
+  .latest-card-copy p {
+    font-size: clamp(0.875rem, calc(0.625rem + 1vw), 1.05rem);
+    line-height: 1.45;
   }
 
   .latest-controls {
@@ -5175,7 +5179,10 @@ blockquote {
   }
 
   .map-canvas {
-    inset: 52px 4px 42px;
+    position: relative;
+    inset: auto;
+    aspect-ratio: 900 / 460;
+    margin: 58px 4px 42px;
   }
 
   .atlas-copy,
@@ -5426,7 +5433,7 @@ blockquote {
   }
 
   .theme-toggle {
-    --toggle-thumb-size: 18px;
+    --toggle-thumb-size: 15px;
     --toggle-thumb-inset: 3px;
     --toggle-width: 40px;
     --toggle-icon-size: 10px;
@@ -5476,8 +5483,8 @@ blockquote {
   }
 
   .theme-toggle {
-    --toggle-thumb-size: 16px;
-    --toggle-width: 36px;
+    --toggle-thumb-size: 13px;
+    --toggle-width: 38px;
     --toggle-icon-size: 9px;
     height: 26px;
   }
