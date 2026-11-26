@@ -25,7 +25,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20261125-atlas-compact" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=featured-project-width" />
   </head>
   <body class="home-page">
     <script src="assets/js/header.js?v=20261125"></script>
@@ -43,16 +43,18 @@
           <div class="hero-text">
             <div class="hero-identity">
               <h1>
-                Kunal
+                <span>Kunal</span>
                 <span>Gupta</span>
               </h1>
               <div data-hero-socials></div>
             </div>
             <div class="hero-subgrid no-actions">
               <p>
-                <strong>Hey, welcome!</strong> I build robots, travel, and write.<br />
-                Other times find me on a tennis court, drifting a mountain
-                pass, or getting humbled at poker and chess.
+                <span><strong>Hey, welcome!</strong> I build robots, travel, and write.</span>
+                <span>
+                  Other times find me on a tennis court, drifting a mountain
+                  pass, or getting humbled at poker and chess.
+                </span>
               </p>
             </div>
           </div>
@@ -63,10 +65,12 @@
               <em>Hardware / Embedded / Autonomy</em>
             </article>
             <article>
+              <span class="hero-field-divider" aria-hidden="true"></span>
               <strong>Travel</strong>
               <em>History / Culture / Adventure</em>
             </article>
             <article>
+              <span class="hero-field-divider" aria-hidden="true"></span>
               <strong>Writing</strong>
               <em>Kaizen / Futurism / Policy</em>
             </article>
@@ -78,6 +82,8 @@
             <div class="portrait-placeholder">
               <img
                 src="assets/images/placeholders/home-hero-portrait.jpg"
+                width="902"
+                height="1075"
                 alt="Portrait of Kunal Gupta"
               />
             </div>
@@ -293,7 +299,7 @@
               data-latest-previous
               aria-label="Show previous update"
             >
-              ←
+              ↑
             </button>
             <div class="latest-dots" aria-label="Choose an update">
               <button
@@ -322,7 +328,7 @@
               data-latest-next
               aria-label="Show next update"
             >
-              →
+              ↓
             </button>
           </div>
         </div>
@@ -331,60 +337,135 @@
       <section
         class="section focus-section"
         id="work"
-        data-section-label="Featured projects"
+        aria-label="Featured projects"
       >
         <div class="focus-shell">
-          <div class="focus-copy">
+          <div class="focus-copy" data-section-label="Featured projects">
             <a class="text-cta" href="projects.html">
               All projects
               <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
-        <div class="project-tile-grid" aria-label="Featured project tiles">
-          <a
-            class="project-tile tile-racecar"
-            href="projects.html#cornell-electric-vehicles"
-            aria-label="Open Cornell Electric Vehicles project"
-          >
-            <video autoplay loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar driving">
-              <source src="assets/video/cornell-electric-vehicles/car-driving.mp4" type="video/mp4" />
-            </video>
-            <span class="project-tile-label">
-              <span class="project-tile-index" aria-hidden="true">07</span>
-              <span>Cornell Electric Vehicles</span>
-              <b aria-hidden="true">↗</b>
-            </span>
-          </a>
-          <a
-            class="project-tile tile-humanoid"
-            href="projects.html#humanoid-joint-control"
-            aria-label="Open Humanoid Joint Control project"
-          >
-            <img
-              src="assets/images/humanoid-joint-control-featured.jpeg"
-              alt="Humanoid robot prototype in the Dynamic Locomotion workshop"
-            />
-            <span class="project-tile-label">
-              <span class="project-tile-index" aria-hidden="true">06</span>
-              <span>Humanoid Joint Control</span>
-              <b aria-hidden="true">↗</b>
-            </span>
-          </a>
-          <a
-            class="project-tile tile-swarms"
-            href="projects.html#stigmergic-swarms"
-            aria-label="Open Stigmergic Swarms project"
-          >
-            <video autoplay loop muted playsinline preload="metadata" aria-label="Stigmergic Swarms experiment">
-              <source src="assets/video/stigmergic-swarms/experiment.mp4" type="video/mp4" />
-            </video>
-            <span class="project-tile-label">
-              <span class="project-tile-index" aria-hidden="true">03</span>
-              <span>Stigmergic Swarms</span>
-              <b aria-hidden="true">↗</b>
-            </span>
-          </a>
+        <div class="project-collage-viewport" tabindex="0" role="region" aria-label="Featured projects collage">
+          <div class="project-collage-strip">
+            <div class="project-collage-featured">
+              <div class="project-collage-column tile-racecar">
+                <a class="project-tile" href="projects.html#cornell-electric-vehicles" aria-label="Cornell Electric Vehicles">
+                  <span class="project-tile-media">
+                    <video src="assets/video/cornell-electric-vehicles/car-driving.mp4" poster="assets/images/cornell-electric-vehicles-racecar.jpeg" width="1280" height="720" loop muted playsinline preload="metadata" aria-label="Cornell Electric Vehicles racecar driving"></video>
+                  </span>
+                  <span class="project-tile-label">
+                    <span class="project-tile-index" aria-hidden="true">07</span>
+                    <span>Cornell Electric Vehicles</span>
+                    <b aria-hidden="true">↗</b>
+                  </span>
+                </a>
+              </div>
+              <div class="project-collage-column tile-humanoid">
+                <a class="project-tile" href="projects.html#humanoid-joint-control" aria-label="Humanoid Joint Control">
+                  <span class="project-tile-media">
+                    <img src="assets/images/humanoid-joint-control-featured.jpeg" width="1933" height="2805" alt="Humanoid robot prototype in the Dynamic Locomotion workshop" />
+                  </span>
+                  <span class="project-tile-label">
+                    <span class="project-tile-index" aria-hidden="true">06</span>
+                    <span>Humanoid Joint Control</span>
+                    <b aria-hidden="true">↗</b>
+                  </span>
+                </a>
+              </div>
+              <div class="project-collage-column tile-swarms">
+                <a class="project-tile" href="projects.html#stigmergic-swarms" aria-label="Stigmergic Swarms">
+                  <span class="project-tile-media">
+                    <video src="assets/video/stigmergic-swarms/experiment.mp4" poster="assets/images/stigmergic-swarms/experiment-rig.jpeg" width="1920" height="1080" loop muted playsinline preload="metadata" aria-label="Stigmergic Swarms experiment"></video>
+                  </span>
+                  <span class="project-tile-label">
+                    <span class="project-tile-index" aria-hidden="true">03</span>
+                    <span>Stigmergic Swarms</span>
+                    <b aria-hidden="true">↗</b>
+                  </span>
+                </a>
+                <div class="project-tile-row">
+                  <a class="project-tile" style="--project-tile-size: 0.82" href="projects.html#swarming-formations" aria-label="Swarming Formations">
+                    <span class="project-tile-media">
+                      <img src="assets/images/swarming-proto1.png" width="1448" height="1086" alt="Magnetic cube prototypes forming early gripper and structural arrangements" />
+                    </span>
+                    <span class="project-tile-label">
+                      <span class="project-tile-index" aria-hidden="true">02</span>
+                      <span>Swarming Formations</span>
+                      <b aria-hidden="true">↗</b>
+                    </span>
+                  </a>
+                  <a class="project-tile" style="--project-tile-size: 0.37" href="projects.html#martha" aria-label="MARTHA">
+                    <span class="project-tile-media">
+                      <img src="assets/images/Martha_base.png" width="539" height="1125" alt="MARTHA app interface" />
+                    </span>
+                    <span class="project-tile-label">
+                      <span class="project-tile-index" aria-hidden="true">09</span>
+                      <span>MARTHA</span>
+                      <b aria-hidden="true">↗</b>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-collage-column project-collage-column--offset" style="--project-tile-size: 0.95">
+              <a class="project-tile" href="projects.html#subsea-construction-simulator" aria-label="Subsea Sim">
+                <span class="project-tile-media">
+                  <img src="assets/images/seabuilt-simulator.png" width="1672" height="941" alt="Simulated remotely operated vehicle inspecting a subsea pipeline valve assembly" />
+                </span>
+                <span class="project-tile-label">
+                  <span class="project-tile-index" aria-hidden="true">04</span>
+                  <span>Subsea Sim</span>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+              <a class="project-tile" style="--project-tile-size: 0.72" href="projects.html#safe" aria-label="SAFE">
+                <span class="project-tile-media">
+                  <img src="assets/images/soar-floating-garden.jpg" width="1500" height="844" alt="Floating garden with solar panels" />
+                </span>
+                <span class="project-tile-label">
+                  <span class="project-tile-index" aria-hidden="true">10</span>
+                  <span>SAFE</span>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+            </div>
+            <div class="project-collage-column project-collage-column--portrait">
+              <a class="project-tile" href="projects.html#visions" aria-label="Visions">
+                <span class="project-tile-media">
+                  <img src="assets/images/visions/scene.jpg" width="2268" height="4032" alt="Visions immersive location-based experience" />
+                </span>
+                <span class="project-tile-label">
+                  <span class="project-tile-index" aria-hidden="true">05</span>
+                  <span>Visions</span>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+            </div>
+            <div class="project-collage-column" style="--project-tile-size: 1.23; --collage-column-drop: clamp(26px, 3.5vw, 54px)">
+              <a class="project-tile" href="projects.html#silverbacks-engineering" aria-label="Silverbacks Engineering">
+                <span class="project-tile-media">
+                  <img src="assets/images/Silverbacks_driving.jpeg" width="1600" height="730" alt="Silverbacks Engineering vehicle competing at Shell Eco-marathon Europe" />
+                </span>
+                <span class="project-tile-label">
+                  <span class="project-tile-index" aria-hidden="true">08</span>
+                  <span>Silverbacks Engineering</span>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+              <a class="project-tile" style="--project-tile-size: 0.88" href="projects.html#edge-corrected-teleoperation" aria-label="Edge-Corrected Teleoperation">
+                <span class="project-tile-media">
+                  <img src="assets/images/edge-corrected-teleoperation.png" width="1448" height="1086" alt="Robot arm using a camera to sort marbles on a workbench" />
+                </span>
+                <span class="project-tile-label">
+                  <span class="project-tile-index" aria-hidden="true">01</span>
+                  <span>Edge-Corrected Teleoperation</span>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -555,7 +636,7 @@
     <script src="assets/vendor/topojson-client.min.js"></script>
     <script src="assets/data/countries-110m.js"></script>
     <script src="assets/data/atlas-small-territories.js"></script>
-    <script src="assets/js/site.js?v=20261123-palette-rebase"></script>
-    <script src="assets/js/main.js?v=20261125-update-video"></script>
+    <script src="assets/js/site.js?v=featured-project-width"></script>
+    <script src="assets/js/main.js?v=featured-project-width"></script>
   </body>
 </html>

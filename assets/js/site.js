@@ -80,22 +80,6 @@ function initAutoplayVideos() {
   refreshAutoplayVideos();
 }
 
-function setActiveSection(active) {
-  document.querySelectorAll("[data-section-nav]").forEach((link) => {
-    link.classList.toggle("is-current", link.dataset.sectionNav === active);
-  });
-}
-
-function setActiveSectionFromHash() {
-  const hash = window.location.hash.replace("#", "");
-  const active = { work: "projects", atlas: "travel", notes: "thoughts" }[hash] || hash;
-  if (!active) return false;
-  const link = document.querySelector(`[data-section-nav="${active}"]`);
-  if (!link) return false;
-  setActiveSection(active);
-  return true;
-}
-
 function initProjectCardFocus() {
   const cards = [...document.querySelectorAll(".project-case-card")];
   if (!cards.length) return;
@@ -330,74 +314,6 @@ function initTilDateFilter() {
   update();
 }
 
-function initHomeSectionTracking() {
-  if ((window.location.pathname.split("/").pop() || "index.html") !== "index.html" && !window.location.pathname.endsWith("/")) return;
-
-  const sectionNav = {
-    latest: "latest",
-    work: "projects",
-    timeline: "timeline",
-    atlas: "travel",
-    notes: "thoughts",
-  };
-  const observedSections = Object.keys(sectionNav)
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
-  const footer = document.querySelector(".site-footer");
-
-  if (observedSections.length) {
-    let sectionTicking = false;
-
-    const updateSectionFromScroll = () => {
-      sectionTicking = false;
-
-      const scrollBottom = window.scrollY + window.innerHeight;
-      const pageBottom = document.documentElement.scrollHeight - 32;
-      const isFooterVisible = footer && footer.getBoundingClientRect().top <= window.innerHeight;
-      if (isFooterVisible || scrollBottom >= pageBottom) {
-        const lastSection = observedSections.at(-1);
-        if (lastSection) setActiveSection(sectionNav[lastSection.id]);
-        return;
-      }
-
-      const targetLine = window.innerHeight * 0.42;
-      const current = observedSections
-        .map((section) => {
-          const rect = section.getBoundingClientRect();
-          const sectionCenter = rect.top + rect.height * 0.38;
-          return {
-            id: section.id,
-            distance: Math.abs(sectionCenter - targetLine),
-            visible: rect.bottom > 96 && rect.top < window.innerHeight - 96,
-          };
-        })
-        .filter((section) => section.visible)
-        .sort((a, b) => a.distance - b.distance)[0];
-
-      if (current) setActiveSection(sectionNav[current.id]);
-    };
-
-    const requestSectionUpdate = () => {
-      if (sectionTicking) return;
-      sectionTicking = true;
-      window.requestAnimationFrame(updateSectionFromScroll);
-    };
-
-    if (!setActiveSectionFromHash()) {
-      setActiveSection("latest");
-    }
-    updateSectionFromScroll();
-    window.addEventListener("scroll", requestSectionUpdate, { passive: true });
-    window.addEventListener("resize", requestSectionUpdate);
-  }
-
-  document.querySelectorAll("[data-section-nav]").forEach((link) => {
-    link.addEventListener("click", () => {
-      setActiveSection(link.dataset.sectionNav);
-    });
-  });
-}
-
 function initProjectYearTracking() {
   if (!document.body.classList.contains("projects-page")) return;
 
@@ -454,7 +370,6 @@ function initializeSitePage() {
   initProjectMediaVideos();
   initBlogFilters();
   initTilDateFilter();
-  initHomeSectionTracking();
   initProjectYearTracking();
 }
 
