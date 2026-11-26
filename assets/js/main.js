@@ -358,6 +358,16 @@ function initSectionNav() {
   updateSectionNav();
 }
 
+const pannedProjectCollages = new WeakSet();
+const projectPanThreshold = 5;
+
+// Cancel a drag-generated click before the header's document capture listener can navigate.
+window.addEventListener("click", (event) => {
+  if (!(event.pointerType || event.detail) || !(event.target instanceof Element)) return;
+  const collage = event.target.closest(".project-collage-viewport");
+  if (pannedProjectCollages.has(collage)) event.preventDefault();
+}, { capture: true });
+
 function initProjectCollage() {
   const collage = document.querySelector(".project-collage-viewport");
   if (!collage || collage.children.length > 1) return;
@@ -371,7 +381,13 @@ function initProjectCollage() {
   let fraction = 0;
   let idleTimer = 0;
   let pointer;
-  let dragged = false;
+
+  function recordPan(event) {
+    if (Math.hypot(event.clientX - pointer.x, event.clientY - pointer.y) >= projectPanThreshold ||
+        Math.abs(collage.scrollLeft - pointer.scrollLeft) >= projectPanThreshold) {
+      pannedProjectCollages.add(collage);
+    }
+  }
 
   function copyStrip() {
     const copy = strip.cloneNode(true);
@@ -393,7 +409,7 @@ function initProjectCollage() {
 
   function animate(now) {
     if (last) {
-      fraction += Math.min(now - last, 48) * 0.022;
+      fraction += Math.min(now - last, 48) * 0.033;
       const pixels = Math.floor(fraction);
       if (pixels) {
         const next = collage.scrollLeft + pixels;
@@ -456,6 +472,9 @@ function initProjectCollage() {
   updateMotionPreference();
 
   collage.addEventListener("scroll", () => {
+    if (pointer && Math.abs(collage.scrollLeft - pointer.scrollLeft) >= projectPanThreshold) {
+      pannedProjectCollages.add(collage);
+    }
     if (idleTimer) waitAfterPanning();
     if (collage.scrollLeft < 1) collage.scrollLeft += cycle;
     else if (collage.scrollLeft >= collage.scrollWidth - collage.clientWidth - 1) {
@@ -469,39 +488,43 @@ function initProjectCollage() {
 
   collage.addEventListener("pointerdown", (event) => {
     if (!event.isPrimary || event.button !== 0) return;
-    pointer = { id: event.pointerId, x: event.clientX, type: event.pointerType };
-    dragged = false;
+    pointer = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      scrollLeft: collage.scrollLeft,
+    };
+    pannedProjectCollages.delete(collage);
     schedule();
   });
 
   collage.addEventListener("pointermove", (event) => {
-    if (event.pointerId !== pointer?.id || pointer.type === "touch") return;
-    const delta = pointer.x - event.clientX;
-    if (!dragged && Math.abs(delta) < 5) return;
-    if (!dragged) {
-      dragged = true;
+    if (event.pointerId !== pointer?.id) return;
+    recordPan(event);
+    if (event.pointerType === "touch") return;
+    const delta = (pointer.dragX ?? pointer.x) - event.clientX;
+    if (pointer.dragX === undefined) {
+      if (Math.abs(delta) < projectPanThreshold) return;
       collage.setPointerCapture(pointer.id);
       collage.classList.add("is-dragging");
     }
     collage.scrollLeft += delta / (collage.currentCSSZoom || 1);
-    pointer.x = event.clientX;
+    pointer.dragX = event.clientX;
   });
 
   function releasePointer(event) {
     if (event.pointerId !== pointer?.id) return;
-    const wasTouch = pointer.type === "touch";
+    if (event.type === "pointerup") recordPan(event);
+    else pannedProjectCollages.add(collage);
     pointer = undefined;
     collage.classList.remove("is-dragging");
-    if (wasTouch) waitAfterPanning();
+    if (event.pointerType === "touch") waitAfterPanning();
     else schedule();
   }
 
-  collage.addEventListener("click", (event) => {
-    if (dragged && event.detail) event.preventDefault();
-  }, true);
   collage.addEventListener("dragstart", (event) => event.preventDefault());
   collage.addEventListener("pointerleave", (event) => {
-    if (!dragged && pointer?.type !== "touch") releasePointer(event);
+    if (event.pointerType !== "touch" && !collage.hasPointerCapture(event.pointerId)) releasePointer(event);
   });
   collage.addEventListener("pointerup", releasePointer);
   collage.addEventListener("pointercancel", releasePointer);
@@ -998,7 +1021,7 @@ function initExperienceCarousel() {
       }
 
       frame = requestAnimationFrame(move);
-    }, 1500);
+    }, 2250);
   }
 
   function sizeCarousel() {
