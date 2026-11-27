@@ -305,7 +305,6 @@
       else await update();
 
       window.initializeHomePage?.();
-      window.refreshAutoplayVideos?.({ reload: true });
     } catch (error) {
       if (error.name !== "AbortError") window.location.assign(url);
     } finally {

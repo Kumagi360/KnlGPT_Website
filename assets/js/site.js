@@ -55,31 +55,6 @@ function initAmbientBackground() {
   `;
 }
 
-function refreshAutoplayVideos({ reload = false } = {}) {
-  document.querySelectorAll("video[autoplay][loop]").forEach((video) => {
-    const isInactiveProjectSlide = video.matches("[data-project-video]") && !video.closest(".project-media-slide")?.classList.contains("is-active");
-    if (document.hidden || isInactiveProjectSlide) return;
-
-    video.muted = true;
-    video.defaultMuted = true;
-    if (reload) video.load();
-
-    const play = () => video.play().catch(() => {});
-    play();
-    window.requestAnimationFrame(play);
-    window.setTimeout(play, 250);
-  });
-}
-
-function initAutoplayVideos() {
-  document.querySelectorAll("video[autoplay][loop]").forEach((video) => {
-    video.addEventListener("loadeddata", refreshAutoplayVideos, { once: true });
-    video.addEventListener("canplay", refreshAutoplayVideos, { once: true });
-  });
-
-  refreshAutoplayVideos();
-}
-
 function initProjectCardFocus() {
   const cards = [...document.querySelectorAll(".project-case-card")];
   if (!cards.length) return;
@@ -163,10 +138,15 @@ function initProjectMediaVideos() {
     if (!media || !playButton || !muteButton) return;
 
     const getActiveVideo = () => media.querySelector(".project-media-slide.is-active [data-project-video]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const pausedByUser = new WeakSet();
+    let inView = false;
 
-    const playActiveVideo = () => {
+    const syncPlayback = () => {
       const video = getActiveVideo();
-      if (video) video.play().catch(() => {});
+      if (!video) return;
+      if (inView && !reducedMotion.matches && !pausedByUser.has(video)) video.play().catch(() => {});
+      else video.pause();
     };
 
     const syncControls = () => {
@@ -182,8 +162,13 @@ function initProjectMediaVideos() {
     const togglePlayback = () => {
       const video = getActiveVideo();
       if (!video) return;
-      if (video.paused) video.play().catch(() => {});
-      else video.pause();
+      if (video.paused) {
+        pausedByUser.delete(video);
+        video.play().catch(() => {});
+      } else {
+        pausedByUser.add(video);
+        video.pause();
+      }
     };
 
     media.addEventListener("pointerdown", () => {
@@ -209,10 +194,13 @@ function initProjectMediaVideos() {
       video.addEventListener("volumechange", syncControls);
     });
     media.addEventListener("projectcarouselchange", () => {
-      playActiveVideo();
+      syncPlayback();
       syncControls();
     });
-    playActiveVideo();
+    new IntersectionObserver(([entry]) => {
+      inView = entry.intersectionRatio >= 0.25;
+      syncPlayback();
+    }, { threshold: 0.25 }).observe(media.querySelector(".project-media-viewport"));
     syncControls();
   });
 }
@@ -366,7 +354,6 @@ function initProjectYearTracking() {
 
 function initializeSitePage() {
   initAmbientBackground();
-  initAutoplayVideos();
   initProjectCardFocus();
   initProjectMediaCarousels();
   initProjectMediaVideos();
@@ -376,5 +363,4 @@ function initializeSitePage() {
 }
 
 window.initializeSitePage = initializeSitePage;
-window.refreshAutoplayVideos = refreshAutoplayVideos;
 initializeSitePage();

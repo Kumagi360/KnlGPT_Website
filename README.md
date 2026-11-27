@@ -1,5 +1,7 @@
 # KnlGPT Website
 
+[Visit knlgpt.xyz](https://knlgpt.xyz/)
+
 ## Structure
 
 - `index.html` - homepage
